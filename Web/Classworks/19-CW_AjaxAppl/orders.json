@@ -1,0 +1,18 @@
+{
+  "orders": [
+    {
+      "email": "1234@co.il",
+      "coffee": "espresso",
+      "size": "tall",
+      "flavor": "none",
+      "strength": 50
+    },
+    {
+      "email": "1235@co.il",
+      "coffee": "espresso",
+      "size": "tall",
+      "flavor": "none",
+      "strength": 50
+    }
+  ]
+}

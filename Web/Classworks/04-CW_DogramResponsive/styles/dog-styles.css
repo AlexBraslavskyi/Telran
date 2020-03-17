@@ -1,0 +1,112 @@
+@font-face {
+    font-family: lakeshore;
+    src: url("fonts/LAKESHOR-webfont.svg") format("svg");
+    src: url("fonts/LAKESHOR-webfont.woff") format("woff")
+}
+@font-face {
+    font-family: airstream;
+    src: url("fonts/Airstream-webfont.svg") format("svg");
+    src: url("fonts/Airstream-webfont.woff") format("woff")
+}
+.thumbnails-item {
+    border: solid 2px red;
+margin-top: 40px;
+
+}
+.thumbnails-item:hover {
+    transform: scale(1.2);
+}
+.thumbnails-image {
+   width: 15vw;
+    height: 10vw;
+}
+.thumbnails-title {
+    display: block;
+    text-align: center;
+    background-color: aliceblue;
+    font-size: 2.5vw;
+    color: black;
+}
+a {
+    text-decoration: none;
+}
+.thumbnails-list {
+    display: flex;
+    list-style: none; /*removing dot from items*/
+   justify-content:space-around;
+    padding: 10px;
+    flex-wrap: wrap;
+    max-height: 20vh;
+    overflow-y: auto;
+}
+.logo-title {
+    text-align: center;
+    background-color: antiquewhite;
+    font-size: 50px;
+    font-family: lakeshore;
+    text-transform: uppercase;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+}
+.detailed-title {
+    display: block;
+    position: absolute;
+    bottom: 1vw;
+    font-family: airstream;
+    font-size: 5vw;
+    font-style: italic;
+    background-color: #f6a12e;
+    color: white;
+
+}
+.detailed-frame {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+
+}
+.detailed-image {
+    width: 70vw;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+}
+html, body {
+    height: 100%
+}
+@media (min-width: 568px) {
+   .main-content {
+       flex-direction: row;
+       /*justify-content: center;*/
+   }
+    .thumbnails-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        max-height: 90vh;
+        overflow-y: auto;
+        justify-content: left;
+        margin-top: 0;
+        order: -1;
+        padding: 0;
+    }
+    .thumbnails-item {
+        margin-top: 0;
+    }
+    .thumbnails-item+.thumbnails-item {
+        margin-top: 10px;
+    }
+    .logo-title {
+        font-size: 5vw;
+        letter-spacing: 10px;
+    }
+    .detailed-title {
+        font-size: 4.5vw;
+    }
+}

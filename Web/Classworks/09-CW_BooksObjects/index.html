@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+</head>
+<body>
+<div class="books-input">
+    <span class="books-input-title">Book Data:</span>
+    <input id="isbn" placeholder="isbn">
+    <input id="title" placeholder="title">
+    <input id="pages" placeholder="pages">
+</div>
+<button onclick="addBook()">Add Book</button>
+<ol class="books-list" >
+
+</ol>
+<div class="result-group">
+    <button onclick="getMaxPages()">Get Max Pages</button>
+    <label id="result-output"></label>
+</div>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>

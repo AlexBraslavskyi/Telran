@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr id="thCars">
+
+    </tr>
+
+    </thead>
+    <tbody id="tbodyCars">
+
+    </tbody>
+</table>
+<button onclick="createRandomCar()">Add Random Car</button>
+<button onclick="clearTable()">Clear Cars</button>
+<button onclick="sortByRegNumber()">Sort by reg_number</button>
+<button onclick="sortByModel()">Sort by model</button>
+<button disabled id="button-model" onclick="filterByModel()">Show cars of model:</button>
+<input  id="input-model">
+<button onclick="getStatistics()">Statistics</button>
+<table>
+    <thead>
+    <tr id="thCarsStatistics">
+
+    </tr>
+    </thead>
+    <tbody id="tBodyCarsStatistics">
+
+    </tbody>
+</table>
+<script src="table.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .input-elements {
+        display: flex;
+        flex-direction: column;
+        font-size: 40px;
+    }
+</style>
+<body>
+<div class="input-elements">
+    <input type="number" id="first-number" placeholder="enter first number">
+    <input type="number" id="second-number" placeholder="enter second number">
+    <select id="operation">
+        <option value="multiply">Multiply</option>
+        <option value="divide">Divide</option>
+        <option value="sum">Add</option>
+        <option value="subtract">Subtract</option>
+    </select>
+    <label id="result">Result</label>
+    <button onclick="reset()">Reset</button>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

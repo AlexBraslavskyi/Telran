@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CoffeeOrders</title>
+    <link rel="stylesheet"
+          href="stylesheets/bootstrap.min.css">
+</head>
+
+<body>
+<section class="card">
+    <header class="card-header">
+        <h2>Order Data</h2>
+    </header>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label>Coffee</label>
+                <select class="form-control" name="coffee">
+                    <option value="cappuccino">
+                        Cappuccino
+                    </option>
+                    <option value="latte-maciato">
+                        Latte-maciato
+                    </option>
+                    <option value="americana">
+                        Americana
+                    </option>
+                    <option value="espresso">
+                        Espresso
+                    </option>
+                    <option value="black-tea">
+                       Black Tea
+                    </option>
+                    <option value="green-tea">
+                        Green Tea
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" required name="email"
+                class="form-control">
+            </div>
+            <div class="form-check">
+                <input type="radio" value="Short" name="size"
+                       checked
+                       class="form-check-input">
+                <label>Short</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" value="Tall" name="size"
+                       class="form-check-input">
+                <label>Tall</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" value="Grand" name="size"
+                       class="form-check-input">
+                <label>Grand</label>
+            </div>
+            <div class="form-group">
+                <label>Flavor</label>
+                <select class="form-control" name="flavor">
+                   <option value="none">None</option>
+                    <option value="mocha">Mocha</option>
+                    <option value="vanilla">Vanilla</option>
+                    <option value="caramel">Caramel</option>
+                    <option value="cinnamon">Cinnamon</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Strength</label>
+                <input type="range" name="strength" value="50"
+                class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>
