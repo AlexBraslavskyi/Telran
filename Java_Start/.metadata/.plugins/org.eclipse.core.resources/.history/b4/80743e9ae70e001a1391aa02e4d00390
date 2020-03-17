@@ -1,0 +1,11 @@
+
+public class mainClass {
+
+	public static void main(String[] args) {
+	System.out.println("Main class");
+	double res = AnotherClass.calculator (2.5,5.6,3);
+	System.out.println(res);
+	
+	}
+
+}

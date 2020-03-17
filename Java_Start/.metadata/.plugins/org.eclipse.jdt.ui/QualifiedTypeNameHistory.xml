@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
+<fullyQualifiedTypeName name="Book"/>
+<fullyQualifiedTypeName name="FictionLibBook"/>
+<fullyQualifiedTypeName name="LibraryBook"/>
+<fullyQualifiedTypeName name="EducationLibBook"/>
+<fullyQualifiedTypeName name="KidsEducLibBook"/>
+<fullyQualifiedTypeName name="Goods"/>
+<fullyQualifiedTypeName name="Food"/>
+<fullyQualifiedTypeName name="MilkFood"/>
+<fullyQualifiedTypeName name="Drinks"/>
+<fullyQualifiedTypeName name="Alcohol"/>
+<fullyQualifiedTypeName name="Car"/>
+<fullyQualifiedTypeName name="Garage"/>
+<fullyQualifiedTypeName name="CinemaProject.FeatureMovie"/>
+<fullyQualifiedTypeName name="CinemaProject.Movie"/>
+<fullyQualifiedTypeName name="CinemaProject.Cinema"/>
+</qualifiedTypeNameHistroy>

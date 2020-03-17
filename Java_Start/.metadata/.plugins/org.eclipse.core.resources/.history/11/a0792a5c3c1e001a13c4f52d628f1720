@@ -1,0 +1,38 @@
+package CinemaProject;
+
+public class MainCinema {
+
+	public static void main(String[] args) {
+		Actor a1 = new Actor("Di Niro",1943,"All geners");
+		Actor a2 = new Actor("Di Caprio",1975,"All geners");
+		Actor a3 = new Actor("J.Roberts",1978,"All geners");
+		
+		Actor[] cast1 = {a1,a2,a3};
+		Actor[] cast2 = {a2,a3,a1};
+		Actor[] cast3 = {a1,a3,a2};
+		
+		FeatureMovie fm1 = new FeatureMovie("Titanic", 220, "Cameron", 1999, "Drama", cast1);
+		FeatureMovie fm2 = new FeatureMovie("Terminator", 250, "Cameron", 1999, "Ections", cast2);
+		FeatureMovie fm3 = new FeatureMovie("Star wars", 210, "Locas", 2000, "Fantasy", cast3);
+		Movie [] movies = {fm1,fm2,fm3};
+		
+		Cinema c = new Cinema("Yes Planet", "Rishon LeTsion", movies);
+		Object obj = c;
+		System.out.println(c);
+		
+		
+		
+
+		/*if(a1.equals(a3) == true)
+		{
+			System.out.println("Equals");
+		}
+		else
+		{
+			System.out.println("NOT Equals");
+		}
+		*/		
+	}
+
+	}
+

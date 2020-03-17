@@ -1,0 +1,21 @@
+content_assist_disabled_computers=org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.jdt.ui.javaChainProposalCategory\u0000
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="Car"><rhs name\="Car"/><rhs name\="Garage"/></lhs><lhs name\="Book"><rhs name\="Book"/><rhs name\="FictionLibBook"/><rhs name\="LibraryBook"/><rhs name\="EducationLibBook"/><rhs name\="KidsEducLibBook"/></lhs><lhs name\="LibraryBook"><rhs name\="FictionLibBook"/><rhs name\="LibraryBook"/><rhs name\="EducationLibBook"/><rhs name\="KidsEducLibBook"/></lhs><lhs name\="FictionLibBook"><rhs name\="FictionLibBook"/></lhs><lhs name\="EducationLibBook"><rhs name\="EducationLibBook"/><rhs name\="KidsEducLibBook"/></lhs><lhs name\="KidsEducLibBook"><rhs name\="KidsEducLibBook"/></lhs><lhs name\="Goods"><rhs name\="Goods"/><rhs name\="Food"/><rhs name\="MilkFood"/><rhs name\="Drinks"/><rhs name\="Alcohol"/></lhs><lhs name\="Food"><rhs name\="Food"/><rhs name\="MilkFood"/><rhs name\="Drinks"/><rhs name\="Alcohol"/></lhs><lhs name\="MilkFood"><rhs name\="MilkFood"/></lhs><lhs name\="Drinks"><rhs name\="Drinks"/><rhs name\="Alcohol"/></lhs><lhs name\="Alcohol"><rhs name\="Alcohol"/></lhs><lhs name\="Garage"><rhs name\="Garage"/></lhs><lhs name\="CinemaProject.Cinema"><rhs name\="CinemaProject.FeatureMovie"/><rhs name\="CinemaProject.Movie"/><rhs name\="CinemaProject.Cinema"/></lhs><lhs name\="CinemaProject.Movie"><rhs name\="CinemaProject.FeatureMovie"/><rhs name\="CinemaProject.Movie"/></lhs><lhs name\="CinemaProject.FeatureMovie"><rhs name\="CinemaProject.FeatureMovie"/></lhs></history>
+content_assist_number_of_computers=22
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+fontPropagated=true
+org.eclipse.jdt.ui.editor.tab.width=
+org.eclipse.jdt.ui.formatterprofiles.version=17
+org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
+org.eclipse.jface.textfont=1|Consolas|10.0|0|WINDOWS|1|0|0|0|0|0|0|0|0|1|0|0|0|0|Consolas;
+proposalOrderMigrated=true
+spelling_locale=en_GB
+spelling_locale_initialized=true
+tabWidthPropagated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

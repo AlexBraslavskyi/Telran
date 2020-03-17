@@ -1,0 +1,66 @@
+
+public class Actor {
+   private String name;
+   private int year;
+   private String speciality;
+ 
+public Actor() {
+	super();
+	
+}
+
+public Actor(String name, int year, String speciality) {
+	super();
+	this.setName(name);
+	this.setYear(year);
+	this.setSpeciality(speciality);
+}
+
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+  if(name != null)
+	this.name = name;
+}
+public int getYear() {
+	return year;
+}
+public void setYear(int year) {
+	if(year > 0)
+	   this.year = year;
+}
+public String getSpeciality() {
+	return speciality;
+}
+public void setSpeciality(String speciality) {
+	if(speciality != null)
+	  this.speciality = speciality;
+}
+
+@Override
+public String toString() {
+	String str = "Name : " + name
+			+ "  Year : " + year
+			+ "  Speciality : " + this.speciality;
+			
+	return str;
+}
+
+@Override
+public boolean equals(Object obj) {
+	Actor a = (Actor)obj;
+	if(this.year == a.year 
+			&&  this.name.equals(a.name) 
+			&&  this.speciality.equals(a.speciality))
+	{
+		return true;
+	}
+	
+	
+	return false;
+}
+   
+   
+   
+}
