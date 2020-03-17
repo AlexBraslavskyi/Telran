@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<style>
+    .calculator {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-around;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100% ;
+
+        align-items: center;
+    }
+    html {
+        height: 100%
+    }
+    .result-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    .result-text {
+        font-size: 2.5vw;
+    }
+</style>
+<body>
+<div class="calculator">
+    <input type="text" id="string"
+           placeholder="enter string">
+    <input type="text" id="substring"
+           placeholder="enter substring">
+
+    <div class="result-group">
+        <button onclick="getIndexOf()">Get index of</button>
+        <label class="result-text" >Result</label>
+    </div>
+</div>
+<script src="mainIndexOf.js"></script>
+</body>
+</html>

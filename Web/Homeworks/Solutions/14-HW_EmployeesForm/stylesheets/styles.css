@@ -1,0 +1,31 @@
+
+.two_inputs,.three_inputs {
+    display: flex;
+    justify-content: space-around;
+}
+.two_inputs .form-control {
+    width: 25vw;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.three_inputs .form-control {
+    width: 18vw;
+}
+
+.two_inputs label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
+.three_inputs label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+

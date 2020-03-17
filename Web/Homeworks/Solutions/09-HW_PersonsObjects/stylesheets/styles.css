@@ -1,0 +1,14 @@
+.persons-input {
+    display: flex;
+    justify-content: center;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.persons-input-title {
+    font-weight: bold;
+
+}

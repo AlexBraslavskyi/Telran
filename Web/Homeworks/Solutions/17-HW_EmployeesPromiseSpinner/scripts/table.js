@@ -1,0 +1,56 @@
+class Table {
+    constructor(keys, trHeadSelector, tbodySelector, keyId,
+                removeFn){
+        this.keys = keys;
+        this.$tbodyElement = $(tbodySelector);
+        this.keyId = keyId;
+        this.removeFn = removeFn;
+        const $trHeadElement = $(trHeadSelector);
+        keys.forEach(function(key) {
+            const $thElement =$('<th>',{
+                text: key
+            });
+            $trHeadElement.append($thElement);
+
+        })
+        if (removeFn) {
+            $trHeadElement.append($('<th>', {
+                // text: 'Remove'
+            }))
+        }
+    }
+    addRow(obj) {
+        const $trElement = $('<tr>');
+        this.$tbodyElement.append($trElement);
+        this.keys.forEach(function(key){
+            const $tdElement = $('<td>', {
+                text: obj[key]
+            });
+            $trElement.append($tdElement);
+        })//filling data
+        //adding button remove
+        /**********************/
+        if (this.removeFn) {
+            const $buttonElement = $('<button>', {
+                text: 'Remove'
+            });
+            $trElement.append($buttonElement);
+            $buttonElement.on('click', function(event) {
+                if (confirm(`you are going
+                 to remove ${obj[this.keyId]}`)) {
+                    this.removeFn(obj[this.keyId])
+                        .then(function() {
+                            $trElement.remove();
+                        })
+
+                }
+            }.bind(this))
+        }
+
+        /**********************/
+    }
+    clear() {
+        this.$tbodyElement.empty();
+
+    }
+}

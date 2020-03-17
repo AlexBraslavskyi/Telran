@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<style>
+    .calculator {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-around;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100% ;
+
+        align-items: center;
+    }
+    html {
+        height: 100%
+    }
+    .result-group {
+        display: flex;
+        justify-content: space-between;
+    }
+    .result-text {
+        font-size: 2.5vw;
+    }
+</style>
+<body>
+<div class="calculator">
+    <input type="number" id="first-number"
+           placeholder="enter first number">
+    <input type="number" id="second-number"
+           placeholder="enter second number">
+    <select id="operation">
+        <option value="multiply">Multiply</option>
+        <option value="divide">Divide</option>
+        <option value="add">Add</option>
+        <option value="subtract">Subtract</option>
+    </select>
+    <div class="result-group">
+        <button onclick="compute()">Result</button>
+        <label class="result-text" >Result</label>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons Objects</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+</head>
+<body>
+<main>
+    <section id="buttons">
+        <button onclick="showTableView()">Show Tables</button>
+        <button onclick="addPersonManuallyView()">Add Person</button>
+        <button onclick="generatePersonsView()">Generate Persons</button>
+        <button onclick="filterByBirthYear()">Filter By Age</button>
+        <label>Sort by</label>
+        <select id="select-element">
+            <option value="Unsorted">Unsorted</option>
+            <option value="Id">Id</option>
+            <option value="Name">Name</option>
+            <option value="Birth Year">Birth Year</option>
+        </select>
+    </section>
+    <section class="hidden" id="manually-add">
+        <div class="persons-input">
+            <span class="persons-input-title">Person Data:</span>
+            <input id="id" placeholder="ID">
+            <input id="name" placeholder="Name">
+            <input id="birth-year" placeholder="Birth Year">
+        </div>
+        <button id="add-button"  disabled   onclick="addPerson()">Add Person</button>
+        <label>List of all persons</label>
+        <ol id="persons">
+
+        </ol>
+        <label>List of the oldest persons</label>
+        <ol id="oldest-persons">
+
+        </ol>
+    </section>
+    <section class="hidden" id="show-table">
+        <table>
+            <thead>
+            <tr id="trHead">
+            </tr>
+            </thead>
+            <tbody id="persons-table">
+
+            </tbody>
+        </table>
+
+    </section>
+    <section class="hidden" id="generation">
+        <label id="amount-label">Amount of persons [1-10]</label>
+        <input type="number" id="amount-input">
+    </section>
+</main>
+<section class="hidden" id="filter">
+    <header>
+       <h4>
+           <label>Sorted By: </label>
+           <label id="label-sorted-filter"></label>
+       </h4>
+    </header>
+   <div class="filter-controls">
+       <input id="birth-date-from" type="number">
+       <input id="birth-date-to" type="number">
+       <button onclick="filterProcessing()">Filter</button>
+
+   </div>
+    <table>
+        <thead>
+        <tr id="trHeadFilter">
+        </tr>
+        </thead>
+        <tbody id="persons-table-filter">
+
+        </tbody>
+    </table>
+    <div>
+        <button onclick="onBack()">Back</button>
+    </div>
+
+</section>
+
+<script src="scripts/table.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

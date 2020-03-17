@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+</head>
+<body>
+<section class="buttons">
+    <button onclick="addNewEmployee()">Add New Employee</button>
+    <button onclick="generateEmployees()">Employees Generation</button>
+    <button onclick="showEmployees()">Show Employee</button>
+</section>
+<div id="spinner" class="spinner-border" hidden></div>
+<section hidden id="employees-data-generation" class="card">
+    <header class="card-header">
+        <h2>
+            Employees Generation Data
+        </h2>
+    </header>
+    <div class="card-body">
+        <form id="form-generation">
+            <div class="two_inputs">
+                <div clas="form-group">
+                    <label>Number of Employees</label>
+                    <input class="form-control" required type="number" name="nEmployees"
+                          >
+                </div>
+                <div clas="form-group">
+                    <label>Number of ID digits</label>
+                    <input class="form-control" type="number" name="nDigits"
+                           required >
+                </div>
+            </div>
+            <div class="two_inputs">
+                <div clas="form-group">
+                    <label>Minimal Salary</label>
+                    <input required class="form-control" type="number" name="minSalary"
+                    value="5000">
+                </div>
+                <div clas="form-group">
+                    <label>Maximal Salary</label>
+                    <input required class="form-control"
+                           value="35000" type="number" name="maxSalary">
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+
+</section>
+<section hidden id="employee-data" class="card">
+    <header class="card-header">
+        <h2>
+            Employee Data
+        </h2>
+
+    </header>
+
+    <div class="card-body">
+        <form id="form_employee">
+            <div class="two_inputs">
+                <div class="form-group">
+                    <label>Employee Identifier</label>
+                    <input class="form-control" required
+                           name="id" type="number">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" type="email" required
+                           name="emailAddress">
+                </div>
+            </div>
+
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio"
+                           value="female" name="gender" required>
+                    Female
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio"
+                           name="gender" value="male">
+                    Male
+                </label>
+            </div>
+            <br>
+            <div class="three_inputs">
+                <div class="form-group">
+                    <label for="name">Employee's Name</label>
+                    <input class="form-control" id="name"
+                           name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input class="form-control" id="salary"
+                           name="salary" type="number" required>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <select class="form-control" name="title">
+                        <option value="WageEmployee">Wage Employee</option>
+                        <option value="Manager">Manager</option>
+                        <option value="SalesPerson">Sales Person</option>
+                        <option value="SalesManager">Sales Manager</option>
+                    </select>
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+            </div>
+
+
+        </form>
+
+    </div>
+</section>
+<section hidden id="employees-table">
+    <table >
+        <thead>
+        <tr id="thEmployees">
+
+        </tr>
+        </thead>
+        <tbody id="tBodyEmployees">
+
+        </tbody>
+    </table>
+    <label class="budget">Total Budget Salary: </label>
+    <label id="total-salary" class="budget"></label>
+</section>
+<script src="scripts/jquery-3.4.1.min.js"></script>
+<script src="scripts/random.js"></script>
+<script src="scripts/formhandler.js"></script>
+<script src="scripts/table.js"></script>
+<script src="scripts/employees.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

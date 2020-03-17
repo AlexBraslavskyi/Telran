@@ -1,0 +1,64 @@
+
+.two_inputs,.three_inputs {
+    display: flex;
+    justify-content: space-around;
+}
+.two_inputs .form-control {
+    width: 25vw;
+}
+
+.three_inputs .form-control {
+    width: 18vw;
+}
+
+.two_inputs label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
+.three_inputs label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
+table, th, td {
+    border: 1px solid black;
+
+}
+table {
+    border-collapse: collapse;
+    width: 80vw;
+    margin-top: 20px;
+
+}
+td {
+    text-align: center;
+}
+#total-salary {
+    background-color: rgba(228,151,60,0.07);
+
+}
+.budget {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttons  {
+    display: flex;
+
+
+}
+.buttons button {
+    margin: 20px;
+}
+th {
+    text-align: center;
+}
+
+
