@@ -52,4 +52,35 @@ render() {
     </table>
 }
 }
+ function getRandomEmployee() {
+	let id = 1;
+    const id = id++;
+    const emailAddress = `${id}@gmail.com`;
+const gender = getRandomElement(['male', 'female']);    
+	const name = getRandomName(gender);
+   const salary = getRandomNumber(5000,
+        35000);
+  const title = getRandomTitle();
+    return {
+        id, name, emailAddress, gender, salary, title}
+
+
+}
+
+function getRandomName(gender) {
+    const genderNames = {
+        male: ['Moshe', 'David', 'Yosef', 'Asaf',
+            'Lee', 'Ivan', 'Nik', 'Yuri', 'Igor', 'Alex'],
+        female: ['Sara', 'Rivka', 'Klara', 'Olya', 'Irina', 'Vera',
+            'Katya', 'Rita', 'Ida', 'Elena']
+    }
+    return getRandomElement(genderNames[gender]);
+}
+
+
+function getRandomTitle() {
+    const titles = ['Developer' ,'Development Manager', 'QA Tester', 'QA Manager', 'Sales Person', 'Sales Manager']
+    return getRandomElement(titles);
+}
+
 export default Employees;
