@@ -1,0 +1,55 @@
+import React from "react";
+import {getRandomNumber, getRandomElement} from "./random";
+class Employees extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            employees: []
+        }
+    }
+    addEmployee() {
+        const employee = getRandomEmployee() ;
+        const employees = this.state.employees;
+        employees.push(employee);
+        this.setState({
+            employees
+        })
+    }
+    componentDidMount() {
+        this.intervalId = setInterval(this.addEmployee.bind(this),
+            5000)
+    }
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+render() {
+   const employeeTableRecords = this.state.employees.map (
+       (employee) => {
+           return <tr>
+               <td>{employee.id}</td>
+               <td>{employee.name}</td>
+               <td>{employee.email}</td>
+               <td>{employee.gender}</td>
+               <td>{employee.salary}</td>
+			    <td>{employee.title}</td>
+           </tr>
+       }
+   )
+    return <table className="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Salary</th>
+			 <th>Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        {employeeTableRecords}
+        </tbody>
+    </table>
+}
+}
+export default Employees;
