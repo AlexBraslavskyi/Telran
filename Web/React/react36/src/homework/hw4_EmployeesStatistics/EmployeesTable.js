@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 
 export default function EmployeesTable(props){
@@ -35,3 +36,6 @@ export default function EmployeesTable(props){
         </div>
 
  }
+=======
+
+>>>>>>> 68c95c2290aa88385f70e6d80459421a778bbeb8

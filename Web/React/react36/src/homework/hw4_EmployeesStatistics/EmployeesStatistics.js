@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import _ from 'lodash';
 
 export default function EmployeesStatistics(props) {
@@ -24,4 +25,15 @@ export default function EmployeesStatistics(props) {
             </tbody>
         </table>
         </div>
+=======
+
+
+export default function EmployeesStatistics(prors) {
+    const listItems = JSON.stringify(prors.statistics);//hw table
+return <div>
+    <ul>
+        {listItems}
+    </ul>
+</div>
+>>>>>>> 68c95c2290aa88385f70e6d80459421a778bbeb8
 }
