@@ -2,22 +2,31 @@ import React from "react";
 import _ from 'lodash';
 import EmployeesStatistics from "./EmployeesStatistics";
 import EmployeesTable from "./EmployeesTable";
+import EmployeeForm from "./OrderForm";
 
 
 class Employees extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            employees: [], flStatistics: false
+            employees: [], flStatistics: false,flAddEmployee:false
         }
+    }
+	  showOrderForm(){
+        this.setState({flAddEmployee:false})
     }
     addEmployee() {
 
         const employees = this.state.employees;
+		  const ind = employees.findIndex(o=>o.email===order.email)
+        if(ind>=0){
+            return false;
+        }
         employees.unshift(employee);
         this.setState({
-            employees
+            employees,flAddEmployee:false
         })
+		  return true;
     }
     removeEmployee(id) {
         const employees = this.state.employees;
@@ -36,7 +45,7 @@ class Employees extends React.Component {
 }
     render() {
         if (!this.state.flStatistics) {
-            return <div>
+            return this.state.flAddEmployee? <EmployeeForm addFn={this.addEmployee.bind(this)}/>: <div>
                 <EmployeesTable employees = {this.state.employees}
                                 removeFn={this.removeEmployee.bind(this)}/>
                 <div style={{"textAlign": "center"}}>
