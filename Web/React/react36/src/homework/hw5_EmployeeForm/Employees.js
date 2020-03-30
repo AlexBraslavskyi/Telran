@@ -61,7 +61,9 @@ class Employees extends React.Component {
                 <EmployeesStatistics stat ={this.state.employees} />
                 <div style={{"textAlign": "center"}}>
                     <button  type="button" onClick={this.changeFlag.bind(this)}>
-                        Hide Statistics</button>
+                        Show table</button>
+   <i style={styleCursor} onClick={this.showEmployeeForm.bind(this)} className="fa fa-plus-circle"></i>
+                        Add Employee</i>
                 </div>
             </div>
         }
