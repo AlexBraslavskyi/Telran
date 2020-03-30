@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class EmployeeForm extends React.Component {
+export default class EmployeesForm extends React.Component {
     constructor(props) {
         super(props);
         this.invalid = true;
