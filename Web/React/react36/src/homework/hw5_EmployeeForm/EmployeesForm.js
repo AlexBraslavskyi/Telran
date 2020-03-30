@@ -9,11 +9,19 @@ export default class EmployeesForm extends React.Component {
             error: '',
             employee: {
                 id: "",
+<<<<<<< HEAD
 	        	name: "",
                 emailAddress: "",
 	        	gender:"",
                 salary: "",
                 title: this.titleOptions[0]
+=======
+		name: "",
+                email: "",
+		gender:"",
+                salary: "",
+                title: this.titleOptions[0];
+>>>>>>> 29366eae27279c99cbe0df4183333c532b8059b1
             }
         }
         this.onSubmit= this.onSubmit.bind(this)
@@ -30,13 +38,17 @@ handlerInputFields(event){
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 29366eae27279c99cbe0df4183333c532b8059b1
 getSelectOptions(optionStrings){
         return optionStrings.map(os=>{
             return <option key={os} value={os}>{os}</option>
         })
 }
 onSubmit(event){
+<<<<<<< HEAD
     event.preventDefault();
     console.log(this.state.employee.salary);
     console.log(this.state.employee.name.length)
@@ -125,4 +137,60 @@ validate(){
 
     }
 
+=======
+        event.preventDefault();
+        if(!this.props.addFn(this.state.employee)){
+            this.setState({error:`employee with ID ${this.state.employee.id} already exist`})
+        }
+}
+validate(){
+        this.invalid = this.state.error || !this.state.employee.id  //checking
+}
+    render() {
+this.validate();
+    return <div className='card'>
+	<header className='card-header'></header>
+        <h3>employee Input Form</h3>
+        <div className='card-body'>
+            <form onSubmit={this.onSubmit}>
+                <div className='form-group' >
+                <label>ID</label>
+                    <input className='form-control' type='number' name='id' onChange={this.handlerInputFields}/>
+                    <div hidden={!this.state.error} className="alert alert-danger">>
+                </div>
+                <div className='form-group' >
+                      <label>Email</label>
+                    <input className='form-control' type='email' name='email'onChange={this.handlerInputFields}/>
+                    <div hidden={!this.state.error} className="alert alert-danger">
+                {this.state.error}
+                </div>
+                <div className='form-group' >
+                    <label>Name</label>
+                    <input className='form-control' name='name'/>
+			   </div>
+	    <div className="form-check">
+                <label className="form-check-label">
+                    <input className="form-check-input" type="radio"
+                           value="female" name="gender" required>
+                    Female
+                </label>
+            </div>
+            <div className="form-check">
+                <label className="form-check-label">
+                    <input className="form-check-input" type="radio"
+                           name="gender" value="male">
+                    Male
+                </label>
+            </div>
+                <div className='form-group' >
+              <label>Salary</label>
+                    <input className='form-control' name='salary' type='number' onChange={this.handlerInputFields}/>
+                    </div>
+                <button type="submit" disabled={this.invalid}>Submit</button>
+            </form>
+        </div>
+        </div>
+
+}
+>>>>>>> 29366eae27279c99cbe0df4183333c532b8059b1
 }
