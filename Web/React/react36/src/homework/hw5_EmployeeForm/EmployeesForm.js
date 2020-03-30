@@ -11,7 +11,7 @@ export default class EmployeeForm extends React.Component {
                 id: "",
 		name: "",
                 email: "",
-		gender:""
+		gender:"",
                 salary: "",
                 title: this.titleOptions[0];
             }
@@ -66,21 +66,20 @@ this.validate();
                     <label>Name</label>
                     <input className='form-control' name='name'/>
 			   </div>
-	    <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio"
+	    <div className="form-check">
+                <label className="form-check-label">
+                    <input className="form-check-input" type="radio"
                            value="female" name="gender" required>
                     Female
                 </label>
             </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio"
+            <div className="form-check">
+                <label className="form-check-label">
+                    <input className="form-check-input" type="radio"
                            name="gender" value="male">
                     Male
                 </label>
             </div>
-	    
                 <div className='form-group' >
               <label>Salary</label>
                     <input className='form-control' name='salary' type='number' onChange={this.handlerInputFields}/>
