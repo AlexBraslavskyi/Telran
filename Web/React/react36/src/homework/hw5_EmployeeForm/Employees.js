@@ -49,7 +49,7 @@ class Employees extends React.Component {
                 <EmployeesTable employees = {this.state.employees}
                                 removeFn={this.removeEmployee.bind(this)}/>
                 <div style={{"textAlign": "center"}}>
-                    <i style={{"cursor": "pointer"}} onClick={this.addEmployee.bind(this)} className="fa fa-plus-square fa-2x">
+                       <i style={styleCursor} onClick={this.showEmployeeForm.bind(this)} className="fa fa-plus-circle"></i>
                         Add Employee</i>
                     <button style={{"marginLeft": 10}} type="button" onClick={this.changeFlag.bind(this)}>
                         Show Statistics</button>
