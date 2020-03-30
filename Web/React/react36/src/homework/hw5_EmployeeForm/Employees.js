@@ -2,7 +2,7 @@ import React from "react";
 import _ from 'lodash';
 import EmployeesStatistics from "./EmployeesStatistics";
 import EmployeesTable from "./EmployeesTable";
-import {getRandomEmployee} from "./GetRandomEmployee";
+
 
 class Employees extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Employees extends React.Component {
         }
     }
     addEmployee() {
-        const employee = getRandomEmployee();
+
         const employees = this.state.employees;
         employees.unshift(employee);
         this.setState({
