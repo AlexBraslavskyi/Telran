@@ -9,7 +9,7 @@ class Employees extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            employees: [], flag= 0;
+            employees: [], flag:'0';
         }
     }
     addEmployee() {
@@ -20,7 +20,7 @@ class Employees extends React.Component {
         }
         employees.unshift(employee);
         this.setState({
-            employees,flag=0
+            employees,flag:'0'
         })
 		  return true;
     }
@@ -39,9 +39,9 @@ class Employees extends React.Component {
                 <EmployeesTable employees = {this.state.employees}
                                 removeFn={this.removeEmployee.bind(this)}/>
                 <div style={{"textAlign": "center"}}>
-                       <i style={styleCursor} onClick={this.setState({flag=2})} className="fa fa-plus-circle"></i>
+                       <i style={styleCursor} onClick={this.setState({flag:'2'})} className="fa fa-plus-circle"></i>
                         Add Employee</i>
-                    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=1})}>
+                    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag:'1'})}>
                         Show Statistics</button>
                 </div>
             </div>
@@ -50,9 +50,9 @@ class Employees extends React.Component {
             return <div>
                 <EmployeesStatistics stat ={this.state.employees} />
                 <div style={{"textAlign": "center"}}>
-                    <button  type="button" onClick={this.setState({flag=0})}>
+                    <button  type="button" onClick={this.setState({flag:'0'})}>
                         Show table</button>
-   <i style={styleCursor} onClick={this.setState({flag=2})} className="fa fa-plus-circle"></i>
+   <i style={styleCursor} onClick={this.setState({flag:'2'})} className="fa fa-plus-circle"></i>
                         Add Employee</i>
                 </div>
             </div>
@@ -61,9 +61,9 @@ class Employees extends React.Component {
     if (this.state.flag ==2) {
             return <div>
      <EmployeeForm addFn={this.addEmployee.bind(this)}/>
-	      <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=1})}>
+	      <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag:'2'})}>
                         Show Statistics</button>
-    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=0})}>
+    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag:'0'})}>
                         Show Table</button>
 }
 export default Employees;
