@@ -30,6 +30,7 @@ handlerInputFields(event){
 
 }
 
+
 getSelectOptions(optionStrings){
         return optionStrings.map(os=>{
             return <option key={os} value={os}>{os}</option>
@@ -123,4 +124,5 @@ validate(){
         </div>
 
     }
+
 }
