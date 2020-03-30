@@ -9,14 +9,10 @@ class Employees extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            employees: [], flStatistics: false,flAddEmployee:false
+            employees: [], flag= 0;
         }
     }
-	  showOrderForm(){
-        this.setState({flAddEmployee:false})
-    }
     addEmployee() {
-
         const employees = this.state.employees;
 		  const ind = employees.findIndex(o=>o.email===order.email)
         if(ind>=0){
@@ -24,7 +20,7 @@ class Employees extends React.Component {
         }
         employees.unshift(employee);
         this.setState({
-            employees,flAddEmployee:false
+            employees,flag=0
         })
 		  return true;
     }
@@ -36,37 +32,38 @@ class Employees extends React.Component {
             return true;
         }
     }
-    changeFlag(){
-        if(!this.state.flStatistics){
-    this.setState({flStatistics:true})}
-        else {
-            this.setState({flStatistics:false})
-        }
-}
+
     render() {
-        if (!this.state.flStatistics) {
-            return this.state.flAddEmployee? <EmployeeForm addFn={this.addEmployee.bind(this)}/>: <div>
+        if (this.state.flag == 0) {
+            return <div>
                 <EmployeesTable employees = {this.state.employees}
                                 removeFn={this.removeEmployee.bind(this)}/>
                 <div style={{"textAlign": "center"}}>
-                       <i style={styleCursor} onClick={this.showEmployeeForm.bind(this)} className="fa fa-plus-circle"></i>
+                       <i style={styleCursor} onClick={this.setState({flag=2})} className="fa fa-plus-circle"></i>
                         Add Employee</i>
-                    <button style={{"marginLeft": 10}} type="button" onClick={this.changeFlag.bind(this)}>
+                    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=1})}>
                         Show Statistics</button>
                 </div>
             </div>
         }
-        if (this.state.flStatistics) {
+        if (this.state.flag ==1) {
             return <div>
                 <EmployeesStatistics stat ={this.state.employees} />
                 <div style={{"textAlign": "center"}}>
-                    <button  type="button" onClick={this.changeFlag.bind(this)}>
+                    <button  type="button" onClick={this.setState({flag=0})}>
                         Show table</button>
-   <i style={styleCursor} onClick={this.showEmployeeForm.bind(this)} className="fa fa-plus-circle"></i>
+   <i style={styleCursor} onClick={this.setState({flag=2})} className="fa fa-plus-circle"></i>
                         Add Employee</i>
                 </div>
             </div>
         }
     }
+    if (this.state.flag ==2) {
+            return <div>
+     <EmployeeForm addFn={this.addEmployee.bind(this)}/>
+	      <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=1})}>
+                        Show Statistics</button>
+    <button style={{"marginLeft": 10}} type="button" onClick={this.setState({flag=0})}>
+                        Show Table</button>
 }
 export default Employees;
