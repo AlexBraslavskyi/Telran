@@ -69,7 +69,7 @@ this.validate();
               <label>Salary</label>
                     <input className='form-control' name='salary' type='number' onChange={this.handlerInputFields}/>
                     </div>
-                <button type="submit" disabled={this.invalid}>Add employee</button>
+                <button type="submit" disabled={this.invalid}>Submit</button>
             </form>
         </div>
         </div>
