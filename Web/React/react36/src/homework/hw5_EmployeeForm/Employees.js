@@ -2,7 +2,7 @@ import React from "react";
 import _ from 'lodash';
 import EmployeesStatistics from "./EmployeesStatistics";
 import EmployeesTable from "./EmployeesTable";
-import EmployeeForm from "./OrderForm";
+import EmployeesForm from "./EmployeesForm";
 
 
 class Employees extends React.Component {
