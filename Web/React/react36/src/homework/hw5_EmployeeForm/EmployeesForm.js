@@ -21,6 +21,7 @@ export default class EmployeesForm extends React.Component {
         this.onSubmit= this.onSubmit.bind(this)
         this.handlerInputFields = this.handlerInputFields.bind(this);
        this.handlerInputSalary = this.handlerInputSalary.bind(this);
+	    this.handlerInputName = this.handlerInputName.bind(this);
     }
 	
 
@@ -36,15 +37,30 @@ handlerInputFields(event){
 }
     handlerInputSalary(event){
         event.preventDefault();
+        const fieldName = event.target.name;
         const fieldValue = event.target.value;
-        console.log(fieldValue);
-        if (fieldValue<5000||fieldValue>35000) {
-            if (this.state.employee.salary<5000|| this.state.employee.salary>35000) {
+        const employee = this.state.employee;
+        employee[fieldName]=fieldValue;
+        if (fieldValue<5000||fieldValue>35000){
                 this.setState({errorSalary: `Salary mast by in range of 5000-35000`});
             }
+	    else{ 
+		    this.setState({errorID:'',errorName:'',errorSalary:'',employee})
         }
     }
-
+    handlerInputName(event){
+        event.preventDefault();
+        const fieldName = event.target.name;
+        const fieldValue = event.target.value;
+        const employee = this.state.employee;
+        employee[fieldName]=fieldValue;
+        if (fieldValue.length <4){
+                this.setState({errorName: `In name mast be more then 4 symbols`});
+            }
+	    else{ 
+		    this.setState({errorID:'',errorName:'',errorSalary:'',employee})
+        }
+    }
 getSelectOptions(optionStrings){
         return optionStrings.map(os=>{
             return <option key={os} value={os}>{os}</option>
@@ -52,9 +68,6 @@ getSelectOptions(optionStrings){
 }
 onSubmit(event){
     event.preventDefault();
-    if (this.state.employee.name.length <4) {
-        this.setState({errorName: `In name mast be more then 4 symbols`});
-    }
         if(!this.props.addFn(this.state.employee)){
             this.setState({errorID?:`employee with ID ${this.state.employee.id} already exist`})
         }
@@ -80,20 +93,17 @@ validate(){
                         </div>
                         <input className='form-control' type='number' name='id' onChange={this.handlerInputFields} required/>
                     </div>
-                    <div className='form-group' >
-                        <label>Email</label>
-
-                        <input className='form-control' type='email' name='emailAddress' onChange={this.handlerInputFields} required/>
-                   
-                    </div>
                             <div className='form-group'>
                                 <label>Name</label>
-
-                                <input className='form-control' name='name' onChange={this.handlerInputFields} required/>
+                                <input className='form-control' name='name' onChange={this.handlerInputName} required/>
                                 <div hidden={!this.state.errorName} className="alert alert-danger">
                                     {this.state.errorName}
                                 </div>
                                 </div>
+			<div className='form-group' >
+                        <label>Email</label>
+                        <lable>{this.state.employee.name+this.state.employee.id+"@.gmail.com"}</lable>
+                    </div>
                             <div className="form-check">
                                 <label className="form-check-label">
                                     <input className="form-check-input" type="radio"
