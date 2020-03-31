@@ -31,7 +31,7 @@ handlerInputFields(event){
         const fieldValue = event.target.value;
         const employee = this.state.employee;
         employee[fieldName]=fieldValue;
-        this.setState({errorID:'',employee})
+        this.setState({errorID:'',errorName:'',errorSalary:'',employee})
 
 }
     handlerInputSalary(event){
