@@ -86,6 +86,7 @@ validate(){
             <h3>employee Input Form</h3>
             <div className='card-body'>
                 <form onSubmit={this.onSubmit}>
+<div className = 'firstLavel'>
                     <div className='form-group'>
                         <label>ID</label>
                         <div hidden={!this.state.errorID} className="alert alert-danger">
@@ -104,6 +105,8 @@ validate(){
                         <label>Email</label>
                         <lable>{this.state.employee.name+this.state.employee.id+"@.gmail.com"}</lable>
                     </div>
+</div>
+<div className = 'secondLavel'>
                             <div className="form-check">
                                 <label className="form-check-label">
                                     <input className="form-check-input" type="radio"
@@ -136,6 +139,7 @@ validate(){
                             <div>
                                 <button type="submit" disabled={this.invalid}>Submit</button>
                             </div>
+</div>
                 </form>
             </div>
         </div>
