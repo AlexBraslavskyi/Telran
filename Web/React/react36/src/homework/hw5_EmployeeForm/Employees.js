@@ -67,7 +67,12 @@ class Employees extends React.Component {
                     <button type="button" onClick={this.changeFlag.bind(this,0)}>
                         Show table
                     </button>
+<<<<<<< HEAD
 
+=======
+                    <i style={styleCursor} onClick={this.changeFlag.bind(this,2)} className="fa fa-plus-circle">
+                        Add Employee</i>
+>>>>>>> cc689b8b4519a53009ddf43aa49ce42143dc097f
                 </div>
             </div>
         }
