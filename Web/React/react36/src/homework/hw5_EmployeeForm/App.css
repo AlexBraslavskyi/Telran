@@ -1,0 +1,25 @@
+
+tbody {
+    display: block;
+    height: 60vh;
+    overflow-y: auto;
+}
+thead,  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.firstLevel, .thirdLevel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.secondLevel{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.alert-danger{
+    background-color: #ffffff00;
+    border-color: #ffffff00;
+}
