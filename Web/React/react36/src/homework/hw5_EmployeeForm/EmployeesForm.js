@@ -6,7 +6,9 @@ export default class EmployeesForm extends React.Component {
         this.invalid = true;
         this.titleOptions = ['Developer' ,'Development Manager', 'QA Tester', 'QA Manager', 'Sales Person', 'Sales Manager'];
         this.state = {
-            error: '',
+            errorID: '',
+		   errorName: '',
+		   errorSalary: '',
             employee: {
                 id: "",
 	        	name: "",
@@ -29,7 +31,7 @@ handlerInputFields(event){
         const fieldValue = event.target.value;
         const employee = this.state.employee;
         employee[fieldName]=fieldValue;
-        this.setState({error:'',employee})
+        this.setState({errorID:'',employee})
 
 }
     handlerInputSalary(event){
@@ -38,7 +40,7 @@ handlerInputFields(event){
         console.log(fieldValue);
         if (fieldValue<5000||fieldValue>35000) {
             if (this.state.employee.salary<5000|| this.state.employee.salary>35000) {
-                this.setState({error: `Salary mast by in range of 5000-35000`});
+                this.setState({errorSalary: `Salary mast by in range of 5000-35000`});
             }
         }
     }
@@ -51,15 +53,15 @@ getSelectOptions(optionStrings){
 onSubmit(event){
     event.preventDefault();
     if (this.state.employee.name.length <4) {
-        this.setState({error: `In name mast be more then 4 symbols`});
+        this.setState({errorName: `In name mast be more then 4 symbols`});
     }
         if(!this.props.addFn(this.state.employee)){
-            this.setState({error:`employee with ID ${this.state.employee.id} already exist`})
+            this.setState({errorID?:`employee with ID ${this.state.employee.id} already exist`})
         }
 
 }
 validate(){
-        this.invalid = this.state.error || !this.state.employee.id
+        this.invalid = this.state.errorID ||this.state.errorSalary||this.state.errorName || !this.state.employee.id
             // ||this.state.employee.name.length <4
             // ||(this.state.employee.salary <5000&&this.state.employee.salary>35000)
          //checking
@@ -73,8 +75,8 @@ validate(){
                 <form onSubmit={this.onSubmit}>
                     <div className='form-group'>
                         <label>ID</label>
-                        <div hidden={!this.state.error} className="alert alert-danger">
-                        {this.state.error}
+                        <div hidden={!this.state.errorID} className="alert alert-danger">
+                        {this.state.errorID}
                         </div>
                         <input className='form-control' type='number' name='id' onChange={this.handlerInputFields} required/>
                     </div>
@@ -82,16 +84,14 @@ validate(){
                         <label>Email</label>
 
                         <input className='form-control' type='email' name='emailAddress' onChange={this.handlerInputFields} required/>
-                        <div hidden={!this.state.error} className="alert alert-danger">
-                            {this.state.error}
-                        </div>
+                   
                     </div>
                             <div className='form-group'>
                                 <label>Name</label>
 
                                 <input className='form-control' name='name' onChange={this.handlerInputFields} required/>
-                                <div hidden={!this.state.error} className="alert alert-danger">
-                                    {this.state.error}
+                                <div hidden={!this.state.errorName} className="alert alert-danger">
+                                    {this.state.errorName}
                                 </div>
                                 </div>
                             <div className="form-check">
@@ -110,8 +110,8 @@ validate(){
                             </div>
                             <div className='form-group'>
                                 <label>Salary</label>
-                                <div hidden={!this.state.error} className="alert alert-danger">
-                                    {this.state.error}
+                                <div hidden={!this.state.errorSalary} className="alert alert-danger">
+                                    {this.state.errorSalary}
                                 </div>
                                 <input className='form-control' name='salary' type='number'
                                        onChange={this.handlerInputSalary} required/>
