@@ -20,6 +20,40 @@ export default class EmployeesForm extends React.Component {
         this.handlerInputFields = this.handlerInputFields.bind(this);
        this.handlerInputSalary = this.handlerInputSalary.bind(this);
     }
+	
+	handleChange = (event) => {
+  event.preventDefault();
+  const { name, value } = event.target;
+  let errors = this.state.errors;
+
+  switch (name) {
+    case 'fullName': 
+      errors.fullName = 
+        value.length < 5
+          ? 'Full Name must be 5 characters long!'
+          : '';
+      break;
+    case 'email': 
+      errors.email = 
+        validEmailRegex.test(value)
+          ? ''
+          : 'Email is not valid!';
+      break;
+    case 'password': 
+      errors.password = 
+        value.length < 8
+          ? 'Password must be 8 characters long!'
+          : '';
+      break;
+    default:
+      break;
+  }
+
+  this.setState({errors, [name]: value}, ()=> {
+      console.log(errors)
+  })
+}
+
 
 handlerInputFields(event){
       event.preventDefault();
