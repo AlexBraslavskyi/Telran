@@ -18,6 +18,7 @@ export default class EmployeesForm extends React.Component {
         }
         this.onSubmit= this.onSubmit.bind(this)
         this.handlerInputFields = this.handlerInputFields.bind(this);
+       this.handlerInputSalary = this.handlerInputSalary.bind(this);
     }
 
 handlerInputFields(event){
@@ -29,7 +30,16 @@ handlerInputFields(event){
         this.setState({error:'',employee})
 
 }
-
+    handlerInputSalary(event){
+        event.preventDefault();
+        const fieldValue = event.target.value;
+        console.log(fieldValue);
+        if (fieldValue<5000||fieldValue>35000) {
+            if (this.state.employee.salary<5000|| this.state.employee.salary>35000) {
+                this.setState({error: `Salary mast by in range of 5000-35000`});
+            }
+        }
+    }
 
 getSelectOptions(optionStrings){
         return optionStrings.map(os=>{
@@ -38,11 +48,6 @@ getSelectOptions(optionStrings){
 }
 onSubmit(event){
     event.preventDefault();
-    console.log(this.state.employee.salary);
-    console.log(this.state.employee.name.length)
-    if (this.state.employee.salary <5000&&this.state.employee.salary>35000) {
-        this.setState({error: `Salary mast by in range of 5000-35000`});
-    }
     if (this.state.employee.name.length <4) {
         this.setState({error: `In name mast be more then 4 symbols`});
     }
@@ -107,7 +112,7 @@ validate(){
                                     {this.state.error}
                                 </div>
                                 <input className='form-control' name='salary' type='number'
-                                       onChange={this.handlerInputFields} required/>
+                                       onChange={this.handlerInputSalary} required/>
                             </div>
                             <div className='form-group' >
                                 <label>Title</label>
