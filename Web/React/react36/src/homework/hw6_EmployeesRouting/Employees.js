@@ -34,20 +34,7 @@ class Employees extends React.Component {
         })
         return true;
     }
-    showStatistics() {
-        this.setState (
-            {
-               employeesSwitch: 1
-            }
-        )
-    }
-    hideStatistics() {
-        this.setState (
-            {
-                employeesSwitch: 0
-            }
-        )
-    }
+  
    removeEmployee(id) {
         console.log(id);
         const employees = this.state.employees;
@@ -65,13 +52,8 @@ class Employees extends React.Component {
                 <i style={{cursor: 'pointer'}}
                    className="fa fa-plus-square fa-3x"
                    onClick={this.addEmployeeShow.bind(this)}></i>
-                <button  onClick={this.showStatistics.bind(this)}>Show statistics</button>
             </div>
-            case 1: return <div>
-                <EmployeesStatistics employees={this.state.employees}></EmployeesStatistics>
-                <button onClick={this.hideStatistics.bind(this)}>Hide statistics</button>
-
-            </div>
+           
             case 2: return <EmployeeForm addEmployeeFn={this.addEmployee.bind(this)}></EmployeeForm>
         }
 
