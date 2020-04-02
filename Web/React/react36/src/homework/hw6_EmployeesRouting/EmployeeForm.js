@@ -82,6 +82,8 @@ export default class EmployeeForm extends React.Component {
             error.errorId = 'id can\'t be negative number';
         } else if(id.indexOf(".") >= 0){
             error.errorId = 'id can\'t be fraction number';
+        } else if(id.substr(0,1)=="0"){
+            error.errorId = 'id can\'t start from 0';
         } else {
             employee.id = id;
         }
@@ -97,7 +99,10 @@ export default class EmployeeForm extends React.Component {
         if (name.length < this.nameMinLength) {
             error.errorName = 'Minimal name length should be '
                 + this.nameMinLength
-        } else {
+        }  else if(!name.match(letters)) {
+            error.errorName = 'Name mast content only english letters';
+        }
+        else {
             employee.name = name;
             this.fillEmployeeAddress();
         }
