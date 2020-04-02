@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter,Switch,Route} from "react-router-dom";
 import EmployeesNav from "./homework/hw6_EmployeesRouting/EmployeesNav";
 import employees from "./homework/hw6_EmployeesRouting/employees";
-import OrdersStatistics from "./homework/hw6_EmployeesRouting/EmployeresStatistics"
+import EmployeesStatistics from "./homework/hw6_EmployeesRouting/EmployeresStatistics"
 
 
 function App() {
