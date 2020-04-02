@@ -161,6 +161,7 @@ export default class EmployeeForm extends React.Component {
                 <h2>Employee Data Form</h2>
             </div>
             <div className="card-body">
+                 <div className = 'firstLevel'>
                 <form onSubmit={this.submit}>
                     {getInputElement('number',
                         'id', 'Enter Employee ID',
@@ -174,14 +175,18 @@ export default class EmployeeForm extends React.Component {
                     {getInputElement('email',
                         'emailAddress', 'Enter email address',
                         this.handlerNonValidated, this.state.employee.emailAddress)}
+                    </div>
+                    <div className = 'secondLevel'>
                     {genderRadioButtons}
+                    </div>
+                    <div className = 'thirdLevel'>
                     {getInputElement('number', 'salary',
                     'Enter Salary', this.handlerSalary)}
                     {getErrorMessage(this.state.error.errorSalary)}
                     {getSelectElement('title', this.handlerNonValidated,
                         'Select Title', this.titles)}
                         <button type="submit" disabled={!this.validate()}>Add Employee</button>
-
+                    </div>
                 </form>
             </div>
         </div>
