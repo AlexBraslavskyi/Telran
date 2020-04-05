@@ -1,6 +1,6 @@
 // import React from "react";
 // import _ from 'lodash';
-// import EmployeesStatistics from "./EmployeesStatistics";
+// import TitleStatistics from "./TitleStatistics";
 // import EmployeesTable from "./EmployeesTable";
 // import {getRandomEmployee} from "./GetRandomEmployee";
 //
@@ -49,7 +49,7 @@
 //         }
 //         if (this.state.flStatistics) {
 //             return <div>
-//                 <EmployeesStatistics stat ={this.state.employees} />
+//                 <TitleStatistics stat ={this.state.employees} />
 //                 <div style={{"textAlign": "center"}}>
 //                     <button  type="button" onClick={this.changeFlag.bind(this)}>
 //                         Hide Statistics</button>
