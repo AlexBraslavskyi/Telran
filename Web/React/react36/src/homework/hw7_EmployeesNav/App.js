@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import EmployeesNav from "./components/EmployeesNav";
+import EmployeesNav from "./homework/hw7_EmployeesNav/components/EmployeesNav";
 import {
   PATH_SALARY_STATISTICS,
   PATH_EMPLOYEES,
@@ -10,10 +10,10 @@ import {
   PATH_TITLE_STATISTICS
 } from "./config/employees_configuration";
 import Employees from "./components/Employees";
-import EmployeesGeneration from "./components/EmployeesGeneration";
-import SalaryStatistics from "./components/SalaryStatistics";
-import TitleStatistics from "./components/TitleStatistics";
-import EmployeesSearch from "./components/EmployeesSearch";
+import EmployeesGeneration from "./homework/hw7_EmployeesNav/components/EmployeesGeneration";
+import SalaryStatistics from "./homework/hw7_EmployeesNav/components/SalaryStatistics";
+import TitleStatistics from "./homework/hw7_EmployeesNav/components/TitleStatistics";
+import EmployeesSearch from "./homework/hw7_EmployeesNav/components/EmployeesSearch";
 class App extends React.Component {
   constructor(props) {
     super(props);
