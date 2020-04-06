@@ -2,18 +2,18 @@ import React from 'react';
 
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import CoursesNav from "./components/CoursesNav";
+import EmployeesNav from "./components/EmployeesNav";
 import {
-  PATH_COST_STATISTICS,
-  PATH_COURSES,
-  PATH_COURSES_GENERATION, PATH_COURSES_SEARCH,
+  PATH_SALARY_STATISTICS,
+  PATH_EMPLOYEES,
+  PATH_EMPLOYEES_GENERATION, PATH_EMPLOYEES_SEARCH,
   PATH_TITLE_STATISTICS
-} from "./config/courses_configuration";
-import Courses from "./components/Courses";
-import CoursesGeneration from "./components/CoursesGeneration";
-import CostStatistics from "./components/CostStatistics";
+} from "./config/employees_configuration";
+import Employees from "./components/Employees";
+import EmployeesGeneration from "./components/EmployeesGeneration";
+import SalaryStatistics from "./components/SalaryStatistics";
 import TitleStatistics from "./components/TitleStatistics";
-import CoursesSearch from "./components/CoursesSearch";
+import EmployeesSearch from "./components/EmployeesSearch";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,20 +22,20 @@ class App extends React.Component {
     return <BrowserRouter>
       <CoursesNav/>
       <Switch>
-        <Route path={PATH_COURSES} exact render={() => {
-          return <Courses/>
+        <Route path={PATH_EMPLOYEES} exact render={() => {
+          return <Employees/>
         }}/>
         <Route path={PATH_TITLE_STATISTICS} exact render={() => {
           return <TitleStatistics/>
         }}/>
-        <Route path={PATH_COURSES_GENERATION} exact render={() => {
-          return <CoursesGeneration/>
+        <Route path={PATH_EMPLOYEES_GENERATION} exact render={() => {
+          return <EmployeesGeneration/>
         }}/>
-        <Route path={PATH_COST_STATISTICS} exact render={() => {
-          return <CostStatistics/>
+        <Route path={PATH_SALARY_STATISTICS} exact render={() => {
+          return <SalaryStatistics/>
         }}/>
-        <Route path={PATH_COURSES_SEARCH} exact render={() => {
-          return <CoursesSearch/>
+        <Route path={PATH_EMPLOYEES_SEARCH} exact render={() => {
+          return <EmployeesSearch/>
         }}/>
 
 
