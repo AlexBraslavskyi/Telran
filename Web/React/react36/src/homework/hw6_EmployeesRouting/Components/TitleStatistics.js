@@ -18,12 +18,12 @@ export default function TitleStatistics(props) {
         <header className="card-header">
            <h3>Statistics of the Employee Titles</h3>
         </header>
-        <div className="card-body">
-            <table>
+        <div className="card-body" >
+            <table className="table table-sm" style={{'textAlign':'center'}}>
                 <thead>
                 <tr>
-                    <th>title</th>
-                    <th>count</th>
+                    <th>Title</th>
+                    <th>Count</th>
                 </tr>
                 </thead>
                 <tbody>

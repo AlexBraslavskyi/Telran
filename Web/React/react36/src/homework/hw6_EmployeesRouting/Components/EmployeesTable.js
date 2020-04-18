@@ -7,7 +7,6 @@ export default function EmployeesTable(props) {
             props.removeFn(id);
         }
     }
-    console.log(props.employees);
     const employeeTableRecords = props.employees.map (
         (employee) => {
             return <tr key={employee.id}>
@@ -24,20 +23,21 @@ export default function EmployeesTable(props) {
             </tr>
         }
         )
-    return <table className="table">
+    return <div style={{"margin":"40px"}}><table className="table">
         <thead>
         <tr>
-            <th>id</th>
-            <th>emailAddress</th>
-            <th>name</th>
-            <th>gender</th>
-            <th>salary</th>
-            <th>title</th>
-            <th></th>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Salary</th>
+            <th>Title</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
         {employeeTableRecords}
         </tbody>
     </table>
+    </div>
 }

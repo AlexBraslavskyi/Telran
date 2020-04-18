@@ -9,17 +9,34 @@ export function getErrorMessage(error){
     return error ?
         <div className="alert alert-danger">{error}</div> : <div></div>
 }
-export function getInputElement(type, name, label, handler,value) {
+export function getInputElement(type, name, label, handler,errorMessage,valueProps) {
     return <div className="form-group">
         <label>{label}</label>
-        <input className="form-control" value={value}
-               onChange={handler} name={name} type={type}/>
+        <input className={"form-control" + (valueProps.controlError===-1
+              ? " is-invalid"
+              : valueProps.controlError===0
+              ? ""
+              : " is-valid")} defaultValue={valueProps.value}
+               onChange={handler}  placeholder={name} name={name} type={type} />
+        <div className="alert alert-danger">{errorMessage}</div>
+    </div>
+}
+export function getInputElementBlur(type, name, label, handler,errorMessage,valueProps) {
+    return <div className="form-group">
+        <label>{label}</label>
+        <input className={"form-control" + (valueProps.controlError===-1
+            ? " is-invalid"
+            : valueProps.controlError===0
+                ? ""
+                : " is-valid")} defaultValue={valueProps.value}
+               onBlur={handler}  placeholder={name} name={name} type={type} />
+        <div className="alert alert-danger">{errorMessage}</div>
     </div>
 }
 export function getSelectElement(name, handler, label, options) {
     return <div className="form-group">
         <label>{label}</label>
-        <select className="form-control" name={name}
+        <select className="form-control" name={name} placeholder={name}
                 onChange={handler}>
             {getSelectOptions(options)}
         </select>
