@@ -1,47 +1,39 @@
 import React from 'react';
-
 import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import EmployeesNav from "./homework/hw7_EmployeesNav/components/EmployeesNav";
-import {
-  PATH_SALARY_STATISTICS,
-  PATH_EMPLOYEES,
-  PATH_EMPLOYEES_GENERATION, PATH_EMPLOYEES_SEARCH,
-  PATH_TITLE_STATISTICS
-} from "./config/employees_configuration";
-import Employees from "./components/Employees";
-import EmployeesGeneration from "./homework/hw7_EmployeesNav/components/EmployeesGeneration";
-import SalaryStatistics from "./homework/hw7_EmployeesNav/components/SalaryStatistics";
-import TitleStatistics from "./homework/hw7_EmployeesNav/components/TitleStatistics";
-import EmployeesSearch from "./homework/hw7_EmployeesNav/components/EmployeesSearch";
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render () {
+import {BrowserRouter,Switch,Route} from "react-router-dom";
+import EmployeesNav from "./homework/hw7_EmployeesNav/Components/EmployeesNav";
+import Employees from "./homework/hw7_EmployeesNav/Components/Employees";
+import TitleStatistics from "./homework/hw7_EmployeesNav/Components/TitleStatistics";
+import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw7_EmployeesNav/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw7_EmployeesNav/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw7_EmployeesNav/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw7_EmployeesNav/Components/EmployeesSearch";
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            employees:[]
+        }
+    }
+    employeesUpdate(employees){
+        this.setState({employees})
+    }
+    render() {
     return <BrowserRouter>
-      <CoursesNav/>
-      <Switch>
-        <Route path={PATH_EMPLOYEES} exact render={() => {
-          return <Employees/>
-        }}/>
-        <Route path={PATH_TITLE_STATISTICS} exact render={() => {
-          return <TitleStatistics/>
-        }}/>
-        <Route path={PATH_EMPLOYEES_GENERATION} exact render={() => {
-          return <EmployeesGeneration/>
-        }}/>
-        <Route path={PATH_SALARY_STATISTICS} exact render={() => {
-          return <SalaryStatistics/>
-        }}/>
-        <Route path={PATH_EMPLOYEES_SEARCH} exact render={() => {
-          return <EmployeesSearch/>
-        }}/>
-
-
-      </Switch>
-    </BrowserRouter>
-  }
+    <EmployeesNav></EmployeesNav>
+    <Switch>
+      <Route path={pathEmployees} exact render ={() =>
+        {return <Employees employees = {this.state.employees} updateEmployeesFn={this.employeesUpdate.bind(this)}/>}}/>
+      <Route path={pathTitleStatistics} exact render={() =>
+        {return <TitleStatistics employees={this.state.employees}/>}}/>
+      <Route path={pathGenerations} exact render={() =>
+        {return <EmployeesGenerations  employees = {this.state.employees} updateEmployeesFn={this.employeesUpdate.bind(this)}/>}}/>
+      <Route path={pathSalaryStatistics} exact render={() =>
+        {return <SalaryStatistics employees={this.state.employees}/>}}/>
+        <Route path={pathSearch} exact render={() =>
+        {return <EmployeesSearch employees={this.state.employees}/>}}/>
+              </Switch>
+              </BrowserRouter>
+      }
 }
-
 export default App;
