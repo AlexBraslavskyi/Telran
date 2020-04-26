@@ -1,6 +1,6 @@
 import React from "react";
 
-// function Clock() {
+// function Timer() {
 //
 //     return <h4>{new Date().toLocaleString()}</h4>
 //

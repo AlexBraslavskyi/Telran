@@ -6,7 +6,9 @@ export default function EmployeesTable(props) {
             'with id=' + id)) {
             props.removeFn(id);
         }
+
     }
+
     const employeeTableRecords = props.employees.map (
         (employee) => {
             return <tr key={employee.id}>
@@ -16,28 +18,27 @@ export default function EmployeesTable(props) {
                 <td>{employee.gender}</td>
                 <td>{employee.salary}</td>
                 <td>{employee.title}</td>
-                {props.removeFn? <td>
+                {props.removeFn ?<td>
                     <i className="fa fa-trash" style={{cursor: 'pointer'}}
-                    onClick={remove.bind(this,employee.id)}/>
-                </td>:null}
+                    onClick={remove.bind(this,employee.id)}></i>
+                </td> : <div/>}
             </tr>
         }
         )
-    return <div style={{"margin":"40px"}}><table className="table">
+    return <table className="table">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Salary</th>
-            <th>Title</th>
-            {props.removeFn? <th>Delete</th> :null}
+            <th>id</th>
+            <th>emailAddress</th>
+            <th>name</th>
+            <th>gender</th>
+            <th>salary</th>
+            <th>title</th>
+            { props.removeFn ? <th></th> : <div/>}
         </tr>
         </thead>
         <tbody>
         {employeeTableRecords}
         </tbody>
     </table>
-    </div>
 }
