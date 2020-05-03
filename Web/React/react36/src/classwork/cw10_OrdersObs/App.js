@@ -1,60 +1,35 @@
 import React, {useState} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Orders from "./classwork/cw8_OrdersHooks/Components/Orders";
-import OrdersStatistics from "./classwork/cw8_OrdersHooks/Components/ordersStatistics";
-import OrdersNav from "./classwork/cw8_OrdersHooks/Components/OrdersNav";
+import Orders from "./classwork/cw10_OrdersObs/Components/Orders";
+import OrdersStatistics from "./classwork/cw10_OrdersObs/Components/ordersStatistics";
+import OrdersNav from "./classwork/cw10_OrdersObs/Components/OrdersNav";
+import OrdersHttpService from "./classwork/cw10_OrdersObs/Service/EmployeesHttpService";
 
-const App=(props)=>{
- let orders;
- let setOrders;
- [orders,setOrders]=useState([]);
+// json-server-auth -p 3500 -w --id email orders.json
 
- const ordersUpdate = (orders) => {
-  setOrders(orders)
- }
+
+const App=()=>{
+ const ordersService = new OrdersHttpService('http://localhost:3500/orders/')
+ // let orders;
+ // let setOrders;
+ // [orders,setOrders]=useState([]);
+
+ // const ordersUpdate = (orders) => {
+ //  setOrders(orders)
+ // }
  return <BrowserRouter>
   <OrdersNav></OrdersNav>
   <Switch>
    <Route path={'/orders'} exact render={() => {
-    return <Orders orders={orders} updateOrdersFn={ordersUpdate}/>}}/>
+    return <Orders ordersService={ordersService}/>}}/>
    <Route path={'/statistics'} exact render={
     () => {
-     return <OrdersStatistics orders={orders}/>}}>
+     return <OrdersStatistics ordersService={ordersService}/>}}>
    </Route>
   </Switch>
  </BrowserRouter>
 }
 
-// class App extends React.Component {
-//  constructor(props) {
-//   super(props);
-//   this.state = {
-//    orders: []
-//   }
-//  }
-//  ordersUpdate(orders) {
-//   this.setState({
-//    orders
-//   })
-//  }
-//  render() {
-//   return <BrowserRouter>
-//    <OrdersNav></OrdersNav>
-//    <Switch>
-//     <Route path={'/orders'} exact render={() => {
-//      return <Orders orders={this.state.orders} updateOrdersFn={this.ordersUpdate.bind(this)}/>
-//     }}/>
-//     <Route path={'/statistics'} exact render={
-//      () => {
-//       return <OrdersStatistics orders={this.state.orders}/>
-//      }
-//     }>
-//
-//     </Route>
-//    </Switch>
-//   </BrowserRouter>
-//  }
-// }
 
 export default App;

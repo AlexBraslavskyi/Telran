@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import './homework/hw9_EmployeesHooksEffect/App.css';
+import './homework/hw8_EmployeesHooks/App.css';
 import {BrowserRouter,Switch,Route} from "react-router-dom";
-import {EmployeesNav} from "./homework/hw9_EmployeesHooksEffect/Components/EmployeesNav";
-import Employees from "./homework/hw9_EmployeesHooksEffect/Components/Employees";
-import TitleStatistics from "./homework/hw9_EmployeesHooksEffect/Components/TitleStatistics";
-import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw9_EmployeesHooksEffect/config/EmployeesConfig";
-import EmployeesGenerations from "./homework/hw9_EmployeesHooksEffect/Components/EmployeesGenerations";
-import SalaryStatistics from "./homework/hw9_EmployeesHooksEffect/Components/SalaryStatistics";
-import EmployeesSearch from "./homework/hw9_EmployeesHooksEffect/Components/EmployeesSearch";
+import {EmployeesNav} from "./homework/hw8_EmployeesHooks/Components/EmployeesNav";
+import Employees from "./homework/hw8_EmployeesHooks/Components/Employees";
+import TitleStatistics from "./homework/hw8_EmployeesHooks/Components/TitleStatistics";
+import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw8_EmployeesHooks/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw8_EmployeesHooks/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw8_EmployeesHooks/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw8_EmployeesHooks/Components/EmployeesSearch";
 
 const App=(props)=>{
  let employees;

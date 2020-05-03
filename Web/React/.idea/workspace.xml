@@ -2,28 +2,74 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2192932-bcf7-435b-9cb6-138bb2833a18" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ServerData/.idea/ServerData.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/Components/OrderForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/Components/Orders.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/Components/OrdersNav.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react36/src/classwork/cw10_OrdersObs/Components/ordersStatistics.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Classworks/05-CW_DogramJavascriptGetStarted" beforeDir="false" afterPath="$PROJECT_DIR$/../Classworks/05-CW_DogramJavascriptGetStarted" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Classworks/06-CW_DogramHiddenAnimation" beforeDir="false" afterPath="$PROJECT_DIR$/../Classworks/06-CW_DogramHiddenAnimation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react36/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react36/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react36/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/src/homework/31-HW_EmployeesHooksWithBugs/components/EmployeeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/react36/src/homework/31-HW_EmployeesHooksWithBugs/components/EmployeeForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/src/homework/hw8_EmployeesHooks/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/src/homework/hw9_EmployeesHooksEffect/Components/EmployeeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/react36/src/homework/hw9_EmployeesHooksEffect/Components/EmployeeForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react36/src/homework/hw9_EmployeesHooksEffect/Components/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/react36/src/homework/hw9_EmployeesHooksEffect/Components/Employees.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectId" id="1ZJFLAE68JuGCFGsMnE8qhptNdj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/react36/src/homework/hw10_EmployeesObserv" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src\homework\hw9_EmployeesHooksEffect" />
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src\homework\hw10_EmployeesObserv" />
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src" />
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src\classwork\cw10_OrdersObs" />
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src\classwork\cw10_" />
+      <recent name="C:\Users\B560\WebstormProjects\Java_36\Telran\Web\React\react36\src\homework\hw9_EmployeesHooksEffect" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,10 +82,23 @@
       <option name="presentableId" value="Default" />
       <updated>1584549231532</updated>
       <workItem from="1584549237302" duration="30000" />
+      <workItem from="1588078228266" duration="12552000" />
+      <workItem from="1588133999272" duration="10841000" />
+      <workItem from="1588305983916" duration="15294000" />
+      <workItem from="1588395449681" duration="8165000" />
+      <workItem from="1588424825704" duration="4212000" />
+      <workItem from="1588477847035" duration="809000" />
+      <workItem from="1588516972445" duration="13615000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="341" y="3" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588085547028">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="341" y="3" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1588085547028" />
   </component>
 </project>

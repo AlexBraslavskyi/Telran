@@ -25,21 +25,14 @@ const EmployeeForm = (props) => {
             error = {errorId:  `Employee ${employee.id} already exists`};
         }
 
-        setIsInvalid(!validate())
+        setEmployee({...employee});
     }
     useEffect(()=>{
-        allSets()
-        return ()=>{
-validate();
+        setIsInvalid(!validate());
+        setError({...error});
 
-            console.log('by');
-        }
+    },[employee])
 
-    },[employee.id])
-
-    function allSets() {
-        setEmployee(_.cloneDeep(employee));
-    }
     function handlerId(event) {
         const id = event.target.value;
         error.errorId = '';
@@ -53,9 +46,7 @@ validate();
         } else {
             employee.id = id;
         }
-
-        allSets()
-
+        setEmployee({...employee});
     }
 
     function handlerName(event) {
@@ -66,17 +57,20 @@ validate();
                 + NAME_MIN_LENGTH
         } else {
             employee.name = name;
-            // fillEmployeeAddress();
+            fillEmployeeAddress();
         }
+        setEmployee({...employee});
     }
     function handlerNonValidated(event) {
        employee[event.target.name] = event.target.value;
         error = {};
+        setEmployee({...employee});
     }
     function handlerGender(event) {
         event.preventDefault();
         employee.gender = event.target.value;
         event.target.checked = true;
+        setEmployee({...employee});
     }
     function handlerSalary(event) {
         const salary = +event.target.value;
@@ -87,6 +81,7 @@ validate();
         } else {
             employee.salary = salary;
         }
+        setEmployee({...employee});
     }
 
     function fillEmployeeAddress() {
@@ -103,6 +98,7 @@ validate();
             employee.emailAddress = emailAddressFirstPart +
                 emailAddressSecondPart;
         }
+        setEmployee({...employee});
     }
 
     function validate() {
