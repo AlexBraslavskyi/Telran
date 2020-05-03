@@ -6,9 +6,7 @@ import {getRandomEmployee} from "../utils/Random";
 import {useState} from "react";
 
 const Employees = (props) =>{
-    let employeesSwitch;
-    let setEmployeesSwitch;
-    [employeesSwitch,setEmployeesSwitch]=useState(0)
+   let [employeesSwitch,setEmployeesSwitch]=useState(0)
     const employees = props.employees;
     const addEmployeeShow = ()=>{
         setEmployeesSwitch(1)
@@ -20,7 +18,7 @@ const Employees = (props) =>{
             .findIndex(e => e.id === employee.id);
         if (index < 0) {
             employees.unshift(employee);
-           props.updateEmployeesFn(employees);
+           props.updateEmployeesFn(_.cloneDeep(employees));
         } else genEmployee();
     }
 
@@ -38,7 +36,7 @@ const Employees = (props) =>{
 
    function removeEmployee(id) {
         _.remove(employees, e => e.id == id);
-        props.updateEmployeesFn(employees);
+        props.updateEmployeesFn(_.cloneDeep(employees));
     }
 
    function viewButton() {

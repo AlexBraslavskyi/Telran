@@ -1,19 +1,19 @@
 import React from 'react';
 
-import './App.css';
+import './homework/31-HW_EmployeesHooksWithBugs/App.css';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import EmployeesNav from "./components/EmployeesNav";
+import EmployeesNav from "./homework/31-HW_EmployeesHooksWithBugs/components/EmployeesNav";
 import {
   PATH_EMPLOYEES,
   PATH_GENERATION,
   PATH_SALARY_STATISTICS, PATH_SEARCH,
   PATH_TITLE_STATISTICS
-} from "./config/employees_config";
-import Employees from "./components/Employees";
-import TitleStatistics from "./components/TitleStatistics";
-import EmployeesGeneration from "./components/EmployeesGeneration";
-import SalaryStatistics from "./components/SalaryStatistics";
-import EmployeesSearch from "./components/EmployeesSearch";
+} from "./homework/31-HW_EmployeesHooksWithBugs/config/employees_config";
+import Employees from "./homework/31-HW_EmployeesHooksWithBugs/components/Employees";
+import TitleStatistics from "./homework/31-HW_EmployeesHooksWithBugs/components/TitleStatistics";
+import EmployeesGeneration from "./homework/31-HW_EmployeesHooksWithBugs/components/EmployeesGeneration";
+import SalaryStatistics from "./homework/31-HW_EmployeesHooksWithBugs/components/SalaryStatistics";
+import EmployeesSearch from "./homework/31-HW_EmployeesHooksWithBugs/components/EmployeesSearch";
 
 class App extends React.Component {
   constructor(props) {
