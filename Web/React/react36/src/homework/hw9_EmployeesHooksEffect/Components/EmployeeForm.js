@@ -29,9 +29,9 @@ export const EmployeeForm = (props) =>{
             error.errorId = `Employee ${employee.id} already exists`;
             id={value:employee.id,controlError: -1}
             error=error.errorId
+            formRef.reset();
+            setFormRef(null);
         }
-        formRef.reset();
-        setFormRef(null);
         setError({...error});
     }
 
@@ -41,7 +41,7 @@ export const EmployeeForm = (props) =>{
         setName(name)
         setEmailAddress(emailAddress)
         setId(id)
-    },[error,id])
+    },[error])
 
    function handlerId(event) {
         id = event.target.value;
@@ -66,8 +66,8 @@ export const EmployeeForm = (props) =>{
             id={value:id,controlError: -1}
             employee.id = id;
         } else {
+            employee.id = id;
             id={value:id,controlError: 1}
-            employee.id = id.value;
             error={errorId:''}
         }
        setError({...error})
@@ -77,21 +77,21 @@ export const EmployeeForm = (props) =>{
         error={errorName:''}
         if(name ==""){
             name={value:name,controlError: 0}
-            employee.name = name.value;
+            employee.name = name;
         }else if (name.length < nameMinLength) {
             error={errorName: 'Minimal name length should be '
                 + nameMinLength+'symbol'}
             name={value:name,controlError: -1}
-            employee.name = name.value;
+            employee.name = name;
         }  else if(!name.match(letters)) {
             error={errorName:'Name mast content only english letters'}
             name={value:name,controlError: -1}
-            employee.name = name.value;
+            employee.name = name;
         }
         else {
             error={errorName:''}
+            employee.name = name;
             name={value:name,controlError: 1}
-            employee.name = name.value;
             fillEmployeeAddress();
         }
       setError({...error})
@@ -124,7 +124,6 @@ export const EmployeeForm = (props) =>{
             employee.emailAddress = email;
             emailAddress={value:email,controlError: 1}
         }
-
       setError({...error})
     }
 
@@ -148,8 +147,8 @@ export const EmployeeForm = (props) =>{
                 emailAddress.value = '@';
             }
             const emailAddressFirstPart =
-                employee.name +
-                employee.id.substr(0, 3);
+                name.value +
+                id.value.substr(0, 3);
             const index = emailAddress.value.indexOf("@");
             const emailAddressSecondPart =
                 emailAddress.value.substr(index);

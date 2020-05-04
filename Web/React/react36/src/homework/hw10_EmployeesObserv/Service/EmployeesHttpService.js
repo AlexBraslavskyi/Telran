@@ -9,14 +9,14 @@ export default class EmployeesHttpService {
         }
         this.url = url;
     }
-    getOrders(){
+    getEmployee(){
         return Axios.get(this.url).pipe(map(response=>response.data))
     }
-    addOrder(order){
-        return Axios.post(this.url,order)
+    addEmployee(employee){
+        return Axios.post(this.url,employee)
     }
 
-    deleteOrder(email){
-        return Axios.delete(this.url+encodeURIComponent(email))
+    deleteEmployee(id){
+        return Axios.delete(this.url+id)
     }
 }

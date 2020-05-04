@@ -1,7 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
 export default function TitleStatistics(props) {
-    const statisticsObj = _.countBy(props.employees, 'title');
+    const [employees, setEmployees] = useState([]);
+    let subscription;
+    const getEmployees = () => {
+        subscription =
+            props.employeesService.getEmployee()
+                .subscribe(employeesFromServer => {
+                    setEmployees(employeesFromServer)
+                }, error => {
+                    alert(JSON.stringify(error))
+                })
+    }
+useEffect(
+    () => {
+        getEmployees();
+        return () => {
+            if(subscription && !subscription.closed) {
+                subscription.unsubscribe();
+            }
+        }
+    }, []
+)
+   
+    
+    const statisticsObj = _.countBy(employees, 'title');
     const statisticsRecords = Object.entries(statisticsObj)
         .map(e => {
             return <tr key={e[0]}>

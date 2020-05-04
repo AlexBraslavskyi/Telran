@@ -1,5 +1,5 @@
 import {maxSalary, titlesArr} from "../config/EmployeesConfig";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import EmployeesTable from "./EmployeesTable";
 
@@ -13,7 +13,28 @@ const EmployeesSearch = (props) =>{
     [salaryFrom,setSalaryFrom]=useState({value:'',controlError:0});
     [salaryTo,setSalaryTo]=useState({value:'',controlError:0});
     [resObj,setResObj]=useState({});
-
+      const [employees, setEmployees] = useState([]);
+    let subscription;
+    const getEmployees = () => {
+        subscription =
+            props.employeesService.getEmployee()
+                .subscribe(employeesFromServer => {
+                    setEmployees(employeesFromServer)
+                }, error => {
+                    alert(JSON.stringify(error))
+                })
+    }
+useEffect(
+    () => {
+        getEmployees();
+        return () => {
+            if(subscription && !subscription.closed) {
+                subscription.unsubscribe();
+            }
+        }
+    }, []
+)
+   
 
    function handlerTitle(event) {
         const title = event.target.value;
@@ -71,7 +92,6 @@ const EmployeesSearch = (props) =>{
     }
     function submit(event) {
         event.preventDefault();
-        const employees = props.employees;
         let searchResult = [];
         const titleProps = title.value;
         const salaryFromProps = +salaryFrom.value;

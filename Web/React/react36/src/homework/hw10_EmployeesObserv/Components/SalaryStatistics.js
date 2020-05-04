@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {maxSalary,minSalary} from "../config/EmployeesConfig";
 import _ from "lodash";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
@@ -16,11 +16,35 @@ const SalaryStatistics = (props) =>{
     [minimalSalary,setMinimalSalary]=useState(0);
     [maximalSalary,setMaximalSalary]=useState(0);
     [totalSalary,setTotalSalary]=useState(0);
-
+    const [employees, setEmployees] = useState([]);
+    let subscription;
+    const getEmployees = () => {
+        subscription =
+            props.employeesService.getEmployee()
+                .subscribe(employeesFromServer => {
+                    setEmployees(employeesFromServer)
+                }, error => {
+                    alert(JSON.stringify(error))
+                })
+    }
+useEffect(
+    () => {
+        getEmployees();
+        return () => {
+            if(subscription && !subscription.closed) {
+                subscription.unsubscribe();
+            }
+        }
+    }, []
+)
+   
+    
+    
+    
     function handlerInterval(event) {
         setTableStatistics([]);
         interval = event.target.value;
-        if (props.employees.length <= 0) {
+        if (employees.length <= 0) {
             setError('You mast add employees');
             setInterval({value: interval, controlError: -1})
         } else if (interval < 0) {
@@ -44,7 +68,6 @@ const SalaryStatistics = (props) =>{
         event.preventDefault();
         let statisticsRecords = {};
         const res =[];
-        const employees = props.employees;
         let i = minSalary;
         let count = 0;
         let getInterval = +interval.value;
@@ -68,7 +91,6 @@ const SalaryStatistics = (props) =>{
     }
 
    function minMaxTotalSalary() {
-        const employees = props.employees;
         minimalSalary = _.minBy(employees, function (employee) {
             return employee.salary;
         });
@@ -89,7 +111,7 @@ const SalaryStatistics = (props) =>{
         const tableRecords = tableStatistics.map(
             (e) => {
                 if(e.countEmployees>0) {
-                    const width = (e.countEmployees * 100) / props.employees.length + "%";
+                    const width = (e.countEmployees * 100) / employees.length + "%";
                     const color = getRandomColor();
                     return <tr key={e.rangeSalary}>
                         <td>{e.rangeSalary}</td>

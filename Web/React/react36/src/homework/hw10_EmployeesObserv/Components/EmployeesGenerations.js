@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getRandomEmployee} from "../utils/Random";
 import {getInputElement} from "../utils/InputElements";
 
@@ -8,7 +8,27 @@ const EmployeesGenerations = (props) =>{
     [formRef,setFormRef]=useState(null);
     [count,setCount]=useState({value:'',controlError: 0});
     [message,setMessage]=useState(false);
-
+    const [employees, setEmployees] = useState([]);
+    let subscription;
+    const getEmployees = () => {
+        subscription =
+            props.employeesService.getEmployee()
+                .subscribe(employeesFromServer => {
+                    setEmployees(employeesFromServer)
+                }, error => {
+                    alert(JSON.stringify(error))
+                })
+    }
+    useEffect(
+        () => {
+            getEmployees();
+            return () => {
+                if(subscription && !subscription.closed) {
+                    subscription.unsubscribe();
+                }
+            }
+        }, []
+    )
   function  handlerCount(event) {
         const inputCount = event.target.value;
          if(inputCount<=0||inputCount>99){
@@ -27,26 +47,26 @@ const EmployeesGenerations = (props) =>{
     }
    const genEmployee=() =>{
             const employee = getRandomEmployee();
-            const employees = props.employees;
             const index = employees
                 .findIndex(e => e.id === employee.id);
             if (index < 0) {
-            employees.unshift(employee);
-        } else genEmployee();
-        props.updateEmployeesFn(employees);
+  props.employeesService.addEmployee(employee).subscribe(() => {
+      if(!subscription || subscription.closed) {
+          getEmployees() ;
+      }
+  }, error => {alert(JSON.stringify(error))});
+            } else genEmployee();
     }
     function submit (event){
-        event.preventDefault();
-        const employees = props.employees;
+        event.preventDefault()
         let submitConfirm = true;
         if (error) {
             submitConfirm = false;}
         if (submitConfirm) {
-            for (let i = 0; i < count.value; i++) {
+            for (let i=0; i < count.value;i++) {
                 genEmployee();
             }
         }
-        props.updateEmployeesFn(employees);
         formRef.reset();
                 setMessage(`${count.value} employees was generated!`);
                 setCount({value:'',controlError: 0});
@@ -55,7 +75,7 @@ const EmployeesGenerations = (props) =>{
         <div className="card-header">
             <h1>Generations Employees</h1>
                 <div className="alert alert-info">
-                    Current employees count: {props.employees.length}
+                    Current employees count: {employees.length}
                 </div>
             <div className="center">
                 <form ref={(ref) => formRef = ref} className='form-group' onSubmit={submit}>

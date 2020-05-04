@@ -1,13 +1,13 @@
 import * as React from "react";
 import _ from 'lodash';
 import EmployeesTable from "./EmployeesTable";
-import {EmployeeForm} from "./EmployeeForm";
+import {EmployeeForm} from "../../hw10_EmployeesObserv/Components/EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState} from "react";
 
 const Employees = (props) =>{
    let [employeesSwitch,setEmployeesSwitch]=useState(0)
-    const employees = props.employees;
+    const employees = [...props.employees];
     const addEmployeeShow = ()=>{
         setEmployeesSwitch(1)
     }

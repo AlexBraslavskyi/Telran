@@ -3,11 +3,34 @@ import _ from 'lodash';
 import EmployeesTable from "./EmployeesTable";
 import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
-import {useState} from "react";
+import {useState,useEffect} from "react";
+
 
 const Employees = (props) =>{
    let [employeesSwitch,setEmployeesSwitch]=useState(0)
-    const employees = props.employees;
+   const [employees, setEmployees] = useState([]);
+   let subscription;
+    const getEmployees = () => {
+        subscription =
+            props.employeesService.getEmployee()
+                .subscribe(employeesFromServer => {
+                    setEmployees(employeesFromServer)
+                }, error => {
+                    alert(JSON.stringify(error))
+                })
+    }
+useEffect(
+    () => {
+        getEmployees();
+        return () => {
+            if(subscription && !subscription.closed) {
+                subscription.unsubscribe();
+            }
+        }
+    }, []
+)
+   
+    
     const addEmployeeShow = ()=>{
         setEmployeesSwitch(1)
     }
@@ -17,8 +40,11 @@ const Employees = (props) =>{
         const index = employees
             .findIndex(e => e.id === employee.id);
         if (index < 0) {
-            employees.unshift(employee);
-           props.updateEmployeesFn(employees);
+             props.employeesService.addEmployee(employee).subscribe(() => {
+           if(!subscription || subscription.closed) {
+               getEmployees() ;
+           }
+       }, error => {alert(JSON.stringify(error))});
         } else genEmployee();
     }
 
@@ -28,15 +54,22 @@ const Employees = (props) =>{
         if (index >= 0) {
             return false;
         }
-        employees.unshift(employee);
-        props.updateEmployeesFn(employees);
-       setEmployeesSwitch(0);
+       props.employeesService.addEmployee(employee).subscribe(() => {
+           if(!subscription || subscription.closed) {
+               getEmployees() ;
+           }
+       }, error => {alert(JSON.stringify(error))});
+       setEmployeesSwitch(0)
         return true;
     }
-
    function removeEmployee(id) {
         _.remove(employees, e => e.id == id);
-        props.updateEmployeesFn(employees);
+        props.employeesService.deleteEmployee(id).subscribe(() => {
+                if(!subscription || subscription.closed) {
+                    getEmployees() ;
+                }
+            }, error => {alert(JSON.stringify(error))});
+        return true;
     }
 
    function viewButton() {
@@ -54,22 +87,22 @@ const Employees = (props) =>{
                 </div>
         }
     if(employees.length>0) {
-            switch (employeesSwitch) {
-                case 0:
-                    return <div>{viewButton()}
-                        <EmployeesTable employees={employees}
-                                        removeFn={removeEmployee}/>
-                    </div>
-                case 1:
-                    return <EmployeeForm addEmployeeFn={addEmployee}/>
-            }
-        }else{
-            switch (employeesSwitch) {
-                case 0:
-                    return viewButton()
-                case 1:
-                    return <EmployeeForm addEmployeeFn={addEmployee}/>
-            }
+        switch (employeesSwitch) {
+            case 0:
+                return <div>{viewButton()}
+                    <EmployeesTable employeesView={props.employeesService.getEmployee()}
+                                    removeFn={removeEmployee}/>
+                </div>
+            case 1:
+                return <EmployeeForm addEmployeeFn={addEmployee}/>
+        }
+    }else{
+        switch (employeesSwitch) {
+            case 0:
+                return viewButton()
+            case 1:
+                return <EmployeeForm addEmployeeFn={addEmployee}/>
+        }
         }
     }
 export default Employees;
