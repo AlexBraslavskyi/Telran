@@ -32,17 +32,16 @@ export const EmployeeForm = (props) =>{
             formRef.reset();
             setFormRef(null);
         }
-        setEmployee({...employee});
+        setError({...error});
     }
 
     useEffect(()=> {
-        setError({...error});
-        setSalary({...salary});
-        setName({...name})
-        setEmailAddress({...emailAddress})
-        setId({...id})
-        console.log('hi')
-    },[employee])
+        setEmployee(employee);
+        setSalary(salary);
+        setName(name)
+        setEmailAddress(emailAddress)
+        setId(id)
+    },[error])
 
    function handlerId(event) {
         id = event.target.value;
@@ -71,7 +70,7 @@ export const EmployeeForm = (props) =>{
             id={value:id,controlError: 1}
             error={errorId:''}
         }
-setEmployee({...employee});
+       setError({...error})
     }
   function  handlerName(event) {
         name = event.target.value;
@@ -95,13 +94,12 @@ setEmployee({...employee});
             name={value:name,controlError: 1}
             fillEmployeeAddress();
         }
-      setEmployee({...employee});
+      setError({...error})
         }
 
    function handlerNonValidated(event) {
         employee[event.target.name] = event.target.value;
-        error={}
-       setEmployee({...employee});
+       setError({...error})
     }
   function  handlerEmail(event) {
         const email = event.target.value;
@@ -126,7 +124,7 @@ setEmployee({...employee});
             employee.emailAddress = email;
             emailAddress={value:email,controlError: 1}
         }
-      setEmployee({...employee});
+      setError({...error})
     }
 
    function handlerSalary(event) {
@@ -141,7 +139,7 @@ setEmployee({...employee});
             employee.salary = salary;
             salary={value:salary,controlError: 1}
         }
-       setEmployee({...employee});
+       setError({...error})
     }
   function  fillEmployeeAddress() {
         if (id && name) {
@@ -149,15 +147,15 @@ setEmployee({...employee});
                 emailAddress.value = '@';
             }
             const emailAddressFirstPart =
-                name +
+                name.value +
                 id.value.substr(0, 3);
             const index = emailAddress.value.indexOf("@");
             const emailAddressSecondPart =
                 emailAddress.value.substr(index);
-           emailAddress.value = emailAddressFirstPart +
+            emailAddress.value = emailAddressFirstPart +
                 emailAddressSecondPart;
+            setError({...error})
         }
-      setEmployee({...employee});
     }
    function validate() {
         const res =  notErrors() && allFields();
