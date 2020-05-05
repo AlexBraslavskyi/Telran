@@ -58,7 +58,7 @@ useEffect(
            if(!subscription || subscription.closed) {
                getEmployees() ;
            }
-       }, error => {alert(JSON.stringify(error))});
+       }, error => {alert(`Employee ${employee.id} already exists`)});
        setEmployeesSwitch(0)
         return true;
     }
@@ -90,7 +90,7 @@ useEffect(
         switch (employeesSwitch) {
             case 0:
                 return <div>{viewButton()}
-                    <EmployeesTable employeesView={props.employeesService.getEmployee()}
+                    <EmployeesTable employees={employees}
                                     removeFn={removeEmployee}/>
                 </div>
             case 1:

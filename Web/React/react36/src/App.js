@@ -10,6 +10,11 @@ import SalaryStatistics from "./homework/hw10_EmployeesObserv/Components/SalaryS
 import EmployeesSearch from "./homework/hw10_EmployeesObserv/Components/EmployeesSearch";
 import EmployeesHttpService from "./homework/hw10_EmployeesObserv/Service/EmployeesHttpService";
 
+
+
+// json-server-auth -p 3500 -w --id id employees.json
+
+
 const App=()=>{
  const employeesService = new EmployeesHttpService('http://localhost:3500/employees/');
  

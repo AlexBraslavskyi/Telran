@@ -175,9 +175,7 @@ useEffect(
 
         let viewRes='';
         if(resObj.length>0) {
-            console.log(resObj)
             viewRes = <EmployeesTable employees = {resObj}/>
-            console.log(viewRes)
         }
         return <div className="generations">
             <header className="card-header">

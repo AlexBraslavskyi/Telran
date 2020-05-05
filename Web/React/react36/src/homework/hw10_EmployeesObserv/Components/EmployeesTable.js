@@ -1,34 +1,12 @@
 import React, {useEffect, useState} from 'react';
 export default function EmployeesTable(props) {
-    const [employees, setEmployees] = useState([]);
-    let subscription;
-    const getEmployees = () => {
-        subscription =
-            props.employeesView
-                .subscribe(employeesFromServer => {
-                    setEmployees(employeesFromServer)
-                }, error => {
-                    alert(JSON.stringify(error))
-                })
-    }
-    useEffect(
-        () => {
-            setEmployees(employees);
-            getEmployees();
-            return () => {
-                if(subscription && !subscription.closed) {
-                    subscription.unsubscribe();
-                }
-            }
-        }, [employees]
-    )
     function remove(id) {
         if(window.confirm('you are going to remove Employee ' +
             'with id=' + id)) {
             props.removeFn(id);
         }
     }
-    const employeeTableRecords = employees.map (
+    const employeeTableRecords = props.employees.map (
         (employee) => {
             return <tr key={employee.id}>
                 <td>{employee.id}</td>

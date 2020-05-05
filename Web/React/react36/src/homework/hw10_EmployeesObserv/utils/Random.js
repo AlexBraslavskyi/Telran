@@ -7,7 +7,7 @@ export function getRandomNumber(min, max) {
         Math.round(Math.random() * (max - min));
 }
 export function getRandomElement(array) {
-    return array[getRandomNumber(0, array.length - 1 )];
+    return array[getRandomNumber(0, array.length - 1)];
 }
 export function getRandomEmployee() {
     const id = getRandomNumber(10 ** (digitsId - 1), 10 ** digitsId - 1);

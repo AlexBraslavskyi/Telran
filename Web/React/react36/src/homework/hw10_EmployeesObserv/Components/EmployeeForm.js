@@ -41,30 +41,30 @@ export const EmployeeForm = (props) =>{
         setName(name)
         setEmailAddress(emailAddress)
         setId(id)
-    },[error,id])
+    },[error])
 
    function handlerId(event) {
         id = event.target.value;
        error={errorId:''}
         if(id==""){
             id={value:id,controlError: 0}
-            employee.id = id;
+            employee.id = id.value;
         }else if (id.length != digitsId) {
             error={errorId:'Number of ID digits should be ' + digitsId}
             id={value:id,controlError: -1}
-            employee.id = id;
+            employee.id = id.value;
         } else if(+id < 0) {
             error={errorId:'id can\'t be negative number'}
             id={value:id,controlError: -1}
-            employee.id = id;
+            employee.id = id.value;
         } else if(id.indexOf(".") >= 0){
             error={errorId: 'id can\'t be fraction number'}
             id={value:id,controlError: -1}
-            employee.id = id;
+            employee.id = id.value;
         } else if(id.substr(0,1)=="0"){
             error={errorId: 'id can\'t start from 0'}
             id={value:id,controlError: -1}
-            employee.id = id;
+            employee.id = id.value;
         } else {
             id={value:id,controlError: 1}
             employee.id = id.value;

@@ -15,10 +15,7 @@ const EmployeesGenerations = (props) =>{
             props.employeesService.getEmployee()
                 .subscribe(employeesFromServer => {
                     setEmployees(employeesFromServer)
-                }, error => {
-                    alert(JSON.stringify(error))
-                })
-    }
+                }, error => {alert('Error connections')})}
     useEffect(
         () => {
             getEmployees();
@@ -49,13 +46,13 @@ const EmployeesGenerations = (props) =>{
             const employee = getRandomEmployee();
             const index = employees
                 .findIndex(e => e.id === employee.id);
-            if (index < 0) {
-  props.employeesService.addEmployee(employee).subscribe(() => {
-      if(!subscription || subscription.closed) {
-          getEmployees() ;
-      }
-  }, error => {alert(JSON.stringify(error))});
-            } else genEmployee();
+       if (index < 0) {
+           props.employeesService.addEmployee(employee).subscribe(() => {
+               if(!subscription || subscription.closed) {
+                   getEmployees();
+               }
+           }, error => {alert(`Employee ${employee.id} already exists`)});
+       } else genEmployee();
     }
     function submit (event){
         event.preventDefault()
