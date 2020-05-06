@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Orders from "./classwork/cw11_OrdersObserv/Components/Orders";
-import OrdersStatistics from "./classwork/cw11_OrdersObserv/Components/ordersStatistics";
-import OrdersNav from "./classwork/cw11_OrdersObserv/Components/OrdersNav";
-import OrdersHttpService from "./classwork/cw11_OrdersObserv/Service/OrdersHttpService";
+import Orders from "./classwork/cw10_OrdersObs/Components/Orders";
+import OrdersStatistics from "./classwork/cw10_OrdersObs/Components/ordersStatistics";
+import OrdersNav from "./classwork/cw10_OrdersObs/Components/OrdersNav";
+import OrdersHttpService from "./classwork/cw10_OrdersObs/Service/EmployeesHttpService";
 
 // json-server-auth -p 3500 -w --id email orders.json
 
