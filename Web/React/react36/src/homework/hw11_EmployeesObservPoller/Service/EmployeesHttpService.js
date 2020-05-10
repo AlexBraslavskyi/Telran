@@ -17,6 +17,6 @@ export default class EmployeesHttpService {
     }
 
     deleteEmployee(id){
-        return Axios.delete(this.url+id)
+        return Axios.delete(this.url+id).toPromise()
     }
 }

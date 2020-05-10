@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import './homework/hw10_EmployeesObserv/App.css';
+import './homework/hw11_EmployeesObservPoller/App.css';
 import {BrowserRouter,Switch,Route} from "react-router-dom";
-import {EmployeesNav} from "./homework/hw10_EmployeesObserv/Components/EmployeesNav";
-import Employees from "./homework/hw10_EmployeesObserv/Components/Employees";
-import TitleStatistics from "./homework/hw10_EmployeesObserv/Components/TitleStatistics";
-import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw10_EmployeesObserv/config/EmployeesConfig";
-import EmployeesGenerations from "./homework/hw10_EmployeesObserv/Components/EmployeesGenerations";
-import SalaryStatistics from "./homework/hw10_EmployeesObserv/Components/SalaryStatistics";
-import EmployeesSearch from "./homework/hw10_EmployeesObserv/Components/EmployeesSearch";
-import EmployeesHttpService from "./homework/hw10_EmployeesObserv/Service/EmployeesHttpService";
+import {EmployeesNav} from "./homework/hw11_EmployeesObservPoller/Components/EmployeesNav";
+import Employees from "./homework/hw11_EmployeesObservPoller/Components/Employees";
+import TitleStatistics from "./homework/hw11_EmployeesObservPoller/Components/TitleStatistics";
+import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw11_EmployeesObservPoller/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw11_EmployeesObservPoller/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw11_EmployeesObservPoller/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw11_EmployeesObservPoller/Components/EmployeesSearch";
+import EmployeesHttpService from "./homework/hw11_EmployeesObservPoller/Service/EmployeesHttpService";
 
 
 // json-server-auth -p 3500 -w --id id employees.json
+// json-server-auth -p 3500 employees.json
 
 
 const App=()=>{

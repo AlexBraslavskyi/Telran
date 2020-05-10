@@ -1,23 +1,27 @@
 import React, {useState} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Orders from "./classwork/cw11_OrdersObserv/Components/Orders";
-import OrdersStatistics from "./classwork/cw11_OrdersObserv/Components/ordersStatistics";
-import OrdersNav from "./classwork/cw11_OrdersObserv/Components/OrdersNav";
-import OrdersHttpService from "./classwork/cw11_OrdersObserv/Service/OrdersHttpService";
+import Orders from "./classwork/cw12_Orders/Components/Orders";
+import OrdersStatistics from "./classwork/cw12_Orders/Components/ordersStatistics";
+import OrdersNav from "./classwork/cw12_Orders/Components/OrdersNav";
+import OrdersHttpService from "./classwork/cw12_Orders/Service/OrdersHttpService";
+import AuthJwtService from "./classwork/cw12_Orders/Service/AuthJwtService";
 
 // json-server-auth -p 3500 -w --id email orders.json
 
 
 const App=()=>{
- const ordersService = new OrdersHttpService('http://localhost:3500/orders/')
- // let orders;
- // let setOrders;
- // [orders,setOrders]=useState([]);
+ const ordersService = new OrdersHttpService('http://localhost:3500/orders/');
+const authService = new AuthJwtService('http://localhost:3500/');
+authService.register([
+ {email:'user@telran.co.il',password:'user'},
+ {email:'admin@telran.co.il',password:'admin'}
+])
+ authService.login({email:'user@telran.co.il',password:'user'}).subscribe(jwt=>{
+  localStorage.setItem('accessToken',jwt)
+  console.log(authService.getUsername())
+ })
 
- // const ordersUpdate = (orders) => {
- //  setOrders(orders)
- // }
  return <BrowserRouter>
   <OrdersNav></OrdersNav>
   <Switch>
