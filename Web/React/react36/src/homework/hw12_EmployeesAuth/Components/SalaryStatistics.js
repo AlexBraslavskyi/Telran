@@ -3,6 +3,7 @@ import {maxSalary,minSalary} from "../config/EmployeesConfig";
 import _ from "lodash";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import {getRandomColor} from "../utils/Random";
+import subscribeEffect from "../utils/subscriber";
 
 
 
@@ -16,38 +17,11 @@ const SalaryStatistics = (props) =>{
     [minimalSalary,setMinimalSalary]=useState(0);
     [maximalSalary,setMaximalSalary]=useState(0);
     [totalSalary,setTotalSalary]=useState(0);
-    const [employees, setEmployees] = useState([]);
-    let subscription;
-    const getEmployees = () => {
-        subscription =
-            props.employeesService.getEmployee()
-                .subscribe(employeesFromServer => {
-                    setEmployees(employeesFromServer)
-                }, error => {
-                    alert(JSON.stringify(error))
-                })
-    }
- let intervalID;
-    const poller = ()=>{
-        if(!subscription||subscription.closed) {
-            getEmployees();
-        }
-    }
-useEffect(
-    () => {
-      getEmployees();
-                intervalID = setInterval(poller,1000);
-            return () => {
-                if(subscription && !subscription.closed) {
-                    subscription.unsubscribe();
-                }else {
-                    clearInterval(intervalID);
-                }
-            }
-        }, []
-)
-    
-    
+    const employeesService = props.employeesService;
+    const [employees, setEmployees] =
+        subscribeEffect(employeesService,
+            employeesService.getEmployees)
+
     function handlerInterval(event) {
         setTableStatistics([]);
         intervalSalary = event.target.value;

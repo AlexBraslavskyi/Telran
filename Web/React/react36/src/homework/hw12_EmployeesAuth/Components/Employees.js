@@ -4,58 +4,26 @@ import EmployeesTable from "./EmployeesTable";
 import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState,useEffect} from "react";
-// import subscribeEffect from "../utils/Subscriber";
+import subscribeEffect from "../utils/subscriber";
 
+const Employees = (props) => {
+    let [employeesSwitch, setEmployeesSwitch] = useState(0)
+    const [employees, setEmployees] = subscribeEffect(props.employeesService,
+        props.employeesService.getEmployees);
 
-const Employees = (props) =>{
-   let [employeesSwitch,setEmployeesSwitch]=useState(0)
-   const [employees, setEmployees] = useState([]);
-
-   let subscription;
-    const getEmployees = () => {
-        subscription =
-            props.employeesService.getEmployee()
-                .subscribe(employeesFromServer => {
-                    setEmployees(employeesFromServer)
-                }, error => {
-                    alert(JSON.stringify(error))
-                })
-    }
-     let intervalID;
-    const poller = ()=>{
-        if(!subscription||subscription.closed) {
-            getEmployees();
-        }
-    }
-useEffect(
-    () => {
-      getEmployees();
-                intervalID = setInterval(poller,1000);
-            return () => {
-                if(subscription && !subscription.closed) {
-                    subscription.unsubscribe();
-                }else {
-                    clearInterval(intervalID);
-                }
-            }
-        }, []
-)
-
-    
-    const addEmployeeShow = ()=>{
+    const addEmployeeShow = () => {
         setEmployeesSwitch(1)
     }
 
-    function genEmployee (){
+    function genEmployee() {
         const employee = getRandomEmployee();
         const index = employees
             .findIndex(e => e.id === employee.id);
         if (index < 0) {
-              props.employeesService.addEmployee(employee).then(() => {
-           if(!subscription || subscription.closed) {
-               getEmployees() ;
-           }
-       }).catch( error => {alert(JSON.stringify(error))})
+            props.employeesService.addEmployee(employee).then(() => {
+            }).catch(error => {
+                alert(JSON.stringify(error))
+            })
         } else genEmployee();
     }
 
@@ -65,23 +33,20 @@ useEffect(
         if (index >= 0) {
             return false;
         }
-        props.employeesService.addEmployee(employee).then(() => {
-            if(!subscription || subscription.closed) {
-                getEmployees() ;
-            }
-            setEmployeesSwitch(0)
-        }).catch (error => {alert(`Employee ${employee.id} already exists`)});
-
+        props.employeesService.addEmployee(employee)
+            .then(() => {
+                setEmployeesSwitch(0);
+            }, error => {
+                alert(`employee with id ${employee.id} already exists`)
+            })
         return true;
     }
- function removeEmployee(id) {
-        _.remove(employees, e => e.id == id);
-     props.employeesService.deleteEmployee(id).then(() => {
-                if(!subscription || subscription.closed) {
-                    getEmployees();
-                }}).catch( error => {alert(JSON.stringify(error))})
 
-        return true;
+    function removeEmployee(id) {
+        _.remove(employees, e => e.id === id);
+        props.employeesService.deleteEmployee(id)
+            .then(() => {
+            })
     }
 
    function viewButton() {

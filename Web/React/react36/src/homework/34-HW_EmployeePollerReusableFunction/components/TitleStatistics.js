@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
-import subscribeEffect from "../utils/subscriber";
+import subscribeEffect from "../../hw12_EmployeesAuth/utils/subscriber";
 export default function TitleStatistics(props) {
     const employeesService = props.employeesService;
     const [employees, setEmployees] =
         subscribeEffect(employeesService, employeesService.getEmployees);
-    
     const statisticsObj = _.countBy(employees, 'title');
     const statisticsRecords = Object.entries(statisticsObj)
         .map(e => {
@@ -23,12 +22,12 @@ export default function TitleStatistics(props) {
         <header className="card-header">
            <h3>Statistics of the Employee Titles</h3>
         </header>
-        <div className="card-body" >
-            <table className="table table-sm" style={{'textAlign':'center'}}>
+        <div className="card-body">
+            <table>
                 <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Count</th>
+                    <th>title</th>
+                    <th>count</th>
                 </tr>
                 </thead>
                 <tbody>

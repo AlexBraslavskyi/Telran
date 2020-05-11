@@ -2,6 +2,7 @@ import {maxSalary, titlesArr} from "../config/EmployeesConfig";
 import React, {useEffect, useState} from "react";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import EmployeesTable from "./EmployeesTable";
+import subscribeEffect from "../utils/subscriber";
 
 
 const EmployeesSearch = (props) =>{
@@ -13,36 +14,9 @@ const EmployeesSearch = (props) =>{
     [salaryFrom,setSalaryFrom]=useState({value:'',controlError:0});
     [salaryTo,setSalaryTo]=useState({value:'',controlError:0});
     [resObj,setResObj]=useState({});
-      const [employees, setEmployees] = useState([]);
-    let subscription;
-    const getEmployees = () => {
-        subscription =
-            props.employeesService.getEmployee()
-                .subscribe(employeesFromServer => {
-                    setEmployees(employeesFromServer)
-                }, error => {
-                    alert(JSON.stringify(error))
-                })
-    }
- let intervalID;
-    const poller = ()=>{
-        if(!subscription||subscription.closed) {
-            getEmployees();
-        }
-    }
-useEffect(
-    () => {
-      getEmployees();
-                intervalID = setInterval(poller,1000);
-            return () => {
-                if(subscription && !subscription.closed) {
-                    subscription.unsubscribe();
-                }else {
-                    clearInterval(intervalID);
-                }
-            }
-        }, []
-)
+    const employeesService = props.employeesService;
+    const [employees, setEmployees] =
+        subscribeEffect(employeesService, employeesService.getEmployees);
 
    function handlerTitle(event) {
         const title = event.target.value;

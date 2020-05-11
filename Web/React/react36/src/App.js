@@ -1,39 +1,47 @@
 import React, {useState} from 'react';
-import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Orders from "./classwork/cw12_Orders/Components/Orders";
-import OrdersStatistics from "./classwork/cw12_Orders/Components/ordersStatistics";
-import OrdersNav from "./classwork/cw12_Orders/Components/OrdersNav";
-import OrdersHttpService from "./classwork/cw12_Orders/Service/OrdersHttpService";
-import AuthJwtService from "./classwork/cw12_Orders/Service/AuthJwtService";
+import './homework/hw12_EmployeesAuth/App.css';
+import {BrowserRouter,Switch,Route} from "react-router-dom";
+import {EmployeesNav} from "./homework/hw12_EmployeesAuth/Components/EmployeesNav";
+import Employees from "./homework/hw12_EmployeesAuth/Components/Employees";
+import TitleStatistics from "./homework/hw12_EmployeesAuth/Components/TitleStatistics";
+import {pathEmployees,pathTitleStatistics,pathSearch,pathSalaryStatistics,pathGenerations} from "./homework/hw12_EmployeesAuth/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw12_EmployeesAuth/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw12_EmployeesAuth/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw12_EmployeesAuth/Components/EmployeesSearch";
+import EmployeesHttpService from "./homework/hw12_EmployeesAuth/Service/EmployeesHttpService";
+import AuthJwtService from "./homework/hw12_EmployeesAuth/Service/AuthJwtService";
 
-// json-server-auth -p 3500 -w --id email orders.json
+
+// json-server-auth -p 3500 -w --id id employees.json
+// json-server-auth -p 3500 employees.json
 
 
 const App=()=>{
- const ordersService = new OrdersHttpService('http://localhost:3500/orders/');
-const authService = new AuthJwtService('http://localhost:3500/');
-authService.register([
- {email:'user@telran.co.il',password:'user'},
- {email:'admin@telran.co.il',password:'admin'}
-])
- authService.login({email:'user@telran.co.il',password:'user'}).subscribe(jwt=>{
-  localStorage.setItem('accessToken',jwt)
-  console.log(authService.getUsername())
- })
+ const employeesService = new EmployeesHttpService('http://localhost:3500/employees/');
+    const authService = new AuthJwtService('http://localhost:3500/');
+    authService.register([
+        {email:'user@telran.co.il',password:'user'},
+        {email:'admin@telran.co.il',password:'admin'}
+    ])
+    authService.login({email:'user@telran.co.il',password:'user'}).subscribe(jwt=>{
+        localStorage.setItem('accessToken',jwt)
+        console.log(authService.getUsername())
+    })
 
- return <BrowserRouter>
-  <OrdersNav></OrdersNav>
-  <Switch>
-   <Route path={'/orders'} exact render={() => {
-    return <Orders ordersService={ordersService}/>}}/>
-   <Route path={'/statistics'} exact render={
-    () => {
-     return <OrdersStatistics ordersService={ordersService}/>}}>
-   </Route>
-  </Switch>
- </BrowserRouter>
-}
-
-
+    return <BrowserRouter>
+    <EmployeesNav></EmployeesNav>
+    <Switch>
+      <Route path={pathEmployees} exact render ={() =>
+        {return <Employees employeesService = {employeesService}/>}}/>
+      <Route path={pathTitleStatistics} exact render={() =>
+        {return <TitleStatistics employeesService={employeesService}/>}}/>
+      <Route path={pathGenerations} exact render={() =>
+        {return <EmployeesGenerations  employeesService = {employeesService}/>}}/>
+      <Route path={pathSalaryStatistics} exact render={() =>
+        {return <SalaryStatistics employeesService={employeesService}/>}}/>
+        <Route path={pathSearch} exact render={() =>
+        {return <EmployeesSearch employeesService={employeesService}/>}}/>
+              </Switch>
+              </BrowserRouter>
+      }
 export default App;

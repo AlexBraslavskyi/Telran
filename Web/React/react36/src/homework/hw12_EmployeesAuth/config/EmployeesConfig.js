@@ -12,6 +12,7 @@ export const pathSalaryStatistics ='/salary/statistics';
 export const pathSearch ='/search';
 export const pathGenerations ='/generations';
 export const pathTitleStatistics ='/title/statistics';
+export const POLLING_INTERVAL = 1000;
 export const LINKS = [
     {path: pathEmployees, label: 'Employees',image:<i style={{cursor: 'pointer'}} className="fa fa-user-circle"/>},
     {path: pathGenerations, label: 'Employees Generations',image:<i style={{cursor: 'pointer'}} className="fa fa-users"/>},

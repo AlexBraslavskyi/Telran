@@ -9,7 +9,7 @@ export default class EmployeesHttpService {
         }
         this.url = url;
     }
-    getEmployee(){
+    getEmployees(){
         return Axios.get(this.url).pipe(map(response=>response.data))
     }
     addEmployee(employee){
