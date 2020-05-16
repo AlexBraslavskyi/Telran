@@ -50,7 +50,7 @@ const Employees = (props) => {
     }
 
    function viewButton() {
-                return <div className="form-group">
+                return <div className="center">
                     <div className='btn btn-group'>
                         <button style={{cursor: 'pointer'}} type="button" className="btn btn-success"
                                 onClick={addEmployeeShow}><i className="fa fa-user-plus fa-2x"/>Add

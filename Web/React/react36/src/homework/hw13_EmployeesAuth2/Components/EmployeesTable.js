@@ -24,7 +24,7 @@ export default function EmployeesTable(props) {
             </tr>
         }
     )
-    return <div style={{"margin":"40px"}}>
+    return <div style={{"margin":"1vw 15vw 3vw 3vw"}}>
         <table className="table">
             <thead>
             <tr>
