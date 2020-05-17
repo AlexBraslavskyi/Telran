@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Header} from "./kamasutra/socialnetwork/components/Header";
 import {Navbar} from "./kamasutra/socialnetwork/components/Navbar";
-import Profile from "./kamasutra/socialnetwork/components/Profile";
+import Profile from "./kamasutra/socialnetwork/components/Post";
 
 
 const App = () => {
