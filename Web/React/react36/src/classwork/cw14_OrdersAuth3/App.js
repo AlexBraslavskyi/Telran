@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import OrdersNav from "./classwork/cw14_OrdersAuth3/components/OrdersNav";
@@ -15,29 +15,32 @@ import Logout from "./classwork/cw14_OrdersAuth3/components/Logout";
 
 const App = () => {
  const ordersService =
-     new OrdersHttpService('http://localhost:3500/orders/');
+     new OrdersHttpService('http://localhost:3500/orders/',()=>{setUserData({})});
  const authService =
      new AuthJwtService('http://localhost:3500/');
  authService.register([
      {email:'user@tel-ran.co.il', password:'user'},
      {email:'admin@tel-ran.co.il', password:'admin'}
  ])
-    const [username, setUsername] = useState(authService.getUsername());
-    const usernameUpdateFn = (username) => {
-    setUsername(username);
+    const [userData, setUserData] = useState({});
+    const userDataUpdateFn = (userData) => {
+    setUserData(userData);
     }
+    useEffect(()=>{
+        authService.getUserData().subscribe(userData =>setUserData(userData));
+    },[])
 
 
  return <BrowserRouter>
-    <OrdersNav username={username}></OrdersNav>
+    <OrdersNav userData={userData}/>
     <Switch>
       <Route path={'/orders'} exact render={() => {
-     return username ? <Orders ordersService={ordersService} /> :
+     return userData.username ? <Orders isAdmin={userData.isAdmin} ordersService={ordersService} /> :
          <Redirect to={'/login'}/>
      }}/>
      <Route path={'/statistics'} exact render={
       () => {
-       return username ? <OrdersStatistics ordersService={ordersService}/> :
+       return userData.isAdmin ? <OrdersStatistics ordersService={ordersService}/> :
            <Redirect to={'/login'}></Redirect>
      }
      }>
@@ -45,8 +48,8 @@ const App = () => {
     </Route>
         <Route path={'/login'} exact render={
             () => {
-                return !username ? <Login authService={authService}
-                              usernameUpdateFn={usernameUpdateFn}/> :
+                return !userData.username ? <Login authService={authService}
+                              userDataUpdateFn={userDataUpdateFn}/> :
                     <Redirect to={'/orders'}></Redirect>
             }
         }>
@@ -54,8 +57,8 @@ const App = () => {
         </Route>
         <Route path={'/logout'} exact render={
             () => {
-                return username ? <Logout authService={authService}
-                                          usernameUpdateFn={usernameUpdateFn}/> :
+                return userData.username ? <Logout authService={authService}
+                                          userDataUpdateFn={userDataUpdateFn}/> :
                     <Redirect to={'/login'}></Redirect>
             }
         }>
