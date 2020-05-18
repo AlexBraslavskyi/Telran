@@ -8,12 +8,19 @@ export default class EmployeesHttpService {
             throw Error ("Url doesn't exist")
         }
         this.url = url;
+        this.handler = handler401;
+    }
+    errorHandler(error){
+        if(error.response && error.response.status == 401){
+            this.handler();
+        }
+        return throwError(error);
     }
     getEmployees(){
         return Axios.get(this.url,{headers: {
             "Authorization": "Bearer " +
             localStorage.getItem("accessToken")
-        }}).pipe(map(response=>response.data))
+        }}) .pipe(map(response => response.data),catchError(this.errorHandler.bind(this)));
     }
     addEmployee(employee){
         return Axios.post(this.url,employee,{headers: {

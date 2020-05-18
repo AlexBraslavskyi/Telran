@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function EmployeesTable(props) {
-
+    const isAdmin = props.isAdmin;
     function remove(id) {
         if(window.confirm('you are going to remove Employee ' +
             'with id=' + id)) {
@@ -17,7 +17,7 @@ export default function EmployeesTable(props) {
                 <td>{employee.gender}</td>
                 <td>{employee.salary}</td>
                 <td>{employee.title}</td>
-                {props.removeFn? <td>
+                {props.removeFn&&isAdmin? <td>
                     <i className="fa fa-trash" style={{cursor: 'pointer'}}
                        onClick={remove.bind(this,employee.id)}/>
                 </td>:null}
@@ -34,7 +34,7 @@ export default function EmployeesTable(props) {
                 <th>Gender</th>
                 <th>Salary</th>
                 <th>Title</th>
-                {props.removeFn? <th>Delete</th> :null}
+                {props.removeFn&&isAdmin? <th>Delete</th> :null}
             </tr>
             </thead>
             <tbody>

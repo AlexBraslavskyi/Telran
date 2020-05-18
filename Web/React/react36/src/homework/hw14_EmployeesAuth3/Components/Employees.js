@@ -5,7 +5,7 @@ import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState,useEffect} from "react";
 import subscribeEffect from "../utils/subscriber";
-
+const isAdmin = props.isAdmin;
 const Employees = (props) => {
     let [employeesSwitch, setEmployeesSwitch] = useState(0)
     const [employees, setEmployees] = subscribeEffect(props.employeesService,
@@ -72,17 +72,18 @@ const Employees = (props) => {
             case 0:
                 return <div>{viewButton()}
                     <EmployeesTable employees={employees}
-                                    removeFn={removeEmployee}/>
+                                    removeFn={removeEmployee}
+                                    isAdmin={isAdmin}/>
                 </div>
             case 1:
-                return <EmployeeForm addEmployeeFn={addEmployee}/>
+                return isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
         }
     }else{
         switch (employeesSwitch) {
             case 0:
                 return viewButton()
             case 1:
-                return <EmployeeForm addEmployeeFn={addEmployee}/>
+                return isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
         }
         }
     }

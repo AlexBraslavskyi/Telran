@@ -22,22 +22,35 @@ export default class AuthJwtService {
     }
     login(credentials) {
         return Axios.post(this.url + 'login', credentials)
-            .pipe(map(response => response.data.accessToken))
+            .pipe(mergeMap(response => {
+                localStorage.setItem('accessToken', response.data.accessToken);
+                return this.getUserData();
+            }))
     }
     logout() {
         localStorage.removeItem('accessToken');
     }
-    getUsername() {
+    getUserData() {
         const jwt = localStorage.getItem('accessToken');
         if (!jwt) {
-            return '';
+            return of({});
         }
         const jwtBody = JSON.parse(atob(jwt.split('.')[1]));
         const currentTimeInSeconds = new Date() / 1000;
         if (currentTimeInSeconds > jwtBody.exp) {
             this.logout();
-            return '';
+            return of({});
         }
-        return jwtBody.email;
+        const username = jwtBody.email;
+        let isAdmin = false;
+        return Axios.get(this.url + 'administrators').pipe(map(response=>{
+            const administrators = response.data;
+            if(administrators&&administrators.length>0){
+                if(administrators.indexOf(username)>=0){
+                    isAdmin = true
+                }
+            }
+            return {username, isAdmin}
+        }));
     }
 }
