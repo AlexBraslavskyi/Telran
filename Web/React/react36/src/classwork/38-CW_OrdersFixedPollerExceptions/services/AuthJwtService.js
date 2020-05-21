@@ -1,6 +1,6 @@
 import {Axios} from "axios-observable";
-import {map,mergeMap,} from "rxjs/operators"
-import {of} from "rxjs";
+import {map, mergeMap} from "rxjs/operators"
+import {of} from 'rxjs'
 export default class AuthJwtService {
     constructor(url) {
         if (!url) {
@@ -24,7 +24,7 @@ export default class AuthJwtService {
     login(credentials) {
         return Axios.post(this.url + 'login', credentials)
             .pipe(mergeMap(response => {
-                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem("accessToken", response.data.accessToken);
                 return this.getUserData();
             }))
     }
@@ -37,6 +37,7 @@ export default class AuthJwtService {
             return of({});
         }
         const jwtBody = JSON.parse(atob(jwt.split('.')[1]));
+
         const currentTimeInSeconds = new Date() / 1000;
         if (currentTimeInSeconds > jwtBody.exp) {
             this.logout();
@@ -44,14 +45,15 @@ export default class AuthJwtService {
         }
         const username = jwtBody.email;
         let isAdmin = false;
-        return Axios.get(this.url + 'administrators').pipe(map(response=>{
+        return Axios.get(this.url + 'administrators').pipe(map(response => {
             const administrators = response.data;
-            if(administrators&&administrators.length>0){
-                if(administrators.indexOf(username)>=0){
-                    isAdmin = true
+            if (administrators && administrators.length > 0) {
+                if (administrators.indexOf(username) >= 0) {
+                    isAdmin = true;
                 }
             }
             return {username, isAdmin}
         }));
+
     }
 }

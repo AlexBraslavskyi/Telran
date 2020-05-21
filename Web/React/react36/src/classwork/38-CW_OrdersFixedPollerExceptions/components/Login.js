@@ -15,12 +15,13 @@ export default function Login(props) {
         event.preventDefault();
         authService.login(credentials)
             .subscribe(userData => {
+
                 userDataUpdateFn(userData);
             }, () => {
                 alert('Wrong credentials');
             })
     }
-    return <div className="card-log">
+    return <div className="card">
         <div className="card-header">
             <h4>Login Form</h4>
         </div>
@@ -40,8 +41,8 @@ export default function Login(props) {
                            className="form-control"/>
 
                 </div>
-                <button type="submit" className='btn-success'><i className="fa fa-unlock"/>Sing in</button>
-                <button type="reset" className='btn-danger'><i className="fa fa-trash"/>Reset</button>
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
             </form>
 
         </div>

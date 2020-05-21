@@ -1,71 +1,76 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import OrdersNav from "./classwork/cw14_OrdersAuth3/components/OrdersNav";
-import Orders from "./classwork/cw14_OrdersAuth3/components/Orders";
-import OrdersStatistics from "./classwork/cw14_OrdersAuth3/components/OrdersStatistics";
-import OrdersHttpService from "./classwork/cw14_OrdersAuth3/services/OrdersHttpService";
-import AuthJwtService from "./classwork/cw14_OrdersAuth3/services/AuthJwtService";
-import Login from "./classwork/cw14_OrdersAuth3/components/Login";
-import Logout from "./classwork/cw14_OrdersAuth3/components/Logout";
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import {EmployeesNav} from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesNav";
+import Employees from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Employees";
+import TitleStatistics from "./homework/hw15_EmployeesAuthUpdatePoller/Components/TitleStatistics";
+import {
+    pathEmployees,
+    pathTitleStatistics,
+    pathSearch,
+    pathSalaryStatistics,
+    pathGenerations,
+    pathLogin, pathLogout, pathWelcome
+} from "./homework/hw15_EmployeesAuthUpdatePoller/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw15_EmployeesAuthUpdatePoller/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesSearch";
+import EmployeesHttpService from "./homework/hw15_EmployeesAuthUpdatePoller/Service/EmployeesHttpService";
+import AuthJwtService from "./homework/hw15_EmployeesAuthUpdatePoller/Service/AuthJwtService";
+import Login from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Login";
+import Logout from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Logout";
+import Welcome from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Welcome";
 
-//json-server-auth orders.json -p 3500 --id email -r routes.json
 
+//json-server-auth employees.json -p 3500 -r routes.json
 
-
-const App = () => {
- const ordersService =
-     new OrdersHttpService('http://localhost:3500/orders/',()=>{setUserData({})});
- const authService =
-     new AuthJwtService('http://localhost:3500/');
- authService.register([
-     {email:'user@tel-ran.co.il', password:'user'},
-     {email:'admin@tel-ran.co.il', password:'admin'}
- ])
-    const [userData, setUserData] = useState({});
+const App=()=>{
+ const employeesService = new EmployeesHttpService('http://localhost:3500/employees/',() => {
+     setUserData({})
+ }, () => {
+     alert("Server is unavailable, please retry again later on")
+ });
+    const authService = new AuthJwtService('http://localhost:3500/');
+    const [userData, setUserData] = useState(authService.getUserData());
     const userDataUpdateFn = (userData) => {
-    setUserData(userData);
+        setUserData(userData);
     }
     useEffect(()=>{
+        authService.register([
+            {email:'user@tel-ran.co.il',password:'user'},
+            {email:'admin@tel-ran.co.il',password:'admin'}
+        ])
         authService.getUserData().subscribe(userData =>setUserData(userData));
     },[])
 
-
- return <BrowserRouter>
-    <OrdersNav userData={userData}/>
+    return <BrowserRouter>
+    <EmployeesNav userData={userData}/>
     <Switch>
-      <Route path={'/orders'} exact render={() => {
-     return userData.username ? <Orders isAdmin={userData.isAdmin} ordersService={ordersService} /> :
-         <Redirect to={'/login'}/>
-     }}/>
-     <Route path={'/statistics'} exact render={
-      () => {
-       return userData.isAdmin ? <OrdersStatistics ordersService={ordersService}/> :
-           <Redirect to={'/login'}></Redirect>
-     }
-     }>
-
-    </Route>
-        <Route path={'/login'} exact render={
-            () => {
-                return !userData.username ? <Login authService={authService}
-                              userDataUpdateFn={userDataUpdateFn}/> :
-                    <Redirect to={'/orders'}></Redirect>
-            }
-        }>
-
-        </Route>
-        <Route path={'/logout'} exact render={
-            () => {
-                return userData.username ? <Logout authService={authService}
-                                          userDataUpdateFn={userDataUpdateFn}/> :
-                    <Redirect to={'/login'}></Redirect>
-            }
-        }>
-
-        </Route>
-    </Switch>
-   </BrowserRouter>
-  }
-
+        <Route path={pathWelcome} exact render ={() =>
+        {return !userData.username ? <Welcome/> :
+            <Redirect to={pathEmployees}/>}}/>
+      <Route path={pathEmployees} exact render ={() =>
+        {return userData.username ? <Employees userData={userData} employeesService = {employeesService}/> :
+        <Redirect to={pathWelcome}/>}}/>
+      <Route path={pathTitleStatistics} exact render={() =>
+        {return userData.username ? <TitleStatistics employeesService={employeesService}/>:
+            <Redirect to={pathWelcome}/>}}/>
+      <Route path={pathGenerations} exact render={() =>
+        {return userData.isAdmin ? <EmployeesGenerations  employeesService = {employeesService}/>:
+            <Redirect to={pathWelcome}/>}}/>
+      <Route path={pathSalaryStatistics} exact render={() =>
+        {return userData.username ? <SalaryStatistics employeesService={employeesService}/>:
+            <Redirect to={pathWelcome}/>}}/>
+        <Route path={pathSearch} exact render={() =>
+        {return userData.username ? <EmployeesSearch employeesService={employeesService}/>:
+            <Redirect to={pathWelcome}/>}}/>
+        <Route path={pathLogin} exact render={() =>
+        {return !userData.username ? <Login authService={authService} userDataUpdateFn={userDataUpdateFn}/> :
+                <Redirect to={pathEmployees}/>}}/>
+        <Route path={pathLogout} exact render={() =>
+        {return userData.username ? <Logout authService={authService} userDataUpdateFn={userDataUpdateFn}/> :
+                    <Redirect to={pathWelcome}/>}}/>
+              </Switch>
+              </BrowserRouter>
+      }
 export default App;

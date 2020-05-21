@@ -1,6 +1,7 @@
 import {Axios} from "axios-observable";
-import {map,mergeMap,} from "rxjs/operators"
+import {mergeMap,map} from "rxjs/operators";
 import {of} from "rxjs";
+
 export default class AuthJwtService {
     constructor(url) {
         if (!url) {

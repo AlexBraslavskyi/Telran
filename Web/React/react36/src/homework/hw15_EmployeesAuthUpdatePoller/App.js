@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
-import {EmployeesNav} from "./homework/hw14_EmployeesAuth3/Components/EmployeesNav";
-import Employees from "./homework/hw14_EmployeesAuth3/Components/Employees";
-import TitleStatistics from "./homework/hw14_EmployeesAuth3/Components/TitleStatistics";
+import {EmployeesNav} from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesNav";
+import Employees from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Employees";
+import TitleStatistics from "./homework/hw15_EmployeesAuthUpdatePoller/Components/TitleStatistics";
 import {
     pathEmployees,
     pathTitleStatistics,
@@ -11,15 +11,15 @@ import {
     pathSalaryStatistics,
     pathGenerations,
     pathLogin, pathLogout, pathWelcome
-} from "./homework/hw14_EmployeesAuth3/config/EmployeesConfig";
-import EmployeesGenerations from "./homework/hw14_EmployeesAuth3/Components/EmployeesGenerations";
-import SalaryStatistics from "./homework/hw14_EmployeesAuth3/Components/SalaryStatistics";
-import EmployeesSearch from "./homework/hw14_EmployeesAuth3/Components/EmployeesSearch";
-import EmployeesHttpService from "./homework/hw14_EmployeesAuth3/Service/EmployeesHttpService";
-import AuthJwtService from "./homework/hw14_EmployeesAuth3/Service/AuthJwtService";
-import Login from "./homework/hw14_EmployeesAuth3/Components/Login";
-import Logout from "./homework/hw14_EmployeesAuth3/Components/Logout";
-import Welcome from "./homework/hw14_EmployeesAuth3/Components/Welcome";
+} from "./homework/hw15_EmployeesAuthUpdatePoller/config/EmployeesConfig";
+import EmployeesGenerations from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesGenerations";
+import SalaryStatistics from "./homework/hw15_EmployeesAuthUpdatePoller/Components/SalaryStatistics";
+import EmployeesSearch from "./homework/hw15_EmployeesAuthUpdatePoller/Components/EmployeesSearch";
+import EmployeesHttpService from "./homework/hw15_EmployeesAuthUpdatePoller/Service/EmployeesHttpService";
+import AuthJwtService from "./homework/hw15_EmployeesAuthUpdatePoller/Service/AuthJwtService";
+import Login from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Login";
+import Logout from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Logout";
+import Welcome from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Welcome";
 
 
 //json-server-auth employees.json -p 3500 -r routes.json

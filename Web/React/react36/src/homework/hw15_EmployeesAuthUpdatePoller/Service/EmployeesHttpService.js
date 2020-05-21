@@ -4,18 +4,27 @@ import {throwError} from "rxjs";
 
 export default class EmployeesHttpService {
 
-    constructor(url,handler401) {
+    constructor(url,handler401,noServerResponse) {
         if(!url){
             throw Error ("Url doesn't exist")
         }
         this.url = url;
         this.handler = handler401;
+        this.noServerResponse = noServerResponse;
     }
     errorHandler(error){
-        if(error.response && error.response.status == 401){
-            this.handler();
+        if (!error.response) {
+            if (this.noServerResponse) {
+                this.noServerResponse();
+            }
+        } else {
+            if (error.response.status == 401) {
+                if (this.handler) {
+                    this.handler();
+                }
+            }
         }
-        return throwError(error);
+        return throwError(error)
     }
     getEmployees(){
         return Axios.get(this.url,{headers: {
