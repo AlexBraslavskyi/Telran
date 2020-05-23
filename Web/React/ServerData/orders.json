@@ -1,5 +1,24 @@
 {
-
-  "orders": []
-
+  "users": [
+    {
+      "email": "user@tel-ran.co.il",
+      "password": "$2a$10$g.VZhmMvEMdDjpgeMNc5.u7TfwypocC18ql.abPq7no/Hj.XOwMe6"
+    },
+    {
+      "email": "admin@tel-ran.co.il",
+      "password": "$2a$10$1JQM6fjI3casGAJge.pn6e37uUhu6lX5fdhqUZHPDLYlQx1wiyc3e"
+    }
+  ],
+  "administrators": [
+    "admin@tel-ran.co.il"
+  ],
+  "orders": [
+    {
+      "coffee": "espresso",
+      "email": "abraslik@gmail.com",
+      "size": "Short",
+      "flavor": "none",
+      "strength": "50"
+    }
+  ]
 }
