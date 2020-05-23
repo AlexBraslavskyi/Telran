@@ -9,15 +9,20 @@ export default function subscribeEffect(service, dataFn) {
     let subscription;
     let intervalId;
     let polling = true;
+    const poller = () => {
+        if (!subscription || subscription.closed) {
+            dataFn.call(service)
+                .subscribe(dataFromServer => setData(dataFromServer));
+        }
+    }
     // eslint-disable-next-line react-hooks/rules-of-hooks
  useEffect(() => {
      subscription =
          dataFn.call(service)
-             .subscribe(dataFromServer => setData(dataFromServer)), () => {}, () => {
-                 if (polling) {
-                     intervalId = setInterval(poller, 1000);
-                 }
-             }
+             .subscribe(dataFromServer => setData(dataFromServer));
+         if (polling) {
+             intervalId = setInterval(poller, POLLING_INTERVAL);
+         }
      return () => {
          if(subscription && !subscription.closed) {
              polling = false;
@@ -29,12 +34,7 @@ export default function subscribeEffect(service, dataFn) {
          }
      }
  }, []) ;
-    const poller = () => {
-        if (!subscription || subscription.closed) {
-            dataFn.call(service)
-                .subscribe(dataFromServer => setData(dataFromServer));
-        }
-    }
+
     return [data, setData];
 }
 

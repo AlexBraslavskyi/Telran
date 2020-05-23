@@ -25,13 +25,14 @@ import Welcome from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Welcom
 //json-server-auth employees.json -p 3500 -r routes.json
 
 const App=()=>{
+    const authService = new AuthJwtService('http://localhost:3500/');
+    const [userData, setUserData] = useState({});
  const employeesService = new EmployeesHttpService('http://localhost:3500/employees/',() => {
      setUserData({})
  }, () => {
      alert("Server is unavailable, please retry again later on")
  });
-    const authService = new AuthJwtService('http://localhost:3500/');
-    const [userData, setUserData] = useState(authService.getUserData());
+
     const userDataUpdateFn = (userData) => {
         setUserData(userData);
     }

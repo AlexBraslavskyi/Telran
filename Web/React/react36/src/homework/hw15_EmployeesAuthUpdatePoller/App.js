@@ -25,19 +25,21 @@ import Welcome from "./homework/hw15_EmployeesAuthUpdatePoller/Components/Welcom
 //json-server-auth employees.json -p 3500 -r routes.json
 
 const App=()=>{
- const employeesService = new EmployeesHttpService('http://localhost:3500/employees/',()=>{
+ const employeesService = new EmployeesHttpService('http://localhost:3500/employees/',() => {
      setUserData({})
+ }, () => {
+     alert("Server is unavailable, please retry again later on")
  });
     const authService = new AuthJwtService('http://localhost:3500/');
-    authService.register([
-        {email:'user@tel-ran.co.il',password:'user'},
-        {email:'admin@tel-ran.co.il',password:'admin'}
-    ])
     const [userData, setUserData] = useState(authService.getUserData());
     const userDataUpdateFn = (userData) => {
         setUserData(userData);
     }
     useEffect(()=>{
+        authService.register([
+            {email:'user@tel-ran.co.il',password:'user'},
+            {email:'admin@tel-ran.co.il',password:'admin'}
+        ])
         authService.getUserData().subscribe(userData =>setUserData(userData));
     },[])
 
