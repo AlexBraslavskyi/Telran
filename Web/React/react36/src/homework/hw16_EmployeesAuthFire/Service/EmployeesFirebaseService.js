@@ -9,7 +9,7 @@ export default class EmployeesFirebaseService{
         return collectionData(this.db)
     }
     addEmployee(employee){
-     return this.db.doc().set(employee);
+     return this.db.doc(employee.id).set(employee);
     }
     deleteEmployee(id){
         return this.db.doc(id).delete();
