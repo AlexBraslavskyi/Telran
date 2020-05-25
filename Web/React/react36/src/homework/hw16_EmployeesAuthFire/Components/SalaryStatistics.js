@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {maxSalary,minSalary} from "../config/EmployeesConfig";
+import {maxSalary, minSalary, POLLING_INTERVAL} from "../config/EmployeesConfig";
 import _ from "lodash";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import {getRandomColor} from "../utils/Random";
 import subscribeEffect from "../utils/subscriber";
+import useSubscribeEffect from "../utils/subscriber";
 
 
 
@@ -19,8 +20,8 @@ const SalaryStatistics = (props) =>{
     [totalSalary,setTotalSalary]=useState(0);
     const employeesService = props.employeesService;
     const [employees, setEmployees] =
-        subscribeEffect(employeesService,
-            employeesService.getEmployees)
+        useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
+            POLLING_INTERVAL)
 
     function handlerInterval(event) {
         setTableStatistics([]);

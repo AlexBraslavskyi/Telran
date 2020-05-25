@@ -1,12 +1,9 @@
-.container{
-    background: #f5c6cb;
-    display: table;
-    border: 5px solid black;
-}
-.grid{
-    display: grid;
+body {
+    display: flex;
     justify-content: center;
-    grid-template-columns: repeat(50,10px);
-    grid-template-rows: repeat(50,10px);
-    grid-gap: 5px;
+    align-items: center;
+    height: 100%;
+}
+html {
+    height:100%
 }

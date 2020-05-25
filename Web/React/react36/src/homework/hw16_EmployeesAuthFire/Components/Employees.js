@@ -4,14 +4,16 @@ import EmployeesTable from "./EmployeesTable";
 import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState,useEffect} from "react";
-import subscribeEffect from "../utils/subscriber";
+import useSubscribeEffect from "../utils/subscriber";
+import {POLLING_INTERVAL} from "../config/EmployeesConfig";
+
 
 const Employees = (props) => {
     const username = props.userData.username;
     const isAdmin = props.userData.isAdmin;
     let [employeesSwitch, setEmployeesSwitch] = useState(0)
-    const [employees, setEmployees] = subscribeEffect(props.employeesService,
-        props.employeesService.getEmployees);
+    const [employees, setEmployees] = useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
+        POLLING_INTERVAL)
 
     const addEmployeeShow = () => {
         setEmployeesSwitch(1)

@@ -28,8 +28,6 @@ useEffect(
     () => {
         getData();
 
-
-
         return () => {
             if(subscription && !subscription.closed) {
                 polling = false;

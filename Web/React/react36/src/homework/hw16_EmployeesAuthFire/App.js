@@ -20,16 +20,20 @@ import AuthJwtService from "./homework/hw16_EmployeesAuthFire/Service/AuthJwtSer
 import Login from "./homework/hw16_EmployeesAuthFire/Components/Login";
 import Logout from "./homework/hw16_EmployeesAuthFire/Components/Logout";
 import Welcome from "./homework/hw16_EmployeesAuthFire/Components/Welcome";
+import EmployeesFirebaseService from "./homework/hw16_EmployeesAuthFire/Service/EmployeesFirebaseService";
+
 
 
 //json-server-auth employees.json -p 3500 -r routes.json
 
 const App=()=>{
- const employeesService = new EmployeesHttpService('http://localhost:3500/employees/',() => {
-     setUserData({})
- }, () => {
-     alert("Server is unavailable, please retry again later on")
- });
+ const employeesService =
+ //     new EmployeesHttpService('http://localhost:3500/employees/',() => {
+ //     setUserData({})
+ // }, () => {
+ //     alert("Server is unavailable, please retry again later on")
+ // });
+     new EmployeesFirebaseService('employees');
     const authService = new AuthJwtService('http://localhost:3500/');
     const [userData, setUserData] = useState(authService.getUserData());
     const userDataUpdateFn = (userData) => {

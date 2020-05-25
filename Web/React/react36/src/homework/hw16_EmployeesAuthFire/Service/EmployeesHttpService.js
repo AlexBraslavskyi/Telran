@@ -27,11 +27,15 @@ export default class EmployeesHttpService {
         return throwError(error)
     }
     getEmployees(){
-        return Axios.get(this.url,{headers: {
-            "Authorization": "Bearer " +
-            localStorage.getItem("accessToken")
-        }}) .pipe(map(response => response.data),catchError(this.errorHandler.bind(this)));
+        return Axios.get(this.url, {
+            headers: {
+                "Authorization": "Bearer " +
+                    localStorage.getItem("accessToken")
+            }
+        })
+            .pipe(map(response => response.data),catchError(this.errorHandler.bind(this)));
     }
+
     addEmployee(employee){
         return Axios.post(this.url,employee,{headers: {
             "Authorization": "Bearer " +

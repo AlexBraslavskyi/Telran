@@ -1,8 +1,9 @@
-import {maxSalary, titlesArr} from "../config/EmployeesConfig";
+import {maxSalary, POLLING_INTERVAL, titlesArr} from "../config/EmployeesConfig";
 import React, {useEffect, useState} from "react";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import EmployeesTable from "./EmployeesTable";
 import subscribeEffect from "../utils/subscriber";
+import useSubscribeEffect from "../utils/subscriber";
 
 
 const EmployeesSearch = (props) =>{
@@ -16,7 +17,8 @@ const EmployeesSearch = (props) =>{
     [resObj,setResObj]=useState({});
     const employeesService = props.employeesService;
     const [employees, setEmployees] =
-        subscribeEffect(employeesService, employeesService.getEmployees);
+        useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
+            POLLING_INTERVAL)
 
    function handlerTitle(event) {
         const title = event.target.value;
