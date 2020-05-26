@@ -1,87 +1,9 @@
-
-tbody {
-    display: block;
-    height: 60vh;
-    overflow-y: auto;
-
-}
-thead,  tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-.firstLevel, .thirdLevel, .btn-submit{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-}
-.secondLevel{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-.alert-danger{
-    color: red;
-    background-color: #ffffff00;
-    border-color: #ffffff00;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.nav-link{
-    color: white;
-
-}
-.btn-group{
-    grid-area: b;
-    margin-top: 0;
-    padding-top: 3px;
-
-}
-.center {
+body {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 0;
-    text-align: center;
+    height: 100%;
 }
-h3,h2,h1{
-    text-align: center;
-}
-.sing-bar{
-    grid-area: s;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 3px 12px;
-}
-.nav{
-    display: grid;
-    width: 100%;
-    margin: 0 auto 20px;
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr;
-    /*grid-gap: 10px;*/
-
-    grid-template-areas: "b s" "b a";
-
-}
-.avatar{
-    grid-area: a;
-}
-.card-log{
-    margin-top: 5vh;
-    margin-left: 30vw;
-    margin-right: 30vw;
-    background: #e3d6bc;
-}
-.img-avatar{
-    width: 9vw;
-    height: 11vw;
-    margin: 0 auto;
-    padding: 0;
+html {
+    height:100%
 }

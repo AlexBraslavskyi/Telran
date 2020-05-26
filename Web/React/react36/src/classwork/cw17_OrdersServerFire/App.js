@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './classwork/cw16_OrdersServer/App.css';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import OrdersNav from "./classwork/cw16_OrdersServer/components/OrdersNav";
-import Orders from "./classwork/cw16_OrdersServer/components/Orders";
-import OrdersStatistics from "./classwork/cw16_OrdersServer/components/OrdersStatistics";
-import OrdersHttpService from "./classwork/cw16_OrdersServer/services/OrdersHttpService";
-import AuthJwtService from "./classwork/cw16_OrdersServer/services/AuthJwtService";
-import Login from "./classwork/cw16_OrdersServer/components/Login";
-import Logout from "./classwork/cw16_OrdersServer/components/Logout";
-import OrdersFirebaseService from "./classwork/cw16_OrdersServer/services/OrdersFirebaseService";
+import OrdersNav from "./classwork/cw17_OrdersServerFire/components/OrdersNav";
+import Orders from "./classwork/cw17_OrdersServerFire/components/Orders";
+import OrdersStatistics from "./classwork/cw17_OrdersServerFire/components/OrdersStatistics";
+import OrdersHttpService from "./classwork/cw17_OrdersServerFire/services/OrdersHttpService";
+import AuthJwtService from "./classwork/cw17_OrdersServerFire/services/AuthJwtService";
+import Login from "./classwork/cw17_OrdersServerFire/components/Login";
+import Logout from "./classwork/cw17_OrdersServerFire/components/Logout";
+import OrdersFirebaseService from "./classwork/cw17_OrdersServerFire/services/OrdersFirebaseService";
 import {collection} from "rxfire/firestore";
 
 //json-server-auth orders.json -p 3500 --id email -r routes.json
