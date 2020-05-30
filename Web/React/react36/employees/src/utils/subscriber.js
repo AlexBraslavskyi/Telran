@@ -11,7 +11,7 @@ export  default function useSubscribeEffect(service, dataFn,pollingInterval) {
         subscription =
             dataFn.call(service)
                 .subscribe(dataFromServer => {
-                    setData(dataFromServer)}, () => {}, () => {
+                    setData(dataFromServer)}, (error) => {alert(JSON.stringify(error))}, () => {
                     if (polling) {
                         intervalId = setInterval(poller, pollingInterval);
                     }

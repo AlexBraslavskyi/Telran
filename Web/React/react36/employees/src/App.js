@@ -21,10 +21,15 @@ import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 import Welcome from "./Components/Welcome";
 import EmployeesFirebaseService from "./Service/EmployeesFirebaseService";
+import AuthFirebaseService from "./Service/AuthFirebaseService";
 
 
 
 //json-server-auth employees.json -p 3500 -r routes.json
+
+// Project Console: https://console.firebase.google.com/project/employees-b0d46/overview
+//     Hosting URL: https://employees-b0d46.web.app
+
 
 const App=()=>{
  const employeesService =
@@ -34,17 +39,17 @@ const App=()=>{
  //     alert("Server is unavailable, please retry again later on")
  // });
      new EmployeesFirebaseService('employees');
-    const authService =
-        new AuthJwtService('http://localhost:3500/');
+    const authService =  new AuthFirebaseService();
+        // new AuthJwtService('http://localhost:3500/');
     const [userData, setUserData] = useState(authService.getUserData());
     const userDataUpdateFn = (userData) => {
         setUserData(userData);
     }
     useEffect(()=>{
-        authService.register([
-            {email:'user@tel-ran.co.il',password:'user'},
-            {email:'admin@tel-ran.co.il',password:'admin'}
-        ])
+        // authService.register([
+        //     {email:'user@tel-ran.co.il',password:'user'},
+        //     {email:'admin@tel-ran.co.il',password:'admin'}
+        // ])
         authService.getUserData().subscribe(userData =>setUserData(userData));
     },[])
 

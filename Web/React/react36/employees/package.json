@@ -17,6 +17,7 @@
     "lodash": "^4.17.15",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-firebaseui": "^4.1.0",
     "react-scripts": "3.4.0",
     "rxfire": "^3.12.5",
     "rxjs": "^6.5.5",

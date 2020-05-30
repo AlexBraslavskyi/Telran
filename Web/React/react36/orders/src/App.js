@@ -14,8 +14,9 @@ import AuthFirebaseService from "./services/AuthFirebaseService";
 
 //json-server-auth orders.json -p 3500 --id email -r routes.json
 
-//Project Console: https://console.firebase.google.com/project/orders-83d5a/overview
- //   Hosting URL: https://orders-83d5a.web.app
+// Project Console: https://console.firebase.google.com/project/orders-83d5a/overview
+//     Hosting URL: https://orders-83d5a.web.app
+
 
 
 const App = () => {

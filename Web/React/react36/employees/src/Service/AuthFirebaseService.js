@@ -10,8 +10,10 @@ export default class AuthFirebaseService {
         this.auth = appFirebase.auth();
 
     }
-    login(user){
-        return user? this.emailAuth(user):this.googleAuth()
+
+    login(user,num){
+        return user&&num==0? this.emailAuth(user):num==1?this.googleAuth():
+            num==2?this.facebookAuth():this.githubAuth()
     }
     emailAuth(user){
         return this.auth.signInWithEmailAndPassword(user.email,user.password);
@@ -20,8 +22,16 @@ export default class AuthFirebaseService {
         const authProvider = new firebase.auth.GoogleAuthProvider();
         return this.auth.signInWithPopup(authProvider);
     }
+    facebookAuth(){
+        const authProvider = new firebase.auth.FacebookAuthProvider();
+        return this.auth.signInWithPopup(authProvider);
+    }
+    githubAuth() {
+        const authProvider = new firebase.auth.GithubAuthProvider();
+        return this.auth.signInWithPopup(authProvider);
+    }
     logout(){
-        return this.auth.signOut()
+        localStorage.removeItem('accessToken');
     }
     getUserData() {
         return authState(this.auth).pipe(mergeMap(user=>{

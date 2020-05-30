@@ -1,25 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {LINKS, pathLogin, pathLogout} from "../config/EmployeesConfig";
-
+import firebase from "firebase";
 
 export const EmployeesNav = (props) =>{
-    // const username = props.userData.username;
-    // const isAdmin = props.userData.isAdmin;
-    //    const navItems = LINKS.map(link => {
-    //        if(isAdmin==link.isAdmin){
-    //             return <button key={link.path} type="button" className='btn btn-info'>
-    //                 <Link to={link.path}>
-    //                     <span className='nav-link'>{link.image}{link.label}</span>
-    //                 </Link>
-    //             </button>}
-    //        else if(isAdmin||!username){
-    //            return <button key={link.path} type="button" className='btn btn-info'>
-    //            <Link to={link.path}>
-    //                <span className='nav-link'>{link.image}{link.label}</span>
-    //            </Link>
-    //        </button>}
-    //     })
     const userData = props.userData;
     const navItems = LINKS.map(link => {
             return link.isAdmin&&userData.isAdmin||!link.isAdmin? <button key={link.path} type="button" className='btn btn-info'>
@@ -29,8 +13,10 @@ export const EmployeesNav = (props) =>{
             </button>:null})
     const log =
         userData.username ? <div> <span className='sing-bar'>
-        {!userData.isAdmin?<img className='img-avatar' src={require('../images/user.png')}/>:
-            <img className='img-avatar' src={require('../images/admin.jpg')}/>}
+        {!userData.isAdmin||userData.username!='user@tel-ran.co.il'?
+            <img className='img-avatar' src={firebase.auth().currentUser.photoURL}/>:userData.isAdmin?
+            <img className='img-avatar' src={require('../images/admin.jpg')}/>:
+                <img className='img-avatar' src={require('../images/user.png')}/>}
                 {' '+ userData.username}</span>
                 <button type="button" className='btn btn-success'>
                     <Link to={pathLogout}>

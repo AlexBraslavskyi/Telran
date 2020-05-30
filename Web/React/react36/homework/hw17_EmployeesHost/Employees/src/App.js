@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
-import {EmployeesNav} from "./homework/hw16_EmployeesAuthFire/Components/EmployeesNav";
-import Employees from "./homework/hw16_EmployeesAuthFire/Components/Employees";
-import TitleStatistics from "./homework/hw16_EmployeesAuthFire/Components/TitleStatistics";
+import {EmployeesNav} from "./Components/EmployeesNav";
+import Employees from "./Components/Employees";
+import TitleStatistics from "./Components/TitleStatistics";
 import {
     pathEmployees,
     pathTitleStatistics,
@@ -11,20 +11,25 @@ import {
     pathSalaryStatistics,
     pathGenerations,
     pathLogin, pathLogout, pathWelcome
-} from "./homework/hw16_EmployeesAuthFire/config/EmployeesConfig";
-import EmployeesGenerations from "./homework/hw16_EmployeesAuthFire/Components/EmployeesGenerations";
-import SalaryStatistics from "./homework/hw16_EmployeesAuthFire/Components/SalaryStatistics";
-import EmployeesSearch from "./homework/hw16_EmployeesAuthFire/Components/EmployeesSearch";
-import EmployeesHttpService from "./homework/hw16_EmployeesAuthFire/Service/EmployeesHttpService";
-import AuthJwtService from "./homework/hw16_EmployeesAuthFire/Service/AuthJwtService";
-import Login from "./homework/hw16_EmployeesAuthFire/Components/Login";
-import Logout from "./homework/hw16_EmployeesAuthFire/Components/Logout";
-import Welcome from "./homework/hw16_EmployeesAuthFire/Components/Welcome";
-import EmployeesFirebaseService from "./homework/hw16_EmployeesAuthFire/Service/EmployeesFirebaseService";
+} from "./config/EmployeesConfig";
+import EmployeesGenerations from "./Components/EmployeesGenerations";
+import SalaryStatistics from "./Components/SalaryStatistics";
+import EmployeesSearch from "./Components/EmployeesSearch";
+import EmployeesHttpService from "./Service/EmployeesHttpService";
+import AuthJwtService from "./Service/AuthJwtService";
+import Login from "./Components/Login";
+import Logout from "./Components/Logout";
+import Welcome from "./Components/Welcome";
+import EmployeesFirebaseService from "./Service/EmployeesFirebaseService";
+import AuthFirebaseService from "./Service/AuthFirebaseService";
 
 
 
 //json-server-auth employees.json -p 3500 -r routes.json
+
+// Project Console: https://console.firebase.google.com/project/employees-b0d46/overview
+//     Hosting URL: https://employees-b0d46.web.app
+
 
 const App=()=>{
  const employeesService =
@@ -34,16 +39,17 @@ const App=()=>{
  //     alert("Server is unavailable, please retry again later on")
  // });
      new EmployeesFirebaseService('employees');
-    const authService = new AuthJwtService('http://localhost:3500/');
+    const authService =  new AuthFirebaseService();
+        // new AuthJwtService('http://localhost:3500/');
     const [userData, setUserData] = useState(authService.getUserData());
     const userDataUpdateFn = (userData) => {
         setUserData(userData);
     }
     useEffect(()=>{
-        authService.register([
-            {email:'user@tel-ran.co.il',password:'user'},
-            {email:'admin@tel-ran.co.il',password:'admin'}
-        ])
+        // authService.register([
+        //     {email:'user@tel-ran.co.il',password:'user'},
+        //     {email:'admin@tel-ran.co.il',password:'admin'}
+        // ])
         authService.getUserData().subscribe(userData =>setUserData(userData));
     },[])
 
