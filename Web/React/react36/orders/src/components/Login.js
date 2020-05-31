@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 export default function Login(props) {
     const authService = props.authService;
-    const userDataUpdateFn = props.userDataUpdateFn;
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
@@ -10,20 +9,15 @@ export default function Login(props) {
         event.preventDefault();
         credentials[event.target.name] = event.target.value;
         setCredentials({...credentials});
-    }
+    };
     const googleAuth = ()=>  {
         authService.login().catch(()=>alert('Wrong Google credentials'))
-    }
+    };
     const onSubmit = (event) => {
         event.preventDefault();
         authService.login(credentials).then().catch(()=>alert('Wrong credentials'))
 
-            // .subscribe(userData => {
-            //     userDataUpdateFn(userData);
-            // }, () => {
-            //     alert('Wrong credentials');
-            // })
-    }
+    };
     return <div className="card">
         <div className="card-header">
             <h4>Login Form</h4>

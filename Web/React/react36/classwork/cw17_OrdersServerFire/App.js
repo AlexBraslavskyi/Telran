@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import './classwork/cw16_OrdersServer/App.css';
+import './App.css';
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import OrdersNav from "./classwork/cw17_OrdersServerFire/components/OrdersNav";
-import Orders from "./classwork/cw17_OrdersServerFire/components/Orders";
-import OrdersStatistics from "./classwork/cw17_OrdersServerFire/components/OrdersStatistics";
-import OrdersHttpService from "./classwork/cw17_OrdersServerFire/services/OrdersHttpService";
-import AuthJwtService from "./classwork/cw17_OrdersServerFire/services/AuthJwtService";
-import Login from "./classwork/cw17_OrdersServerFire/components/Login";
-import Logout from "./classwork/cw17_OrdersServerFire/components/Logout";
-import OrdersFirebaseService from "./classwork/cw17_OrdersServerFire/services/OrdersFirebaseService";
+import OrdersNav from "./components/OrdersNav";
+import Orders from "./components/Orders";
+import OrdersStatistics from "./components/OrdersStatistics";
+import OrdersHttpService from "./services/OrdersHttpService";
+import AuthJwtService from "./services/AuthJwtService";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import OrdersFirebaseService from "./services/OrdersFirebaseService";
 import {collection} from "rxfire/firestore";
+import AuthFirebaseService from "./services/AuthFirebaseService";
 
 //json-server-auth orders.json -p 3500 --id email -r routes.json
+
+// Project Console: https://console.firebase.google.com/project/orders-83d5a/overview
+//     Hosting URL: https://orders-83d5a.web.app
 
 
 
@@ -24,17 +28,18 @@ const App = () => {
         // });
     new OrdersFirebaseService('orders');
     const authService =
-        new AuthJwtService('http://localhost:3500/');
+        new AuthFirebaseService();
+        // new AuthJwtService('http://localhost:3500/');
 
     const [userData, setUserData] = useState({});
     const userDataUpdateFn = (userData) => {
     setUserData(userData);
     }
     useEffect(()=>{
-        authService.register([
-            {email:'user@tel-ran.co.il', password:'user'},
-            {email:'admin@tel-ran.co.il', password:'admin'}
-        ])
+        // authService.register([
+        //     {email:'user@tel-ran.co.il', password:'user'},
+        //     {email:'admin@tel-ran.co.il', password:'admin'}
+        // ])
         authService.getUserData().subscribe(userData =>setUserData(userData));
     },[])
 

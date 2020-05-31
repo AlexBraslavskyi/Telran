@@ -11,7 +11,7 @@ export default class AuthFirebaseService {
 
     }
     login(user){
-        return user? this.emailAuth():this.googleAuth()
+        return user? this.emailAuth(user):this.googleAuth()
     }
     emailAuth(user){
         return this.auth.signInWithEmailAndPassword(user.email,user.password);

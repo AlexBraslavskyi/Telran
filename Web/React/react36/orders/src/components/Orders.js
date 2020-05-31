@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
-import _ from "lodash";
 import {OrderForm} from "./OrderForm";
-import useSubscribeEffect from "../util/subscriberData";
+import {useSelector} from "react-redux";
 const Orders = (props) => {
-
-
-    const isAdmin = props.isAdmin;
+    const userData = useSelector(state=>state.userData)
     const [flAddOrder, setFlAddOrder] = useState(false);
-    const [orders,setOrders] = useSubscribeEffect(props.ordersService,props.ordersService.getOrders,1000)
+    const orders = useSelector(state=>state.orders)
     const showOrderForm = () => {
         setFlAddOrder(true);
     }
@@ -44,7 +41,7 @@ const Orders = (props) => {
                 <td>{order.flavor}</td>
                 <td>{order.strength}</td>
                 <td>
-                    {isAdmin?<i style={styleCursor}
+                    {userData.isAdmin?<i style={styleCursor}
                         onClick={() => deleteOrder(order.email)}
                         className="fa fa-trash "/>:null
                     }
@@ -68,7 +65,7 @@ const Orders = (props) => {
             {orderTableRecords}
             </tbody>
         </table>
-        {isAdmin?<i style={styleCursor} onClick={showOrderForm} className="fa fa-plus-circle"></i>:null}
+        {userData.isAdmin?<i style={styleCursor} onClick={showOrderForm} className="fa fa-plus-circle"></i>:null}
 
     </div>
 
