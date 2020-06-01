@@ -4,7 +4,6 @@ export default function Logout(props) {
     const userDataUpdateFn = props.userDataUpdateFn;
         if (window.confirm('You are going to perform logout')) {
             authService.logout();
-            userDataUpdateFn({});
         }
 return true;
     }

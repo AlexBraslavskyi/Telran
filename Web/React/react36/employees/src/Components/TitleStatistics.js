@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
-import subscribeEffect from "../utils/subscriber";
-import useSubscribeEffect from "../utils/subscriber";
-import {POLLING_INTERVAL} from "../config/EmployeesConfig";
-export default function TitleStatistics(props) {
-    const employeesService = props.employeesService;
-    const [employees, setEmployees] =
-        useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
-            POLLING_INTERVAL)
+import {useSelector} from "react-redux";
+export default function TitleStatistics() {
+    const employees = useSelector(state=>state.employees);
     const statisticsObj = _.countBy(employees, 'title');
     const statisticsRecords = Object.entries(statisticsObj)
         .map(e => {

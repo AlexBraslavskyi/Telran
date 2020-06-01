@@ -2,9 +2,10 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {LINKS, pathLogin, pathLogout} from "../config/EmployeesConfig";
 import firebase from "firebase";
+import {useSelector} from "react-redux";
 
-export const EmployeesNav = (props) =>{
-    const userData = props.userData;
+export const EmployeesNav = () =>{
+    const userData = useSelector(state=>state.userData);
     const navItems = LINKS.map(link => {
             return link.isAdmin&&userData.isAdmin||!link.isAdmin? <button key={link.path} type="button" className='btn btn-info'>
                 <Link to={link.path}>

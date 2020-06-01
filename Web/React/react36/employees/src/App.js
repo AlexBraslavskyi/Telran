@@ -15,14 +15,13 @@ import {
 import EmployeesGenerations from "./Components/EmployeesGenerations";
 import SalaryStatistics from "./Components/SalaryStatistics";
 import EmployeesSearch from "./Components/EmployeesSearch";
-import EmployeesHttpService from "./Service/EmployeesHttpService";
-import AuthJwtService from "./Service/AuthJwtService";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 import Welcome from "./Components/Welcome";
 import EmployeesFirebaseService from "./Service/EmployeesFirebaseService";
 import AuthFirebaseService from "./Service/AuthFirebaseService";
-
+import {actionUserData,actionEmployees} from "./store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 //json-server-auth employees.json -p 3500 -r routes.json
@@ -33,25 +32,22 @@ import AuthFirebaseService from "./Service/AuthFirebaseService";
 
 const App=()=>{
  const employeesService =
- //     new EmployeesHttpService('http://localhost:3500/employees/',() => {
- //     setUserData({})
- // }, () => {
- //     alert("Server is unavailable, please retry again later on")
- // });
      new EmployeesFirebaseService('employees');
     const authService =  new AuthFirebaseService();
-        // new AuthJwtService('http://localhost:3500/');
-    const [userData, setUserData] = useState(authService.getUserData());
-    const userDataUpdateFn = (userData) => {
-        setUserData(userData);
-    }
+    const dispatch = useDispatch();//hook for possibility to updating global store
+    const userData = useSelector(state=>
+        state.userData);//hook for getting global store
     useEffect(()=>{
-        // authService.register([
-        //     {email:'user@tel-ran.co.il',password:'user'},
-        //     {email:'admin@tel-ran.co.il',password:'admin'}
-        // ])
-        authService.getUserData().subscribe(userData =>setUserData(userData));
-    },[])
+        authService.getUserData().subscribe(userData=>{
+            dispatch(actionUserData(userData))//update state
+            if(userData.username){
+                employeesService.getEmployees().subscribe(employees=>{
+                    dispatch(actionEmployees(employees));
+                },error => alert(JSON.stringify(error)))
+            }
+        })
+
+    },[]);
 
     return <BrowserRouter>
     <EmployeesNav userData={userData}/>
@@ -60,25 +56,25 @@ const App=()=>{
         {return !userData.username ? <Welcome/> :
             <Redirect to={pathEmployees}/>}}/>
       <Route path={pathEmployees} exact render ={() =>
-        {return userData.username ? <Employees userData={userData} employeesService = {employeesService}/> :
+        {return userData.username ? <Employees employeesService = {employeesService}/> :
         <Redirect to={pathWelcome}/>}}/>
       <Route path={pathTitleStatistics} exact render={() =>
-        {return userData.username ? <TitleStatistics employeesService={employeesService}/>:
+        {return userData.username ? <TitleStatistics/>:
             <Redirect to={pathWelcome}/>}}/>
       <Route path={pathGenerations} exact render={() =>
         {return userData.isAdmin ? <EmployeesGenerations  employeesService = {employeesService}/>:
             <Redirect to={pathWelcome}/>}}/>
       <Route path={pathSalaryStatistics} exact render={() =>
-        {return userData.username ? <SalaryStatistics employeesService={employeesService}/>:
+        {return userData.username ? <SalaryStatistics/>:
             <Redirect to={pathWelcome}/>}}/>
         <Route path={pathSearch} exact render={() =>
-        {return userData.username ? <EmployeesSearch employeesService={employeesService}/>:
+        {return userData.username ? <EmployeesSearch/>:
             <Redirect to={pathWelcome}/>}}/>
         <Route path={pathLogin} exact render={() =>
-        {return !userData.username ? <Login authService={authService} userDataUpdateFn={userDataUpdateFn}/> :
+        {return !userData.username ? <Login authService={authService}/> :
                 <Redirect to={pathEmployees}/>}}/>
         <Route path={pathLogout} exact render={() =>
-        {return userData.username ? <Logout authService={authService} userDataUpdateFn={userDataUpdateFn}/> :
+        {return userData.username ? <Logout authService={authService} /> :
                     <Redirect to={pathWelcome}/>}}/>
               </Switch>
               </BrowserRouter>

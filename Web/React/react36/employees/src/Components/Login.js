@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import firebase from "firebase";
+
 
 export default function Login(props) {
 
     const authService = props.authService;
-    const userDataUpdateFn = props.userDataUpdateFn;
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''

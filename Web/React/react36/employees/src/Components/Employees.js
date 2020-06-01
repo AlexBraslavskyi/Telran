@@ -4,17 +4,14 @@ import EmployeesTable from "./EmployeesTable";
 import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState,useEffect} from "react";
-import useSubscribeEffect from "../utils/subscriber";
-import {POLLING_INTERVAL} from "../config/EmployeesConfig";
+import {useSelector} from "react-redux";
 
 
 const Employees = (props) => {
-    const username = props.userData.username;
-    const isAdmin = props.userData.isAdmin;
-    let [employeesSwitch, setEmployeesSwitch] = useState(0)
-    const [employees, setEmployees] = useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
-        POLLING_INTERVAL)
 
+    let [employeesSwitch, setEmployeesSwitch] = useState(0)
+    const userData = useSelector(state=>state.userData);
+    const employees = useSelector(state=>state.employees);
     const addEmployeeShow = () => {
         setEmployeesSwitch(1)
     }
@@ -56,11 +53,11 @@ const Employees = (props) => {
    function viewButton() {
                 return <div className="center">
                     <div className='btn btn-group'>
-                        {isAdmin? <button style={{cursor: 'pointer'}} type="button" className="btn btn-success"
+                        {userData.isAdmin? <button style={{cursor: 'pointer'}} type="button" className="btn btn-success"
                                 onClick={addEmployeeShow}><i className="fa fa-user-plus fa-2x"/>Add
                             Employee
                         </button>:null}
-                        {isAdmin?<button style={{cursor: 'pointer'}} type="button" className="btn btn-primary"
+                        {userData.isAdmin?<button style={{cursor: 'pointer'}} type="button" className="btn btn-primary"
                                 onClick={genEmployee}><i className="fa fa-users fa-2x"/>Generate
                             Employee
                         </button>:null}
@@ -77,18 +74,18 @@ const Employees = (props) => {
                 return <div>{viewButton()}
                     <EmployeesTable employees={employees}
                                     removeFn={removeEmployee}
-                                    isAdmin={isAdmin}
+                                    isAdmin={userData.isAdmin}
                     />
                 </div>
             case 1:
-                return isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
+                return userData.isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
         }
     }else{
         switch (employeesSwitch) {
             case 0:
                 return viewButton()
             case 1:
-                return isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
+                return userData.isAdmin?<EmployeeForm addEmployeeFn={addEmployee}/>:null
         }
         }
     }

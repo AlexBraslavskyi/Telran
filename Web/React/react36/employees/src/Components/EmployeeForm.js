@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {minSalary,maxSalary,titlesArr,digitsId,genders,nameMinLength} from "../config/EmployeesConfig";
 import {getInputElement, getInputElementBlur, getRadioButtonElement, getSelectElement} from "../utils/InputElements";
-import _ from 'lodash';
 
 const letters = /^[A-Za-z]+$/;
 

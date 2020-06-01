@@ -3,12 +3,11 @@ import {maxSalary, minSalary, POLLING_INTERVAL} from "../config/EmployeesConfig"
 import _ from "lodash";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import {getRandomColor} from "../utils/Random";
-import subscribeEffect from "../utils/subscriber";
-import useSubscribeEffect from "../utils/subscriber";
+import {useSelector} from "react-redux";
 
 
 
-const SalaryStatistics = (props) =>{
+const SalaryStatistics = () =>{
     let intervalSalary, setIntervalSalary, error,setError, tableStatistics, setTableStatistics,formRef,setFormRef,minimalSalary,
         setMinimalSalary, maximalSalary, setMaximalSalary, totalSalary,setTotalSalary;
     [error,setError]=useState('');
@@ -18,11 +17,7 @@ const SalaryStatistics = (props) =>{
     [minimalSalary,setMinimalSalary]=useState(0);
     [maximalSalary,setMaximalSalary]=useState(0);
     [totalSalary,setTotalSalary]=useState(0);
-    const employeesService = props.employeesService;
-    const [employees, setEmployees] =
-        useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
-            POLLING_INTERVAL)
-
+    const employees = useSelector(state=>state.employees);
     function handlerInterval(event) {
         setTableStatistics([]);
         intervalSalary = event.target.value;

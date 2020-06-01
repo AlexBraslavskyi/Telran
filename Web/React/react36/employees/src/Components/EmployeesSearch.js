@@ -2,11 +2,10 @@ import {maxSalary, POLLING_INTERVAL, titlesArr} from "../config/EmployeesConfig"
 import React, {useEffect, useState} from "react";
 import {getInputElement, getInputElementBlur} from "../utils/InputElements";
 import EmployeesTable from "./EmployeesTable";
-import subscribeEffect from "../utils/subscriber";
-import useSubscribeEffect from "../utils/subscriber";
+import {useSelector} from "react-redux";
 
 
-const EmployeesSearch = (props) =>{
+const EmployeesSearch = () =>{
     let  error,setError, formRef,setFormRef, title, setTitle, salaryFrom,setSalaryFrom,
         salaryTo, setSalaryTo, resObj,setResObj;
     [error,setError]=useState({errorTitle:'',errorSalaryFrom:'',errorSalaryTo:''});
@@ -15,10 +14,7 @@ const EmployeesSearch = (props) =>{
     [salaryFrom,setSalaryFrom]=useState({value:'',controlError:0});
     [salaryTo,setSalaryTo]=useState({value:'',controlError:0});
     [resObj,setResObj]=useState({});
-    const employeesService = props.employeesService;
-    const [employees, setEmployees] =
-        useSubscribeEffect(props.employeesService,props.employeesService.getEmployees,
-            POLLING_INTERVAL)
+    const employees = useSelector(state=>state.employees);
 
    function handlerTitle(event) {
         const title = event.target.value;
