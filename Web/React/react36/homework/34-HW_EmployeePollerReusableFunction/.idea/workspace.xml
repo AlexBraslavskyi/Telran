@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1a0a5a78-44ee-45f3-8e55-6b3e666febf6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../ServerData/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Components/EmployeesGenerations.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Components/EmployeesGenerations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Components/EmployeesNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Components/EmployeesNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Components/EmployeesSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Components/EmployeesSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Components/EmployeesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Components/EmployeesTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Components/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Components/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/Service/AuthFirebaseService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/Service/AuthFirebaseService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../employees/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../employees/src/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectId" id="1clvpyeqqOfoJ3No1n97QwVTUC0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a0a5a78-44ee-45f3-8e55-6b3e666febf6" name="Default Changelist" comment="" />
+      <created>1591116180501</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591116180501</updated>
+      <workItem from="1591116181982" duration="72000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>
