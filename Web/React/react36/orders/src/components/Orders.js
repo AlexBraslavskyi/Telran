@@ -1,10 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {OrderForm} from "./OrderForm";
 import {useSelector} from "react-redux";
+
+import columnsMediaObject from "../config/columnsMediaConfig";
+import useColumnsMedia from "../util/mediaHook";
+import Details from "./Details";
+
+
 const Orders = (props) => {
     const userData = useSelector(state=>state.userData)
     const [flAddOrder, setFlAddOrder] = useState(false);
     const orders = useSelector(state=>state.orders)
+    const columns = useColumnsMedia(columnsMediaObject);
+    const [order, setOrder] = useState({});
+    const showDetails=(order)=>
+setOrder({...order});
+
+    const backFn = () => setOrder({});
     const showOrderForm = () => {
         setFlAddOrder(true);
     }
@@ -37,28 +49,31 @@ const Orders = (props) => {
             return <tr key={order.email}>
                 <td>{order.coffee}</td>
                 <td>{order.email}</td>
-                <td>{order.size}</td>
-                <td>{order.flavor}</td>
-                <td>{order.strength}</td>
+                {columns >2 ? <td>{order.size}</td>:null}
+                {columns >3 ?<td>{order.flavor}</td>:null}
+               {columns>4?<React.Fragment><td>{order.strength}</td>
                 <td>
                     {userData.isAdmin?<i style={styleCursor}
                         onClick={() => deleteOrder(order.email)}
                         className="fa fa-trash "/>:null
-                    }
-                </td>
+                    }:null}
+                </td></React.Fragment>:<i style={styleCursor}
+                        onClick={() => showDetails(order)}
+                        className="fa fa-ellipsis-h"/>}
             </tr>
         }
     )
 
-    return flAddOrder ? <OrderForm addFn={addOrder}/> : <div>
+    return order.email ?<Details order = {order} removeFn={userData.isAdmin? deleteOrder:null} backFn = {backFn}></Details>:flAddOrder ? <OrderForm addFn={addOrder}/> : <div>
         <table className="table">
             <thead>
             <tr>
                 <th>coffee</th>
                 <th>email</th>
-                <th>size</th>
-                <th>flavor</th>
-                <th>strength</th>
+                {columns >2 ?  <th>size</th>:null}
+                {columns >3 ?  <th>flavor</th>:null}
+                {columns >4 ?  <th>strength</th>:null}
+                <th></th>
             </tr>
             </thead>
             <tbody>

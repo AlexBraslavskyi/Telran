@@ -63,8 +63,8 @@ const Employees = (props) => {
                                 onClick={genEmployee}><i className="fa fa-users fa-2x"/>Generate
                             Employee
                         </button>:null}
-                        {/*<button style={{cursor: 'pointer'}} type="button" className="btn btn-primary"*/}
-                        {/*        onClick={delAllEmployees}><i className="fa fa-trash fa-2x"/>Delete All*/}
+                        {/*<button style={{cursor: 'pointer'}} type="button" className="btn btn-success"*/}
+                        {/*        onClick={props.employeesService.deleteAllEmployees()}><i className="fa fa-trash fa-2x"/>Delete All*/}
                         {/*    Employees*/}
                         {/*</button>*/}
                     </div>
