@@ -56,7 +56,7 @@ setOrder({...order});
                     {userData.isAdmin?<i style={styleCursor}
                         onClick={() => deleteOrder(order.email)}
                         className="fa fa-trash "/>:null
-                    }:null}
+                    }
                 </td></React.Fragment>:<i style={styleCursor}
                         onClick={() => showDetails(order)}
                         className="fa fa-ellipsis-h"/>}
@@ -64,7 +64,9 @@ setOrder({...order});
         }
     )
 
-    return order.email ?<Details order = {order} removeFn={userData.isAdmin? deleteOrder:null} backFn = {backFn}></Details>:flAddOrder ? <OrderForm addFn={addOrder}/> : <div>
+    return order.email ?<Details order = {order} removeFn={userData.isAdmin?
+        deleteOrder:null} backFn = {backFn}></Details>:flAddOrder ?
+        <OrderForm addFn={addOrder}/> : <div>
         <table className="table">
             <thead>
             <tr>

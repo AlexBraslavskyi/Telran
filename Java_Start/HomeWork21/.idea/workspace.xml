@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0d89973a-1511-47b7-8412-d65ee6ea2993" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/classwork/42-CW_OrdersResponsiveLayouts/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/classwork/42-CW_OrdersResponsiveLayouts/.idea/42-CW_OrdersResponsiveLayouts.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/classwork/42-CW_OrdersResponsiveLayouts/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/classwork/42-CW_OrdersResponsiveLayouts/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/classwork/42-CW_OrdersResponsiveLayouts/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/DetailsTable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/mobileNavMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Service/MobMenuService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/columnsMediaConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/navMediaConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/utils/mediaHook.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/utils/mediaHookNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/ServerData/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/Employees.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/Employees.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesGenerations.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesGenerations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/SalaryStatistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/SalaryStatistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/TitleStatistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/TitleStatistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/store/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/orders/src/components/Details.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/orders/src/components/Details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/orders/src/components/Orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/orders/src/components/Orders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/orders/src/config/columnsMediaConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/orders/src/config/columnsMediaConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/orders/src/util/mediaHook.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/orders/src/util/mediaHook.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1cx3Bbei6QZDWrRO8rJ5XKdp8AO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0d89973a-1511-47b7-8412-d65ee6ea2993" name="Default Changelist" comment="" />
+      <created>1591456283109</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591456283109</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591456430496">
+      <screen x="0" y="23" width="1440" height="798" />
+    </state>
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.798@0.23.1440.798" timestamp="1591456430496" />
+  </component>
+</project>

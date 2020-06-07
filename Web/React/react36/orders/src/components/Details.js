@@ -9,8 +9,9 @@ const Details = (props) =>{
 {Object.entries(order).map(e=>{
     return <h5 key={e[0]}>{e[0]}:{e[1]}</h5>
 })}
-{removeFn ? <button onClick={()=>
-    removeFn(order.email)}
+{removeFn ? <button onClick={()=>{
+    removeFn(order.email);
+         backFn();}}
    >Remove</button>:null}
 <button onClick={backFn}>Back</button>
     </div>
