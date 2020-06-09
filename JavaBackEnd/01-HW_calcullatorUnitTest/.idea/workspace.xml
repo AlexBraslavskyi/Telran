@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/tableConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/EmployeesReactFinalSolution.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01-CW_CalculatorUnitTest/src/telran/numbers/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../01-CW_CalculatorUnitTest/src/telran/numbers/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/telran/numbers/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telran/numbers/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/telran/numbers/tests/CalculatorTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/EqualsProject/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/EqualsProject/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork17/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork17/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork18/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork18/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork19/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork19/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork20/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork20/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork21/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork21/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork22/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork22/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Java lesson 1/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Java/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17-2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17-2/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 18/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 18/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 19/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 19/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 20/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 20/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson2/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson21/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson21/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson22/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson22/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson23/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson23/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/RemoteSystemsTempFiles/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson1/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_Start/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Java_Start/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_Start/test/src/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Java_Start/test/test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/columnsMediaConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/columnsMediaConfig.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1d331tSoNvpn8kpwaJSud92U0tC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="" />
+      <created>1591639737226</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591639737226</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591639969360">
+      <screen x="0" y="23" width="1440" height="798" />
+    </state>
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.798@0.23.1440.798" timestamp="1591639969360" />
+  </component>
+</project>

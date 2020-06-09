@@ -31,15 +31,21 @@ const EmployeesGenerations = (props) =>{
         }
     }
 
-   async function submit (event){
-        event.preventDefault()
+
+    async function genEmployees(){
         for (let i = 0; i < count.value; i++) {
             const employee = getRandomEmployee();
-           await  employeesService.addEmployee(employee).then(() => counterSuccess++,
-                () => counterUnsuccess++)};
-             await setMessage(`Generated ${counterSuccess} employees successful; ${counterUnsuccess} unsuccessful `)
-             await (()=>formRef.reset())
-       // formRef.reset();
+            await employeesService.addEmployee(employee).then(() => counterSuccess++,
+                () => counterUnsuccess++);
+        }
+}
+
+    function submit (event){
+        event.preventDefault()
+            genEmployees().then( () =>
+                setMessage(`Generated ${counterSuccess} employees successful; ${counterUnsuccess} unsuccessful `))
+        setCount({value:'',controlError:0})
+       formRef.reset();
   }
         return <div className="center">
         <div className="card-header">

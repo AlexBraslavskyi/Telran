@@ -161,7 +161,8 @@ const EmployeesSearch = () =>{
             <header className="card-header">
                 <h3>Searching Employees</h3>
             </header>
-            <form ref={(ref) => formRef = ref}  className='form-group' onSubmit={submit}>
+            <form ref={(ref) => formRef = ref}
+                className='form-group' onSubmit={submit}>
                 <div className='firstLevel'>
             <div>
                 {getInputElementBlur('','Enter title','Title',handlerTitle,

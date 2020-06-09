@@ -11,7 +11,6 @@ const SalaryStatistics = () =>{
     let intervalSalary, setIntervalSalary, error,setError, tableStatistics, setTableStatistics,formRef,setFormRef,minimalSalary,
         setMinimalSalary, maximalSalary, setMaximalSalary, totalSalary,setTotalSalary;
     [error,setError]=useState('');
-    [formRef,setFormRef]=useState(null);
     [intervalSalary,setIntervalSalary]=useState({value:'',controlError: 0});
     [tableStatistics,setTableStatistics]=useState([]);
     [minimalSalary,setMinimalSalary]=useState(0);
@@ -61,7 +60,6 @@ const SalaryStatistics = () =>{
             count = 0;
             res.push(statisticsRecords);
         }
-        formRef.reset();
         minMaxTotalSalary();
             setTableStatistics(res);
             setIntervalSalary({value: '', controlError: 0});
@@ -133,7 +131,7 @@ function inputForm(){
             <header className="card-header">
                 <h3>Statistics of the Employees Salaries</h3>
             </header>
-            <form ref={(ref) => formRef = ref} className='form-group' onSubmit={submit}>
+            <form className='form-group' onSubmit={submit}>
                 <div className='center' style={{marginTop:'5px'}}>
                     {getInputElement('number', 'Enter intervalSalary', 'Salary Interval',
                         handlerInterval, error, intervalSalary)}

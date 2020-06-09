@@ -18,7 +18,5 @@ export default class EmployeesFirebaseService {
     deleteEmployee(id) {
         return this.db.doc(id).delete();
     }
-    // deleteAllEmployees() {
-    //     return appFirebase.firestore().collection('employees').set({});
-    // }
+
 }

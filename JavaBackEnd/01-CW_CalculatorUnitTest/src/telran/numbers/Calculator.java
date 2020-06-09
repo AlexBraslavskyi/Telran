@@ -20,12 +20,24 @@ public class Calculator {
 	}
 	
 	public static int digits(int number) {
-		//TODO
-		return -1;
+		int count;
+		if (number == 0) {
+			count = 1;
+			return count;
+		} else {
+		for (count = 0; number != 0; count++)
+			number = number / 10;
+		return count;
+	}
 	}
 	public static int pow(int a, int b) {
-		//TODO
-		return -1;
-	} 
-
+		int res=0;
+		if (a >= 0 && b == 0) {
+			res = 1;
+		}else {
+		for (res = 1; b > 0; b--)
+			res = res * a;
+		}
+	return res;
+	}
 }

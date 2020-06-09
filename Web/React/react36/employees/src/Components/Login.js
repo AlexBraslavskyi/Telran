@@ -15,15 +15,14 @@ export default function Login(props) {
     }
     const googleAuth = ()=>  {
         authService.login('',1)
-            // .catch(()=>alert('Wrong Google credentials'))
+
     }
     const facebookAuth = ()=>  {
         authService.login('',2)
-        // .catch(()=>alert('Wrong Google credentials'))
+
     }
     const githubAuth = ()=>  {
         authService.login('',3)
-        // .catch(()=>alert('Wrong Google credentials'))
     }
     const onSubmit = (event) => {
         event.preventDefault();

@@ -5,9 +5,6 @@ import {EmployeeForm} from "./EmployeeForm";
 import {getRandomEmployee} from "../utils/Random";
 import {useState,useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {pathDBEmployees} from "../config/EmployeesConfig";
-import {actionFlagMobMenu} from "../store/actions";
-import MobMenuService from "../Service/MobMenuService";
 
 
 const Employees = (props) => {
@@ -15,10 +12,7 @@ const Employees = (props) => {
     let [employeesSwitch, setEmployeesSwitch] = useState(0)
     const userData = useSelector(state=>state.userData);
     const employees = useSelector(state=>state.employees);
-    // const dispatch =useDispatch();
-    // const mobMenuService = new MobMenuService();
-    // let flagMobMenu =  useSelector(state=>state.flagMobMenu);
-    //     dispatch(actionFlagMobMenu({flag:mobMenuService.changeFlag(flagMobMenu.flag)}))
+
 
     const addEmployeeShow = () => {
         setEmployeesSwitch(1)
@@ -70,10 +64,6 @@ const Employees = (props) => {
                                 onClick={genEmployee}><i className="fa fa-users fa-2x"/>Generate
                             Employee
                         </button>:null}
-                        {/*<button style={{cursor: 'pointer'}} type="button" className="btn btn-success"*/}
-                        {/*        onClick={props.employeesService.deleteAllEmployees()}><i className="fa fa-trash fa-2x"/>Delete All*/}
-                        {/*    Employees*/}
-                        {/*</button>*/}
                     </div>
                 </div>
         }
