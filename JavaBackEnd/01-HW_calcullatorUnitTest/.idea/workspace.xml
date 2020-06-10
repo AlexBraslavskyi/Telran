@@ -1,61 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/tableConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/EmployeesReactFinalSolution.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Web/React/react36/homework/EmployeesReactFinalSolution/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../01-CW_CalculatorUnitTest/src/telran/numbers/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../01-CW_CalculatorUnitTest/src/telran/numbers/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/telran/numbers/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telran/numbers/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/telran/numbers/tests/CalculatorTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/EqualsProject/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/EqualsProject/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork17/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork17/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork18/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork18/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork19/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork19/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork20/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork20/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork21/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork21/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork22/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/HomeWork22/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Java lesson 1/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Java/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17-2/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17-2/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 17/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 18/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 18/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 19/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 19/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 20/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson 20/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson2/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson21/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson21/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson22/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson22/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson23/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/Lesson23/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/RemoteSystemsTempFiles/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java_Start/lesson1/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Java_Start/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Java_Start/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Java_Start/test/src/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Java_Start/test/test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/.firebase/hosting.YnVpbGQ.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/Components/EmployeesTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/columnsMediaConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/React/react36/employees/src/config/columnsMediaConfig.js" afterDir="false" />
-    </list>
+    <list default="true" id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,6 +20,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -89,9 +36,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591639969360">
-      <screen x="0" y="23" width="1440" height="798" />
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591801120500">
+      <screen x="0" y="23" width="1440" height="800" />
     </state>
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.798@0.23.1440.798" timestamp="1591639969360" />
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.800@0.23.1440.800" timestamp="1591801120500" />
+    <state x="507" y="134" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1591801115584">
+      <screen x="0" y="23" width="1440" height="800" />
+    </state>
+    <state x="507" y="134" key="#com.intellij.ide.macro.MacrosDialog/0.23.1440.800@0.23.1440.800" timestamp="1591801115584" />
+    <state x="457" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1591801100594">
+      <screen x="0" y="23" width="1440" height="800" />
+    </state>
+    <state x="457" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1440.800@0.23.1440.800" timestamp="1591801100594" />
+    <state x="221" y="61" key="SettingsEditor" timestamp="1591801294400">
+      <screen x="0" y="23" width="1440" height="800" />
+    </state>
+    <state x="221" y="61" key="SettingsEditor/0.23.1440.800@0.23.1440.800" timestamp="1591801294400" />
   </component>
 </project>

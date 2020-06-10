@@ -20,29 +20,20 @@ public class Calculator {
 	}
 	
 	public static int digits(int number) {
-		int count;
-		if (number == 0) {
-			count = 1;
-			return count;
-		} else {
-		for (count = 0; number != 0; count++)
-			number = number / 10;
+		int count = 0;
+		do {
+			number /= 10;
+			count++;
+		}while(number!=0);
 		return count;
 		
 	}
-	}
 	public static int pow(int a, int b) {
-		int res = 0;
-		if (a >= 0 && b == 0) {
-			res = 1;
-		return res;
-	}else {
-			for (res = 1; b > 0; b--)
-				res = res * a;
-	}
-	
-		return res;
-	}
+		int res = 1;
 
-	
+			for (int i = 0; i<b; i++) {
+				res *= a;
+	}
+		return res;
+	}
 }
