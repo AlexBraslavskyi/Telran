@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
+
 public class InformationPrimitivesAppl {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
-			System.out.println("Enter primirtive type or exit");
+			System.out.println("Enter primitive type or exit");
 			String primitiveType = scanner.next();
 			if(primitiveType.equals("exit")) {
 				
@@ -18,11 +19,12 @@ public class InformationPrimitivesAppl {
 		}
 	}
 
-
+	
+	
 	private static String getInformation(String primitiveType, String informationType) {
 		switch (primitiveType) {
 		case "int":
-				return getIntInformation(informationType);
+			return getIntInformation(informationType);
 		case "long":
 			return getLongInformation(informationType);
 		case "char":

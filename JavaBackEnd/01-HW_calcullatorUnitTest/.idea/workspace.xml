@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="" />
+    <list default="true" id="18eee9f6-1470-4b79-83e3-b85f68e1b227" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01-HW_calcullatorUnitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/01-HW_calcullatorUnitTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02-CW_InformationsPrimitivesApplications/src/InformationPrimitivesAppl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../02-CW_InformationsPrimitivesApplications/src/InformationPrimitivesAppl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw1_Calc.zip" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +25,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="android.dex.compiler" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="JarApplication" nameIsGenerated="true">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JarApplication">
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,11 +56,16 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591801120500">
-      <screen x="0" y="23" width="1440" height="800" />
+    <state x="208" y="23" key="#Project_Structure" timestamp="1591890882026">
+      <screen x="0" y="23" width="1440" height="803" />
+    </state>
+    <state x="208" y="23" key="#Project_Structure/0.23.1440.803@0.23.1440.803" timestamp="1591890882026" />
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591891211513">
+      <screen x="0" y="23" width="1440" height="803" />
     </state>
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.798@0.23.1440.798" timestamp="1591639969360" />
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.800@0.23.1440.800" timestamp="1591801120500" />
+    <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.803@0.23.1440.803" timestamp="1591891211513" />
     <state x="507" y="134" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1591801115584">
       <screen x="0" y="23" width="1440" height="800" />
     </state>
@@ -49,9 +74,10 @@
       <screen x="0" y="23" width="1440" height="800" />
     </state>
     <state x="457" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1440.800@0.23.1440.800" timestamp="1591801100594" />
-    <state x="221" y="61" key="SettingsEditor" timestamp="1591801294400">
-      <screen x="0" y="23" width="1440" height="800" />
+    <state x="221" y="61" key="SettingsEditor" timestamp="1591891265572">
+      <screen x="0" y="23" width="1440" height="803" />
     </state>
     <state x="221" y="61" key="SettingsEditor/0.23.1440.800@0.23.1440.800" timestamp="1591801294400" />
+    <state x="221" y="61" key="SettingsEditor/0.23.1440.803@0.23.1440.803" timestamp="1591891265572" />
   </component>
 </project>
