@@ -71,8 +71,8 @@ public class InformationPrimitivesAppl {
 }
 	private static String getCharInformation(String informationType) {
 		switch(informationType) {
-		case "min": return ""+Character.MIN_VALUE;
-		case "max": return ""+Character.MAX_VALUE;
+		case "min": return ""+(int)Character.MIN_VALUE;
+		case "max": return ""+(int)Character.MAX_VALUE;
 		case "bytes": return ""+Character.BYTES;
 		default: return "Error: wrong information type";
 	}
