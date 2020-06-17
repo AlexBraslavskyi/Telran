@@ -1,38 +1,24 @@
 package telran.numbers;
 
 public class CodeDecode {
-	String keyCodeDecode;// unique
+	private String keyCodeDecode;// unique
 	public CodeDecode(String keyCodeDecode) {
 		super();
 		this.keyCodeDecode = keyCodeDecode;
 	}
 
-private int getBase() {
-//	TODO
-	
-	
-	return 10;
+public int getBase() {
+int length = this.keyCodeDecode.length();
+//System.out.println(length);
+	return length;
 }
 private char getDigitChar(int digit) {
-//	TODO using charAT
-	
-	return (char) ('0' + digit);
+	char result = this.keyCodeDecode.charAt(digit);
+
+	return result;
 }
 private int getDigit(char digitChar) {
-//	TODO using indexOf
-	
-	return digitChar - '0';
-}
-public int decode (String numberStr) {
-	int length = numberStr.length(); // srting length
-	int result = 0;
-	int base = getBase();
-	for(int i = 0; i<length;i++) {
-		char digitChar = numberStr.charAt(i);//for first iteration digitChar = '1'
-		int digit = getDigit(digitChar);
-		result = result*base+digit;
-		
-	}
+int result = (int)this.keyCodeDecode.indexOf(digitChar);
 	
 	return result;
 }
@@ -47,6 +33,24 @@ public String code(int number) {
 		number /= base;
 		
 	}while(number!=0);
+//	System.out.println(base);
 	return result;
 }
+public int decode (String numberStr) {
+	int length = numberStr.length(); // srting length
+	int result = 0;
+	int base = getBase();
+	for(int i = 0; i<length;i++) {
+		
+		char digitChar = numberStr.charAt(i);//for first iteration digitChar = '1'
+		int digit = getDigit(digitChar);
+		
+		
+		result = result*base+digit;
+		
+	}
+	System.out.println(base);
+	return result;
+}
+
 }
