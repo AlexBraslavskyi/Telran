@@ -7,9 +7,8 @@ public class CodeDecode {
 		this.keyCodeDecode = keyCodeDecode;
 	}
 
-public int getBase() {
-int length = this.keyCodeDecode.length();
-//System.out.println(length);
+private int getBase() {
+int length = keyCodeDecode.length();
 	return length;
 }
 private char getDigitChar(int digit) {
@@ -33,7 +32,6 @@ public String code(int number) {
 		number /= base;
 		
 	}while(number!=0);
-//	System.out.println(base);
 	return result;
 }
 public int decode (String numberStr) {
@@ -49,7 +47,6 @@ public int decode (String numberStr) {
 		result = result*base+digit;
 		
 	}
-	System.out.println(base);
 	return result;
 }
 
