@@ -44,6 +44,20 @@ class RegularExpressionsTest {
 		
 		
 	}
+	
+	@Test
+	void testIPv4() {
+		//<less256>.<less256>.<less256>.<less256> format IPv4
+		String ipV4Regex = RegularExpressions.ipV4();
+		assertTrue("0.0.0.0".matches(ipV4Regex));
+		assertTrue("255.110.110.0".matches(ipV4Regex));
+		assertFalse("256.110.110.0".matches(ipV4Regex));
+		assertFalse("-1.110.110.0".matches(ipV4Regex));
+		assertFalse("1.110.110.0.1".matches(ipV4Regex));
+		
+		
+	}
+	
 //Metacheracter
 	//* - any number of symbols, >=0
 	//+ - any number of symbols > 0 

@@ -12,7 +12,14 @@ public static String javaVariable() {
 	return regex;
 }
 public static String Less256() {
+	
 	String regex = "\\d|\\d?|[0-1]\\d\\d|2[0-4]\\d|25[0-5]";
 	return regex;
+}
+
+public static String ipV4() {
+	String regex = String.format("((%1$s)\\.){3}(%1$s)",Less256());
+	return regex;
+
 }
 }
