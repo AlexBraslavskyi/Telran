@@ -31,8 +31,8 @@ class ArraysIntTest {
 	@Test
 	void testRemoveAtIndex() {
 		int ar[] = {10,2,7};
-		int index = 1;
-        int exp[] = {10,7};
+		int index = 0;
+        int exp[] = {2,7};
 		assertArrayEquals(exp, ArraysInt.remove(ar,index));
 	}
 
