@@ -75,4 +75,12 @@ class MatrixIntTest {
 		assertArrayEquals(expMatrix, MatrixInt.removeRow(matrix, nRow));
 	}
 
+	@Test
+	void testTranspMatrix() {
+		int matrix[][]=  {{1,2,3,},{4,5,6}};
+		int expMatrix [][]= {{1,4},{2,5},{3,6}};
+		
+//		System.out.println(Arrays.deepToString(MatrixInt.removeRow(expMatrix, nRow)));
+		assertArrayEquals(expMatrix, MatrixInt.transp(matrix));
+	}
 }
