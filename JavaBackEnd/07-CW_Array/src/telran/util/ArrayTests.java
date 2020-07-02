@@ -90,9 +90,9 @@ for(int i = 0; i < arrayDbl.length; i++) {
 		String expArrayStr [] = {"abc", "www"};
 		double expArrayDbl[] = {2.22, 4.44, 5.55};
 		int index = 1;
-		
-//		assertEquals(-7,arInt.remove(index));
-		if(arInt.remove(index)!=null) {
+		Integer j = arInt.remove(index);
+		assertEquals(-7,j);
+		if(j!=null) {
 			
 			
 		assertEquals(expArrayInt.length, arInt.size());
