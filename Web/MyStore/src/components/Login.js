@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {getInputElement} from "../utils/inputElements";
 
 
 export default function Login(props) {
@@ -30,47 +31,69 @@ export default function Login(props) {
 
     }
 
-    return <div className = "centerForm">
-    <div className="card-log">
-        <div className="card-header">
-            <h4 style={{textAlign:'center'}}>Login Form</h4>
+    return  <div className="content">
+            <h2 className="center-align" style={{color:"#ee6e73",fontFamily:"fantasy", marginTop:"5vh"}}>My cabinet</h2>
+    
+        <div className="log">
+            <form className="col s6 center-align" onSubmit={onSubmit} style={{width:"35vw"}}>
+                {getInputElement('email',
+                    'email', 'Email',
+                    inputHandler,'','','email')}
+                {getInputElement('password',
+                    'password', 'Password',
+                    inputHandler,'','','vpn_key')}
+                        </form>
+                        <div>
+                    <div >
+                    <button style = {{minWidth:'10vw', margin:'2vh'}} type="submit" name="action"className="btn waves-effect waves-light blue"
+                            > <i class="material-icons right">send</i>Sign
+                        </button>
+                    </div>
+                    <div>
+                        <button  style = {{minWidth:'10vw', margin:'2vh'}} type = "reset" name = "action" className = "btn waves-effect waves-light red"
+                            > <i class="material-icons right">delete</i>Reset
+                        </button>
+                        </div>
+                        </div>
         </div>
-        <div className="card-body">
-            <form onSubmit={onSubmit}>
-                <div className="form-group">
-                    <label>Username/email</label>
-                    <input name="email" required
-                           onChange={inputHandler}
-                    className="form-control"/>
+    
+            <div className="social-btn">
+            <div className='log'>
+                <a className="waves-effect waves-light col s6 btn social google" onClick={googleAuth}>
+                    <i className="fa fa-google"></i> Sign in with google</a>
                 </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" required
-                           onChange={inputHandler}
-                           className="form-control"/>
+                <div className='log'>
+                <a className="waves-effect waves-light col s6 btn  social facebook" onClick={facebookAuth}>
+                    <i className="fa fa-fw fa-facebook"></i> Sign in with facebook</a>
                 </div>
-                <button type="submit" className='btn-success'><i className="fa fa-unlock"/>Sing in</button>
-                <button type="reset" className='btn-danger'><i className="fa fa-trash"/>Reset</button>
-            </form>
-            <div style={{'marginTop':'3vh',textAlign:"center"}}>
-                <button className='btn-light' onClick={googleAuth} style={{width:'18vw',textAlign:'left'}}>
-                    <img src={require('../style/images/Google_icon.png')}
-                         style={{height:'3vh', weight:'3vh', cursor: 'pointer',marginRight:'1vw',paddingBottom: '2px'}}/>
-                         LOGIN WITH GOOGLE</button>
-            </div>
-            <div style={{'marginTop':'1vh',textAlign:"center"}}>
-                <button className='btn-light' onClick={facebookAuth} style={{width:'18vw',textAlign:'left'}}>
-                    <img src={require('../style/images/facebook.png')}
-                         style={{height:'3vh', weight:'3vh', cursor:'pointer',marginRight:'1vw',paddingBottom: '2px'}}/>
-                    LOGIN WITH FACEBOOK</button>
-            </div>
-            <div style={{'marginTop':'1vh',textAlign:"center"}}>
-                <button className='btn-light' onClick={githubAuth} style={{width:'18vw',textAlign:'left'}}>
-                    <img src={require('../style/images/github.png')}
-                         style={{height:'3vh', weight:'3vh', cursor:'pointer',marginRight:'1vw',paddingBottom: '2px'}}/>
-                    LOGIN WITH GITHUB</button>
+                    <div className='log'>
+                <a className="waves-effect waves-light col s6 btn social github" onClick={githubAuth}>
+                        <i className="fa fa-github"></i> Sign in with github</a>
+                    </div>
+                    <div class='log'>
+                    <a class="waves-effect waves-light col s6 btn social linkedin">
+                     <i class="fa fa-linkedin"></i> Sign in with linkedin</a>
+                    </div>
             </div>
         </div>
-    </div>
-    </div>
+        
+        {/* <div className="fixed-action-btn horizontal click-to-toggle">
+            <a className="btn-floating btn-large red">
+                <i className="material-icons">menu</i>
+            </a>
+            <ul>
+                <li>
+                    <a className="waves-effect waves-light btn-floating social google" onClick={googleAuth}><i className="fa fa-google"></i></a>
+                </li>
+                <li>
+                    <a className="waves-effect waves-light btn-floating facebook" onClick={facebookAuth}><i className="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a className="waves-effect waves-light btn-floating github" onClick={githubAuth}><i className="fa fa-github"></i></a>
+                </li>
+            </ul>
+        </div> */}
+
+
+
 }

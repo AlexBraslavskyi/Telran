@@ -1,22 +1,25 @@
   
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addShipping } from './actions/cartActions'
+import { addDelivery } from './actions/cartActions'
+import { Link } from 'react-router-dom'
+import { pathOrderForm } from '../config/ShopConfig'
 class Recipe extends Component{
     
     componentWillUnmount() {
-         if(this.refs.shipping.checked)
-              this.props.substractShipping()
+         if(this.refs.delivery.checked)
+              this.props.subtractDelivery()
     }
 
     handleChecked = (e)=>{
         if(e.target.checked){
-            this.props.addShipping();
+            this.props.addDelivery();
         }
         else{
-            this.props.substractShipping();
+            this.props.subtractDelivery();
         }
     }
+  
 
     render(){
   
@@ -25,16 +28,19 @@ class Recipe extends Component{
                 <div className="collection">
                     <li className="collection-item">
                             <label>
-                                <input type="checkbox" ref="shipping" onChange= {this.handleChecked} />
+                                <input type="checkbox" ref="delivery" onChange= {this.handleChecked} />
                                 <span>Delivery(+5₪)</span>
                             </label>
                         </li>
                         <li className="collection-item"><b>Total: {this.props.total} ₪</b></li>
                     </div>
                     <div className="checkout">
-                        <button className="waves-effect waves-light btn">Submit</button>
+                        <button className="waves-effect waves-light btn"> 
+                        <Link to={pathOrderForm}><span style={{color:'white'}}><i
+                            className="material-icons right">send</i>Submit</span></Link>
+                        </button></div>
                     </div>
-                 </div>
+                
         )
     }
 }
@@ -48,8 +54,8 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        addShipping: ()=>{dispatch({type: 'ADD_DELIVERY'})},
-        substractShipping: ()=>{dispatch({type: 'SUB_DELIVERY'})}
+        addDelivery: ()=>{dispatch({type: 'ADD_DELIVERY'})},
+        subtractDelivery: ()=>{dispatch({type: 'SUB_DELIVERY'})}
     }
 }
 

@@ -77,4 +77,31 @@ public class Array<T> {
 		
 	}
 }
+
+	public int indexOf(Object pattern) {
+		for(int i = 0; i < size; i++) {
+			if(array[i].equals(pattern)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	public int lastIndexOf(Object pattern) {
+		for(int i = size-1; i >=0; i--) {
+			if(array[i].equals(pattern)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	/**
+	 * head->?<-tail
+	 */
+	public void reverse() {   //>=!!
+		for(int left = 0, right = size-1; left < right; left++, right--) {
+		T tmp = array[left];
+		array[left] = array[right];
+		array[right] = tmp;
+	}
+}
 }

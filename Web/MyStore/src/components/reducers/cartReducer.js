@@ -29,12 +29,12 @@ const cartReducer= (state = initState,action)=>{
          let existed_item= state.addedItems.find(item=> action.id === item.id)
          if(existed_item)
          {
-        //    if(window.confirm('You allready added item with id=' + existed_item.id + '. Do you want to add quantity')){
-        //     addedItem.quantity += 1 
+           if(window.confirm('You allready added item with id=' + existed_item.id + '. Do you want to add quantity')){
+            addedItem.quantity += 1 
              return{
                 ...state,
                  total: state.total + addedItem.price,
-                //   }
+                  }
         }}
          else{
             addedItem.quantity = 1;

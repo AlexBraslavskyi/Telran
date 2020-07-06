@@ -13,7 +13,7 @@ class Cart extends Component{
     handleAddQuantity = (id)=>{
         this.props.addQuantity(id);
     }
-    //to substruct from the quantity
+    //to subtract from the quantity
     handleSubtractQuantity = (id)=>{
         this.props.subtractQuantity(id);
     }
@@ -55,15 +55,16 @@ class Cart extends Component{
              (
                 <p>Nothing.</p>
              )
-       return(
+       return(<div className="content">
             <div className="container">
                 <div className="cart">
-                    <h5>You have ordered:</h5>
+                    <h5 style={{color:"#ee6e73",fontFamily:"fantasy"}}>Your order:</h5>
                     <ul className="collection">
                         {addedItems}
                     </ul>
                 </div> 
                 <Recipe />          
+            </div>
             </div>
        )
     }

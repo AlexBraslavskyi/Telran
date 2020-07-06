@@ -1,5 +1,6 @@
 import React from "react";
-
+import M from 'materialize-css/dist/js/materialize';
+import $ from "jquery";
 export function getSelectOptions(optionStrings) {
     return optionStrings.map(os => {
         return <option key={os} value={os}>{os}</option>
@@ -9,18 +10,29 @@ export function getErrorMessage(error){
     return error ?
         <div className="alert alert-danger">{error}</div> : <div></div>
 }
-export function getInputElement(type, name, label, handler,errorMessage,valueProps) {
-    return <div className="form-group">
-        <label>{label}</label>
-        <input className={"form-control" + (valueProps.controlError===-1
+export function getInputElement(type, name, label, handler,errorMessage,valueProps,icon) {
+    return <div className="row">
+        <div class="input-field col s12">
+<i class="material-icons prefix">{icon}</i>
+        <input id={label} required="required"
+               className = {(valueProps.controlError===-1
               ? " is-invalid"
               : valueProps.controlError===0
               ? ""
-              : " is-valid")} defaultValue={valueProps.value}
-               onChange={handler}  placeholder={name} name={name} type={type} />
-        <div className="alert alert-danger">{errorMessage}</div>
+              : "validate")} defaultValue={valueProps.value}
+               onChange={handler}  name={name} type={type} />
+               <label for={label}
+                      // className="active"
+               >{label}</label>
+            <span className="helper-text" data-error={errorMessage} data-success="Perfect!"></span>
+
+        </div>
     </div>
+    $(document).ready(function() {
+        M.updateTextFields()
+    });
 }
+ 
 export function getInputElementBlur(type, name, label, handler,errorMessage,valueProps) {
     return <div className="form-group">
         <label>{label}</label>

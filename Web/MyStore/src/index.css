@@ -1,5 +1,7 @@
-@import "~bootstrap/dist/css/bootstrap.css";
+
 @import "~font-awesome/css/font-awesome.min.css";
-@import "~materialize-css/dist/css/materialize.css";
+@import "~materialize-social/materialize-social.css";
 @import '~material-icons/iconfont/material-icons.css';
+@import "~materialize-css/dist/css/materialize.css";
+/* @import "~bootstrap/dist/css/bootstrap.css"; */
 

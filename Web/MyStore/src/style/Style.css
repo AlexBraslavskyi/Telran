@@ -64,5 +64,25 @@
     color: #ee6e73;
     text-align: center;
     margin-left: 10px;
-    bottom: 91.2%;
+    /* bottom: 91.2%; */
 }
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .content {
+    min-height: calc(100vh - 80px);
+  }
+     .log{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 1vh;
+     }
+     .social-btn{
+        display: block;
+        margin-left: 40%;
+        margin-top: 1vh;
+        width: 20vw;
+       
+     }

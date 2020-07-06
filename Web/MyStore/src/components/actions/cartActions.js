@@ -29,3 +29,17 @@ export const addQuantity=(id)=>{
         id
     }
 }
+//add delivery action
+export const addDelivery=(id)=>{
+    return{
+        type: ADD_DELIVERY,
+        id
+    }
+}
+//subtract qt action
+export const subtractDelivery=(id)=>{
+    return{
+        type: SUB_DELIVERY,
+        id
+    }
+}

@@ -123,4 +123,49 @@ for(int i = 0; i < arrayDbl.length; i++) {
 	}
 
 }
+	@Test
+	void testReverse() {
+		int expArrayInt []=  {18, 13, 9, 20, -7, 10};
+		String expArrayStr [] = {"www", "def", "abc"};
+		arInt.reverse();
+		arStr.reverse();
+	assertEquals(arrayInt.length, arInt.size());
+	assertEquals(arrayStr.length, arStr.size());
+	for(int i = 0; i < arrayInt.length; i++) {
+		assertEquals(expArrayInt[i], arInt.get(i));
+	}
+	for(int i = 0; i < arrayStr.length; i++) {
+		assertEquals(expArrayStr[i], arStr.get(i));
+	}
+	}
+	@Test
+	void testIndexOf() {
+		int expArrayInt []=  {18, 13, 9, 20, -7, 10};
+		String expArrayStr [] = {"www", "def", "abc"};
+		arInt.reverse();
+		arStr.reverse();
+	assertEquals(arrayInt.length, arInt.size());
+	assertEquals(arrayStr.length, arStr.size());
+	for(int i = 0; i < arrayInt.length; i++) {
+		assertEquals(expArrayInt[i], arInt.get(i));
+	}
+	for(int i = 0; i < arrayStr.length; i++) {
+		assertEquals(expArrayStr[i], arStr.get(i));
+	}
+	}
+	@Test
+	void testLastIndexOf() {
+		int expArrayInt []=  {18, 13, 9, 20, -7, 10};
+		String expArrayStr [] = {"www", "def", "abc"};
+		arInt.reverse();
+		arStr.reverse();
+	assertEquals(arrayInt.length, arInt.size());
+	assertEquals(arrayStr.length, arStr.size());
+	for(int i = 0; i < arrayInt.length; i++) {
+		assertEquals(expArrayInt[i], arInt.get(i));
+	}
+	for(int i = 0; i < arrayStr.length; i++) {
+		assertEquals(expArrayStr[i], arStr.get(i));
+	}
+	}
 }
