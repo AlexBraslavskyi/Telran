@@ -15,8 +15,8 @@ public class LinkedList<T> {
 
 	}
 
-	private Node<T> head; // reference to the first node
-	private Node<T> tail; // reference to the last node
+	private Node<T> head; 
+	private Node<T> tail; 
 	private int size;
 
 	public void add(T obj) {
@@ -37,9 +37,8 @@ public class LinkedList<T> {
 		if (index < 0 || index >= size) {
 			return null;
 		}
-		Node<T> nodeIndex = getNode(index); 
+		Node<T> nodeIndex = getNode(index);
 		return nodeIndex.obj;
-//	return (index < size / 2) ? getFromLeft(index).obj : getFromRight(index).obj;
 	}
 
 	private Node<T> getFromRight(int index) {
@@ -58,19 +57,19 @@ public class LinkedList<T> {
 		return current;
 	}
 
-	public int size() {
+	public int size() { 
 		return size;
 	}
 
 	public boolean add(int index, T obj) {
-		if (index < 0 || index >= size) { // if size-1 -> cann't add to end
+		if (index < 0 || index >= size-1) { 
 			return false;
 		}
 		if (index == 0) {
-			addHead(obj);// private
+			addHead(obj);
 
 		} else {
-			addMiddle(index, obj);// private
+			addMiddle(index, obj);
 		}
 		size++;
 		return true;
@@ -100,7 +99,7 @@ public class LinkedList<T> {
 			return null;
 
 		}
-		Node<T> node = getNode(index);// get
+		Node<T> node = getNode(index);
 		T res = node.obj;
 		if (head == tail) {
 			head = tail = null;
@@ -121,11 +120,10 @@ public class LinkedList<T> {
 	}
 
 	private void removeNode(Node<T> node) {
-	Node<T> nodeNext = node.next;
-	Node<T> nodePrev = node.prev;
-	nodePrev.next = nodeNext;
-	nodeNext.prev = nodePrev;
-	
+		Node<T> nodeNext = node.next;
+		Node<T> nodePrev = node.prev;
+		nodePrev.next = nodeNext;
+		nodeNext.prev = nodePrev;
 
 	}
 
@@ -143,86 +141,44 @@ public class LinkedList<T> {
 
 		return (index < size / 2) ? getFromLeft(index) : getFromRight(index);
 	}
-}
 
-//private void addMiddle(int index, T obj) {
-//	Node<T> node = new Node<>(obj);
-//	Node<T> current = this.head;
-//	if(head == null) {
-//		head = tail = node;
-//	}else {
-//	for(int i = 0; i < index; i++) {
-//		current = current.next;
-//		if(i == index-1) {
-//			node.next = current;
-//			node.prev = current.prev;
-//			current.prev.next = node;
-//			current.prev = node;
-//		
-//		}
-//		
-//	}
-//	}
-//	
-//}
-//
-//private void addRoot(T obj) {
-//	Node<T> node = new Node<>(obj);
-//	if(head == null) {
-//		head = tail = node;
-//	}else {
-//		head.prev = node;
-//		node.next = head;
-//		head = node;
-//	}
-//	
-//}
-//public T remove (int index) {
-//	if(index < 0 || index >=size) {
-//		return null;
-//		
-//	}
-//	Node<T> node = getNode(index);//get
-//	T res = node.obj;
-////	System.out.println(res);
-//	if(head == null) {
-//		head = tail = node;
-//		return null;
-//	}
-//	 if(index == 0) {
-//		removeRoot();
-//		
-//	}else if(index == size - 1){
-//		removeTail();
-//	}else {
-//		removeNode(node);
-//		
-//	}
-//	
-//	size --;
-//		return res;
-//
-//}
-//
-//private void removeNode(Node<T> node) {
-//	node.prev.next = node.next;
-//	node.next.prev = node.prev;
-//
-//	
-//}
-//
-//private void removeTail() {
-//	tail = tail.prev;
-//}
-//
-//private void removeRoot() {
-//	head = head.next;
-//	
-//}
-//
-//private Node<T> getNode(int index) {
-//
-//	return (index < size / 2) ? getFromLeft(index) : getFromRight(index);
-//}
-//}
-//
+	public int indexOf(Object pattern) {
+		Node<T> current = head;
+		for (int i = 0; i < size; i++) {
+			if (current.obj.equals(pattern)) {
+				return i;
+			}
+			current = current.next;
+		}
+		return -1;
+	}
+
+	public int lastIndexOf(Object pattern) {
+		Node<T> current = tail;
+		for (int i = size - 1; i >= 0; i--) {
+			if (current.obj.equals(pattern)) {
+				return i;
+			}
+			current = current.prev; 
+		}
+		return -1;
+	}
+
+	/**
+	 * head->exit?<-tail 
+	 */
+	public void reverse() {
+		Node<T> currentTail = tail;
+		Node<T> currentHead = head;
+		for (int i = 0; i <= (size-1) / 2; i++) {
+			T tmp = currentHead.obj;
+			
+			currentHead.obj = currentTail.obj;
+			currentTail.obj = tmp;
+			if(currentHead.next!=currentTail) {
+			currentHead = currentHead.next;
+			currentTail = currentTail.prev;
+			}
+		}
+	}
+}
