@@ -148,14 +148,13 @@ public class LinkedList<T> {
 			if(current.obj.equals(pattern)) {
 				return index;
 			}
-		}
 //		Node<T> current = head;
 //		for (int i = 0; i < size; i++) {
 //			if (current.obj.equals(pattern)) {
 //				return i;
 //			}
 //			current = current.next;
-//		}
+		}
 		return -1;
 	}
 
@@ -185,17 +184,17 @@ public class LinkedList<T> {
 			T tmp = left.obj;
 			left.obj = right.obj;
 			right.obj = tmp;
+		
 //		Node<T> currentTail = tail;
 //		Node<T> currentHead = head;
-//		for (int i = 0; i < size/ 2; i++) {
+//		for (int i = 0; i < size / 2; i++) {
 //			T tmp = currentHead.obj;
 //			
 //			currentHead.obj = currentTail.obj;
 //			currentTail.obj = tmp;
-//			
 //			currentHead = currentHead.next;
 //			currentTail = currentTail.prev;
-//			
+			
 		}
 	}
 }

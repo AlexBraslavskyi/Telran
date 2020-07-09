@@ -2,7 +2,7 @@ package telran.util;
 
 import java.util.Arrays;
 
-public class LinkedList<T> {
+public class LinkedList<T> implements IndexedList<T>{
 
 	private static class Node<T> {
 		public T obj;
@@ -94,30 +94,30 @@ public class LinkedList<T> {
 		head = node;
 	}
 
-	public T remove(int index) {
-		if (index < 0 || index >= size) {
-			return null;
-
-		}
-		Node<T> node = getNode(index);
-		T res = node.obj;
-		if (head == tail) {
-			head = tail = null;
-		} else {
-			if (index == 0) {
-				removeHead();
-
-			} else if (index == size - 1) {
-				removeTail();
-			} else {
-				removeNode(node);
-
-			}
-		}
-		size--;
-		return res;
-
-	}
+//	public T remove(int index) {
+//		if (index < 0 || index >= size) {
+//			return null;
+//
+//		}
+//		Node<T> node = getNode(index);
+//		T res = node.obj;
+//		if (head == tail) {
+//			head = tail = null;
+//		} else {
+//			if (index == 0) {
+//				removeHead();
+//
+//			} else if (index == size - 1) {
+//				removeTail();
+//			} else {
+//				removeNode(node);
+//
+//			}
+//		}
+//		size--;
+//		return res;
+//
+//	}
 
 	private void removeNode(Node<T> node) {
 		Node<T> nodeNext = node.next;
@@ -197,5 +197,29 @@ public class LinkedList<T> {
 //			currentTail = currentTail.prev;
 //			
 		}
+	}
+
+	@Override
+	public T remove(Object pattern) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeAll(IndexedList<T> patterns) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(T pattern) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean reteinAll(IndexedList<T> patterns) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
