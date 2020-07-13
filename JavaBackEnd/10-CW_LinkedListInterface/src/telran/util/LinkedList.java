@@ -94,30 +94,30 @@ public class LinkedList<T> implements IndexedList<T>{
 		head = node;
 	}
 
-//	public T remove(int index) {
-//		if (index < 0 || index >= size) {
-//			return null;
-//
-//		}
-//		Node<T> node = getNode(index);
-//		T res = node.obj;
-//		if (head == tail) {
-//			head = tail = null;
-//		} else {
-//			if (index == 0) {
-//				removeHead();
-//
-//			} else if (index == size - 1) {
-//				removeTail();
-//			} else {
-//				removeNode(node);
-//
-//			}
-//		}
-//		size--;
-//		return res;
-//
-//	}
+	public T remove(int index) {
+		if (index < 0 || index >= size) {
+			return null;
+
+		}
+		Node<T> node = getNode(index);
+		T res = node.obj;
+		if (head == tail) {
+			head = tail = null;
+		} else {
+			if (index == 0) {
+				removeHead();
+
+			} else if (index == size - 1) {
+				removeTail();
+			} else {
+				removeNode(node);
+
+			}
+		}
+		size--;
+		return res;
+
+	}
 
 	private void removeNode(Node<T> node) {
 		Node<T> nodeNext = node.next;
@@ -149,13 +149,6 @@ public class LinkedList<T> implements IndexedList<T>{
 				return index;
 			}
 		}
-//		Node<T> current = head;
-//		for (int i = 0; i < size; i++) {
-//			if (current.obj.equals(pattern)) {
-//				return i;
-//			}
-//			current = current.next;
-//		}
 		return -1;
 	}
 
@@ -166,60 +159,58 @@ public class LinkedList<T> implements IndexedList<T>{
 				return index;
 			}
 		}
-//		Node<T> current = tail;
-//		for (int i = size - 1; i >= 0; i--) {
-//			if (current.obj.equals(pattern)) {
-//				return i;
-//			}
-//			current = current.prev; 
-//		}
 		return -1;
 	}
 
-	/**
-	 * head->exit?<-tail 
-	 */
 	public void reverse() {
 		for(Node<T> left = head, right = tail; left != right && left.prev != right; left = left.next,
 				right = right.prev) {
 			T tmp = left.obj;
 			left.obj = right.obj;
-			right.obj = tmp;
-//		Node<T> currentTail = tail;
-//		Node<T> currentHead = head;
-//		for (int i = 0; i < size/ 2; i++) {
-//			T tmp = currentHead.obj;
-//			
-//			currentHead.obj = currentTail.obj;
-//			currentTail.obj = tmp;
-//			
-//			currentHead = currentHead.next;
-//			currentTail = currentTail.prev;
-//			
+			right.obj = tmp;	
 		}
 	}
 
 	@Override
 	public T remove(Object pattern) {
-		// TODO Auto-generated method stub
-		return null;
+		int index = indexOf(pattern);
+		T res = remove(index);
+		return res;
 	}
 
 	@Override
 	public boolean removeAll(IndexedList<T> patterns) {
-		// TODO Auto-generated method stub
-		return false;
+		int tempSize = size;
+		Node<T> node = tail;
+		for(int i = size - 1; i >= 0; i--) {
+			if (patterns.contains(node.obj)) {
+		remove(i);
+			}
+			node = node.prev;
+		}
+		return tempSize != size;
 	}
-
+ 
 	@Override
 	public boolean contains(T pattern) {
-		// TODO Auto-generated method stub
+		for (Node<T> current = head; current != null; current = current.next) {
+			if(current.obj.equals(pattern)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean reteinAll(IndexedList<T> patterns) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean retainAll(IndexedList<T> patterns) {
+		int tempSize = size;
+		Node<T> node = tail;
+		for(int i = size - 1; i >= 0; i--) {
+			if (!patterns.contains(node.obj)) {
+		remove(i);
+			}
+			node = node.prev;
+	}
+		return tempSize != size;
 	}
 }

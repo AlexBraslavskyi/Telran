@@ -18,14 +18,28 @@ class IndexedListTest {
 	IndexedList<Integer> listInt;
 	IndexedList<Integer> listIntMid;
 	IndexedList<String> listStr;
-
+	IndexedList<Integer> patternInt;
+	IndexedList<String> patternStr;
 	@BeforeEach
 	void setUp() {
-		listWillEmpty = new Array<>();
-		listIntFirst = new Array<>();
-		listInt = new Array<>();
-		listIntMid = new Array<>();
-		listStr = new Array<>(); 
+		//for array
+//		listWillEmpty = new Array<>();
+//		listIntFirst = new Array<>();
+//		listInt = new Array<>();
+//		listIntMid = new Array<>();
+//		listStr = new Array<>(); 
+//		patternInt = new Array<>();
+//		patternStr = new Array<>();
+		
+		//for linkedList
+		listWillEmpty = new LinkedList<>();
+		listIntFirst = new LinkedList<>();
+		listInt = new LinkedList<>();
+		listIntMid = new LinkedList<>();
+		listStr = new LinkedList<>(); 
+		patternInt = new LinkedList<>();
+		patternStr = new LinkedList<>();
+		
 		for (int i = 0; i < arrayStr.length; i++) {
 			listStr.add(arrayStr[i]);
 
@@ -40,6 +54,12 @@ class IndexedListTest {
 			listWillEmpty.add(arrayWillEmpty[i]);
 
 		}
+
+		patternInt.add(10);
+		patternInt.add(13);
+		patternInt.add(18);
+		patternStr.add("www");
+		patternStr.add("abc");
 	}
 
 	@Test
@@ -83,36 +103,37 @@ class IndexedListTest {
 
 	}
 
-//	@Test
-//	void testRemoveOnIndex() {
-//		int expListEmpty[] = {};
-//		int expListIntMid[] = { 10, -7, 20, 10, 13, 18 };
-//		int expListIntFirst[] = { -7, 20, 10, 9, 13, 18 };
-//		int expListIntLast[] = { 10, -7, 20, 10, 9, 13 };
-//		String expListStr[] = { "abc", "def", "qww", "www","eee" };
-////		assertEquals(1, listWillEmpty.remove(0));
-//
-//		int index = 2;
-//		listIntFirst.remove(0); 
-//		listInt.remove(6);
-//		assertEquals(9, listIntMid.remove(4));
-//		assertEquals(expListIntMid.length, listIntMid.size());
-//		for (int i = 0; i < expListIntMid.length; i++) {
-//			assertEquals(expListIntMid[i], listIntMid.get(i));
-//			assertEquals(expListIntFirst[i], listIntFirst.get(i));
-//			assertEquals(expListIntLast[i], listInt.get(i));
-//
-//		}
-//		assertNull(listStr.remove(-10)); 
-//		assertEquals("www", listStr.remove(index));
-//		assertEquals(expListStr.length, listStr.size());
-//		for (int i = 0; i < expListStr.length; i++) {
-//			assertEquals(expListStr[i], listStr.get(i));
-//		}
-//		assertNull(listIntMid.remove(-1));
-//		assertNull(listIntFirst.remove(555));
-//
-//	}
+	@Test
+	void testRemoveOnIndex() {
+	
+		int expListEmpty[] = {};
+		int expListIntMid[] = { 10, -7, 20, 10, 13, 18 };
+		int expListIntFirst[] = { -7, 20, 10, 9, 13, 18 };
+		int expListIntLast[] = { 10, -7, 20, 10, 9, 13 };
+		String expListStr[] = { "abc", "def", "qww", "www","eee" };
+
+
+		int index = 2;
+		listIntFirst.remove(0); 
+		listInt.remove(6);
+		assertEquals(9, listIntMid.remove(4));
+		assertEquals(expListIntMid.length, listIntMid.size());
+		for (int i = 0; i < expListIntMid.length; i++) {
+			assertEquals(expListIntMid[i], listIntMid.get(i));
+			assertEquals(expListIntFirst[i], listIntFirst.get(i));
+			assertEquals(expListIntLast[i], listInt.get(i));
+
+		}
+		assertNull(listStr.remove(-10)); 
+		assertEquals("www", listStr.remove(index));
+		assertEquals(expListStr.length, listStr.size());
+		for (int i = 0; i < expListStr.length; i++) {
+			assertEquals(expListStr[i], listStr.get(i));
+		}
+		assertNull(listIntMid.remove(-1));
+		assertNull(listIntFirst.remove(555));
+
+	}
 
 	@Test
 	void testReverse() {
@@ -152,12 +173,15 @@ class IndexedListTest {
 		int expListIntFirst[] = { -7, 20, 10, 9, 13, 18 };
 		int expListIntLast[] = { 10, -7, 20, 10, 9, 13 };
 		String expListStr[] = { "abc", "def", "qww", "www","eee" };
-//		assertEquals(1, listWillEmpty.remove(1));
 
+
+//		Object patternMid = 9;
+//		Object patternFirst = 10;
+//		Object pattern = 18;
+		listIntFirst.remove((Object)(10)); 
+		listInt.remove((Object)(18));
 	
-		listIntFirst.remove(10); 
-		listInt.remove(18);
-		assertEquals(9, listIntMid.remove(9));
+		assertEquals(9,listIntMid.remove((Object)(9)));
 		assertEquals(expListIntMid.length, listIntMid.size());
 		for (int i = 0; i < expListIntMid.length; i++) {
 			assertEquals(expListIntMid[i], listIntMid.get(i));
@@ -175,5 +199,54 @@ class IndexedListTest {
 		assertNull(listIntMid.remove(-1));
 		assertNull(listIntFirst.remove(555));
 
+	}
+	@Test
+	void testContains() {
+		assertTrue(listInt.contains(10));
+		assertTrue(listInt.contains(13));
+		assertFalse(listInt.contains(100));
+		assertFalse(listInt.contains(-20));
+	}
+	@Test
+	void testRemoveAll() {
+		int expListInt[] = {-7, 20, 9};
+		String expListStr[] = {"def", "qww", "eee"};
+		
+		assertTrue(listInt.removeAll(patternInt));
+		
+		assertEquals(expListInt.length, listInt.size());
+		
+		for (int i = 0; i < listInt.size(); i++) {
+			assertEquals(expListInt[i], listInt.get(i));
+//			System.out.print(" " +listInt.get(i));
+		}
+		assertTrue(listStr.removeAll(patternStr));
+		assertEquals(expListStr.length, listStr.size());
+		for (int i = 0; i < expListStr.length; i++) {
+			assertEquals(expListStr[i], listStr.get(i));
+		}
+		assertTrue(listInt.removeAll(listInt));
+		assertFalse(listInt.removeAll(new Array<Integer>()));
+ 
+	}
+	@Test
+	void testRetainAll() {
+		int expListInt[] = {10, 10, 13, 18};
+		String expListStr[] = {"abc", "www", "www"};
+		
+		assertTrue(listInt.retainAll(patternInt));
+		assertEquals(expListInt.length, listInt.size());
+		for (int i = 0; i < expListInt.length; i++) {
+			assertEquals(expListInt[i], listInt.get(i));
+//			System.out.print(" " +listInt.get(i));
+		}
+
+		assertTrue(listStr.retainAll(patternStr));
+		assertEquals(expListStr.length, listStr.size());
+		for (int i = 0; i < expListStr.length; i++) {
+			assertEquals(expListStr[i], listStr.get(i));
+		}
+		assertTrue(listInt.removeAll(listInt));
+		assertFalse(listInt.removeAll(new Array<Integer>()));
 	}
 }

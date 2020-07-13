@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/10_CW-IndexedListInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/10-CW_IndexedListInterface"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

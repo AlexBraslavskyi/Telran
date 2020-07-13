@@ -5,7 +5,7 @@ public interface IndexedList<T> {
 	
 	void add(T obj);
 	boolean add(int index, T obj);
-//	T remove(int index);
+	T remove(int index);
 	T get(int index);
 	int indexOf(Object pattern);
 	int lastIndexOf(Object pattern);
@@ -36,7 +36,7 @@ public interface IndexedList<T> {
 	 * @param patterns
 	 * @return true if at least one object has been removed or false
 	 */
-	boolean reteinAll(IndexedList <T> patterns);
+	boolean retainAll(IndexedList <T> patterns);
 	
 	
 	
