@@ -10,10 +10,6 @@ public class LinkedListLoop {
 		public Node(int data) {
 			this.data = data;
 		}
-
-		public Node() {
-
-		}
 		
 		public static void main(String[] args) {
 		
@@ -41,14 +37,10 @@ public class LinkedListLoop {
 			n9.next = n10;
 			n10.next = n3;
 
-			int numberElements = n10.data + 1;
-			int index = numberElements - ListValidator.loopStartIndex(n0);
-			boolean found = ListValidator.hasLoop(n0);
-			if (found) {
-				System.out.println("Loop Found");
-				System.out.println("Loop start on index " + index);
-			} else
-				System.out.println("No Loop");
+			
+			 ListValidator.loopStartIndex(n0);
+			
+			
 
 		}
 	}

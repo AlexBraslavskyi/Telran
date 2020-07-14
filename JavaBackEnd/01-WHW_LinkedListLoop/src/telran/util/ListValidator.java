@@ -1,57 +1,55 @@
 package telran.util;
 
-import java.util.*;
 import telran.util.LinkedListLoop.Node;
 
+
 public class ListValidator {
+	private static boolean cycle;
+	private static Node step;
+	private static Node stepX2;
+	private static int position;
 
-	public static boolean hasLoop(Node head) {
+	
+	public static int loopStartIndex(Node head) {
 
-		// Create a temporary node
-		Node temp = new Node();
-		while (head != null) {
+		step = stepX2 = head;
+		cycle = hasLoop(head);
 
-			// This condition is for the case when there is no loop
-			if (head.next == null) {
-				return false;
-			}
-
-			// Check if next is already pointing to temp
-			if (head.next == temp) {
-				return true;
-			}
-
-			// Store the pointer to the next node in order to get to it in the next step
-			Node next = head.next;
-
-			// Make next point to temp
-			head.next = temp;
-
-			// Get to the next node in the list
-			head = next;
+		if (cycle) {
+			System.out.println("Found cycle.");
+			position = findPosition(head);
+			System.out.println("Cycle start on position - " + position);
+		} else {
+			System.out.println("No cycle.");
+			position = -1;
 		}
+		return position;
+	}
 
-		return false;
+	private static int findPosition(Node head) {
+		int i = 0;
+		step = head;
+		while (step != stepX2) {
+			step = step.next;
+			stepX2 = stepX2.next;
+			++i;
+		}
+		return i;
 	}
 
 	// Floyd's Cycle-Finding Algorithm O(n) time complexity
-	public static int loopStartIndex(Node head) {
-		Node step = head, stepX2 = head;
-		int flag = 0;
-		int index = 0;
+	public static boolean hasLoop(Node head) {
+		step = stepX2 = head;
+		if (step == null || step.next == null) {
+			return false;
+		}
 		while (step != null && stepX2 != null && stepX2.next != null) {
 			step = step.next;
 			stepX2 = stepX2.next.next;
-			index++;
 			if (step == stepX2) {
-				flag = 1;
-				break;
+				return true;
 			}
 		}
-		if (flag == 1) {
-			return index;
-		} else {
-			return -1;
-		}
+		return false;
 	}
 }
