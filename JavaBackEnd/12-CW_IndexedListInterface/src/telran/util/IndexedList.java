@@ -1,5 +1,7 @@
 package telran.util;
 
+import java.util.Comparator;
+
 public interface IndexedList<T> {
 
 	//**** Add complexity*****
@@ -39,6 +41,6 @@ public interface IndexedList<T> {
 	 */
 	boolean retainAll(IndexedList <T> patterns);//O[N]
 	
-
+	void sort(Comparator <T> comporator); //array O[N^2]
 	
 }

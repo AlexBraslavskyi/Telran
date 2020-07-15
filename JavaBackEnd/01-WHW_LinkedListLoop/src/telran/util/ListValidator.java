@@ -28,6 +28,9 @@ public class ListValidator {
 
 	private static int findPosition(Node head) {
 		int i = 0;
+		
+		
+
 		step = head;
 		while (step != stepX2) {
 			step = step.next;
