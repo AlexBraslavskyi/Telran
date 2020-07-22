@@ -29,14 +29,14 @@ export const OrderForm = (props) =>{
     [phone,setPhone]=useState({value:'',controlError: 0});
     [passport,setPassport]=useState({value:'',controlError: 0});
     [comment, setComment] = useState({value:'',controlError: 0});
-    [orderNumber,setOrderNumber]= useState({value:getRandomOrderNumb(),controlError:0});
+    [orderNumber, setOrderNumber] = useState({value:''});
     [formRef,setFormRef]=useState(null);
 
     function submit(event) {
         event.preventDefault();
         if (!props.addOrderFn(order)) {
             error.errorOrderNumber = `Order ${order.orderNumber} already exists`;
-            orderNumber={value:order.orderNumber,controlError: -1}
+            orderNumber={value:order.orderNumber}
             error=error.errorOrderNumber;
         }
         formRef.reset();
@@ -166,12 +166,11 @@ export const OrderForm = (props) =>{
             } , true)
     }
         return  <div className="content">
-            <div className="card-title">
-        <h2>Order # {getRandomOrderNumb()}</h2>
+            <div className="center">
+        <h2 style={{color:"#ee6e73", marginTop:"5vh"}}>Order # {order.orderNumber}</h2>
             </div>
             <div className="row" style={{width:"60%"}}>
                 <form className="col s12" ref={(ref) => formRef = ref} onSubmit={submit}>
-                    {/*<div className = 'firstLevel'>*/}
                     {getInputElement('text',
                         'name', 'Name',
                         handlerName,error.errorName,name,'account_circle')}
@@ -181,21 +180,18 @@ export const OrderForm = (props) =>{
                     {getInputElement('text',
                         'phone', 'Phone number',
                         handlerPhone,error.errorPhone,phone,'phone')}
-                    {/*</div>*/}
-                    {/*<div className = 'secondLevel'>*/}
+    
                     {getInputElement('text',
                         'address', 'Address',
                         handlerNonValidated,"",address,'home')}
                     {getInputElement('text',
                         'passport', 'Passport',
                         handlerPassport,error.errorPassport,passport,'local_library')}
-                    {/*</div>*/}
-                    {/*<div className = 'thirdLevel'>*/}
+            
                     {getInputElement('text',
                         'comment', 'Comment',
                         handlerNonValidated,error.errorOrderNumber,comment,'comment')}
-                    {/*</div> */}
-                    <button type="submit" name="action"className="btn waves-effect waves-light"
+                    <button type="submit" name="action" className="btn waves-effect waves-light"
                             disabled={!validate()}
                             > <i class="material-icons right">send</i>Submit
                         </button>

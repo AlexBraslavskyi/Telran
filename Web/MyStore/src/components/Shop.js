@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect } from 'react';
 import { connect } from 'react-redux'
-import { addToCart } from './actions/cartActions'
+import { addToCart } from './actions/actions'
 
  class Shop extends Component{
     
@@ -38,6 +38,7 @@ import { addToCart } from './actions/cartActions'
         )
     }
 }
+
 const mapStateToProps = (state)=>{
     return {
       items: state.items

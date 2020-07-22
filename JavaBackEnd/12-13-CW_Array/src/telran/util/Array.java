@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
+
+
 public class Array<T> implements IndexedList<T> {
 	private T[] array;
 	private Comparator<T> comparator;
@@ -275,8 +277,24 @@ public class Array<T> implements IndexedList<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new ArrayIterator();
 	}
+	
+	
+	private class ArrayIterator implements Iterator<T>{
+		 private int i = 0;
+			@Override
+			public boolean hasNext() {
+				return size() > i;
+			}
+
+			@Override
+			public T next() {
+				return array[i++];
+
+			}
+			
+		}
 
 }

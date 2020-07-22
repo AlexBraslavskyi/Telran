@@ -1,4 +1,4 @@
-TODO
+
 const columnsContent = {
     2: ['name', 'orderNumber'],
     4: ['name', 'orderNumber', 'emailAddress','total','paymantInfo','address'],

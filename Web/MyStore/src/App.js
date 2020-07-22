@@ -1,6 +1,6 @@
   
 import React, {Component, useEffect} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch,Redirect} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Cart from './components/Cart'
 import './style/Style.css'
@@ -12,9 +12,10 @@ import OrdersFirebaseService from "./services/OrdersFirebaseService";
 import AuthFirebaseService from "./services/AuthFirebaseService";
 import MobMenuService from "./services/MobMenuService";
 import {useDispatch, useSelector} from "react-redux";
-import {actionFlagMobMenu, actionOrders, actionUserData} from "./store/actions";
-import { pathCart, pathShop, pathLogin, pathLogout, pathHome, pathOrderForm } from './config/ShopConfig';
+import {actionFlagMobMenu, actionOrders, actionUserData} from "./components/actions/actions";
+import { pathCart, pathShop, pathLogin, pathLogout, pathHome, pathOrderForm, pathOrders } from './config/ShopConfig';
 import { OrderForm } from './components/OrderForm';
+import Orders from './components/Orders';
 
 // class App extends Component {
 //   render() {
@@ -63,15 +64,18 @@ const App =()=> {
                     <Route exact path={pathCart} render ={() =><Cart/>}/>
                     <Route exact path={pathShop} render ={() =><Shop/>}/>
                     <Route exact path={pathOrderForm} render ={() =><OrderForm/>}/>
+                    <Route exact path={pathOrders} render ={() =>
+        {return userData.isAdmin ? <Orders ordersService = {ordersService}/> :
+        <Redirect to={pathHome}/>}}/>
                     <Route exact path={pathLogin}render ={() =><Login/>}/>
                     <Route exact path={pathLogout} render ={() =><Logout/>}/>
 
                   </Switch>
-                    <footer class="page-footer end-align">
+                    <footer className="page-footer end-align">
           {/* <div class="footer-copyright"> */}
-            <div class="container">
+            <div className="container">
             © 2020 Copyright Alex Braslavskyi
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
           {/* </div> */}
         </footer>

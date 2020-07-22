@@ -30,6 +30,10 @@ export default class AuthFirebaseService {
         const authProvider = new firebase.auth.GithubAuthProvider();
         return this.auth.signInWithPopup(authProvider);
     }
+    twitterAuth() {
+        const authProvider = new firebase.auth.TwitterAuthProvider();
+        return this.auth.signInWithPopup(authProvider);
+    }
     logout(){
         return this.auth.signOut()
     }
