@@ -3,6 +3,7 @@ package telran.util;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 import telran.util.IndexedList;
 
@@ -26,12 +27,21 @@ Node <T> current = head;
 
 	@Override
 	public T next() {
-
 		T res = current.obj;
 		current = current.next;
 		return res;
 	}
-	
+	@Override
+	public void remove() {
+		//exception
+		if(current==null) {
+			removeNode(tail);
+			
+		}else {
+			removeNode(current.prev);
+		}
+		
+	}
 	
 }
 	private Comparator<T> comparator;
@@ -285,7 +295,8 @@ Node <T> current = head;
 	@Override
 	public Iterator<T> iterator() {
 	
-		
 		return new LinkedListIterator();
 	}
+
+
 }

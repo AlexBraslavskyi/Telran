@@ -3,6 +3,7 @@ package telran.util;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 
 
@@ -278,6 +279,7 @@ public class Array<T> implements IndexedList<T> {
 	@Override
 	public Iterator<T> iterator() {
 		
+		
 		return new ArrayIterator();
 	}
 	
@@ -286,7 +288,7 @@ public class Array<T> implements IndexedList<T> {
 		 private int i = 0;
 			@Override
 			public boolean hasNext() {
-				return size() > i;
+				return i < size;
 			}
 
 			@Override
@@ -294,7 +296,11 @@ public class Array<T> implements IndexedList<T> {
 				return array[i++];
 
 			}
+			@Override
+			public void remove() {
+				
+
+			}
 			
 		}
-
 }

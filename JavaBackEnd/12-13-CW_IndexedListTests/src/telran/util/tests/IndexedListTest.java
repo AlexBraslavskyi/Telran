@@ -3,6 +3,8 @@ package telran.util.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -189,7 +191,6 @@ class IndexedListTest {
 		assertFalse(listInt.removeAll(new Array<Integer>()));
 	}
 
-
 	@Test
 	void testIndexOf() {
 		assertEquals(4, listInt.indexOf(9));
@@ -231,14 +232,19 @@ class IndexedListTest {
 
 		}
 		listInt.sort(new IntegerComparator());
-		assertTrue(testArrayListSort(listInt));
-
+		Iterator<Integer> it = listInt.iterator();
+		int prev = it.next();
+		while (it.hasNext()) {
+			int current = it.next();
+			assertTrue(prev <= current);
+			prev = current;
+		}
 	}
+
 	@Test
 	void testIterator() {
 		testArrayListInt(arrayInt, listInt);
 		testArrayListStr(arrayStr, listStr);
-		testArrayListSort(listInt);
 	}
 
 	private void testArrayListInt(int[] expected, IndexedList<Integer> list) {
@@ -259,17 +265,34 @@ class IndexedListTest {
 		assertArrayEquals(expected, actual);
 
 	}
-
-	private boolean testArrayListSort(IndexedList<Integer> list) {
-		int[] actual = new int[list.size()];
-		int index = 0;
-		for (int num : list) {
-			actual[index] = num;
-			if (index > 0 && actual[index] < actual[index - 1]) {
-				return false;
-			}
-			index++;
+	
+	@Test
+	void testRemoveIf() {
+		int nNumbers = 1000;
+		for(int i = 0; i < nNumbers; i++) {
+			listInt.add((int) (Math.random()*100));
 		}
-		return true;
+		Predicate<Integer> predicate = new EvenNumbersPredicate();
+		assertTrue(listInt.removeIf(predicate));
+		assertFalse(listInt.removeIf(predicate));
+		
+		for(int num: listInt) {
+			assertTrue(num %2 != 0);
+//			assertTrue(predicate.negate().test(num));
+//			assertFalse(predicate.test(num));
+		}
 	}
+	@Test
+	void testRemoveIfExpected() {
+		int expected[] = { -7, 9, 13, 18, 3 };
+		listInt.add(15);
+		listInt.add(15);
+		listInt.add(3);
+		listInt.add(20);
+
+		Predicate<Integer> predicate = new DividorPredicate(5);
+		listInt.removeIf(predicate);
+		testArrayListInt(expected, listInt);
+		}
+
 }
