@@ -2,10 +2,11 @@ package telran.util;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import telran.util.*;
-
 
 public interface IndexedList<T> extends Iterable<T> {
 
@@ -59,20 +60,21 @@ public interface IndexedList<T> extends Iterable<T> {
 			T obj = it.next();
 			if (predicate.test(obj)) {
 				it.remove();
-			} 
+			}
 		}
 		return initialSize != size();
 	}
 
 	default public boolean removeAll(IndexedList<T> pattern) {// O[N]
-//		Predicate<T> predicate = new PredicateRemoveAll(pattern);
-//		return removeIf(predicate);
-		return removeIf(this::contains);
-	}
-	default public boolean retainAll(IndexedList<T> pattern) {// O[N]
-		Predicate<T> predicate = new PredicateRemoveAll(pattern);
-		return removeIf(predicate.negate());
-		
+		return removeIf(t -> PredicateContains(pattern, t));
 	}
 
+	default public boolean retainAll(IndexedList<T> pattern) {// O[N]
+		return removeIf(t -> !PredicateContains(pattern, t));
+
+	}
+
+	private boolean PredicateContains(IndexedList<T> pattern, T t) {
+		return pattern.contains(t);
+	}
 }

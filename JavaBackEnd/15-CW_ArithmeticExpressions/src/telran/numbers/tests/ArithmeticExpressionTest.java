@@ -21,6 +21,6 @@ class ArithmeticExpressionTest {
 	void testCompute() {
 		assertEquals(14, compute(" 25 +3 /2"));
 		assertEquals(10, compute("10 * 2 / 2 + 5 - 5"));
-		assertEquals(5, compute(" 50+10%"));
+		assertEquals(10, compute(" 10%100"));
 	}
 }

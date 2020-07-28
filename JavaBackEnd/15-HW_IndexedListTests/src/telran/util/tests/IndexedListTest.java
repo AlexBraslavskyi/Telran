@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import telran.util.*;
 
 class IndexedListTest {
 
+	 static int position = 0;
 	int[] arrayInt = { 10, -7, 20, 10, 9, 13, 18 };
 	int[] arrayTest = { 1, 3, 2, 3, 3, 5, 4 };
 	String[] arrayStr = { "abc", "def", "www", "qww", "www", "eee" };
@@ -25,6 +28,7 @@ class IndexedListTest {
 
 	@BeforeEach
 	void setUp() {
+	
 		// for array
 		listIntFirst = new Array<>();
 		listInt = new Array<>();
@@ -166,17 +170,17 @@ class IndexedListTest {
 		assertEquals(2, listStr.indexOf("www"));
 		assertEquals(-1, listStr.indexOf("Alex"));
 		assertEquals(-1, listInt.indexOf(125));
-		listInt.sort(new IntegerComparator());
+		listInt.sort((a, b) -> a - b);
 		assertEquals(2, listInt.indexOf(10));
 		assertEquals(-1, listInt.indexOf(121));
 		for (int i = 0; i < 5; i++) {
 			listInt.add(3, 2);
 		}
-		listInt.sort(new IntegerComparator());
+		listInt.sort((a, b) -> a - b);
 		assertEquals(1, listInt.indexOf(2));
 		assertEquals(5, listInt.lastIndexOf(2));
 		listStr.add("abc");
-		listStr.sort(new StringComparator());
+		listStr.sort((a, b) -> a.compareTo(b));
 		assertEquals(5, listStr.indexOf("www"));
 		assertEquals(6, listStr.lastIndexOf("www"));
 		assertEquals(0, listStr.indexOf("abc"));
@@ -190,7 +194,7 @@ class IndexedListTest {
 		assertEquals(4, listStr.lastIndexOf("www"));
 		assertEquals(-1, listStr.lastIndexOf("Alex"));
 		assertEquals(-1, listInt.lastIndexOf(125));
-		listInt.sort(new IntegerComparator());
+		listInt.sort((a, b) -> a - b);
 		assertEquals(3, listInt.lastIndexOf(10));
 	}
 
@@ -200,7 +204,7 @@ class IndexedListTest {
 			listInt.add((int) (Math.random() * 1000));
 
 		}
-		listInt.sort(new IntegerComparator());
+		listInt.sort((a, b) -> a - b);
 		Iterator<Integer> it = listInt.iterator();
 		int prev = it.next();
 		while (it.hasNext()) {
@@ -216,41 +220,17 @@ class IndexedListTest {
 		testArrayListStr(arrayStr, listStr);
 	}
 
-	private void testArrayListInt(int[] expected, IndexedList<Integer> list) {
-		int[] actual = new int[list.size()];
-		int index = 0;
-		for (int num : list) {
-			actual[index++] = num;
-
-		}
-		assertArrayEquals(expected, actual);
-	}
-
-	private void testArrayListStr(String[] expected, IndexedList<String> list) {
-		String[] actual = new String[list.size()];
-		int index = 0;
-		for (String num : list) {
-			actual[index++] = num;
-		}
-		assertArrayEquals(expected, actual);
-
-	}
-
 	@Test
 	void testRemoveIf() {
 		int nNumbers = 1000;
 		for (int i = 0; i < nNumbers; i++) {
 			listInt.add((int) (Math.random() * 100));
 		}
-		Predicate<Integer> predicate = new EvenNumbersPredicate();
-		assertTrue(listInt.removeIf(predicate));
-		assertFalse(listInt.removeIf(predicate));
 
-		for (int num : listInt) {
-			assertTrue(num % 2 != 0);
-//			assertTrue(predicate.negate().test(num));
-//			assertFalse(predicate.test(num));
-		}
+		assertTrue(listInt.removeIf(a -> a % 2 == 0));
+		assertFalse(listInt.removeIf(a -> a % 2 == 0));
+		listInt.forEach(num -> assertTrue(num % 2 != 0));
+
 	}
 
 	@Test
@@ -261,15 +241,14 @@ class IndexedListTest {
 		listInt.add(20);
 		listInt.add(10);
 
-		Predicate<Integer> predicate = new DividorPredicate(5);
-		listInt.removeIf(predicate);
+		listInt.removeIf(a -> a % 5 == 0);
 		testArrayListInt(expected, listInt);
 
 	}
 
 	@Test
 	void testRemoveAll() {
-		listInt.sort(new IntegerComparator());
+		listInt.sort((a, b) -> a - b);
 		int expListInt[] = { -7, 9, 20 };
 		String expListStr[] = { "def", "qww", "eee" };
 
@@ -299,40 +278,35 @@ class IndexedListTest {
 
 	}
 
-//	@Test
-//	void testRemoveAll() {
-//		listInt.sort(new IntegerComparator());
-//		int expListInt[] = { -7, 9, 20 };
-//		String expListStr[] = { "def", "qww", "eee" };
-//		
-//		Predicate<Integer> predicate = new PredicateRemoveAll(patternInt);
-//		
-//		assertTrue(listInt.removeAll(patternInt));
-//		assertEquals(expListInt.length, listInt.size());
-//		testArrayListInt(expListInt, listInt);
-//		assertTrue(listStr.removeAll(patternStr));
-//		assertEquals(expListStr.length, listStr.size());
-//		testArrayListStr(expListStr, listStr);
-//		assertTrue(listInt.removeAll(listInt));
-//		assertFalse(listInt.removeAll(new Array<Integer>()));
-//
-//	}
+	@Test
+	void testEvenOddSorting() {
+		// first the even numbers in ascending order after the odd numbers in descending
+		// order
 
-//	@Test
-//	void testRetainAll() {
-//		int expListInt[] = { 10, 10, 13, 18 };
-//		String expListStr[] = { "abc", "www", "www" };
-//		listInt.add(1, 2);
-//		
-//		
-//		assertTrue(listInt.retainAll(patternInt));
-//		assertEquals(expListInt.length, listInt.size());
-//		testArrayListInt(expListInt, listInt);
-//		assertTrue(listStr.retainAll(patternStr));
-//		assertEquals(expListStr.length, listStr.size());
-//		testArrayListStr(expListStr, listStr);
-//		assertTrue(listInt.removeAll(listInt));
-//		assertFalse(listInt.removeAll(new Array<Integer>()));
-//	}
+		int[] expected = { -20, 10, 10, 18, 20, 13, 9, -1, -7, -15 };
+		listInt.add(-20);
+		listInt.add(-15);
+		listInt.add(-1);
+		listInt.sort(this::evenOddCompare);
+		testArrayListInt(expected, listInt);
+	}
 
+	private int evenOddCompare(Integer a, Integer b) {
+		return a % 2 == 0 && b % 2 == 0 ? a - b : b - a;
+	}
+
+	private void testArrayListInt(int[] expected, IndexedList<Integer> list) {
+		int[] actual = new int[list.size()];
+		list.forEach((num) -> actual[position++] = num);
+		position = 0;
+		assertArrayEquals(expected, actual);
+
+	}
+
+	private void testArrayListStr(String[] expected, IndexedList<String> list) {
+		String[] actual = new String[list.size()];
+		list.forEach((num) -> actual[position++] = num);
+		position = 0;
+		assertArrayEquals(expected, actual);
+	}
 }
