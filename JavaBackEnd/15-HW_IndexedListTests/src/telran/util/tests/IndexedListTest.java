@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import telran.util.*;
 
 class IndexedListTest {
 
-	 static int position = 0;
 	int[] arrayInt = { 10, -7, 20, 10, 9, 13, 18 };
 	int[] arrayTest = { 1, 3, 2, 3, 3, 5, 4 };
 	String[] arrayStr = { "abc", "def", "www", "qww", "www", "eee" };
@@ -28,24 +28,26 @@ class IndexedListTest {
 
 	@BeforeEach
 	void setUp() {
-	
+
 		// for array
-		listIntFirst = new Array<>();
-		listInt = new Array<>();
-		listIntMid = new Array<>();
-		listStr = new Array<>();
-		patternInt = new Array<>();
-		patternStr = new Array<>();
+//		listIntFirst = new Array<>();
+//		listInt = new Array<>();
+//		listIntMid = new Array<>();
+//		listStr = new Array<>();
+//		patternInt = new Array<>();
+//		patternStr = new Array<>();
 
 		// for linkedList
 
-//		listIntFirst = new LinkedList<>();
-//		listInt = new LinkedList<>();
-//		listIntMid = new LinkedList<>();
-//		listStr = new LinkedList<>();
-//		patternInt = new LinkedList<>();
-//		patternStr = new LinkedList<>();
+		listIntFirst = new LinkedList<>();
+		listInt = new LinkedList<>();
+		listIntMid = new LinkedList<>();
+		listStr = new LinkedList<>();
+		patternInt = new LinkedList<>();
+		patternStr = new LinkedList<>();
 
+	
+		
 		for (int i = 0; i < arrayStr.length; i++) {
 			listStr.add(arrayStr[i]);
 
@@ -282,7 +284,7 @@ class IndexedListTest {
 	void testEvenOddSorting() {
 		// first the even numbers in ascending order after the odd numbers in descending
 		// order
-
+	
 		int[] expected = { -20, 10, 10, 18, 20, 13, 9, -1, -7, -15 };
 		listInt.add(-20);
 		listInt.add(-15);
@@ -292,21 +294,36 @@ class IndexedListTest {
 	}
 
 	private int evenOddCompare(Integer a, Integer b) {
-		return a % 2 == 0 && b % 2 == 0 ? a - b : b - a;
+		
+//		if( a % 2 == 0 && b % 2 == 0 ) {
+//			return a - b;
+//		}else if(a % 2 != 0 && b % 2 != 0 ){
+//		return	b - a;
+//		}
+//		if(a % 2 == 0) {
+//			return -1;
+//		}
+//		return 1;
+		return  a % 2 == 0 && b % 2 == 0 ? a - b : a % 2 != 0 && b % 2 != 0 ? b - a : a % 2 == 0 ? -1: 1;
 	}
 
 	private void testArrayListInt(int[] expected, IndexedList<Integer> list) {
+		int position[] = {0};
 		int[] actual = new int[list.size()];
-		list.forEach((num) -> actual[position++] = num);
-		position = 0;
+		list.forEach(num -> actual[position[0]++] = num);
+
+//		for(int i=0;i<actual.length;i++) {
+//			System.out.println(" "+list.get(i));
+//		}
+
 		assertArrayEquals(expected, actual);
 
 	}
 
 	private void testArrayListStr(String[] expected, IndexedList<String> list) {
 		String[] actual = new String[list.size()];
-		list.forEach((num) -> actual[position++] = num);
-		position = 0;
+		int position[] = {0};
+		list.forEach(num -> actual[position[0]++] = num);
 		assertArrayEquals(expected, actual);
 	}
 }

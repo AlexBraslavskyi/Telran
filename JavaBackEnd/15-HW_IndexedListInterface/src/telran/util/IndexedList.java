@@ -66,15 +66,11 @@ public interface IndexedList<T> extends Iterable<T> {
 	}
 
 	default public boolean removeAll(IndexedList<T> pattern) {// O[N]
-		return removeIf(t -> PredicateContains(pattern, t));
+		return removeIf(pattern::contains);
 	}
 
 	default public boolean retainAll(IndexedList<T> pattern) {// O[N]
-		return removeIf(t -> !PredicateContains(pattern, t));
+		return removeIf(t -> !pattern.contains(t));
 
-	}
-
-	private boolean PredicateContains(IndexedList<T> pattern, T t) {
-		return pattern.contains(t);
 	}
 }

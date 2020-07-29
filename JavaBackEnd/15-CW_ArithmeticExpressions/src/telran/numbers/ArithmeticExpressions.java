@@ -7,7 +7,7 @@ public class ArithmeticExpressions {
 	static List<String> operations = Arrays.asList("+", "*", "-", "/", "%");
 	static List<BinaryOperator<Integer>> operators = Arrays.asList((a, b) -> a + b, 
 			(a, b) -> a * b, (a, b) -> a - b,
-			(a, b) -> a / b, (a, b) -> a * b / 100);
+			(a, b) -> a / b, (a, b) -> a % b);
 
 	static public boolean isValid(String exprStr) {
 
