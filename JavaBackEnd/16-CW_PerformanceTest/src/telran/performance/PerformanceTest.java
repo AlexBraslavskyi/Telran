@@ -43,6 +43,7 @@ public abstract class PerformanceTest {
 	private void displayResults(long startTime, long finishTime) {
 	System.out.printf("test: %s; number of runs: %d running time: %d ", 
 			testName, nRuns, finishTime - startTime);
+	System.out.println();
 		
 	}
 
