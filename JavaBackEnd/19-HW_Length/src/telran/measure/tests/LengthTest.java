@@ -1,10 +1,11 @@
 package telran.measure.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import telran.measure.*;
+import telran.measure.Length;
+import telran.measure.LengthUnit;
 
 public class LengthTest {
 	Length length1=new Length(10.f,LengthUnit.M);

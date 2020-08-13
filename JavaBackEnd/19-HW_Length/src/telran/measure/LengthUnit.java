@@ -10,8 +10,7 @@ public enum LengthUnit {
 		return value;
 	}
 	public float between(Length l1, Length l2){
-	
-		return 0;
+		return l2.convert(this).getNumber()-l1.convert(this).getNumber();
 	}
 	
 }

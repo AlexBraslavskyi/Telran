@@ -1,5 +1,7 @@
 package telran.measure;
 
+import java.util.Locale;
+
 public class Length {
 	private float number;
 	private LengthUnit unit;
@@ -22,26 +24,22 @@ public class Length {
 	}
 	@Override
 	public String toString(){
-		//TODO
-		return "";
+		return String.format(Locale.ROOT, "%.1f%s",number,unit); // without Locale.ROOT on macOS getting "," and tests failing
 	}
 	public Length plus(Length length) {
-		//TODO
-		return null;
+		return new Length(number + length.convert(unit).number, unit); 
 	}
 	public Length minus(Length length) {
-		//TODO
-		return null;
+		
+		return new Length(number - length.convert(unit).number, unit);
 	}
 	public Length convert(LengthUnit otherUnit) {
-		//TODO
-		return null;
+		return new Length(number * unit.getValue() / otherUnit.getValue(), otherUnit);
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
-		//TODO
-		return false;
+		Length otherLength = (Length) obj;
+		return unit == otherLength.unit && number == otherLength.number;
 	}
 	
 }
