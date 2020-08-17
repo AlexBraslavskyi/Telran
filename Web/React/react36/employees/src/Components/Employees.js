@@ -13,7 +13,7 @@ const Employees = (props) => {
     const userData = useSelector(state=>state.userData);
     const employees = useSelector(state=>state.employees);
 
-
+    console.log(employees)
     const addEmployeeShow = () => {
         setEmployeesSwitch(1)
     }
