@@ -94,10 +94,10 @@ YearMonth yearMonth = YearMonth.of(year, month);
 	try {
 		month = Integer.parseInt(args[0]);
 		if(month < 1 || month > 12) {
-			throw new Exception(String.format("you have entered $d but month value shuuld be in range 1 - 12", month));
+			throw new Exception(String.format("you have entered %d but month value shuuld be in range 1 - 12", month));
 		}
 	} catch (NumberFormatException e) {
-	throw new Exception(String.format("you have entered $s but month value shuuld be number ", args[0]));
+	throw new Exception(String.format("you have entered %s but month value shuuld be number ", args[0]));
 	}
 		int year;
 		try {
@@ -106,7 +106,7 @@ YearMonth yearMonth = YearMonth.of(year, month);
 				throw new Exception("year should be only positive value");
 			}
 		} catch (NumberFormatException e) {
-			throw new Exception(String.format("you have entered $s but year value shuuld be a positive number ", args[1]));
+			throw new Exception(String.format("you have entered %s but year value shuuld be a positive number ", args[1]));
 			
 		}
 		return new int[] {month, year};

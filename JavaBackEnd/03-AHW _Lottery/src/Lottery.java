@@ -3,7 +3,6 @@
  * implement rateCombination() with complexity O[N], where N=7
  */
 public class Lottery {
-	int winningComination [];
 	boolean arr[] = new boolean[50];
 
 	/**
@@ -12,9 +11,8 @@ public class Lottery {
 	 */
 	public Lottery(int[] winningCombination) {
 		super();
-		this.winningComination = winningCombination;
-		for (int i = 0; i < winningComination.length; i++) {
-			arr[winningComination[i]] = true;
+		for (int i = 0; i < winningCombination.length; i++) {
+			arr[winningCombination[i]] = true;
 		}
 		
 	}
