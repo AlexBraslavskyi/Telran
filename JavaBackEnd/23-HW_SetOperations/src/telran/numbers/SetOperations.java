@@ -112,9 +112,10 @@ public class SetOperations {
 //	The main task is to do it with complexity O(N), considering the N  is array length. 
 	public static boolean isSumOfTwoElements(int[] array, int number) {
 		if(array.length < 2) return false;
-	    HashSet <Integer> set = new HashSet<>();
+		
+	    HashSet <Integer> set = new LinkedHashSet<>();
 	    set.add(number - array[0]);
-	    System.out.println();
+
 	    for(int i = 1; i < array.length; i++) {
 	       if(set.contains(array[i])) return true;
 	       set.add(number - array[i]);

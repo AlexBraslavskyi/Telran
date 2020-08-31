@@ -10,7 +10,7 @@ public class ShootingRating {
 	public static int rateShooting(int[] hittingResults) {
 		int lookUpTable[] = new int[11];
 for(int i = 0; i < hittingResults.length; i++) {
-	if(hittingResults[i] < 1 || hittingResults[i] > 10) {
+	if(hittingResults[i] < 0 || hittingResults[i] > 10) {
 		throw new IllegalArgumentException("Number must be in range 1-10");
 	}
 	lookUpTable[hittingResults[i]]++;
@@ -18,15 +18,12 @@ for(int i = 0; i < hittingResults.length; i++) {
 
 int unCheckedNum = hittingResults.length - (hittingResults.length*70/100);
 int res = 0;
-for(int i = 1; unCheckedNum >= 0; i++) {
+for(int i = 0; unCheckedNum >= 0; i++) {
 	if(lookUpTable[i]!=0) {
 		res = i;
-		lookUpTable[i]--;
-		unCheckedNum--;
-		i--;
+		unCheckedNum = unCheckedNum - lookUpTable[i];
 	}
 	}
-System.out.println(res);
 return res;
 		
 	}
