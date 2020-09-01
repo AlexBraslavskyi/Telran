@@ -1,7 +1,7 @@
-package telran.emploeeys.services.interfaces;
+package telran.employees.services.interfaces;
 
-import telran.emploeeys.dto.Employee;
-import telran.emploeeys.dto.ReturnCodes;
+import telran.employees.dto.Employee;
+import telran.employees.dto.ReturnCodes;
 
 public interface EmployeeService {
 

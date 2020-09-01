@@ -1,4 +1,4 @@
-package telran.emploeeys.dto;
+package telran.employees.dto;
 
 import java.time.LocalDate;
 

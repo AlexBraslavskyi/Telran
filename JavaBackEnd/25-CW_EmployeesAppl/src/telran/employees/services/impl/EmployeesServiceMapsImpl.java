@@ -1,16 +1,17 @@
-package telran.emploeeys.services.impl;
+package telran.employees.services.impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-import telran.emploeeys.dto.Employee;
-import telran.emploeeys.dto.ReturnCodes;
-import telran.emploeeys.services.interfaces.EmployeeService;
+import telran.employees.dto.Employee;
+import telran.employees.dto.ReturnCodes;
+import telran.employees.services.interfaces.EmployeeService;
 
 public class EmployeesServiceMapsImpl implements EmployeeService {
 HashMap<Long, Employee> employees = new HashMap<>();
@@ -50,7 +51,6 @@ HashMap<String, List<Employee>> employeesDepartment = new HashMap<>();
 		List <Employee> employeesList = employeesSalary.getOrDefault(salary, new ArrayList<>());
 		employeesList.add(empl);
 		employeesSalary.putIfAbsent(salary, employeesList);
-		
 	}
 
 	@Override
@@ -62,33 +62,39 @@ HashMap<String, List<Employee>> employeesDepartment = new HashMap<>();
 		removeEmployeeAge(empl);
 		removeEmployeeSalary(empl);
 		removeEmployeeDepartment(empl);
+		System.out.println(employeesDepartment.toString());
 		return ReturnCodes.OK;
 	}
 
 	private void removeEmployeeDepartment(Employee empl) {
-		// TODO Auto-generated method stub
-		
+		employeesDepartment.remove(empl.getDepartment(),empl);
+	
+		if(employeesDepartment.size() == 0) {
+			employeesDepartment = null;
+		}
 	}
 
 	private void removeEmployeeSalary(Employee empl) {
-		// TODO Auto-generated method stub
-		
+		employeesSalary.remove(empl.getSalary(),empl);
+		if(employeesSalary.size() == 0) {
+			employeesSalary = null;
+		}
 	}
 
 	private void removeEmployeeAge(Employee empl) {
 		
-		//ToDo
-		int birthYear = empl.getBirthDate().getYear();
-		List <Employee> employeesList = employeesAge.getOrDefault(birthYear, new ArrayList<>());
-		employeesList.add(empl);
-		employeesAge.putIfAbsent(birthYear, employeesList);
+		employeesAge.remove(empl.getBirthDate().getYear(),empl);
+		if(employeesAge.size() == 0) {
+			employeesAge = null;
+		}
 	}
 		
 
 
 	@Override
 	public Employee updateEmployee(long id, Employee newEmployee) {
-		// TODO Auto-generated method stub
+		removeEmployee(id);
+		addEmployee(newEmployee);
 		return null;
 	}
 
@@ -100,8 +106,12 @@ HashMap<String, List<Employee>> employeesDepartment = new HashMap<>();
 	}
 
 	private Iterable<Employee> toColectionEmployees(Collection<List<Employee>> values) {
-		// TODO Auto-generated method stub   addAll
-		return null;
+	 ArrayList<Employee> empl = new ArrayList<>();
+	Iterator<List<Employee>> it = values.iterator();
+	while(it.hasNext()) {
+	empl.addAll(it.next());
+	}
+		return empl;
 	}
 
 	private Integer getBirthYear(int ageTo) {
@@ -124,7 +134,6 @@ HashMap<String, List<Employee>> employeesDepartment = new HashMap<>();
 
 	@Override
 	public Employee getEmployee(long id) {
-
 		return employees.get(id);
 	}
 
