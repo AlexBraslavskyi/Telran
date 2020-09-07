@@ -12,23 +12,23 @@ public class BinaryTreeApp {
 		Comparator<Integer> comp = Comparator.naturalOrder();
 		BinaryTree<Integer> treeSet = new BinaryTree<>(comp);
 		
-//		for (int i=0; i < GEN_CNT; i++) {
-//			treeSet.add(gen.nextInt(100));
-//		}
-//		System.out.println(treeSet); // test recursive print
-//		
-//		for (Integer i : treeSet) { // test iterator
-//			System.out.print(" " + i);
-//		}
-//		System.out.println();
-//		
-//		System.out.println(treeSet.size());
-//		System.out.println(treeSet.depth());
-//		System.out.println(treeSet.contains(7));
-//		
-//		treeSet.remove(51);
-//		System.out.println(treeSet);
-		treeSet.printTree();
+		for (int i=0; i < GEN_CNT; i++) {
+			treeSet.add(gen.nextInt(100));
+		}
+		System.out.println(treeSet); // test recursive print
+		
+		for (Integer i : treeSet) { // test iterator
+			System.out.print(" " + i);
+		}
+		System.out.println();
+		
+		System.out.println(treeSet.size());
+		System.out.println(treeSet.depth());
+		System.out.println(treeSet.contains(7));
+		
+		treeSet.remove(51);
+		System.out.println(treeSet);
+//		treeSet.printTree();
 	}
 
 }

@@ -1,5 +1,5 @@
 package telran.words;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static telran.words.Anagram.isAnagram;
 
@@ -12,10 +12,11 @@ String word = "yellow";
 		assertTrue(isAnagram(word, "llowye"));
 		assertTrue(isAnagram(word, "lowyel"));
 		assertTrue(isAnagram(word, "olwlye"));
+		assertTrue(isAnagram(word, "olwyle"));
 	}
 	@Test
 	void testAnagramFalse() {
-		assertFalse(isAnagram(word, "olwly"));
+		assertFalse(isAnagram(word, "olwle"));
 		assertFalse(isAnagram(word, "ollelwly"));
 		assertFalse(isAnagram(word, ""));
 		assertFalse(isAnagram("", ""));

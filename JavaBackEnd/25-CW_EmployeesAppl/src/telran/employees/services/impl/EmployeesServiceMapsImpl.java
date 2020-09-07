@@ -34,20 +34,17 @@ public class EmployeesServiceMapsImpl implements EmployeeService {
 
 	private void addEmployeeDepartment(Employee empl) {
 		String dept = empl.getDepartment();
-		List<Employee> employeesList = employeesDepartment.computeIfAbsent(dept, d -> new ArrayList<>());
-		employeesList.add(empl);
+		employeesDepartment.computeIfAbsent(dept, k -> new ArrayList<>()).add(empl);
 	}
 
 	private void addEmployeeAge(Employee empl) {
 		int birthYear = empl.getBirthDate().getYear();
-		List<Employee> employeesList = employeesAge.computeIfAbsent(birthYear, b -> new ArrayList<>());
-		employeesList.add(empl);
+		employeesAge.computeIfAbsent(birthYear, k -> new ArrayList<>()).add(empl);
 	}
 
 	private void addEmployeeSalary(Employee empl) {
 		int salary = empl.getSalary();
-		List<Employee> employeesList = employeesSalary.computeIfAbsent(salary, s -> new ArrayList<>());
-		employeesList.add(empl);
+		employeesSalary.computeIfAbsent(salary, k -> new ArrayList<>()).add(empl);
 	}
 
 	@Override
