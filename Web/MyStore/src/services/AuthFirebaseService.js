@@ -12,8 +12,9 @@ export default class AuthFirebaseService {
     }
 
     login(user,num){
+
         return user&&num==0? this.emailAuth(user):num==1?this.googleAuth():
-            num==2?this.facebookAuth():this.githubAuth()
+            num==2?this.facebookAuth(): num==3?this.githubAuth():this.twitterAuth()
     }
     emailAuth(user){
         return this.auth.signInWithEmailAndPassword(user.email,user.password);

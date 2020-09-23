@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {nameMinLength} from "../config/ShopConfig";
-import {getInputElement, getInputElementBlur} from "../utils/inputElements";
+import {getInputElement, getInputElementActive, getInputElementBlur} from "../utils/inputElements";
 import { getRandomOrderNumb } from '../utils/random';
 import { Button, Card, Row, Col } from 'react-materialize';
 
@@ -9,8 +9,8 @@ const letters = /^[A-Za-z]+$/;
 
 export const OrderForm = (props) =>{
 
-    // return <a>TODO</a>
-    
+    let items = props.addedItems;
+    console.log(items);
     let order, setOrder, orderNumber, setOrderNumber, error, setError, emailAddress, setEmailAddress,
         name, setName, address, setAddress, phone, setPhone, passport, setPassport,  formRef, setFormRef, comment, setComment;
     [order,setOrder]=useState({
@@ -20,20 +20,22 @@ export const OrderForm = (props) =>{
                 address: '',
                 passport: '',
                 phone: '',
-                comment: ''
-            });
-    [error,setError]=useState({errorId:'',errorName:'',errorEmail:'',errorSalary:''});
+                comment: '',
+                items:items,
+    });
+    [error,setError]=useState({errorPassport:'',errorName:'',errorEmail:'',errorPhone:''});
     [emailAddress,setEmailAddress]=useState({value:'',controlError: 0});
     [name,setName]=useState({value:'',controlError: 0});
     [address,setAddress]=useState({value:'',controlError: 0});
     [phone,setPhone]=useState({value:'',controlError: 0});
     [passport,setPassport]=useState({value:'',controlError: 0});
     [comment, setComment] = useState({value:'',controlError: 0});
-    [orderNumber, setOrderNumber] = useState({value:''});
+    [orderNumber, setOrderNumber] = useState({value: order.orderNumber});
     [formRef,setFormRef]=useState(null);
 
     function submit(event) {
         event.preventDefault();
+
         if (!props.addOrderFn(order)) {
             error.errorOrderNumber = `Order ${order.orderNumber} already exists`;
             orderNumber={value:order.orderNumber}
@@ -46,6 +48,7 @@ export const OrderForm = (props) =>{
 
     useEffect(()=> {
         setOrder(order);
+        setOrderNumber(orderNumber);
         setPhone(phone);
         setName(name);
         setEmailAddress(emailAddress);
@@ -64,7 +67,7 @@ export const OrderForm = (props) =>{
           
         }else if (name.length < nameMinLength) {
             error={errorName: 'Minimal name length should be '
-                + nameMinLength+'symbol'}
+                + nameMinLength+' symbols'}
             name={value:name,controlError: -1}
             order.name = name.value;
    
@@ -84,7 +87,7 @@ export const OrderForm = (props) =>{
         }
 
    function handlerNonValidated(event) {
-        order[event.target.name] = event.target.value;
+      order[event.target.name] = event.target.value;
        setError({...error})
     }
   function  handlerEmail(event) {
@@ -104,21 +107,20 @@ export const OrderForm = (props) =>{
             order.emailAddress = emailAddress;
             emailAddress={value:emailAddress,controlError: 1}
         }
-
       setError({...error})
     }
     function  handlerPhone(event) {
          phone = event.target.value;
         error={errorPhone:''}
-        const format = "^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$";
+        const format = /^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$/;
 
         if (phone == "") {
             phone={value:phone,controlError: 0}
             order.phone = phone;
-        // } else if (!format.test(phone)) {
-        //     error={errorPhone:'Wrong phone format'}
-        //     phone={value:phone,controlError: -1}
-        //     order.phone = phone;
+        } else if (!format.test(phone)) {
+            error={errorPhone:'Wrong phone format'}
+            phone={value:phone,controlError: -1}
+            order.phone = phone;
         } else {
             error={errorPhone:''}
             order.phone = phone;
@@ -147,7 +149,8 @@ export const OrderForm = (props) =>{
       setError({...error})
     }
    function validate() {
-        const res =  notErrors() && allFields();
+        const res =  notErrors()
+            // && allFields();
         return res;
     }
 
@@ -166,36 +169,40 @@ export const OrderForm = (props) =>{
             } , true)
     }
         return  <div className="content">
-            <div className="center">
-        <h2 style={{color:"#ee6e73", marginTop:"5vh"}}>Order # {order.orderNumber}</h2>
-            </div>
+
             <div className="row" style={{width:"60%"}}>
+
                 <form className="col s12" ref={(ref) => formRef = ref} onSubmit={submit}>
+                    <div className="center">
+                        <h3 style={{color:"#ee6e73", marginTop:"5vh"}}> - Order -</h3>
+                    </div>
+                    {getInputElementActive('text',
+                        'orderNumber', 'Order number',
+                        handlerNonValidated,"",orderNumber,'shopping_cart',true)}
                     {getInputElement('text',
                         'name', 'Name',
-                        handlerName,error.errorName,name,'account_circle')}
+                        handlerName,error.errorName,'','account_circle')}
                     {getInputElement('email',
                         'emailAddress', 'Email',
-                       handlerEmail,error.errorEmail,emailAddress,'email')}
+                       handlerEmail,error.errorEmail,'','email')}
                     {getInputElement('text',
                         'phone', 'Phone number',
-                        handlerPhone,error.errorPhone,phone,'phone')}
+                        handlerPhone,error.errorPhone,'','phone')}
     
                     {getInputElement('text',
                         'address', 'Address',
-                        handlerNonValidated,"",address,'home')}
+                        handlerNonValidated,"",'','home')}
                     {getInputElement('text',
                         'passport', 'Passport',
-                        handlerPassport,error.errorPassport,passport,'local_library')}
+                        handlerPassport,error.errorPassport,'','local_library')}
             
                     {getInputElement('text',
                         'comment', 'Comment',
-                        handlerNonValidated,error.errorOrderNumber,comment,'comment')}
+                        handlerNonValidated,"",'','comment')}
                     <button type="submit" name="action" className="btn waves-effect waves-light"
                             disabled={!validate()}
-                            > <i class="material-icons right">send</i>Submit
+                            > <i className="material-icons right">send</i>Submit
                         </button>
-                
                 </form>
             </div>
         </div>

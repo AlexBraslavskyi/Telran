@@ -86,3 +86,36 @@
         width: 20vw;
        
      }
+.sing-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: center;
+    padding: 3px 12px;
+}
+.nav{
+    display: grid;
+    width: 100%;
+    margin: 0 auto 20px;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr;
+    /*grid-gap: 10px;*/
+
+    grid-template-areas: "b s" "b a";
+
+}
+.avatar{
+    grid-area: a;
+}
+.card-log{
+    margin-top: 5vh;
+    margin-left: 30vw;
+    margin-right: 30vw;
+    background: #e3d6bc;
+}
+.img-avatar{
+    width: 9vw;
+    height: 11vw;
+    margin: 0 auto;
+    padding: 0;
+}

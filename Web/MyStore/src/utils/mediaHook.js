@@ -13,7 +13,7 @@ const useColumnsMedia = (columnsMediaObject) => {
         const handler = () => {
             setColumns(getColumns());
         }
-        mediaQueryList.forEach(mq => mq.addEventListener('change', handler))
+        // mediaQueryList.forEach(mq => mq.addEventListener('change', handler))
     },[])
     return columns;
 }

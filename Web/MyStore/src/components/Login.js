@@ -25,6 +25,9 @@ export default function Login(props) {
     const githubAuth = ()=>  {
         authService.login('',3)
     }
+    const linkedInAuth = ()=>  {
+        authService.login('',4)
+    }
     const onSubmit = (event) => {
         event.preventDefault();
         authService.login(credentials,0).then().catch(()=>alert('Wrong credentials'))
@@ -42,19 +45,19 @@ export default function Login(props) {
                 {getInputElement('password',
                     'password', 'Password',
                     inputHandler,'','','vpn_key')}
-                        </form>
                         <div>
                     <div >
                     <button style = {{minWidth:'10vw', margin:'2vh'}} type="submit" name="action"className="btn waves-effect waves-light blue"
-                            > <i class="material-icons right">send</i>Sign
+                            > <i className="material-icons right">send</i>Sign
                         </button>
                     </div>
                     <div>
                         <button  style = {{minWidth:'10vw', margin:'2vh'}} type = "reset" name = "action" className = "btn waves-effect waves-light red"
-                            > <i class="material-icons right">delete</i>Reset
+                            > <i className="material-icons right">delete</i>Reset
                         </button>
                         </div>
                         </div>
+            </form>
         </div>
     
             <div className="social-btn">
@@ -70,9 +73,9 @@ export default function Login(props) {
                 <a className="waves-effect waves-light col s6 btn social github" onClick={githubAuth}>
                         <i className="fa fa-github"></i> Sign in with github</a>
                     </div>
-                    <div class='log'>
-                    <a class="waves-effect waves-light col s6 btn social linkedin">
-                     <i class="fa fa-linkedin"></i> Sign in with linkedin</a>
+                    <div className='log'>
+                    <a className="waves-effect waves-light col s6 btn social linkedin" onClick={linkedInAuth}>
+                     <i className="fa fa-linkedin"></i> Sign in with linkedIn</a>
                     </div>
             </div>
         </div>

@@ -1,48 +1,58 @@
   
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { addDelivery } from './actions/cartActions'
+import React, {Component, useState} from 'react'
+import {connect, useSelector} from 'react-redux'
+import {addDelivery, addToCart} from './actions/actions'
 import { Link } from 'react-router-dom'
-import { pathOrderForm } from '../config/ShopConfig'
-class Recipe extends Component{
-    
-    componentWillUnmount() {
-         if(this.refs.delivery.checked)
-              this.props.subtractDelivery()
+import {pathOrderForm, pathOrders} from '../config/ShopConfig'
+import {OrderForm} from "./OrderForm";
+import Orders from "./Orders";
+import Cart from "./Cart";
+import OrdersFirebaseService from "../services/OrdersFirebaseService";
+const Recipe = (props) => {
+    const ordersService =
+        new OrdersFirebaseService('orders');
+    let [ordersSwitch, setOrdersSwitch] = useState(0)
+    // let addedItems = props.addedItems;
+    // console.log(addedItems);
+    const handleChecked = (e) => {
+        if (e.target.checked) {
+            props.addDelivery();
+        } else {
+            props.subtractDelivery();
+        }
     }
 
-    handleChecked = (e)=>{
-        if(e.target.checked){
-            this.props.addDelivery();
-        }
-        else{
-            this.props.subtractDelivery();
-        }
-    }
-  
+    const showOrders = () => {
+        setOrdersSwitch(1)
 
-    render(){
-  
-        return(
-            <div className="container">
-                <div className="collection">
-                    <li className="collection-item">
-                            <label>
-                                <input type="checkbox" ref="delivery" onChange= {this.handleChecked} />
-                                <span>Delivery(+5₪)</span>
-                            </label>
-                        </li>
-                        <li className="collection-item"><b>Total: {this.props.total} ₪</b></li>
-                    </div>
-                    <div className="checkout">
-                        <button className="waves-effect waves-light btn"> 
-                        <Link to={pathOrderForm}><span style={{color:'white'}}><i
-                            className="material-icons right">send</i>Submit</span></Link>
-                        </button></div>
-                    </div>
-                
-        )
     }
+    const showCart = () => {
+        return <div className="container">
+            <div className="collection">
+                <li className="collection-item">
+                    <label>
+                        <input type="checkbox" onChange={handleChecked}/>
+                        <span>Delivery(+5₪)</span>
+                    </label>
+                </li>
+                <li className="collection-item"><b>Total: {props.total} ₪</b></li>
+            </div>
+            <div className="checkout">
+                <button className="waves-effect waves-light btn" onClick={showOrders}>
+                        <span style={{color: 'white'}}><i
+                            className="material-icons right">send</i>Submit</span>
+                </button>
+            </div>
+        </div>
+
+    }
+
+    if (ordersSwitch == 0) {
+        return showCart()
+    }
+    return <Orders addedItems={props.addedItems}
+                   ordersService = {ordersService}
+    total = {props.total}/>
 }
 
 const mapStateToProps = (state)=>{

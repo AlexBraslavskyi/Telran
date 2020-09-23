@@ -1,22 +1,22 @@
 import React, { Component,useEffect } from 'react';
-import { connect } from 'react-redux'
+import {connect, useDispatch, useSelector} from 'react-redux'
 import { addToCart } from './actions/actions'
 
- class Shop extends Component{
-    
-    handleClick = (id)=>{
-        this.props.addToCart(id); 
-    }
+const Shop = (props) => {
 
-    render(){
-        let itemList = this.props.items.map(item=>{
+   const handleClick = (id)=>{
+        props.addToCart(id);
+    }
+     // const items = useSelector(state=>state.items);
+    const items = props.items;
+        let itemList = items.map(item=>{
             return(
                 <div className="card" key={item.id}>
                         <div className="card-image">
                             <img className = 'itemImg' src={item.img} alt={item.title}/>
                             <span className="card-title">{item.title}</span>
                             <span to="/" className="btn-floating halfway-fab waves-effect waves-light red"
-                                  onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span>
+                                  onClick={()=>{handleClick(item.id)}}><i className="material-icons">add</i></span>
                         </div>
 
                         <div className="card-content">
@@ -36,19 +36,20 @@ import { addToCart } from './actions/actions'
                 </div>
             </div>
         )
-    }
 }
 
 const mapStateToProps = (state)=>{
+
     return {
-      items: state.items
+      items: state.items,
     }
   }
-const mapDispatchToProps= (dispatch)=>{
-    
+const mapDispatchToProps = (dispatch)=>{
+
     return{
         addToCart: (id)=>{dispatch(addToCart(id))}
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Shop)
+export default connect(mapStateToProps,mapDispatchToProps)(Shop);
+// export default Shop;

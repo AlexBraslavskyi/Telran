@@ -1,4 +1,9 @@
-export const SET_ORDERS = 'set-orders';
-export const SET_USER_DATA = 'set-user-data';
-export const SET_FLAG_MOB_MENU = 'set-flag-mob-menu';
-export const SET_CARD_REDUCER = 'set-card-reducer';
+export const SET_ORDERS = 'SET_ORDERS';
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const SET_FLAG_MOB_MENU = 'SET_FLAG_MOB_MENU';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const SUB_QUANTITY = 'SUB_QUANTITY';
+export const ADD_QUANTITY = 'ADD_QUANTITY';
+export const ADD_DELIVERY = 'ADD_DELIVERY';
+export const SUB_DELIVERY = 'SUB_DELIVERY';

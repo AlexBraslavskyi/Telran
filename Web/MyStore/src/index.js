@@ -5,16 +5,17 @@ import './index.css'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-// import allReducers from './components/reducers/reducers';
-import cartReducer from './components/reducers/cartReducer';
+import allReducers from './components/reducers/Reducers';
+import Reducers from './components/reducers/Reducers';
 
 const store = createStore(
     // allReducers,
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-    
-    
-    cartReducer);
 
+    //
+    
+    Reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+//
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

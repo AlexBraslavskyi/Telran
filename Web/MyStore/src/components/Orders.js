@@ -9,16 +9,17 @@ const Orders = (props) => {
 
     const userData = useSelector(state=>state.userData);
     const orders = useSelector(state=>state.orders);
-
+console.log(orders);
+    let addedItems = props.addedItems;
+    // console.log(addedItems);
     function addOrder(order) {
-        const index = orders
-            .findIndex(o => o.orderNumber === order.orderNumber);
+        const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
         if (index >= 0) {
             return false;
         }
         props.ordersService.addOrder(order)
             .then(() => {
-                // setEmployeesSwitch(0);
+                    alert(`order with number ${order.orderNumber} added successfully`)
             }
             , error => {
                 alert(`order with number ${order.orderNumber} already exists`)
@@ -32,14 +33,15 @@ const Orders = (props) => {
             .then(() => {
             })
     }
-    if(orders.length>0) {
-                return userData.isAdmin?<div><OrdersTable orders={orders}
+    if(orders.length) {
+                return <div><OrdersTable orders={orders}
                                     removeFn={removeOrder}
-                                    isAdmin={userData.isAdmin}
+                                    // isAdmin={userData.isAdmin}
                     />
-                </div>:null;
+                </div>
     }else{
-                return <OrderForm addOrderFn={addOrder}/>
+                return <OrderForm addOrderFn={addOrder}
+                                  addedItems={addedItems}/>
         }
     }
 export default Orders;

@@ -11,8 +11,8 @@ export function getRandomElement(array) {
     return array[getRandomNumber(0, array.length - 1)];
 }
 export function getRandomOrderNumb() {
-    let numb = Date.now()+getRandomNumber(1000,100000);
-    return numb;
+    let numb = Date.now()+getRandomNumber(10,1000);
+    return numb.toString();
 }
 
 export function getRandomColor() {
