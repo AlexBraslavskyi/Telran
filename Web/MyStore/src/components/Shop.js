@@ -7,8 +7,9 @@ const Shop = (props) => {
    const handleClick = (id)=>{
         props.addToCart(id);
     }
-     // const items = useSelector(state=>state.items);
     const items = props.items;
+    // const items = useSelector(state=>state.items);
+   console.log(items)
         let itemList = items.map(item=>{
             return(
                 <div className="card" key={item.id}>
@@ -51,5 +52,6 @@ const mapDispatchToProps = (dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Shop);
-// export default Shop;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)(Shop);

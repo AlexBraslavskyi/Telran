@@ -5,51 +5,64 @@ import Item3 from '../../images/anagram-29-sweet-chocolate-sing-a-tune-foil-ball
 import Item4 from '../../images/cti-12-all-round-bachelorette-party-latex-balloons-950046-c-14798915436607_900x.jpg'
 import Item5 from '../../images/cti-12-all-round-bachelorette-party-latex-balloons-950046-c-14798915436607_900x.jpg'
 import Item6 from '../../images/cti-12-pastel-birthday-6-pk-latex-balloons-912609-c-14841568395327_900x.jpg'
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_DELIVERY,SUB_DELIVERY,SET_FLAG_MOB_MENU, SET_USER_DATA, SET_ORDERS} from '../actions/common'
-import {actionOrders} from "../actions/actions";
+import {
+    ADD_TO_CART,
+    REMOVE_ITEM,
+    SUB_QUANTITY,
+    ADD_QUANTITY,
+    ADD_DELIVERY,
+    SUB_DELIVERY,
+    SET_FLAG_MOB_MENU,
+    SET_USER_DATA,
+    SET_ORDERS,
+    SET_ITEMS
+} from '../actions/common'
+import {actionFlagMobMenu, actionItems, actionOrders, actionUserData} from "../actions/actions";
+import {DELIVERY} from "../../config/ShopConfig";
+import OrdersFirebaseService from "../../services/OrdersFirebaseService";
+import {useEffect} from "react";
+import ItemsFirebaseService from "../../services/ItemsFirebaseService";
+import {useDispatch, useSelector} from "react-redux";
+
 
 
 const initState = {
-    items: [
-        {id:1,title:"Title", desc: "Descriptions", price:11,img:Item1},
-        {id:2,title:"Title", desc: "Descriptions", price:8,img: Item2},
-        {id:3,title:"Title", desc: "Descriptions", price:12,img: Item3},
-        {id:4,title:"Title", desc: "Descriptions", price:10,img:Item4},
-        {id:5,title:"Title", desc: "Descriptions", price:16,img: Item5},
-        {id:6,title:"Title", desc: "Descriptions", price:9,img: Item6}
-    ],
+    items:
+        [],
+
+    //     [
+    //     {id:1,title:"Title", desc: "Descriptions", price:11,img:Item1},
+    //     {id:2,title:"Title", desc: "Descriptions", price:8,img: Item2},
+    //     {id:3,title:"Title", desc: "Descriptions", price:12,img: Item3},
+    //     {id:4,title:"Title", desc: "Descriptions", price:10,img:Item4},
+    //     {id:5,title:"Title", desc: "Descriptions", price:16,img: Item5},
+    //     {id:6,title:"Title", desc: "Descriptions", price:9,img: Item6}
+    // ],
     quantity:0,
     addedItems:[],
     total: 0,
-    orders:[],
+    // orders:[],
     userData:{},
-    flagMobile:{}
+    flagMobile:{},
+    delivery:0
 
 }
-// const reducerOrders = (state=[],action)=>{
-//     return action.type === SET_ORDERS ? action.payload.slice(0) : state;// slice or spread
-// };
-// const reducerUserData = (state ={},action)=>{
-//     return action.type === SET_USER_DATA ? {...action.payload} : state;
-// }
-// export default combineReducers({
-//     orders: reducerOrders,
-//     userData: reducerUserData
-// })
+
 const Reducers =
     (state = initState, action)=>{
     let existedQuantity = state.quantity;
-    let addedItem = state.items.find(item=> item.id === action.id);
-    let existed_item= state.addedItems.find(item=> action.id === item.id);
-    let itemToRemove= state.addedItems.find(item=> action.id === item.id)
-    let new_items = state.addedItems.filter(item=> action.id !== item.id)
+    let addedItem =
+        // state.addedItems.find(item=> action.id === item.id);
+        state.items.find(item=> item.id === action.id);
+        let existed_item= state.addedItems.find(item=> action.id === item.id);
+        let new_items = state.addedItems.filter(item=> action.id !== item.id);
     //INSIDE SHOP COMPONENT
 
     if(action.type === ADD_TO_CART){
         //check if the action id exists in the addedItems
         if(existed_item)
         {
-            if(window.confirm('You allready added item with id=' + existed_item.id + '. Do you want to add quantity')){
+            if(window.confirm('You already added item with id=' + existed_item.id + '. Do you want to add quantity')){
                addedItem.quantity += 1;
                 return{
                     ...state,
@@ -78,6 +91,7 @@ const Reducers =
         }
     }
     if(action.type === REMOVE_ITEM){
+        let itemToRemove= state.addedItems.find(item=> action.id === item.id);
         //calculating the total
         let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
         return{
@@ -123,14 +137,16 @@ const Reducers =
     if(action.type=== ADD_DELIVERY){
         return{
             ...state,
-            total: state.total + 5
+            delivery: DELIVERY,
+            total: state.total + DELIVERY
         }
     }
 
     if(action.type=== SUB_DELIVERY){
         return{
             ...state,
-            total: state.total - 5
+            delivery: 0,
+            total: state.total - state.delivery
         }
     }
 
@@ -140,6 +156,13 @@ const Reducers =
             orders: action.payload.slice(0)
         }
     }
+
+        if(action.type === SET_ITEMS){
+            return {
+                ...state,
+                items: action.payload.slice(0)
+            }
+        }
         if(action.type=== SET_USER_DATA){
             return {
                 ...state,

@@ -9,9 +9,9 @@ const Orders = (props) => {
 
     const userData = useSelector(state=>state.userData);
     const orders = useSelector(state=>state.orders);
-console.log(orders);
     let addedItems = props.addedItems;
-    // console.log(addedItems);
+    let total = props.total;
+    let delivery = props.delivery;
     function addOrder(order) {
         const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
         if (index >= 0) {
@@ -41,7 +41,9 @@ console.log(orders);
                 </div>
     }else{
                 return <OrderForm addOrderFn={addOrder}
-                                  addedItems={addedItems}/>
+                                  addedItems={addedItems}
+                                  total = {total}
+                                  delivery = {delivery}/>
         }
     }
 export default Orders;

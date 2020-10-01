@@ -12,7 +12,14 @@ import OrdersFirebaseService from "./services/OrdersFirebaseService";
 import AuthFirebaseService from "./services/AuthFirebaseService";
 import MobMenuService from "./services/MobMenuService";
 import {useDispatch, useSelector} from "react-redux";
-import {actionFlagMobMenu, actionOrders, actionUserData, addToCart} from "./components/actions/actions";
+import {
+    actionFlagMobMenu,
+    actionItems,
+    actionOrders,
+    actionProducts,
+    actionUserData,
+    addToCart
+} from "./components/actions/actions";
 import {
     pathCart,
     pathShop,
@@ -28,10 +35,12 @@ import Orders from './components/Orders';
 import {reduce} from "rxjs/operators";
 import AuthJwtService from "./services/AuthJwtService";
 import OrdersHttpService from "./services/OrdersHttpService";
+import ItemsFirebaseService from "./services/ItemsFirebaseService";
 
 const App =()=> {
   const ordersService =
   new OrdersFirebaseService('orders');
+  const itemsService = new ItemsFirebaseService('items');
  const authService =  new AuthFirebaseService();
  const mobMenuService = new MobMenuService();
  const dispatch = useDispatch();
@@ -40,13 +49,21 @@ const App =()=> {
      dispatch(actionFlagMobMenu({flag:mobMenuService.getFlag()}))
      authService.getUserData().subscribe(userData=> {
          dispatch(actionUserData(userData))
-         if(userData.username){
-             ordersService.getOrders().subscribe(orders=>{
-                 dispatch(actionOrders(orders));
-             }
-             ,error => alert('Data transfer finished')
-         )}
+         if(userData.username) {
+             ordersService.getOrders().subscribe(orders => {
+                     dispatch(actionOrders(orders));
+                 }
+                 , error => alert('Data transfer finished')
+             );
+             itemsService.getItems().subscribe(items => {
+                     dispatch(actionItems(items));
+                 }
+                 , error => alert(JSON.stringify(error))
+             )
+         }
      })
+
+
  },[]);
     return (
        <BrowserRouter>
@@ -63,10 +80,12 @@ const App =()=> {
                     {/*{return userData.isAdmin ? <OrdersSearch/> :*/}
                     {/*    <Redirect to={pathHome}/>}}/>*/}
                     <Route path={pathShop} exact render={() =>
-                    {return userData.username ? <Shop/> :
+                    {return userData.username ? <Shop
+                            itemsService = {itemsService}
+                        /> :
                         <Redirect to={pathLogin}/>}}/>
                     <Route path={pathOrders} exact render={() =>
-                    {return userData.username ? <Orders ordersService={ordersService} /> :
+                    {return userData.username ? <Orders ordersService={ordersService}/> :
                         <Redirect to={pathLogin}/>}}/>
                          //isAdmin
                     <Route path={pathLogin} exact render={() =>

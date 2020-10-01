@@ -13,10 +13,16 @@
 }
 .card .card-image .card-title{
     color: black;
-    font-weight: 400
+    font-weight: 400;
+    position: inherit;
+    font-size: 14px;
 }
 .cart{
     margin-top:40px;
+}
+card-title{
+    position: inherit;
+    color: black;
 }
 .collection .collection-item{
     display: flex;
@@ -84,7 +90,7 @@
         margin-left: 40%;
         margin-top: 1vh;
         width: 20vw;
-       
+
      }
 .sing-bar{
     display: flex;
@@ -118,4 +124,10 @@
     height: 11vw;
     margin: 0 auto;
     padding: 0;
+}
+.detailTotal{
+    margin-left: 5px;
+  font-weight: bold;
+    color: red;
+
 }

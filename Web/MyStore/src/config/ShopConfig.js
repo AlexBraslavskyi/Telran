@@ -1,4 +1,7 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+import ItemsFirebaseService from "../services/ItemsFirebaseService";
+import {actionItems, actionOrders} from "../components/actions/actions";
 
 export const nameMinLength = 4;
 export const genOrderNun = 5;
@@ -11,6 +14,7 @@ export const pathOrderForm = '/orderForm';
 export const pathShop = '/shop';
 export const pathCart = '/cart';
 export const POLLING_INTERVAL = 1000;
+export const DELIVERY = 10;
 export const LINKS = [
     {path: pathOrders, label: 'Orders',image:<i style={{cursor: 'pointer'}} className="fa fa-user-circle"/>,isAdmin:false},
     {path: pathSearch, label: 'Orders Search',image:<i style={{cursor: 'pointer'}} className="fa fa-search"/>,isAdmin:false}

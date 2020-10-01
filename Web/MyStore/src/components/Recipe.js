@@ -3,7 +3,7 @@ import React, {Component, useState} from 'react'
 import {connect, useSelector} from 'react-redux'
 import {addDelivery, addToCart} from './actions/actions'
 import { Link } from 'react-router-dom'
-import {pathOrderForm, pathOrders} from '../config/ShopConfig'
+import {DELIVERY, pathOrderForm, pathOrders} from '../config/ShopConfig'
 import {OrderForm} from "./OrderForm";
 import Orders from "./Orders";
 import Cart from "./Cart";
@@ -32,7 +32,7 @@ const Recipe = (props) => {
                 <li className="collection-item">
                     <label>
                         <input type="checkbox" onChange={handleChecked}/>
-                        <span>Delivery(+5₪)</span>
+                        <span>Delivery(+{DELIVERY}₪)</span>
                     </label>
                 </li>
                 <li className="collection-item"><b>Total: {props.total} ₪</b></li>
@@ -52,13 +52,16 @@ const Recipe = (props) => {
     }
     return <Orders addedItems={props.addedItems}
                    ordersService = {ordersService}
-    total = {props.total}/>
+                   total = {props.total}
+                   delivery = {props.delivery}
+    />
 }
 
 const mapStateToProps = (state)=>{
     return{
         addedItems: state.addedItems,
-        total: state.total
+        total: state.total,
+        delivery: state.delivery
     }
 }
 

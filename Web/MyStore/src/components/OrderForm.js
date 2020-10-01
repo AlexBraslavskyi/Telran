@@ -10,6 +10,8 @@ const letters = /^[A-Za-z]+$/;
 export const OrderForm = (props) =>{
 
     let items = props.addedItems;
+    let total = props.total;
+    let delivery = props.delivery;
     console.log(items);
     let order, setOrder, orderNumber, setOrderNumber, error, setError, emailAddress, setEmailAddress,
         name, setName, address, setAddress, phone, setPhone, passport, setPassport,  formRef, setFormRef, comment, setComment;
@@ -22,6 +24,9 @@ export const OrderForm = (props) =>{
                 phone: '',
                 comment: '',
                 items:items,
+                total: total,
+                delivery: delivery,
+                paymentMethod: 'VISA'
     });
     [error,setError]=useState({errorPassport:'',errorName:'',errorEmail:'',errorPhone:''});
     [emailAddress,setEmailAddress]=useState({value:'',controlError: 0});

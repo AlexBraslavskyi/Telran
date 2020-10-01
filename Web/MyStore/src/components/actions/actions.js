@@ -1,6 +1,20 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_DELIVERY,SUB_DELIVERY, SET_ORDERS, SET_USER_DATA, SET_FLAG_MOB_MENU} from "./common";
+import {
+    ADD_TO_CART,
+    REMOVE_ITEM,
+    SUB_QUANTITY,
+    ADD_QUANTITY,
+    ADD_DELIVERY,
+    SUB_DELIVERY,
+    SET_ORDERS,
+    SET_USER_DATA,
+    SET_FLAG_MOB_MENU,
+     SET_ITEMS
+} from "./common";
 export const actionOrders = (orders)=>{
     return {type: SET_ORDERS, payload:orders}
+};
+export const actionItems = (items)=>{
+    return {type: SET_ITEMS, payload:items}
 };
 export const actionUserData = (userData)=>{
     return{type:SET_USER_DATA, payload:userData}
