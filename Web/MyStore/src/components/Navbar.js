@@ -8,7 +8,7 @@ import navMediaObject from "../config/navMediaConfig";
 import MobileNavMenu from "./mobileNavMenu";
 import {actionFlagMobMenu, addToCart} from "./actions/actions";
 import MobMenuService from "../services/MobMenuService";
-import {pathCart, pathShop, pathOrders, pathHome, pathLogout, pathLogin} from '../config/ShopConfig';
+import {pathCart, pathShop, pathOrders, pathHome, pathLogout, pathLogin, pathProducts} from '../config/ShopConfig';
  
 
 
@@ -57,9 +57,13 @@ const Navbar = (props)=>{
                         Happy Balloons</Link>
                     <ul className="right">
                         <li><Link to={pathShop}>Shop</Link></li>
-                        <li><Link to={pathCart}>My cart</Link></li>
                         <li><Link to={pathOrders}>Orders</Link></li>
-                        <li><Link to={pathCart}><span className = 'basketQuant'>{itemsCount?itemsCount:null}</span>
+                        <li><Link>Statistics</Link></li>
+                        <li><Link>Search</Link></li>
+                        <li><Link to={pathProducts}>Products</Link></li>
+                        <li><Link>Contact</Link></li>
+                        <li><Link>My Cabinet</Link></li>
+                        <li><Link style={{height:'64px'}} to={pathCart}><span className = 'basketQuant'>{itemsCount?itemsCount:null}</span>
                         <i className="fa fa-shopping-bag fa-2x"/>
                             </Link></li>
                         {!userData.username ? <li><Link to={pathLogin}>Login</Link></li>

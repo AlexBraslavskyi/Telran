@@ -13,6 +13,7 @@ export const pathHome = '/home';
 export const pathOrderForm = '/orderForm';
 export const pathShop = '/shop';
 export const pathCart = '/cart';
+export const pathProducts = '/products';
 export const POLLING_INTERVAL = 1000;
 export const DELIVERY = 10;
 export const LINKS = [

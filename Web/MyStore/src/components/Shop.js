@@ -26,12 +26,15 @@ const Shop = (props) => {
                         </div>
                  </div>
 
+
             )
         })
 
         return(
             <div className="body">
-                <h3 className="bodyTitle" style={{color:"#ee6e73",fontFamily:"fantasy"}}>Our balloons</h3>
+                <h3 className="bodyTitle" style={{
+                    // color:"#ee6e73",
+                    fontFamily:"fantasy", fontWeigh:"bold"}}> - Our balloons - </h3>
                 <div className="box">
                     {itemList}
                 </div>

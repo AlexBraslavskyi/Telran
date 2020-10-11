@@ -1,5 +1,8 @@
+html { height:100%; }
+body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
+
 .box{
-    margin: 5vw;
+    margin: 0;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap
@@ -43,9 +46,9 @@ card-title{
     align-self:center;
 }
 .body{
-    background-image: url('./images/kisspng-balloon-banner-clip-art-colorful-balloon-5aa32b3006cb59.1819753615206428640279.png');
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-image: url('./images/colorful-balloon-png.png');
+    background-repeat: round;
+    background-size: auto;
     margin: 0;
 }
 .bodyTitle{
@@ -53,6 +56,8 @@ card-title{
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    margin: 0;
+    padding-top: 20px;
 }
 .centerForm{
     display: flex;
@@ -70,7 +75,7 @@ card-title{
     color: #ee6e73;
     text-align: center;
     margin-left: 10px;
-    /* bottom: 91.2%; */
+
 }
 * {
     margin: 0;

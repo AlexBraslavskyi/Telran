@@ -13,7 +13,7 @@
 
      });
 
-        return <div>
+        return <div className='body'>
                 <h3 className="bodyTitle">TODO Welcome</h3>
             {/* <div className="carousel carousel-slider">
                 <a className="carousel-item" href="#one!"><img src="https://lorempixel.com/800/400/food/1"/></a>

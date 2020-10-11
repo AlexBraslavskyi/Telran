@@ -13,12 +13,12 @@ export default class ItemsFirebaseService {
 
     }
 
-    // addItems(item) {
-    //     return this.db.doc(item.id).set(item);
-    // }
-    //
-    // deleteItem(id) {
-    //     return this.db.doc(id).delete();
-    // }
+    addItem(item) {
+        return this.db.doc(item.id).set(item);
+    }
+
+    deleteItem(id) {
+        return this.db.doc(id).delete();
+    }
 
 }

@@ -12,11 +12,11 @@ export const OrderForm = (props) =>{
     let items = props.addedItems;
     let total = props.total;
     let delivery = props.delivery;
-    console.log(items);
     let order, setOrder, orderNumber, setOrderNumber, error, setError, emailAddress, setEmailAddress,
         name, setName, address, setAddress, phone, setPhone, passport, setPassport,  formRef, setFormRef, comment, setComment;
     [order,setOrder]=useState({
                 orderNumber: getRandomOrderNumb(),
+                orderData: new Date().toLocaleDateString(),
                 emailAddress: '',
                 name: '',
                 address: '',
@@ -26,7 +26,7 @@ export const OrderForm = (props) =>{
                 items:items,
                 total: total,
                 delivery: delivery,
-                paymentMethod: 'VISA'
+                paymentMethod: 'VISA',
     });
     [error,setError]=useState({errorPassport:'',errorName:'',errorEmail:'',errorPhone:''});
     [emailAddress,setEmailAddress]=useState({value:'',controlError: 0});
@@ -35,7 +35,7 @@ export const OrderForm = (props) =>{
     [phone,setPhone]=useState({value:'',controlError: 0});
     [passport,setPassport]=useState({value:'',controlError: 0});
     [comment, setComment] = useState({value:'',controlError: 0});
-    [orderNumber, setOrderNumber] = useState({value: order.orderNumber});
+    // [orderNumber, setOrderNumber] = useState({value: order.orderNumber});
     [formRef,setFormRef]=useState(null);
 
     function submit(event) {
@@ -53,7 +53,7 @@ export const OrderForm = (props) =>{
 
     useEffect(()=> {
         setOrder(order);
-        setOrderNumber(orderNumber);
+        // setOrderNumber(orderNumber);
         setPhone(phone);
         setName(name);
         setEmailAddress(emailAddress);
@@ -181,9 +181,9 @@ export const OrderForm = (props) =>{
                     <div className="center">
                         <h3 style={{color:"#ee6e73", marginTop:"5vh"}}> - Order -</h3>
                     </div>
-                    {getInputElementActive('text',
-                        'orderNumber', 'Order number',
-                        handlerNonValidated,"",orderNumber,'shopping_cart',true)}
+                    {/*{getInputElementActive('text',*/}
+                    {/*    'orderNumber', 'Order number',*/}
+                    {/*    handlerNonValidated,"",orderNumber,'shopping_cart',true)}*/}
                     {getInputElement('text',
                         'name', 'Name',
                         handlerName,error.errorName,'','account_circle')}

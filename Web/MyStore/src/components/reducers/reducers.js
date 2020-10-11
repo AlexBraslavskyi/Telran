@@ -153,7 +153,8 @@ const Reducers =
     if(action.type=== SET_ORDERS ){
         return {
             ...state,
-            orders: action.payload.slice(0)
+            orders: action.payload.slice(0),
+            quantity: 0
         }
     }
 

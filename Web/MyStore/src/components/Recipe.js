@@ -9,6 +9,7 @@ import Orders from "./Orders";
 import Cart from "./Cart";
 import OrdersFirebaseService from "../services/OrdersFirebaseService";
 const Recipe = (props) => {
+
     const ordersService =
         new OrdersFirebaseService('orders');
     let [ordersSwitch, setOrdersSwitch] = useState(0)
@@ -23,6 +24,7 @@ const Recipe = (props) => {
     }
 
     const showOrders = () => {
+
         setOrdersSwitch(1)
 
     }
@@ -61,7 +63,8 @@ const mapStateToProps = (state)=>{
     return{
         addedItems: state.addedItems,
         total: state.total,
-        delivery: state.delivery
+        delivery: state.delivery,
+        // quantity: state.quantity,
     }
 }
 

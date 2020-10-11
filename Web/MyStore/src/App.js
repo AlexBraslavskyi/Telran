@@ -28,14 +28,13 @@ import {
     pathHome,
     pathOrderForm,
     pathOrders,
-    pathSearch
+    pathSearch, pathProducts
 } from './config/ShopConfig';
 import { OrderForm } from './components/OrderForm';
 import Orders from './components/Orders';
 import {reduce} from "rxjs/operators";
-import AuthJwtService from "./services/AuthJwtService";
-import OrdersHttpService from "./services/OrdersHttpService";
 import ItemsFirebaseService from "./services/ItemsFirebaseService";
+import ProductsTable from "./components/ProductsTable";
 
 const App =()=> {
   const ordersService =
@@ -88,6 +87,9 @@ const App =()=> {
                     {return userData.username ? <Orders ordersService={ordersService}/> :
                         <Redirect to={pathLogin}/>}}/>
                          //isAdmin
+                    <Route path={pathProducts} exact render={() =>
+                    {return userData.username ? <ProductsTable itemsService={itemsService}/> :
+                        <Redirect to={pathLogin}/>}}/>
                     <Route path={pathLogin} exact render={() =>
                     {return !userData.username ? <Login authService={authService}/> :
                         <Redirect to={pathHome}/>}}/>
@@ -97,13 +99,13 @@ const App =()=> {
                         <Redirect to={pathHome}/>}}/>
 
                   </Switch>
-                    <footer className="page-footer end-align">
-          {/* <div class="footer-copyright"> */}
+                    <footer  className="page-footer align-content-end">
+           <div className="footer-copyright">
             <div className="container">
             © 2020 Copyright Alex Braslavskyi
             <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
-          {/* </div> */}
+           </div>
         </footer>
        </BrowserRouter>
     );

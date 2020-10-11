@@ -6,11 +6,14 @@ import useColumnsMedia from "../utils/mediaHook";
 import DetailsTable from "./DetailsTable";
 import columnsContent from "../config/tableConfig";
 import MaterialTable, {MTableBody, MTableBodyRow, MTableCell, MTableHeader, MTablePagination} from "material-table";
+import {render} from "react-dom";
+import _ from "lodash";
 
 
 export default function OrdersTable(props) {
-    const userData = useSelector(state=>state.userData);
+    // const userData = useSelector(state=>state.userData);
     const orders = props.orders;
+    // let [rowData,setRowData] = useState({});
     // const columns = useColumnsMedia(columnsMediaObject);
     // const [order,setOrder] = useState({});
     // const showDetails=(order)=>
@@ -18,10 +21,20 @@ export default function OrdersTable(props) {
     // const backFn = () => setOrder({});
     const columnValues = Object.values(columnsMediaObject);
     const maxColumns = Math.max(...columnValues);
-    function remove(orderNumber) {
-        if(window.confirm('you are going to remove Order with number = ' + orderNumber)) {
+    function removeOrder(orderNumber) {
             props.removeFn(orderNumber);
-        }
+    }
+    function removeItemFromOrder(orderNumber, item) {
+            props.removeItemFn(orderNumber,item);
+    }
+    function addItemToOrder(currentOrder, item) {
+       return props.addItemToOrderFn(currentOrder,item);
+    }
+    function updateItem(currentOrder, item) {
+        return props.updateItemFn(currentOrder,item);
+    }
+    function addOrder(order) {
+        props.updateOrderFn(order);
     }
     // const orderTableRecords =
     //     orders.map (
@@ -67,42 +80,44 @@ export default function OrdersTable(props) {
     const [columns, setColumns] = useState([
                 { title: 'Order Number', field: 'orderNumber' },
                 { title: 'Name', field: 'name' },
+                { title: 'Date', field: 'orderData' },
                 { title: 'Email', field: 'emailAddress' },
                 { title: 'Address', field: 'address' },
                 { title: 'Phone', field: 'phone' },
                 { title: 'Passport', field: 'passport' },
                 { title: 'Comment', field: 'comment' },
-                {title:  'Payment method', field: 'paymentMethod'}
+                { title: 'Payment method', field: 'paymentMethod'}
             ]);
 
-    const [data, setData] = useState(orders.map((order)=>({orderNumber: order.orderNumber, name:
-                        order.name,emailAddress:order.emailAddress,address:order.address, phone:order.phone,
-                        passport:order.passport,comment:order.comment, items:order.items, total:order.total, delivery:order.delivery, paymentMethod: order.paymentMethod
+    const [data, setData] = useState(orders.map((order)=>({orderNumber: order.orderNumber, orderData:order.orderData,
+        name: order.name,emailAddress:order.emailAddress,address:order.address, phone:order.phone,
+        passport:order.passport,comment:order.comment, items:order.items, total:order.total,
+        delivery:order.delivery, paymentMethod: order.paymentMethod
                        })));
 
     return  (
         <MaterialTable style={{marginTop:'50px'}}
             title="- Orders - "
+                       options={{
+                           headerStyle:{fontWeight:"bold", fontSize:16}
+                       }}
             columns={columns}
             data={data}
                        onRowClick={(event, rowData, togglePanel) => togglePanel()}
+
             editable={{
-                onRowAdd: newData =>
+                onRowUpdate: (newData,oldData) =>
                     new Promise((resolve, reject) => {
                         setTimeout(() => {
-                            setData([...data, newData]);
-
-                            resolve();
-                        }, 1000)
-                    }),
-                onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            const dataUpdate = [...data];
-                            const index = oldData.tableData.id;
-                            dataUpdate[index] = newData;
-                            setData([...dataUpdate]);
-
+                            if(window.confirm(`You are going to update item with number ${oldData.orderNumber}`)) {
+                                removeOrder(oldData.orderNumber);
+                                addOrder(newData);
+                                const dataDelete = [...data];
+                                const index = oldData.tableData.id;
+                                dataDelete.splice(index, 1);
+                                dataDelete.push(newData);
+                                setData([...dataDelete]);
+                            }
                             resolve();
                         }, 1000)
                     }),
@@ -113,56 +128,76 @@ export default function OrdersTable(props) {
                             const index = oldData.tableData.id;
                             dataDelete.splice(index, 1);
                             setData([...dataDelete]);
-
+                            removeOrder(oldData.orderNumber);
                             resolve()
                         }, 1000)
                     }),
             }}
-                    detailPanel={rowData => {
 
-                        return (
+                    detailPanel={[
+                        rowData => ({
+                            ...props,
+                            render: (rowData) => {
+                                // rowData is now updated, so changes took place
+                                return (
                             <div>
                             <MaterialTable   style={{margin:'10px 100px 10px 100px'}} options={{
                                 search: false,
+                                headerStyle:{fontWeight:"bold", fontSize:16},
                                 paging:false
-                            }}
-                                title="- Order details -"
-                                             columns={[{ title: 'ID', field: 'id' },
-                                                             { title: 'Title', field: 'title' },
-                                                             { title: 'Price', field: 'price' },
-                                                             { title: 'Quantity', field: 'quantity' },
-                                                             { title: 'Subtotal', field: 'subtotal' },
 
+                            }}
+                                title = "- Orders Details -"
+                                             columns={[{ title: 'ID', field: 'id',width: 10 },
+                                                 { title: '', field: 'img', width: 100},
+                                                             { title: 'Title', field: 'title', width: 300 },
+                                                             { title: 'Price', field: 'price', width: 10},
+                                                             { title: 'Quantity', field: 'quantity' , width: 10},
+                                                             { title: 'Subtotal', field: 'subtotal', width: 10 },
+                                                             { title: 'Description', field: 'description', hidden: true},
                                                          ]}
+
                                              data={rowData.items.map((item)=>({id: item.id, title:
-                                                 item.title, price:item.price,quantity:item.quantity, subtotal:item.price*item.quantity}))}
+                                                 item.title, price:item.price,quantity:item.quantity,
+                                                 subtotal:item.price*item.quantity, description:item.description,img:
+                                                     // <img src={
+                                                         item.img
+                                                     // } alt="" border="3" height="100" width="100" />
+                                                 }))}
+
                                              editable={{
+
                                                  onRowAdd: newData =>
                                                      new Promise((resolve, reject) => {
                                                          setTimeout(() => {
-                                                             setData([...data, newData]);
-
+                                                                 if(!addItemToOrder(rowData, newData)){
+                                                                     rowData.items.push(newData)
+                                                                 }else{
+                                                                     alert(`item with number ${newData.id} already exists`)
+                                                             }
                                                              resolve();
                                                          }, 1000)
                                                      }),
                                                  onRowUpdate: (newData, oldData) =>
                                                      new Promise((resolve, reject) => {
                                                          setTimeout(() => {
-                                                             const dataUpdate = [...data];
-                                                             const index = oldData.tableData.id;
-                                                             dataUpdate[index] = newData;
-                                                             setData([...dataUpdate]);
-
+                                                             if(window.confirm(`You are going to update item with number ${oldData.id}`)) {
+                                                                 const index = oldData.tableData.id;
+                                                                 rowData.items.splice(index, 1);
+                                                                 removeItemFromOrder(rowData.orderNumber, oldData);
+                                                                 updateItem(rowData, newData);
+                                                                 rowData.items.push(newData);
+                                                             }
                                                              resolve();
                                                          }, 1000)
                                                      }),
+
                                                  onRowDelete: oldData =>
                                                      new Promise((resolve, reject) => {
                                                          setTimeout(() => {
-                                                             const dataDelete = [...data];
-                                                             const index = oldData.tableData.id;
-                                                             dataDelete.splice(index, 1);
-                                                             setData([...dataDelete]);
+                                                                const index = oldData.tableData.id;
+                                                                rowData.items.splice(index, 1);
+                                                                removeItemFromOrder(rowData.orderNumber, oldData);
 
                                                              resolve()
                                                          }, 1000)
@@ -174,77 +209,28 @@ export default function OrdersTable(props) {
                                 <MTableBody {...props} />
                                 <div className='detailTotal'>
                                     <table style={{width:'100%'}}>
+                                        <tbody>
                                     <tr>
                                         <td>Delivery</td>
                                         <td>{rowData.delivery}₪</td>
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td>{rowData.total}₪</td>
+                                        <td>{parseInt(rowData.delivery) + rowData.items.reduce(function(prev, cur)
+                                        {
+                                            return prev + (cur.price * cur.quantity)
+                                        }, 0)}₪</td>
                                     </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                                 </div>
                                     )}}
-
                             />
                             </div>
-            )
-                    }
+            )}
+                    })]
                     }
         />
     )
-    //     <MaterialTable style={{marginTop:'50px'}}
-    //         title="- Orders -"
-    //         columns={[
-    //             { title: 'Order Number', field: 'orderNumber' },
-    //             { title: 'Name', field: 'name' },
-    //             { title: 'Email', field: 'emailAddress' },
-    //             { title: 'Address', field: 'address' },
-    //             { title: 'Phone', field: 'phone' },
-    //             { title: 'Passport', field: 'passport' },
-    //             { title: 'Comment', field: 'comment' },
-    //         ]}
-    //         data={orders.map((order)=>({orderNumber: order.orderNumber, name:
-    //             order.name,emailAddress:order.emailAddress,address:order.address, phone:order.phone,
-    //             passport:order.passport,comment:order.comment, items:order.items, total:order.total, delivery:order.delivery
-    //            }))}
-    //
-    //
-    //         detailPanel={rowData => {
-    //
-    //             return (
-    //                 <div>
-    //                 <MaterialTable   style={{margin:'10px 100px 10px 100px'}} options={{
-    //                     search: false,
-    //                     paging:false
-    //                 }}
-    //                     title="- Order details -"
-    //                 columns={[
-    //                     { title: 'ID', field: 'id' },
-    //             { title: 'Title', field: 'title' },
-    //             { title: 'Price', field: 'price' },
-    //             { title: 'Quantity', field: 'quantity' },
-    //             { title: 'Subtotal', field: 'subtotal' },
-    //
-    //         ]}
-    //             data={rowData.items.map((item)=>({id: item.id, title:
-    //                     item.title, price:item.price,quantity:item.quantity, subtotal:item.price*item.quantity}))}
-    //
-    //                 components={{
-    //                     Body: props => (
-    //                     <div style={{ backgroundColor: '#e8eaf5', width:'100%', display: 'contents' }}>
-    //                     <MTableBody {...props} />
-    //                         <span className='detailTotal'> Delivery - {rowData.delivery}</span><br/>
-    //                         <span className='detailTotal'> Total - {rowData.total}</span>
-    //                     </div>
-    //                         )}}
-    //
-    //                 />
-    //                 </div>
-    // )
-    //         }
-    //         }
-    //     />
-    // )
 }
