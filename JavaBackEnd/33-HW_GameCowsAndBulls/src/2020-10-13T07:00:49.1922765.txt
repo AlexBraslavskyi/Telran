@@ -1,0 +1,5 @@
+You enter 1234 (Random number - 0179)
+Your result 0 Bulls 1 Cows 
+You enter 6787 (Random number - 0179)
+Your result 0 Bulls 1 Cows 
+Exit

@@ -1,0 +1,2 @@
+You enter 7865 (Random number - 9815)
+Your result 2 Bulls 0 Cows 

@@ -1,0 +1,6 @@
+You enter 5678 (Random number - 0781)
+Your result 0 Bulls 2 Cows 
+You enter 4556 (Random number - 0781)
+Your result 0 Bulls 0 Cows 
+You entered not correct number
+Exit

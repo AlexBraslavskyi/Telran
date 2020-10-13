@@ -1,0 +1,2 @@
+You enter 1234 (Random number - 1706)
+Your result 1 Bulls 0 Cows 

@@ -1,0 +1,6 @@
+You enter 5667 (Random number - 8074)
+Your result 0 Bulls 1 Cows 
+You enter 1239 (Random number - 8074)
+Your result 0 Bulls 0 Cows 
+You entered not correct number
+Exit
