@@ -1,0 +1,16 @@
+User - Alex
+You enter 1234 (Random number - 7813)
+Your result 0 Bulls 2 Cows 
+You enter 4567 (Random number - 7813)
+Your result 0 Bulls 1 Cows 
+You enter 8765 (Random number - 7813)
+Your result 0 Bulls 2 Cows 
+You enter 9876 (Random number - 7813)
+Your result 1 Bulls 1 Cows 
+You entered not correct number
+You entered not correct number
+You enter 3456 (Random number - 7813)
+Your result 0 Bulls 1 Cows 
+You enter 8765 (Random number - 7813)
+Your result 0 Bulls 2 Cows 
+Exit

@@ -1,0 +1,6 @@
+User - Alex
+You enter 1234 (Random number - 1972)
+Your result 1 Bulls 1 Cows 
+You enter 1111 (Random number - 1972)
+Your result 1 Bulls 0 Cows 
+Exit

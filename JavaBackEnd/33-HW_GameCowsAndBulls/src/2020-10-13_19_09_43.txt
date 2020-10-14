@@ -1,0 +1,45 @@
+User - Alex
+You enter 1234 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1256 (Random number - 8173)
+Your result 0 Bulls 1 Cows 
+You enter 1235 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1267 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1289 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1389 (Random number - 8173)
+Your result 0 Bulls 3 Cows 
+You enter 1289 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1392 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1382 (Random number - 8173)
+Your result 0 Bulls 3 Cows 
+You enter 2389 (Random number - 8173)
+Your result 0 Bulls 2 Cows 
+You enter 1387 (Random number - 8173)
+Your result 0 Bulls 4 Cows 
+You enter 3178 (Random number - 8173)
+Your result 2 Bulls 2 Cows 
+You enter 3187 (Random number - 8173)
+Your result 1 Bulls 3 Cows 
+You enter 1378 (Random number - 8173)
+Your result 1 Bulls 3 Cows 
+You enter 7138 (Random number - 8173)
+Your result 1 Bulls 3 Cows 
+You enter 8137 (Random number - 8173)
+Your result 2 Bulls 2 Cows 
+You enter 8731 (Random number - 8173)
+Your result 1 Bulls 3 Cows 
+You enter 8137 (Random number - 8173)
+Your result 2 Bulls 2 Cows 
+You enter 8371 (Random number - 8173)
+Your result 2 Bulls 2 Cows 
+You enter 1873 (Random number - 8173)
+Your result 2 Bulls 2 Cows 
+You enter 3871 (Random number - 8173)
+Your result 1 Bulls 3 Cows 
+You enter 8173 (Random number - 8173)
+You win, your number correct!!!

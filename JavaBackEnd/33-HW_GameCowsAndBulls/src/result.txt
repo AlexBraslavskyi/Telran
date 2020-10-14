@@ -1,5 +1,9 @@
-You enter 6767 (Random number - 5719)
+User - 1234
+You enter 1234 (Random number - 1876)
 Your result 1 Bulls 0 Cows 
-You enter 9890 (Random number - 5719)
+You entered not correct number
+You entered not correct number
+You entered not correct number
+You enter 4321 (Random number - 1876)
 Your result 0 Bulls 1 Cows 
-Exit
+You entered not correct number

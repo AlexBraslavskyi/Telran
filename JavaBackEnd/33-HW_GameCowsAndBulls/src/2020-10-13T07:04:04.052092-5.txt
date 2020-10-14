@@ -1,5 +1,0 @@
-You enter 6767 (Random number - 5719)
-Your result 1 Bulls 0 Cows 
-You enter 9890 (Random number - 5719)
-Your result 0 Bulls 1 Cows 
-Exit
