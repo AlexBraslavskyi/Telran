@@ -152,15 +152,15 @@ public class EmployeesServiceMapsImpl implements EmployeeService {
 
 	@Override
 	public DepartmentSalary[] getDepartmentAvgSalaryDistribution() {
-		List<DepartmentSalary> Deptlist = new ArrayList<>();
+		List<DepartmentSalary> deptlist = new ArrayList<>();
 		employeesDepartment.forEach((k, v) -> {
 			IntSummaryStatistics stats = v.stream().mapToInt(Employee::getSalary).summaryStatistics();
-			Deptlist.add(new DepartmentSalary(k, stats.getAverage()));
+			deptlist.add(new DepartmentSalary(k, stats.getAverage()));
 		});
-		Arrays.sort(Deptlist.toArray(new DepartmentSalary[0]),
+		Arrays.sort(deptlist.toArray(new DepartmentSalary[0]),
 				(s1, s2) -> Double.compare(s2.getAvgSalary(), s1.getAvgSalary()));
 
-		return Deptlist.toArray(new DepartmentSalary[0]);
+		return deptlist.toArray(new DepartmentSalary[0]);
 	}
 
 }
