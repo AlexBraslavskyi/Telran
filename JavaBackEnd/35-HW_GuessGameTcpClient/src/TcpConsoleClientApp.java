@@ -3,29 +3,28 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-
-
-public class ClientTestAppl {
+public class TcpConsoleClientApp  extends GameTcpProxy{
+	static final String host = "localhost";
+	static final int port = 5000;
 	
-	static final String HOST = "localhost";
-	static final int PORT = 5000;
-
+	public TcpConsoleClientApp(String host, int port) {
+		super(host, port);
+	
+	}
 	public static void main(String[] args) throws Exception{
-		try (Socket socket = new Socket(HOST, PORT);
+		try (Socket socket = new Socket(host, port);
 				BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 				BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				PrintStream socketWriter = new PrintStream(socket.getOutputStream())) {
 			while (true) {
 				String line= null;
 				String socketLine = "";
-				System.out.println("enetr request type (length or reverse) or quit");
+				socketLine = line + "#";
+				System.out.println("Please enter a 4-digit number (or type 'quit' to exit):");
 				line = consoleReader.readLine();
 				if (line.equalsIgnoreCase("quit")) {
 					break; 
 				}
-				socketLine = line + "#";
-				System.out.println("enter any string");
-				line = consoleReader.readLine();
 				socketLine += line;
 				socketWriter.println(socketLine);
 				line = socketReader.readLine();
