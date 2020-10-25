@@ -3,14 +3,11 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-public class TcpConsoleClientApp  extends GameTcpProxy{
+public class TcpConsoleClientApp{
 	static final String host = "localhost";
 	static final int port = 5000;
 	
-	public TcpConsoleClientApp(String host, int port) {
-		super(host, port);
-	
-	}
+
 	public static void main(String[] args) throws Exception{
 		try (Socket socket = new Socket(host, port);
 				BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));

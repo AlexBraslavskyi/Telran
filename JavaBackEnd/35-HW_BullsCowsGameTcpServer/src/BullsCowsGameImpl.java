@@ -1,8 +1,7 @@
 import java.util.Random;
 
-import telran.games.GuessGame;
 
-public class BullsCowsGameImpl implements GuessGame{
+public class BullsCowsGameImpl{
 	
 	
 	static String random = new Random().ints(1, 10).distinct().limit(4)
@@ -39,38 +38,14 @@ public class BullsCowsGameImpl implements GuessGame{
 		}
 
 		if (bulls == 4) {
+			
 			return "You win, your number correct!!!";
 		}
 		if(flag) {
-			BullsCowsGameImpl b = new BullsCowsGameImpl();
-			return "Your result " + bulls + " Bulls " + cows + " Cows " + b.startGame();
+		
+			return "Your result " + bulls + " Bulls " + cows + " Cows " +  " Secret number " +random;
 		}
 		return "Your result " + bulls + " Bulls " + cows + " Cows " ;
-	}
-
-	
-	
-	
-	@Override
-	public String startGame() {
-		return " Secret number " +random;
-	}
-	@Override
-	public String prompt() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String move(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isFineshed() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 

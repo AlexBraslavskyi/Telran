@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d25bdedc-b549-4f36-8792-0435ba9ad144" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/32HW-Braslavskyi.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/33HW-Braslavskyi.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/34HW-Braslavskyi.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_BullsCowsGameTcpServer/src/BullsCowsGameImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_BullsCowsGameTcpServer/src/BullsCowsGameImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_BullsCowsGameTcpServer/src/TcpBullsCowsApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_BullsCowsGameTcpServer/src/TcpBullsCowsApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_BullsCowsGameTcpServer/src/telran/games/GuessGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_GuessGameTcpClient/src/GameTcpProxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_GuessGameTcpClient/src/TcpConsoleClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../JavaBackEnd/35-HW_GuessGameTcpClient/src/TcpConsoleClientApp.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectId" id="1jM6g5RndWtZOCJyO4zDpR9hToU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d25bdedc-b549-4f36-8792-0435ba9ad144" name="Default Changelist" comment="" />
+      <created>1603601721599</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603601721599</updated>
+      <workItem from="1603601722900" duration="482000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

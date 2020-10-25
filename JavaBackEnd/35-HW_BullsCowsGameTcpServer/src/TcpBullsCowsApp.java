@@ -41,21 +41,19 @@ public static void main(String[] args) throws Exception {
 		while(true) {
 			
 			String line = null;
+
 			try {
 				line = reader.readLine();
 				if (line == null) {
 					System.out.println("client closed connection");
 					break;
 				}
-//				line = reader.readLine();
-//				if (line == "You win, your number correct!!!") {
-//					System.out.println(line);
-//					break;
-//				}
+
 			} catch (IOException e) {
 				System.out.println("client abnormally closed connection");
 				break;
 			}
+	
 			line = getRequest(line);
 			writerToSocket.println(line);
 		}
@@ -74,6 +72,7 @@ public static void main(String[] args) throws Exception {
 					"You entered not correct number";
 			writerToSocket.println(message);
 		}
+
 	return BullsCowsGameImpl.getResult(tokens[1],flTest);
 		
 		}
