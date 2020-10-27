@@ -1,7 +1,9 @@
 package telran.view;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Function; 
+
 
 
 public interface InputOutput {
@@ -31,8 +33,13 @@ public interface InputOutput {
 	}
 	
 	default String readOption(String prompt, List<String> options) {
-		//TODO Read string and return any string out of specified options //contain in list
-		return null;
+		//Read string and return any string out of specified options //contain in list
+		return readObject(prompt, "It is not contain in the range", s -> {
+		if(!options.contains(prompt)) {
+			throw new IllegalArgumentException();
+		}
+		return prompt;
+	});
 	}
 	default Integer readInteger(String prompt) {
 		//Read string and return int
@@ -55,18 +62,27 @@ public interface InputOutput {
 	}
 	
 	default Long readLong(String prompt) {
-		//TODO Read string and return long
-		return null;
+		// Read string and return long
+		return readObject(prompt, "It is not long number", Long::parseLong);
 	}
 	default Double readDouble(String prompt) {
-		//TODO Read string and return double
+		//Read string and return double
 		
 		
-		return null;
+		return readObject(prompt, "It is not long number", Double::parseDouble);
 	}
+	
 	default LocalDate readDate(String prompt, String formate) {
-		//TODO Read string and return double  
-		return null;
+		//Read string checked format and return localdate 
+		return readObject(prompt, String.format("It is not date in the format - %s",formate), s -> {
+		     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(formate);
+		     LocalDate date =  LocalDate.parse(prompt);
+		     if(!prompt.equals(dateFormatter.format(date))) {
+		    	 throw new IllegalArgumentException();
+		     }
+		     return date;
+		        
+		});
 	}
 	
 }

@@ -40,14 +40,15 @@ public class Menu implements Item {
 
 	private void displayMenu(InputOutput io) {
 		
-		io.writeLn("=".repeat(20));
+		io.writeLn("=".repeat(30));
 		io.writeLn("\t" + name);
-		io.writeLn("=".repeat(20));
+		io.writeLn("=".repeat(30));
 		
 		int nItems = items.size();
 		for(int i = 1; i <= nItems; i++) {
 			io.writeLn(i + ". " + items.get(i-1).displayName());
 		}
+		io.writeLn("=".repeat(30));
 	}
 
 }
