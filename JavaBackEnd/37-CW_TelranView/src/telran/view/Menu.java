@@ -1,13 +1,16 @@
 package telran.view;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Menu implements Item {
 
 	String name;
-	ArrayList<Item> items;
+	List<Item> items;
 	
-	
-	public Menu(String name, ArrayList<Item> items) {
+	public Menu(String name, Item ...items) {
+		this(name,Arrays.asList(items));
+	}
+	public Menu(String name, List<Item> items) {
 		super();
 		this.name = name;
 		this.items = items;

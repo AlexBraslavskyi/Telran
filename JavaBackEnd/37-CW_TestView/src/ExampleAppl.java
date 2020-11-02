@@ -1,7 +1,8 @@
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import telran.view.ConsoleInputOutput;
 import telran.view.InputOutput;
@@ -11,86 +12,25 @@ import telran.view.Menu;
 public class ExampleAppl {
 
 	public static void main(String[] args) {
-		
-		
-		
-//		System.out.println("Enter");
-//		Scanner scan = new Scanner(System.in);
-//		String s = scan.nextLine();
-//		
-//		readDate(s, "YYYY-MM-dd");
-//	}
-//	public static LocalDate readDate(String prompt, String formate) {
-			//Read string checked format and return localdate 
-//		
-//	     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(formate);
-//			     LocalDate date =  LocalDate.parse(prompt);
-//
-//			     if(prompt
-//			    		 .equals(dateFormatter.format(date))) {
-//			    	 System.out.println("Hi");
-//			     }
-//			    	 return date;
-		
-	
-		
 		InputOutput io = new ConsoleInputOutput();
-
-		Item sum[] = { Item.of("Enter numbers", ExampleAppl::Sum), Item.exit() };
-		Item sub[] = { Item.of("Enter numbers", ExampleAppl::Sub), Item.exit() };
-		Item mult[] = { Item.of("Enter numbers", ExampleAppl::Mult), Item.exit() };
-		Item div[] = { Item.of("Enter numbers", ExampleAppl::Div), Item.exit() };
-		Item addDays[] = { Item.of("Enter numbers", ExampleAppl::AddDays), Item.exit() };
-		Item subDays[] = { Item.of("Enter numbers", ExampleAppl::SubDays), Item.exit() };
-		Item daysBetween[] = { Item.of("Enter numbers", ExampleAppl::DaysBetween), Item.exit() };
-		Item joinString[] = { Item.of("Enter string", ExampleAppl::JoinString), Item.exit() };
-		Item anagram[] = { Item.of("Enter string", ExampleAppl::Anagram), Item.exit() };
-		
-		
-		Item arCalc[] = { Item.of("Sum", a -> {
-			Menu menu = new Menu("Sum", new ArrayList<Item>(Arrays.asList(sum)));
-			menu.perform(io);}), 
-				Item.of("Sub", a -> {
-			Menu menu = new Menu("Sub", new ArrayList<Item>(Arrays.asList(sub)));
-			menu.perform(io);}),
-				Item.of("Mult", a -> {
-			Menu menu = new Menu("Mult", new ArrayList<Item>(Arrays.asList(mult)));
-			menu.perform(io);}),
-				Item.of("Div", a -> {
-			Menu menu = new Menu("Div", new ArrayList<Item>(Arrays.asList(div)));
-			menu.perform(io);}),
-				Item.exit() };
-		
-		Item date[] = { Item.of("Add days", a -> {
-			Menu menu = new Menu("Add days", new ArrayList<Item>(Arrays.asList(addDays)));
-			menu.perform(io);}),
-				Item.of("Sub days", a -> {
-			Menu menu = new Menu("Sub days", new ArrayList<Item>(Arrays.asList(subDays)));
-			menu.perform(io);}),
-				Item.of("Days between", a -> {
-			Menu menu = new Menu("Days between", new ArrayList<Item>(Arrays.asList(daysBetween)));
-			menu.perform(io);}),
-				Item.exit() };
-		
-		Item string[] = { Item.of("Join", a -> {
-			Menu menu = new Menu("Join", new ArrayList<Item>(Arrays.asList(joinString)));
-			menu.perform(io);}),
-				Item.of("Anagram", a -> {
-			Menu menu = new Menu("Anagram", new ArrayList<Item>(Arrays.asList(anagram)));
-			menu.perform(io);}),
-				Item.exit() };
-		
-		Item arItems[] = { Item.of("Calc", a -> {
-			Menu menu = new Menu("Calc", new ArrayList<Item>(Arrays.asList(arCalc)));
-			menu.perform(io);}),
-				Item.of("Date", a -> {
-			Menu menu = new Menu("Date", new ArrayList<Item>(Arrays.asList(date)));
-			menu.perform(io);}),
-				Item.of("String", a -> {
-			Menu menu = new Menu("String", new ArrayList<Item>(Arrays.asList(string)));
-			menu.perform(io);}), 
-				Item.exit() };
-		Menu menu = new Menu("Main manu", new ArrayList<Item>(Arrays.asList(arItems)));
+			
+		Menu menu = new Menu("Main manu", 
+		new Menu("Calc", 
+					Item.of("Sum", ExampleAppl::Sum), 
+					Item.of("Sub", ExampleAppl::Sub),
+					Item.of("Mult", ExampleAppl::Mult), 
+					Item.of("Div", ExampleAppl::Div), 
+					Item.exit()),
+		new Menu("Date", 	
+					Item.of("Add days", ExampleAppl::AddDays), 
+					Item.of("Sub days", ExampleAppl::SubDays),
+					Item.of("Days between", ExampleAppl::DaysBetween), 
+					Item.exit()),
+		new Menu("String", 
+					Item.of("Join", ExampleAppl::JoinString), 
+					Item.of("IsAnagram", ExampleAppl::Anagram),
+					Item.exit()),
+		Item.exit());
 
 		menu.perform(io);
 	}
@@ -122,28 +62,69 @@ public class ExampleAppl {
 		Integer secondNumber = ioParam.readInteger("Enter second number");
 		ioParam.writeLn("Result " + ((double) firstNumb / (double) secondNumber));
 	}
+
 	static void AddDays(InputOutput ioParam) {
-//		System.out.println("Enter date in formate YYYY-MM-dd");
-//		Scanner scan = new Scanner(System.in);
-//		String s = scan.nextLine();
-		LocalDate date = ioParam.readDate("Enter date in formate YYYY-MM-dd", "YYYY-MM-dd");
+		String pattern = "yyyy-MM-dd";
+		LocalDate date = ioParam.readDate("Enter date in formate " + pattern , pattern);
 		Integer days = ioParam.readInteger("Enter number of days");
 		ioParam.writeLn("Result " + date.plusDays(days));
 	}
+
 	static void SubDays(InputOutput ioParam) {
-
-		//TODO
+		String pattern = "yyyy-MM-dd";
+		LocalDate date = ioParam.readDate("Enter date in formate " + pattern , pattern);
+		Integer days = ioParam.readInteger("Enter number of days");
+		ioParam.writeLn("Result " + date.minusDays(days));
 	}
+
 	static void DaysBetween(InputOutput ioParam) {
-
-		//TODO
+		String pattern = "yyyy-MM-dd";
+		LocalDate from = ioParam.readDate("Enter date in formate " + pattern , pattern);
+		LocalDate to = ioParam.readDate("Enter date in formate " + pattern , pattern);
+		ioParam.writeLn("Result " + (int) ChronoUnit.DAYS.between(from, to) + " days");
 	}
+
 	static void JoinString(InputOutput ioParam) {
-
-		//TODO
+		List<String> options = new ArrayList<String>();
+		options.add("Java");
+		options.add("C");
+		options.add("JS");
+		String option = ioParam.readOption("Enter one of options (Java, C, JS)", options);
+		String prompt = ioParam.readString("Enter text");
+		ioParam.writeLn("Result - " + (prompt + "  " + option));
 	}
-	static void Anagram(InputOutput ioParam) {
 
-		//TODO
+	static void Anagram(InputOutput ioParam) {
+		String word = ioParam.readString("Enter first word");
+		String anagram = ioParam.readString("Enter second word");
+		boolean isAnagram = false;
+		if (isAnagram(word, anagram)) {
+			isAnagram = true;
+		}
+		ioParam.writeLn("Is anagram - " + isAnagram);
+	}
+
+	public static boolean isAnagram(String word, String anagram) {
+		if (word.isEmpty() || word.length() != anagram.length() || word.equals(anagram)) {
+			return false;
+		}
+		char[] wordChars = word.toCharArray();
+		char[] anagramChars = anagram.toCharArray();
+		int[] helper = new int[123];
+
+		for (int i = 0; i < wordChars.length; i++) {
+			helper[wordChars[i]]++;
+		}
+		for (int i = 0; i < anagramChars.length; i++) {
+			helper[anagramChars[i]]--;
+			if (helper[anagramChars[i]] < 0) {
+				return false;
+			}
+			if (i == anagramChars.length - 1) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 }

@@ -25,6 +25,7 @@ const SalaryStatistics = (props) => {
 
 
         const statistics = getStatistics();
+
     function getStatistics() {
         return employees.reduce((res, c) => {
             return {min: c.salary < res.min ? c.salary : res.min,

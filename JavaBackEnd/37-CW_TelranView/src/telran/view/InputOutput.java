@@ -34,11 +34,11 @@ public interface InputOutput {
 	
 	default String readOption(String prompt, List<String> options) {
 		//Read string and return any string out of specified options //contain in list
-		return readObject(prompt, "It is not contain in the range", s -> {
-		if(!options.contains(prompt)) {
+		return readObject(prompt, "It is not contains in the options", s -> {
+		if(!options.contains(s)) {
 			throw new IllegalArgumentException();
 		}
-		return prompt;
+		return s;
 	});
 	}
 	default Integer readInteger(String prompt) {
@@ -72,17 +72,17 @@ public interface InputOutput {
 		return readObject(prompt, "It is not long number", Double::parseDouble);
 	}
 	
-	default LocalDate readDate(String prompt, String formate) {
+	default LocalDate readDate(String prompt, String format) {
 		//Read string checked format and return localdate 
-		return readObject(prompt, String.format("It is not date in the format - %s",formate), s -> {
-		     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(formate);
-		     LocalDate date =  LocalDate.parse(prompt);
-		     if(!prompt.equals(dateFormatter.format(date))) {
-		    	 throw new IllegalArgumentException();
-		     }
-		     return date;
-		        
+//		return readObject(prompt, String.format("it is not a date in format %s", formate), 
+//				s -> LocalDate.parse(s, DateTimeFormatter.ofPattern(formate)));
+		return readObject(String.format("%s in format %s",prompt,format), "Wrong date or format", s -> {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
+			return LocalDate.parse(s, dtf);
 		});
-	}
+}
+		    
+	
+	void consolClear();
 	
 }

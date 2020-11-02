@@ -1,5 +1,6 @@
 package telran.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleInputOutput implements InputOutput {
@@ -17,7 +18,19 @@ public class ConsoleInputOutput implements InputOutput {
 
 	@Override
 	public void writeObject(Object obj) {
-		System.out.print(obj);
+		System.out.print(obj.toString());
+
+	}
+	@Override
+	public  void consolClear() {
+		// Clears Screen in java
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (IOException | InterruptedException ex) {
+		}
 
 	}
 
