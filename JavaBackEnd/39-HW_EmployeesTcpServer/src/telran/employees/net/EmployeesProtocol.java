@@ -3,7 +3,6 @@ package telran.employees.net;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -42,6 +41,7 @@ public EmployeesProtocol(EmployeeService service) {
 public ResponseJava getResponse(RequestJava request) {
 	Class <?> clazz = request.requestType.getClass();
 	Method method = null;
+	ResponseJava response = null;
 	try {
 		method = clazz.getDeclaredMethod(clazz.getName(),Serializable.class);
 	} catch (NoSuchMethodException e1) {
@@ -64,9 +64,37 @@ public ResponseJava getResponse(RequestJava request) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	try {
+		 response = (ResponseJava) Class.forName(method.getName()).getConstructor().newInstance();
+		
+	} catch (InstantiationException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IllegalAccessException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IllegalArgumentException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (InvocationTargetException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (NoSuchMethodException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SecurityException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println("class" + clazz);
+	System.out.println("method" +method);
+	 System.out.println("response " +response);
 //	return mapFunctions.getOrDefault(request.requestType, 
 //			r -> new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type")).apply(request.requestData);
-	return 
+return response != null?response:new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type");
 }
 	ResponseJava addEmployee(Serializable requestData) {
 		try {
