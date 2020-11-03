@@ -5,44 +5,79 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import telran.util.Array;
 import telran.util.IndexedList;
-import telran.util.LinkedList;
 
 class IndexedListTest {
 
 	int[] arrayInt = { 10, -7, 20, 10, 9, 13, 18 };
 	String[] arrayStr = { "abc", "def", "www", "qww", "www", "eee"};
 	int[] arrayWillEmpty = { 1 };
-	IndexedList<Integer> listWillEmpty;
-	IndexedList<Integer> listIntFirst;
-	IndexedList<Integer> listInt;
-	IndexedList<Integer> listIntMid;
-	IndexedList<String> listStr;
-	IndexedList<Integer> patternInt;
-	IndexedList<String> patternStr;
+	static IndexedList<Integer> listWillEmpty;
+	static IndexedList<Integer> listIntFirst;
+	static IndexedList<Integer> listInt;
+	static IndexedList<Integer> listIntMid;
+	static IndexedList<String> listStr;
+	static IndexedList<Integer> patternInt;
+	static IndexedList<String> patternStr;
+	static Constructor<?> constructor;
+	
+
+	@BeforeAll
+	   static void Config() {
+		String filePath = "src/TestConfig";
+        String text = "";
+		try {
+			text = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Class<?> clazz;
+		try {
+			clazz = Class.forName(text);
+			constructor = clazz.getConstructor();
+		      
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@SuppressWarnings("unchecked")
 	@BeforeEach
-	void setUp() {
-		//for array
-//		listWillEmpty = new Array<>();
-//		listIntFirst = new Array<>();
-//		listInt = new Array<>();
-//		listIntMid = new Array<>();
-//		listStr = new Array<>(); 
-//		patternInt = new Array<>();
-//		patternStr = new Array<>();
-		
-		//for linkedList
-		listWillEmpty = new LinkedList<>();
-		listIntFirst = new LinkedList<>();
-		listInt = new LinkedList<>();
-		listIntMid = new LinkedList<>();
-		listStr = new LinkedList<>(); 
-		patternInt = new LinkedList<>();
-		patternStr = new LinkedList<>();
+	void setUp(){
+		try {
+			listWillEmpty = (IndexedList<Integer>) constructor.newInstance();
+			listIntFirst = (IndexedList<Integer>) constructor.newInstance();
+			listInt = (IndexedList<Integer>) constructor.newInstance();
+			listIntMid = (IndexedList<Integer>) constructor.newInstance();
+			listStr = (IndexedList<String>) constructor.newInstance();
+			patternInt =(IndexedList<Integer>) constructor.newInstance();
+			patternStr = (IndexedList<String>) constructor.newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		for (int i = 0; i < arrayStr.length; i++) {
 			listStr.add(arrayStr[i]);
@@ -64,6 +99,7 @@ class IndexedListTest {
 		patternInt.add(18);
 		patternStr.add("www");
 		patternStr.add("abc");
+	        
 	}
 
 	@Test

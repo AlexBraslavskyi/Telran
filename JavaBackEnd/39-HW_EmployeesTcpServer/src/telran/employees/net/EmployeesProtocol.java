@@ -1,16 +1,8 @@
 package telran.employees.net;
 
-import static telran.employees.api.ApiConstants.ADD_EMPLOYEE;
-import static telran.employees.api.ApiConstants.GET_DEPT_AVR_SALARY_DISTR;
-import static telran.employees.api.ApiConstants.GET_EMPLOYEE;
-import static telran.employees.api.ApiConstants.GET_EMPLOYEES_BY_AGE;
-import static telran.employees.api.ApiConstants.GET_EMPLOYEES_BY_DEPARTMENT;
-import static telran.employees.api.ApiConstants.GET_EMPLOYEES_BY_SALARY;
-import static telran.employees.api.ApiConstants.GET_EMPLOYEES_BY_SALARY_INTERVAL;
-import static telran.employees.api.ApiConstants.REMOVE_EMPLOYEE;
-import static telran.employees.api.ApiConstants.UPDATE_EMPLOYEE;
-
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,6 +17,7 @@ import telran.net.ResponseJava;
 import telran.net.TcpResponseCode;
 import telran.net.server.ProtocolJava;
 public class EmployeesProtocol implements ProtocolJava {
+private static final String API_PATH = "telran.employees.api.ApiConstants";
 EmployeeService service;
  Map<String, Function<Serializable, ResponseJava>> mapFunctions;
 
@@ -32,32 +25,55 @@ EmployeeService service;
 public EmployeesProtocol(EmployeeService service) {
 	super();
 	this.service = service;
-	//TODO 
-	if(mapFunctions == null) {
-		mapFunctions = new HashMap<>();
-		mapFunctions.put(ADD_EMPLOYEE, this::addEmployee);
-		mapFunctions.put(GET_EMPLOYEE, this::getEmployee);
-		mapFunctions.put(REMOVE_EMPLOYEE, this::removeEmployee);
-		mapFunctions.put(UPDATE_EMPLOYEE, this::updateEmployee);
-		mapFunctions.put(GET_EMPLOYEES_BY_AGE, this::getEmplByAge);
-		mapFunctions.put(GET_EMPLOYEES_BY_DEPARTMENT, this::getEmplByDept);
-		mapFunctions.put(GET_EMPLOYEES_BY_SALARY, this::getEmplBySalary);
-		mapFunctions.put(GET_EMPLOYEES_BY_SALARY_INTERVAL, this::getEmplBySalaryInterval);
-		mapFunctions.put(GET_DEPT_AVR_SALARY_DISTR, this::getDeptAvrSalaryDistr);
-	}
+
+	
+	
+
+
+	      
+//	//TODO 
+//	if(mapFunctions == null) {
+//		mapFunctions = new HashMap<>();
+//		mapFunctions.put();
+//	}
 }
 
 @Override
 public ResponseJava getResponse(RequestJava request) {
-
-	return mapFunctions.getOrDefault(request.requestType, 
-			r -> new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type")).apply(request.requestData);
+	Class <?> clazz = request.requestType.getClass();
+	Method method = null;
+	try {
+		method = clazz.getDeclaredMethod(clazz.getName(),Serializable.class);
+	} catch (NoSuchMethodException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} catch (SecurityException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}//response.class
+	method.setAccessible(true);
+	try {
+		 method.invoke(this);
+	} catch (IllegalAccessException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IllegalArgumentException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (InvocationTargetException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+//	return mapFunctions.getOrDefault(request.requestType, 
+//			r -> new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type")).apply(request.requestData);
+	return 
 }
 	ResponseJava addEmployee(Serializable requestData) {
 		try {
 			Employee empl = (Employee) requestData;
 			ReturnCodes result = service.addEmployee(empl);
 			ResponseJava response = new ResponseJava(TcpResponseCode.OK, result);
+			
 			return response;
 		} catch (Exception e) {
 			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());

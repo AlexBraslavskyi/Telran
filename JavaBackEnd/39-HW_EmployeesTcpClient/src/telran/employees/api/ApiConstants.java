@@ -1,18 +1,17 @@
 package telran.employees.api;
 
+
 public interface ApiConstants {
-//TODO name of function
-	String ADD_EMPLOYEE = "telran.employees.net.";
-	
-	
-	String GET_EMPLOYEE = "get_employee";
-	String REMOVE_EMPLOYEE = "remove_employee";
-	String UPDATE_EMPLOYEE = "update_employee";
-	String GET_EMPLOYEES_BY_AGE = "get_employees_by_age";
-	String GET_EMPLOYEES_BY_DEPARTMENT = "get_employees_by_department";
-	String GET_EMPLOYEES_BY_SALARY = "get_employee_by_salary";
-	String GET_EMPLOYEES_BY_SALARY_INTERVAL = "get_employee_by_salary_interval";
-	String GET_DEPT_AVR_SALARY_DISTR = "get_dept_avr_salary_distr";
+
+	String ADD_EMPLOYEE = "telran.employees.net.EmployeesProtocol.addEmployee";
+	String GET_EMPLOYEE = "telran.employees.net.EmployeesProtocol.getEmployee";
+	String REMOVE_EMPLOYEE = "telran.employees.net.EmployeesProtocol.removeEmployee";
+	String UPDATE_EMPLOYEE = "telran.employees.net.EmployeesProtocol.updateEmployee";
+	String GET_EMPLOYEES_BY_AGE = "telran.employees.net.EmployeesProtocol.getEmplByAge";
+	String GET_EMPLOYEES_BY_DEPARTMENT = "telran.employees.net.EmployeesProtocol.getEmplByDept";
+	String GET_EMPLOYEES_BY_SALARY = "telran.employees.net.EmployeesProtocol.getEmplBySalary";
+	String GET_EMPLOYEES_BY_SALARY_INTERVAL = "telran.employees.net.EmployeesProtocol.getEmplBySalaryInterval";
+	String GET_DEPT_AVR_SALARY_DISTR = "telran.employees.net.EmployeesProtocol.getDeptAvrSalaryDistr";
 	int SALARY_FROM = 5000;
 	int SALARY_TO = 30000;
 	
