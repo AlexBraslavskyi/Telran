@@ -1,10 +1,7 @@
 package telran.employees.net;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.function.Function;
 
 import telran.employees.dto.DepartmentSalary;
 import telran.employees.dto.Employee;
@@ -16,85 +13,29 @@ import telran.net.ResponseJava;
 import telran.net.TcpResponseCode;
 import telran.net.server.ProtocolJava;
 public class EmployeesProtocol implements ProtocolJava {
-private static final String API_PATH = "telran.employees.api.ApiConstants";
 EmployeeService service;
- Map<String, Function<Serializable, ResponseJava>> mapFunctions;
 
 
 public EmployeesProtocol(EmployeeService service) {
 	super();
 	this.service = service;
 
-	
-	
-
-
-	      
-//	//TODO 
-//	if(mapFunctions == null) {
-//		mapFunctions = new HashMap<>();
-//		mapFunctions.put();
-//	}
 }
 
 @Override
 public ResponseJava getResponse(RequestJava request) {
-	Class <?> clazz = request.requestType.getClass();
-	Method method = null;
-	ResponseJava response = null;
-	try {
-		method = clazz.getDeclaredMethod(clazz.getName(),Serializable.class);
-	} catch (NoSuchMethodException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	} catch (SecurityException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}//response.class
-	method.setAccessible(true);
-	try {
-		 method.invoke(this);
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalArgumentException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvocationTargetException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	try {
-		 response = (ResponseJava) Class.forName(method.getName()).getConstructor().newInstance();
+
+		try {
+			Class <?> clazz = getClass();
+			Method method = clazz.getDeclaredMethod(request.requestType,Serializable.class);
+			method.setAccessible(true);
+	
+		return (ResponseJava) method.invoke(this, request.requestData);
+	} catch (Exception e) {
+		return new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type");
 		
-	} catch (InstantiationException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalArgumentException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InvocationTargetException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (NoSuchMethodException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SecurityException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
 	}
-	System.out.println("class" + clazz);
-	System.out.println("method" +method);
-	 System.out.println("response " +response);
-//	return mapFunctions.getOrDefault(request.requestType, 
-//			r -> new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type")).apply(request.requestData);
-return response != null?response:new ResponseJava(TcpResponseCode.WRONG_REQUEST, "Wrong request type");
+
 }
 	ResponseJava addEmployee(Serializable requestData) {
 		try {

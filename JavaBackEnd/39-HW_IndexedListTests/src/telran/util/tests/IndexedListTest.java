@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
@@ -36,23 +35,18 @@ class IndexedListTest {
 	@BeforeAll
 	   static void Config() {
 		String filePath = "src/TestConfig";
-        String text = "";
+        String configCom = "";
+        Class<?> clazz;
 		try {
-			text = new String ( Files.readAllBytes( Paths.get(filePath) ) );
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Class<?> clazz;
-		try {
-			clazz = Class.forName(text);
+			configCom = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+			clazz = Class.forName(configCom);
 			constructor = clazz.getConstructor();
-		      
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 	@SuppressWarnings("unchecked")
 	@BeforeEach
