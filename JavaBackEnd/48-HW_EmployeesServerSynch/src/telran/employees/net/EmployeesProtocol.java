@@ -1,7 +1,19 @@
 package telran.employees.net;
 
+import static telran.employees.api.ApiConstants.ADD_EMPLOYEE;
+import static telran.employees.api.ApiConstants.EXIT;
+import static telran.employees.api.ApiConstants.GET_DEPARTMENT_AVG_SALARY_DISTRIBUTION;
+import static telran.employees.api.ApiConstants.GET_EMPLOYEE;
+import static telran.employees.api.ApiConstants.GET_EMPLOYEES_AGE;
+import static telran.employees.api.ApiConstants.GET_EMPLOYEES_DEPARTMENT;
+import static telran.employees.api.ApiConstants.GET_EMPLOYEES_SALARY;
+import static telran.employees.api.ApiConstants.GET_EMPLOYEES_SALARY_INTERVAL;
+import static telran.employees.api.ApiConstants.REMOVE_EMPLOYEE;
+import static telran.employees.api.ApiConstants.UPDATE_EMPLOYEE;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import telran.employees.dto.DepartmentSalary;
@@ -13,7 +25,6 @@ import telran.net.RequestJava;
 import telran.net.ResponseJava;
 import telran.net.TcpResponseCode;
 import telran.net.server.ProtocolJava;
-import static telran.employees.api.ApiConstants.*;
 public class EmployeesProtocol implements ProtocolJava {
 	 Map<String, Function<Serializable, ResponseJava>> mapFunctions;
 	
@@ -33,6 +44,7 @@ EmployeeService service;
 		mapFunctions.put(GET_EMPLOYEES_DEPARTMENT, this::getEmployeesDepartment);
 		mapFunctions.put(GET_EMPLOYEES_SALARY_INTERVAL, this::getEmployeesSalariesInterval);
 		mapFunctions.put(GET_DEPARTMENT_AVG_SALARY_DISTRIBUTION, this::getDepartmentsSalaries);
+		mapFunctions.put(EXIT, this::exit);
 	}
 }
 	@Override
@@ -102,7 +114,7 @@ EmployeeService service;
 			long id = (long) requestData;
 			ReturnCodes res = service.removeEmployee(id);
 			ResponseJava response = new ResponseJava(TcpResponseCode.OK,
-					(Serializable)res);
+					res);
 			return response;
 		} catch (Exception e) {
 			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());
@@ -113,7 +125,7 @@ EmployeeService service;
 			Employee newEmployee= (Employee) requestData;
 			Employee res = service.updateEmployee(newEmployee.getId(), newEmployee);
 			ResponseJava response = new ResponseJava(TcpResponseCode.OK,
-					(Serializable)res);
+					res);
 			return response;
 		} catch (Exception e) {
 			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());
@@ -124,7 +136,7 @@ EmployeeService service;
 			int interval = (int) requestData;
 			MinMaxSalaryEmployees[] res = service.getEmployeesBySalariesInterval(interval);
 			ResponseJava response = new ResponseJava(TcpResponseCode.OK,
-					(Serializable)res);
+					res);
 			return response;
 		} catch (Exception e) {
 			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());
@@ -135,7 +147,17 @@ EmployeeService service;
 			
 			DepartmentSalary[] res = service.getDepartmentAvgSalaryDistribution();
 			ResponseJava response = new ResponseJava(TcpResponseCode.OK,
-					(Serializable)res);
+					res);
+			return response;
+		} catch (Exception e) {
+			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());
+		}
+	}
+	ResponseJava exit(Serializable requestData) {
+		try {
+			
+			ResponseJava response = new ResponseJava(TcpResponseCode.EXIT,
+					requestData);
 			return response;
 		} catch (Exception e) {
 			return new ResponseJava(TcpResponseCode.WRONG_REQUEST, e.getMessage());

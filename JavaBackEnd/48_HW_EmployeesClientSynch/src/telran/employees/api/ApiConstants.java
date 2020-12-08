@@ -13,5 +13,5 @@ String GET_EMPLOYEES_SALARY = "get_employees_salary";
 
 String GET_EMPLOYEES_SALARY_INTERVAL = "get_employees_salary_interval";
 String GET_DEPARTMENT_AVG_SALARY_DISTRIBUTION = "get_department_avg_salary_distribution";
-
+String EXIT = "exit";
 }

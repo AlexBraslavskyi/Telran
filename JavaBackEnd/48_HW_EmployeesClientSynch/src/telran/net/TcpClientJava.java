@@ -1,7 +1,11 @@
 package telran.net;
 
-import java.io.*;
-import java.net.*;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.net.Socket;
 public class TcpClientJava implements Closeable {
 	ObjectOutputStream output;
 	ObjectInputStream input;
@@ -27,6 +31,9 @@ protected TcpClientJava(String hostname, int port) {
 		try {
 			output.writeObject(request);
 			ResponseJava response = (ResponseJava) input.readObject();
+			if(response.code != TcpResponseCode.EXIT) {
+				close();
+			}
 			if (response.code != TcpResponseCode.OK) {
 				throw new Exception(response.responseData.toString());
 			}
