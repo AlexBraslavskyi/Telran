@@ -31,8 +31,9 @@ protected TcpClientJava(String hostname, int port) {
 		try {
 			output.writeObject(request);
 			ResponseJava response = (ResponseJava) input.readObject();
-			if(response.code != TcpResponseCode.EXIT) {
-				close();
+			if(response.code == TcpResponseCode.EXIT) {
+//				close();
+				throw new Exception(response.responseData.toString());
 			}
 			if (response.code != TcpResponseCode.OK) {
 				throw new Exception(response.responseData.toString());

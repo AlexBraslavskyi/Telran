@@ -29,13 +29,24 @@ public ServerJava(int port, ProtocolJava protocol) {
 //			int timeout = 15000;
 			while(true) {
 				Socket socket = serverSocket.accept();
+				
 				ServerClientJava client = new ServerClientJava(socket, protocol);
 		
 //				serverSocket.setSoTimeout(timeout);
 //				socket.setSoTimeout(timeout);
 				executor.execute(client);
+//				System.out.println(client.toString());
+//				client.socket.getSoTimeout()
+				System.out.println(client.isStoped());
+				if(client.isStoped()) {
+				stop();
+					
+				}
+				
 			}
-		} catch (IOException e) {
+			
+		} catch (Exception e) {
+			
 			stop();
 //			e.printStackTrace();
 		}

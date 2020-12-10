@@ -1,6 +1,7 @@
 package telran.employees.net;
 
 import static telran.employees.api.ApiConstants.ADD_EMPLOYEE;
+import static telran.employees.api.ApiConstants.EXIT;
 import static telran.employees.api.ApiConstants.GET_DEPARTMENT_AVG_SALARY_DISTRIBUTION;
 import static telran.employees.api.ApiConstants.GET_EMPLOYEE;
 import static telran.employees.api.ApiConstants.GET_EMPLOYEES_AGE;
@@ -17,7 +18,8 @@ import telran.employees.dto.Employee;
 import telran.employees.dto.MinMaxSalaryEmployees;
 import telran.employees.dto.ReturnCodes;
 import telran.employees.services.interfaces.EmployeeService;
-import telran.net.TcpClientJava;public class EmployeesTcpProxy extends TcpClientJava implements EmployeeService {
+import telran.net.TcpClientJava;
+import telran.net.TcpResponseCode;public class EmployeesTcpProxy extends TcpClientJava implements EmployeeService {
 
 	public EmployeesTcpProxy(String hostname, int port) {
 		super(hostname, port);
@@ -75,6 +77,10 @@ import telran.net.TcpClientJava;public class EmployeesTcpProxy extends TcpClient
 	public DepartmentSalary[] getDepartmentAvgSalaryDistribution() {
 		
 		return sendRequest(GET_DEPARTMENT_AVG_SALARY_DISTRIBUTION, null);
+	}
+public ReturnCodes exit() {
+		
+		return sendRequest(EXIT, TcpResponseCode.EXIT);
 	}
 
 }

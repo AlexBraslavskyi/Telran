@@ -1,0 +1,24 @@
+///////////////PostgreSQL
+select name from students where stid in (
+select stid from marks where mark >=95
+)
+select mark from marks where stid=(select stid from students where name = 'Moshe')
+
+select name, subject, mark from students s join marks m on s.stid=m.stid join subjects sb on m.suid=sb.suid
+where name = 'Moshe' and subject='Java'
+
+create view students_marks_subjects as 
+select s.stid, sb.suid, name, subject, mark from students s join marks m on s.stid=m.stid join subjects sb on m.suid=sb.suid
+
+select name from students_marks_subjects s1 where subject = 'Java' and mark >= 80
+and exists (select * from students_marks_subjects s2 where s1.stid = s2.stid and subject = 'React' and mark <=75)
+
+select name from students_marks_subjects where subject = 'Java' and mark > (select mark from students_marks_subjects where name = 'Moshe' and subject = 'Java') 
+
+////////////////MongoDB
+
+db.students.find({marks:{$elemMatch:{mark:{$gte:95}}}},{_id:0, name:1})
+db.students.find({name:'Moshe'})
+
+  
+db.students.find({$and:[{marks:{$elemMatch:{subject:'Java',mark:{$gte:80}}}},{marks:{$elemMatch:{subject:'React',mark:{$lte:75}}}}]},{_id:0,name:1})

@@ -7,7 +7,10 @@ import telran.employees.net.EmployeesTcpProxy;
 import telran.employees.view.AdministratorActions;
 import telran.employees.view.StatisticActions;
 import telran.employees.view.UserActions;
-import telran.view.*;
+import telran.view.ConsoleInputOutput;
+import telran.view.InputOutput;
+import telran.view.Item;
+import telran.view.Menu;
 public class EmployeesClientAppl {
 
 	private static final String HOST_NAME = "localhost";
@@ -29,7 +32,10 @@ public class EmployeesClientAppl {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}, true)
+			}, true),
+			Item.of("Stop server", iostop->{
+				io.writeLn(service.exit());
+			})
 	};
 	Menu menu = new Menu("Employees Menu", items);
 	menu.perform(io);
