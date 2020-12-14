@@ -23,7 +23,7 @@ public class ClientSessionHandler implements Runnable {
 		this.protocol = protocol;
 		this.isStoped = isStoped;
 		try {
-			socket.setSoTimeout(50000);
+			socket.setSoTimeout(10000);
 		} catch (SocketException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

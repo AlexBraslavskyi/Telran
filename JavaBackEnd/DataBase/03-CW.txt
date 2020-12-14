@@ -1,0 +1,26 @@
+select round(avg(mark)) avg_mark from marks 
+
+select round(avg(mark)) avg_mark, min(mark) min_mark from marks
+
+
+select name, round(avg(mark)) avr_mark 
+from students_marks_subjects GROUP BY name ORDER BY avg(mark) DESC LIMIT 3
+
+
+select name, round(avg(mark)) avr_mark from students_marks_subjects GROUP BY name 
+having avg(mark) > (SELECT avg(mark) from marks)
+
+db.students.aggregate([{
+$unwind: "$marks"}, {$group:{_id:"$name", avg_mark:{$avg:"$marks.mark"}}}, 
+{$sort:{avg_mark:-1}},{$limit:2},{$project:{avr_mark:{$round:["$avg_mark", 0]}}
+}])
+
+
+var avgTotal = db.students.aggregate([{
+$unwind: "$marks"}, {$group:{_id:null, avg_mark:{$avg:"$marks.mark"}}}]).toArray()[0].avg_mark
+
+
+db.students.aggregate([{
+$unwind: "$marks"}, {$group:{_id:"$name", avg_mark:{$avg:"$marks.mark"}}},{$match:{avg_mark:{$gte:avgTotal}}},
+    {$project:{avr_mark:{$round:["$avg_mark", 0]}}
+}])

@@ -19,7 +19,7 @@ public class TcpClient implements Closeable {
 	protected TcpClient(String hostname, int port) {
 		try {
 			socket = new Socket(hostname, port);
-			socket.setSoTimeout(50000);
+			socket.setSoTimeout(10000);
 			output = new ObjectOutputStream(socket.getOutputStream());
 			input = new ObjectInputStream(socket.getInputStream());
 		} catch (Exception e) {
@@ -31,6 +31,7 @@ public class TcpClient implements Closeable {
 		input.close();
 		output.close();
 		socket.close();		
+		System.exit(0);
 	}
 	
 	@SuppressWarnings("unchecked")

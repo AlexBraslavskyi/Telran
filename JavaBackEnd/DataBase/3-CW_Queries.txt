@@ -1,0 +1,16 @@
+1. Display names of two the best students
+select name,  round(avg(mark)) avg_mark from students_marks_subjects group by name
+order by avg(mark) desc limit 2
+
+db.students.aggregate([{$unwind:"$marks"},{$group: {_id:"$name", avg_mark:{$avg:"$marks.mark"}}}, {$sort: {avg_mark: -1}},{$limit: 2},
+{$project:{avg_mark:{$round:["$avg_mark", 0]}}}])
+
+2. Display student names and average values of their marks only for students having average marks greater tha total average mark for all students
+select name,  round(avg(mark)) avg_mark from students_marks_subjects group by name 
+having avg(mark) > (select avg(mark) from marks)
+
+var avgTotal = db.students.aggregate([{$unwind:"$marks"},{$group: {_id:null, avg_mark:{$avg:"$marks.mark"}}}]).toArray()[0].avg_mark
+
+db.students.aggregate([{$unwind:"$marks"},{$group: {_id:"$name", avg_mark:{$avg:"$marks.mark"}}},{$match:{avg_mark:{$gte:avgTotal}}},
+{$project:{avg_mark:{$round:["$avg_mark", 0]}}}])
+

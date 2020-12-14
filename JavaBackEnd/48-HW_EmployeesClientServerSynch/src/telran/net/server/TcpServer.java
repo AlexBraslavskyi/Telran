@@ -3,7 +3,6 @@ package telran.net.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,19 +36,17 @@ public class TcpServer implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("server is listened on port " + port);
-		SocketAddress clientAddr = null;
 		while (!isStoped.get()) {
 			try {
 				Socket socket = serverSocket.accept();
-				clientAddr = socket.getRemoteSocketAddress();
-				System.out.println("Connected client:" + clientAddr);
 				ClientSessionHandler client = new ClientSessionHandler(socket, protocol, isStoped);
 				executor.execute(client);
 			} catch (SocketTimeoutException e) {
 				if(isStoped.get()) {
 					try {
 						executor.shutdownNow();
-						serverSocket.setSoTimeout(1);;
+						serverSocket.close();
+//						System.exit(0);
 					}catch(IOException e1){
 						e.printStackTrace();
 					}

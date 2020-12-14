@@ -13,6 +13,7 @@ import telran.view.Menu;
 public class EmployeesClientAppl {
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		InputOutput io = new ConsoleInputOutput();
+		
 		try (EmployeesServiceProxy service = new EmployeesServiceProxy("localhost", PORT)) {
 			// to see methods parameters names in menu builder, open Project Properties -> Java Compiler
 			// and switch on option "Store information about method parameters"
@@ -20,6 +21,7 @@ public class EmployeesClientAppl {
 			employeesMenu.perform(io);
 			
 		}catch (Exception e) {
+		
 			// TODO: handle exception
 		}
 		
