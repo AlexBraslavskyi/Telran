@@ -1,0 +1,105 @@
+Perform the queries for both SQL and MongoDB for the following tasks
+1.Update table marks such that all marks for those who don’t have “Java Technologies” mark will be decreased on 20
+2.Update subject name ‘Java’ to ‘Java core’
+3.Insert new “Java A dvanced” marks for all students. These marks should be equaled to an average
+mark among all subjects related to Java of each student. For example if a student has 100 of “Java Technologies” and 70 of “Java core” the “Java Advanced”mark should be 85 for the student. Hint: applying either “like” or regular expression Display two best students of Front-End (React, JS)
+4.Delete mark objects of React of students who have mark of JS less than 80
+5.Delete students having average mark less than the college average mark
+
+
+
+1.
+////
+db.students.updateMany({marks:{$not:{$elemMatch:{subject:'Java Technologies'}}}},{$inc:{'marks.$[].mark':-20}})
+////
+
+
+db.students.find().forEach(function(f){
+var flagJavaTech = 0;
+    for(var i = 0; i<f.marks.length; i++){
+    if(f.marks[i].subject == 'Java Technologies'){
+      flagJavaTech++;
+    }
+    }
+    var marks1 = [];
+    var temp = {};
+     for(var i = 0; i<f.marks.length; i++){
+    if(flagJavaTech==0){
+		marks1[i] = {"subject":f.marks[i].subject,"mark":f.marks[i].mark-20};
+      temp = {
+		"_id":f._id,
+      "name":f.name,
+      "marks":marks1
+    }
+    db.students.updateOne({_id:f._id},{$pull:{marks:f.marks[i]}});
+    db.students.updateOne({_id:f._id},{$push:{marks:temp.marks[i]}})
+    } 
+     }
+         
+})
+
+2.
+db.students.updateMany({"marks.subject":"Java"},{$set:{"marks.$.subject":"Java Core"}})
+
+3.
+/////
+var javaAvgDocs = 
+db.students.aggregate([
+    { "$unwind": "$marks" },{$match:{"marks.subject":{$regex: /java/i}}},
+    {"$group": {"_id": "$_id", avg_java:{'$avg':"$marks.mark"}}},{$project:{avr_marks:{$round:['$avg_java',0]}}}
+]).toArray()
+
+javaAvgDocs.forEach(doc=> db.students.updateOne({_id:doc._id},{$push:{marks:{subject:'Java Advanced', mark:doc.avr_marks}}}))
+
+
+///
+var arr = db.students.aggregate([
+    { "$unwind": "$marks" },{$match:{"marks.subject":{$regex: /java/i}}},
+    {"$group": {"_id": "$_id", avg_marks:{'$avg':"$marks.mark"}}},{$project:{avr_marks:{$round:[]}}
+])
+
+
+db.students.find().forEach(function(f){
+    for(var i = 0; i<arr.length; i++){
+    if(f._id == arr[i]._id){
+       db.students.updateOne({_id:f._id},
+       {$push:{marks:{subject:'Java Advanced', mark:(arr[i].sum_marks)}}}) 
+    }
+    }
+
+})
+
+4.
+//
+
+db.students.updateMany({marks:{$elemMatch:{subject:'JS',mark:{$lt:80}}}},{$pull:{marks:{'subject':'React'}}})
+
+//
+
+var arr = db.students.aggregate([{ "$unwind": "$marks" },
+{$match:{"marks.subject":{$regex: /JS/i}}},{$match:{"marks.mark":{$lt:80}}}
+]).toArray()
+
+
+db.students.find().forEach(function(f){
+    for(var i = 0; i<arr.length; i++){
+    if(f._id == arr[i]._id){
+       db.students.updateOne({_id:f._id},
+       {$pull:{marks:{subject:'React'}}}) 
+    }
+    }
+
+})
+
+
+5.
+var arrAvg = db.students.aggregate([{$unwind:"$marks"},
+{$group: {_id:"$_id",  avgMark: { $avg: "$marks.mark"}}}]).toArray()
+var avrMarkAll = db.students.aggregate([{$unwind:"$marks"},
+{$group: {_id:null,  total: { $avg: "$marks.mark"}}}]).toArray()[0].avrMarkAll
+    
+for(var i = 0; i<arrAvg.length; i++){
+    if(arrAvg[i].avrMark<){
+        db.students.remove({_id:arrAvg[i]._id}) 
+    }
+}

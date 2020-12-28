@@ -1,0 +1,189 @@
+Perform the queries for both SQL and MongoDB for the following tasks
+1.Update table marks such that all marks for those who don’t have “Java Technologies” mark will be decreased on 20
+2.Update subject name ‘Java’ to ‘Java core’
+3.Insert new “Java A dvanced” marks for all students. These marks should be equaled to an average
+mark among all subjects related to Java of each student. For example if a student has 100 of “Java Technologies” and 70 of “Java core” the “Java Advanced”mark should be 85 for the student. Hint: applying either “like” or regular expression Display two best students of Front-End (React, JS)
+4.Delete mark objects of React of students who have mark of JS less than 80
+5.Delete students having average mark less than the college average mark
+
+
+1.
+/////
+UPDATE marks
+SET mark = mark - 20
+WHERE stid NOT IN (
+SELECT stid FROM students_marks_subjects WHERE subject = 'Java Technologies')
+
+///difficalt
+do $$ declare i record;
+count_st integer := (
+  select 
+    count(mark) 
+  FROM 
+    students_marks_subjects s1 
+  WHERE 
+    not exists (
+      select 
+        mark 
+      from 
+        students_marks_subjects s2 
+      where 
+        s1.stid = s2.stid 
+        and subject = 'Java Technologies'
+    )
+);
+begin for i in 1..count_st loop 
+UPDATE 
+  marks 
+set 
+  mark = mark - 20 
+where 
+  (
+    select suid 
+    FROM 
+      students_marks_subjects s1 
+    WHERE 
+      not exists (
+        select mark 
+        from 
+          students_marks_subjects s2 
+        where 
+          s1.stid = s2.stid 
+          and subject = 'Java Technologies'
+      ) 
+    order by 
+      mark OFFSET i - 1 limit 1
+  )= suid 
+  and (
+    select stid 
+    FROM 
+      students_marks_subjects s1 
+    WHERE 
+      not exists (
+        select mark 
+        from 
+          students_marks_subjects s2 
+        where 
+          s1.stid = s2.stid 
+          and subject = 'Java Technologies'
+      ) 
+    order by 
+      mark OFFSET i - 1 limit 1
+  )= stid;
+end loop;
+end;
+$$
+
+2.
+update subjects set subject = 'Java Core' where subject = 'Java' 
+
+3.
+insert into subjects (suid, subject )
+values (5,'Java Advanced')
+
+
+do $$ declare i record;
+begin for i in 1..(
+  SELECT 
+    DISTINCT count(name) over() 
+  FROM 
+    students_marks_subjects 
+  WHERE 
+    subject ~ * 'java' 
+  GROUP by name
+) loop 
+insert into marks (stid, suid, mark) 
+values 
+  (
+    (
+      SELECT stid 
+      FROM 
+        students_marks_subjects 
+      WHERE 
+        subject ~ * 'java' 
+      GROUP by 
+        stid OFFSET i - 1 
+      LIMIT 
+        1
+    ),(
+      select suid 
+      from 
+        subjects 
+      where 
+        subject = 'Java Advanced'
+    ), 
+    (
+      SELECT 
+        sum(mark) total 
+      FROM 
+        students_marks_subjects 
+      WHERE 
+        subject ~ * 'java' 
+      GROUP by 
+        name OFFSET i - 1 LIMIT 1
+    ) / 2
+  );
+end loop;
+end;
+$$
+
+4.
+delete from 
+  marks m1 
+where 
+  suid = (
+    select suid 
+    from 
+      subjects 
+    where 
+      subject = 'React'
+  ) 
+  and EXISTS(
+    select mark 
+    from 
+      students_marks_subjects s 
+    where 
+      subject = 'JS' 
+      and mark < 80 
+      and m1.stid = s.stid
+  )
+
+5.
+//
+delete from students where stid in(select stid from students_marks_subjects group by stid 
+								  having avg(mark)< (select avg(mark) from marks))
+//
+
+do $$ declare i record;
+avg_all integer := (
+  select avg(mark) 
+  from 
+    students_marks_subjects
+);
+avg_st integer;
+s_id integer;
+begin for i in 1..(
+  SELECT count(name) 
+  FROM 
+    students
+) loop 
+Select avg(mark) into avg_st 
+from 
+  students_marks_subjects 
+GROUP by 
+  stid OFFSET i - 1 LIMIT 1;
+Select 
+  stid into s_id 
+from 
+  students_marks_subjects 
+GROUP by 
+  stid OFFSET i - 1 LIMIT 1;
+if (avg_st < avg_all) then 
+delete from 
+  marks 
+where 
+  stid = s_id;
+end if;
+end loop;
+end;
+$$

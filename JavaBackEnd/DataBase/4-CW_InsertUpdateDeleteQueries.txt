@@ -1,0 +1,24 @@
+1. Add new student Vasya with Java mark 85 
+insert into students (stid, name) values(4, 'Vasya')
+insert into marks (stid,suid,mark)
+values ((select stid from students where name='Vasya'), (select suid from subjects where subject='Java'), 85)
+
+db.students.insertOne({_id:4, name: 'Vasya', marks: [{subject: 'Java', mark: 85}]})
+
+2. Update Java mark of Moshe to 85
+db.students.updateOne({name:'Moshe',"marks.subject":'Java'},{$set:{"marks.$.mark":85}})
+
+update marks set mark=85 where stid=(select stid from students where name='Moshe')
+and suid=(select suid from subjects where subject='Java') 
+
+3. Insert Java Technologies mark of Vasya as 75
+insert into marks (stid, suid, mark )
+values ((select stid from students where name='Vasya'),
+		(select suid from subjects where subject='Java Technologies'), 75)
+
+db.students.updateOne({name:'Vasya'},{$push:{marks:{subject:'Java Technologies', mark:75}}})
+
+4. Delete all marks less or equal than 80
+db.students.updateMany({},{$pull:{marks:{mark:{$lte:80}}}})
+delete from marks where mark <= 80		
+		

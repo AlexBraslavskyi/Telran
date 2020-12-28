@@ -1,0 +1,162 @@
+1
+///sql
+UPDATE marks
+SET mark = mark - 20
+WHERE stid NOT IN (
+SELECT stid FROM students_marks_subjects WHERE subject = 'Java Technologies')
+
+///difficalt
+  do $$
+  declare
+    i record;
+	count_st integer := (select count(mark) FROM students_marks_subjects s1 WHERE
+not exists
+(select  mark from students_marks_subjects s2 where s1.stid=s2.stid and subject='Java Technologies'));
+ begin
+    for  i in 1..count_st loop
+ 	UPDATE marks set mark  = mark - 20 where 
+(select  suid FROM students_marks_subjects s1 WHERE
+not exists
+(select  mark from students_marks_subjects s2 where s1.stid=s2.stid and subject='Java Technologies') order by mark OFFSET i-1 limit 1)=suid 
+and 
+(select  stid FROM students_marks_subjects s1 WHERE
+not exists
+(select  mark from students_marks_subjects s2 where s1.stid=s2.stid and subject='Java Technologies') order by mark OFFSET i-1 limit 1)=stid;
+   end loop;
+   end; $$
+
+///mongo
+
+db.students.find().forEach(function(f){
+var flagJavaTech = 0;
+    for(var i = 0; i<f.marks.length; i++){
+    if(f.marks[i].subject == 'Java Technologies'){
+      flagJavaTech++;
+    }
+    }
+    var marks1 = [];
+    var temp = {};
+     for(var i = 0; i<f.marks.length; i++){
+    if(flagJavaTech==0){
+		marks1[i] = {"subject":f.marks[i].subject,"mark":f.marks[i].mark-20};
+      temp = {
+		"_id":f._id,
+      "name":f.name,
+      "marks":marks1
+    }
+    db.students.updateOne({_id:f._id},{$pull:{marks:f.marks[i]}});
+    db.students.updateOne({_id:f._id},{$push:{marks:temp.marks[i]}})
+    } 
+     }
+         
+})
+
+2
+///sql
+
+update subjects set subject = 'Java Core' where subject = 'Java' 
+
+mongo
+db.students.updateMany({"marks.subject":"Java"},{$set:{"marks.$.subject":"Java Core"}})
+
+
+3
+////sql
+insert into subjects (suid, subject )
+values (5,'Java Advanced')
+
+
+
+  do $$
+  declare
+    i record;
+ begin
+    for  i in 1..(SELECT DISTINCT count(name) over() FROM students_marks_subjects  WHERE subject ~* 'java' 
+  GROUP by name) loop
+ 	insert into marks (stid, suid, mark )
+ values (
+ 	(SELECT stid FROM students_marks_subjects  WHERE subject ~* 'java' 
+ GROUP by stid OFFSET i-1  LIMIT 1)
+	 ,(select suid from subjects where subject='Java Advanced'),
+ 	(SELECT sum(mark) total FROM students_marks_subjects  WHERE subject ~* 'java' 
+ GROUP by name OFFSET i-1  LIMIT 1)/2);
+   end loop;
+   end; $$
+
+////mongo
+var arr = db.students.aggregate([
+    { "$unwind": "$marks" },{$match:{"marks.subject":{$regex: /java/i}}},
+    {"$group": {"_id": "$_id", sum_marks:{'$sum':"$marks.mark"}}},{'$sort':{'_id':1}}
+]).toArray()
+
+
+db.students.find().forEach(function(f){
+    for(var i = 0; i<arr.length; i++){
+    if(f._id == arr[i]._id){
+       db.students.updateOne({_id:f._id},
+       {$push:{marks:{subject:'Java Advanced', mark:(arr[i].sum_marks)/2}}}) 
+    }
+    }
+
+})
+
+4.
+sql
+delete from marks m1 where suid = (select suid from subjects where subject='React') and EXISTS(
+select mark from students_marks_subjects s where subject='JS' and mark <80 and m1.stid=s.stid)
+
+////mongo
+
+//correct
+
+var arr = db.students.aggregate([{ "$unwind": "$marks" },
+{$match:{"marks.subject":{$regex: /JS/i}}},{$match:{"marks.mark":{$lt:80}}}
+]).toArray()
+
+
+db.students.find().forEach(function(f){
+    for(var i = 0; i<arr.length; i++){
+    if(f._id == arr[i]._id){
+       db.students.updateOne({_id:f._id},
+       {$pull:{marks:{subject:'React'}}}) 
+    }
+    }
+
+})
+
+
+
+5.
+////sql
+
+
+ do $$
+   declare
+i record;
+avg_all integer := (select avg(mark) from students_marks_subjects);
+avg_st integer;
+s_id integer;
+ begin
+    for  i in 1..(SELECT count(name) FROM students) loop
+     Select avg(mark) into avg_st from students_marks_subjects GROUP by stid    OFFSET i-1 LIMIT 1;
+	Select stid into s_id from students_marks_subjects GROUP by stid    OFFSET i-1 LIMIT 1;
+	if 
+ 	(avg_st<avg_all)
+	then delete from marks where stid = s_id ;
+	end if;
+   end loop;
+   end; $$
+
+
+///mongo
+
+var arrAvg = db.students.aggregate([{$unwind:"$marks"},
+{$group: {_id:"$_id",  total: { $avg: "$marks.mark"}}}]).toArray()
+var totalAvg = db.students.aggregate([{$unwind:"$marks"},
+{$group: {_id:null,  total: { $avg: "$marks.mark"}}}]).toArray()
+    
+for(var i = 0; i<arrAvg.length; i++){
+    if(arrAvg[i].total<totalAvg[0].total){
+        db.students.remove({_id:arrAvg[i]._id}) 
+    }
+}

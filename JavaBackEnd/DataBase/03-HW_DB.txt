@@ -1,0 +1,56 @@
+1.Display count of students having marks in the [70-80]
+
+****** SQL
+select DISTINCT count(name) over() from students_marks_subjects s  where  mark between 70 and 80 GROUP by name 
+
+//select  count(DISTINCT(stid)) from  marks  where  mark between 70 and 80 
+
+**** Mongo
+db.students.aggregate([{$match:{'marks.mark':{$gte:70,$lte:80}}}]).itcount()
+
+2.Display two student names having most even marks
+
+***** SQL
+SELECT name FROM students_marks_subjects s  WHERE MOD(mark,2) = 0 GROUP BY name
+order by count(name)  DESC LIMIT 2
+
+***** Mongo
+db.students.aggregate([{ "$unwind": "$marks" },{$match:{"marks.mark":{"$mod":[2,0]}}},
+    {"$group": {"_id": "$name","count": { "$sum": 1}}},
+    { "$sort": { "count": -1 } },  { "$limit": 2 }])
+
+
+3.Display two student names that are worst in Front - End (Assumed that Front - End is any subject that is not related to Java). Estimation should be done according to the sum of all relevant marks
+
+***** SQL
+SELECT name, sum(mark) total_frontEnd FROM students_marks_subjects  WHERE subject !~* '^java' 
+GROUP by name order by total_frontEnd limit 2
+
+***** Mongo 
+db.students.aggregate([
+    { "$unwind": "$marks" },{$match:{"marks.subject":{$not:{$regex: /java/i}}}},
+    {"$group": {"_id": "$name", sum_marks:{'$sum':"$marks.mark"}}},
+    { "$sort": {sum_marks:1 }},{$limit:2} 
+])
+4.
+Display two student names that are best in Back - End (Assumed that Back - End is any subject containing Java). Estimation should be done according to the sum of all relevant marks
+
+***** SQL
+SELECT name, sum(mark) total_backEnd FROM students_marks_subjects  WHERE subject ~* '^java' 
+GROUP by name order by total_backEnd DESC limit 2
+
+
+***** Mongo
+db.students.aggregate([
+    { "$unwind": "$marks" },{$match:{"marks.subject":{$regex:/java/i}}},
+    {"$group": {"_id": "$name", sum_marks:{'$sum':"$marks.mark"}}},
+    { "$sort": { "sum_marks": -1 } },{$limit:2}
+])
+
+5.Display list of all the marks with counts of their occurrences. List should be sorted in the descending order of the occurrences
+
+***** SQL
+SELECT mark,COUNT(mark) FROM marks GROUP BY mark ORDER BY COUNT(mark) DESC, mark desc;
+
+***** Mongo
+db.students.aggregate([{$unwind:"$marks"},{$group: {_id:"$marks.mark",  total: { $sum: 1}}}, { $sort: { total: -1, mark:-1} }])
