@@ -1,9 +1,17 @@
 import React from "react";
 import M from 'materialize-css/dist/js/materialize';
 import $ from "jquery";
+
+
 export function getSelectOptions(optionStrings) {
-    return optionStrings.map(os => {
-        return <option key={os} value={os}>{os}</option>
+    return
+    // <div>
+    //     <option value="" disabled selected>Choose your option</option>
+    // </div>
+    optionStrings.map(os => {
+        return <div>
+        <option key={os} value={os} >{os}</option>
+        </div>
     })
 }
 export function getErrorMessage(error){
@@ -15,15 +23,16 @@ export function getInputElement(type, name, label, handler,errorMessage,valuePro
         <div className="input-field col s12">
 <i className="material-icons prefix">{icon}</i>
         <input id={label} required="required" disabled={disabled}
-              className = {(valueProps.controlError===-1
-              ? "validate_invalid"
-              : valueProps.controlError===1
-              ? "validate_valid"
-              : "validate")}
+               className = {errorMessage
+                   ? "invalid"
+                   :"validate"
+                       } defaultValue={valueProps.value}
                onChange={handler}  name={name} type={type} />
                <label htmlFor={label}
                >{label}</label>
-            <span className="helper-text" data-error={errorMessage} data-success={"Perfect!"}></span>
+
+            <span className="helper-text" data-error={errorMessage}
+                  data-success={"Perfect!"}></span>
 
         </div>
     </div>
@@ -65,13 +74,17 @@ export function getInputElementBlur(type, name, label, handler,errorMessage,valu
     </div>
 }
 export function getSelectElement(name, handler, label, options) {
-    return <div className="form-group">
-        <label>{label}</label>
-        <select className="form-control" name={name} placeholder={name}
+    return <div class="input-field col s12">
+
+        <select className="browser-default"  name={name} placeholder={name}
                 onChange={handler}>
             {getSelectOptions(options)}
         </select>
+        {/*<label>{label}</label>*/}
     </div>
+    // $(document).ready(function(){
+    //     $('select').formSelect();
+    // });
 }
 export function getRadioButtonElement(name, handler, value) {
     return <div className="form-check" key={value}>

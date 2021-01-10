@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {nameMinLength} from "../config/ShopConfig";
 import {getInputElement, getInputElementActive, getInputElementBlur} from "../utils/inputElements";
 import { getRandomOrderNumb } from '../utils/random';
+import $ from "jquery";
 import { Button, Card, Row, Col } from 'react-materialize';
+import _ from "lodash";
+import {useSelector} from "react-redux";
 
 
-const letters = /^[A-Za-z]+$/;
+
+const letters = /^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/;
 
 export const OrderForm = (props) =>{
 
@@ -25,7 +29,7 @@ export const OrderForm = (props) =>{
                 comment: '',
                 items:items,
                 total: total,
-                delivery: delivery,
+                delivery: delivery ? delivery: "0",
                 paymentMethod: 'VISA',
     });
     [error,setError]=useState({errorPassport:'',errorName:'',errorEmail:'',errorPhone:''});
@@ -35,13 +39,26 @@ export const OrderForm = (props) =>{
     [phone,setPhone]=useState({value:'',controlError: 0});
     [passport,setPassport]=useState({value:'',controlError: 0});
     [comment, setComment] = useState({value:'',controlError: 0});
-    // [orderNumber, setOrderNumber] = useState({value: order.orderNumber});
     [formRef,setFormRef]=useState(null);
-
+    const orders = useSelector(state=>state.orders);
+    function addOrder(order) {
+        const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
+        if (index >= 0) {
+            return false;
+        }
+        props.ordersService.addOrder(order)
+            .then(() => {
+                    alert(`order with number ${order.orderNumber} added successfully`)
+                }
+                , error => {
+                    alert(`order with number ${order.orderNumber} already exists`)
+                })
+        return true;
+    }
     function submit(event) {
         event.preventDefault();
 
-        if (!props.addOrderFn(order)) {
+        if (!addOrder(order)) {
             error.errorOrderNumber = `Order ${order.orderNumber} already exists`;
             orderNumber={value:order.orderNumber}
             error=error.errorOrderNumber;
@@ -53,7 +70,6 @@ export const OrderForm = (props) =>{
 
     useEffect(()=> {
         setOrder(order);
-        // setOrderNumber(orderNumber);
         setPhone(phone);
         setName(name);
         setEmailAddress(emailAddress);
@@ -134,28 +150,10 @@ export const OrderForm = (props) =>{
 
       setError({...error})
     }
-    function  handlerPassport(event) {
-        passport = event.target.value;
-        error={errorPassport:''}
 
-        if (passport == "") {
-            passport={value:passport,controlError: 0}
-            order.passport = passport;
-        } else if (passport.length!=9) {
-            error={errorPassport:'Wrong passport number'}
-            passport={value:passport,controlError: -1}
-            order.passport = passport;
-        } else {
-            error={errorPassport:''}
-            order.passport = passport;
-            passport={value:passport,controlError: 1}
-        }
-
-      setError({...error})
-    }
    function validate() {
         const res =  notErrors()
-            // && allFields();
+            && allFields();
         return res;
     }
 
@@ -173,17 +171,15 @@ export const OrderForm = (props) =>{
                 return res && field
             } , true)
     }
+
         return  <div className="content">
 
             <div className="row" style={{width:"60%"}}>
 
-                <form className="col s12" ref={(ref) => formRef = ref} onSubmit={submit}>
+                <form className="col s12" id="formValidate" ref={(ref) => formRef = ref} novalidate="novalidate" onSubmit={submit}>
                     <div className="center">
                         <h3 style={{color:"#ee6e73", marginTop:"5vh"}}> - Order -</h3>
                     </div>
-                    {/*{getInputElementActive('text',*/}
-                    {/*    'orderNumber', 'Order number',*/}
-                    {/*    handlerNonValidated,"",orderNumber,'shopping_cart',true)}*/}
                     {getInputElement('text',
                         'name', 'Name',
                         handlerName,error.errorName,'','account_circle')}
@@ -199,7 +195,7 @@ export const OrderForm = (props) =>{
                         handlerNonValidated,"",'','home')}
                     {getInputElement('text',
                         'passport', 'Passport',
-                        handlerPassport,error.errorPassport,'','local_library')}
+                        handlerNonValidated,"",'','local_library',)}
             
                     {getInputElement('text',
                         'comment', 'Comment',

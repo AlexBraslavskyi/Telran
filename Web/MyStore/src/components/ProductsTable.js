@@ -1,25 +1,49 @@
-
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import columnsMediaObject from "../config/columnsMediaConfig";
-import useColumnsMedia from "../utils/mediaHook";
-import DetailsTable from "./DetailsTable";
-import columnsContent from "../config/tableConfig";
-import MaterialTable, {MTableBody, MTableBodyRow, MTableCell, MTableHeader, MTablePagination} from "material-table";
-import {render} from "react-dom";
+import MaterialTable from "material-table";
 import _ from "lodash";
-import {throwError} from "rxjs";
+import { forwardRef } from 'react';
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+
 
 
 export default function ProductsTable(props) {
-    // const userData = useSelector(state=>state.userData);
     const products = useSelector(state=>state.items);
-    // let [rowData,setRowData] = useState({});
-    // const columns = useColumnsMedia(columnsMediaObject);
-    // const [order,setOrder] = useState({});
-    // const showDetails=(order)=>
-    //     setOrder({...order});
-    // const backFn = () => setOrder({});
+    console.log(products);
+    const tableIcons = {
+        Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+        Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+        Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+        Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+        DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+        Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+        Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+        Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+        FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+        LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+        NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+        PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+        ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+        Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+        SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+        ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+        ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+    };
     const columnValues = Object.values(columnsMediaObject);
     const maxColumns = Math.max(...columnValues);
     function removeProduct(productNumber) {
@@ -54,27 +78,47 @@ export default function ProductsTable(props) {
 
     const [columns, setColumns] = useState([
 
-        { title: 'ID', field: 'id', width: 10},
-        { title: '', field: 'img', width: 80},
-        { title: 'Title', field: 'title',width: 120 },
-        { title: 'Price', field: 'price', width: 10,},
+        { title: 'ID', field: 'id', cellStyle:{width: 10,maxWidth: 10}, headerStyle:{width: 10,maxWidth: 10}},
+        { title: '', field: 'img', cellStyle:{width: 70,maxWidth: 70},headerStyle:{width: 70,maxWidth: 70},
+            render: (row) => (
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100px',
+                        width: '120px',
+                        padding:0,
+                    }}
+                >
+                    <img
+                        style={{ height: '90px', width: '100px' }}
+                        src={(
+                            row.img
+                        )
+                        }
+                    />
+                </div>
+            )},
+        { title: 'Title', field: 'title',cellStyle:{width: 200 ,maxWidth: 200},headerStyle:{width: 200,maxWidth: 200}},
+        { title: 'Price', field: 'price', cellStyle:{width: 10,maxWidth: 10},headerStyle:{width: 10,maxWidth: 10}},
         { title: 'Description', field: 'description',
-                width: 400},
+            cellStyle:{width: 400,maxWidth: 400},headerStyle:{width: 400,maxWidth: 400}},
             ]);
 
     const [data, setData] = useState(products.map((item)=>({id: item.id, title:
         item.title, price:item.price, description:item.description,img:
-            // <img src={
                 item.img
-            // } alt="" border="3" height="100" width="100" />
     })))
 
 
     return  (
         <MaterialTable style={{marginTop:'50px'}}
+                       icons={tableIcons}
             title="- Products - "
                        options={{
                            headerStyle:{fontWeight:"bold", fontSize:16},
+                           cellStyle:{padding:0},
                        }}
             columns={columns}
             data = {data}

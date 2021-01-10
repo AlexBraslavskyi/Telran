@@ -13,8 +13,7 @@ const Recipe = (props) => {
     const ordersService =
         new OrdersFirebaseService('orders');
     let [ordersSwitch, setOrdersSwitch] = useState(0)
-    // let addedItems = props.addedItems;
-    // console.log(addedItems);
+
     const handleChecked = (e) => {
         if (e.target.checked) {
             props.addDelivery();
@@ -34,7 +33,7 @@ const Recipe = (props) => {
                 <li className="collection-item">
                     <label>
                         <input type="checkbox" onChange={handleChecked}/>
-                        <span>Delivery(+{DELIVERY}₪)</span>
+                        <span>Delivery : {DELIVERY} ₪</span>
                     </label>
                 </li>
                 <li className="collection-item"><b>Total: {props.total} ₪</b></li>
@@ -52,7 +51,7 @@ const Recipe = (props) => {
     if (ordersSwitch == 0) {
         return showCart()
     }
-    return <Orders addedItems={props.addedItems}
+    return <OrderForm addedItems={props.addedItems}
                    ordersService = {ordersService}
                    total = {props.total}
                    delivery = {props.delivery}
@@ -64,7 +63,6 @@ const mapStateToProps = (state)=>{
         addedItems: state.addedItems,
         total: state.total,
         delivery: state.delivery,
-        // quantity: state.quantity,
     }
 }
 
@@ -72,6 +70,7 @@ const mapDispatchToProps = (dispatch)=>{
     return{
         addDelivery: ()=>{dispatch({type: 'ADD_DELIVERY'})},
         subtractDelivery: ()=>{dispatch({type: 'SUB_DELIVERY'})}
+
     }
 }
 

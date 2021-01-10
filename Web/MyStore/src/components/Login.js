@@ -35,7 +35,7 @@ export default function Login(props) {
     }
 
     return  <div className="content">
-            <h2 className="center-align" style={{color:"#ee6e73",fontFamily:"fantasy", marginTop:"5vh"}}>My cabinet</h2>
+            <h2 className="center-align" style={{color:"#ee6e73",fontFamily:"fantasy", marginTop:"5vh"}}>Please sing in to enter</h2>
     
         <div className="log">
             <form className="col s6 center-align" onSubmit={onSubmit} style={{width:"35vw"}}>

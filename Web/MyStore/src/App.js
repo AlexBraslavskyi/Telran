@@ -1,6 +1,5 @@
   
 import React, {Component, useEffect} from 'react';
-import {BrowserRouter, Route, Switch,Redirect} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Cart from './components/Cart'
 import './style/Style.css'
@@ -12,13 +11,13 @@ import OrdersFirebaseService from "./services/OrdersFirebaseService";
 import AuthFirebaseService from "./services/AuthFirebaseService";
 import MobMenuService from "./services/MobMenuService";
 import {useDispatch, useSelector} from "react-redux";
+import 'fomantic-ui-css/semantic.css';
 import {
+    actionComments,
     actionFlagMobMenu,
     actionItems,
     actionOrders,
-    actionProducts,
     actionUserData,
-    addToCart
 } from "./components/actions/actions";
 import {
     pathCart,
@@ -26,20 +25,28 @@ import {
     pathLogin,
     pathLogout,
     pathHome,
-    pathOrderForm,
     pathOrders,
-    pathSearch, pathProducts
+    pathSearch, pathProducts, pathStatistics, pathContacts, pathUserProfile
 } from './config/ShopConfig';
-import { OrderForm } from './components/OrderForm';
 import Orders from './components/Orders';
-import {reduce} from "rxjs/operators";
 import ItemsFirebaseService from "./services/ItemsFirebaseService";
 import ProductsTable from "./components/ProductsTable";
+import Statistics from "./components/Statistics";
+import OrdersSearch from "./components/OrdersSearch";
+import Contacts from "./components/Contacts";
+import CommentsFirebaseService from "./services/CommentsFirebaseService";
+import {Redirect, Route, Switch} from "react-router";
+import {BrowserRouter} from "react-router-dom";
+import UserProfile from "./components/UserProfile/UserProfile";
+import {AppBar, Typography} from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
 
 const App =()=> {
   const ordersService =
   new OrdersFirebaseService('orders');
   const itemsService = new ItemsFirebaseService('items');
+  const commentsService = new CommentsFirebaseService('comments');
  const authService =  new AuthFirebaseService();
  const mobMenuService = new MobMenuService();
  const dispatch = useDispatch();
@@ -58,26 +65,56 @@ const App =()=> {
                      dispatch(actionItems(items));
                  }
                  , error => alert(JSON.stringify(error))
-             )
+             );
          }
+             commentsService.getComments().subscribe(comments => {
+                     dispatch(actionComments(comments));
+                 }
+                 , error => alert(JSON.stringify(error))
+             )
      })
 
 
  },[]);
+    const drawerWidth = 0;
+    const useStyles = makeStyles(theme => ({
+        appBar: {
+            top: 'auto',
+            bottom: 0,
+            width: '100%',
+            // marginLeft: drawerWidth,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+            marginLeft: 10,
+            background:"#ee6e73",
+        },
+        footer: {
+            background: "#ee6e73",
+            fontSize: 17,
+        },
+    }));
+    const classes = useStyles();
     return (
-       <BrowserRouter>
-              <Navbar userData={userData}/>
-                <Switch>
-                    <Route exact path={pathHome} render ={() =><Home/>}/>
-                    <Route path={pathHome} exact render={() =>
-                    {return !userData.username ? <Home/> :
-                        <Redirect to={pathCart}/>}}/>
+         <BrowserRouter>
+           <Navbar userData={userData}/>
+           <Switch>
+                    <Route exact path={pathHome} render ={() => {return <Home commentsService={commentsService}/>}}/>
                     <Route path={pathCart} exact render={() =>
                     {return userData.username ? <Cart/> :
                         <Redirect to={pathLogin}/>}}/>
-                    {/*<Route path={pathSearch} exact render={() =>*/}
-                    {/*{return userData.isAdmin ? <OrdersSearch/> :*/}
-                    {/*    <Redirect to={pathHome}/>}}/>*/}
+
+                    <Route path={pathContacts} exact render={() =>
+                    {return  <Contacts/>}}/>
+                    <Route path={pathStatistics} exact render={() =>
+                    {return userData.isAdmin ? <Statistics/> :
+                        <Redirect to={pathHome}/>}}/>
+                    <Route path={pathSearch} exact render={() =>
+                    {return userData.isAdmin ? <OrdersSearch itemsService={itemsService}/> :
+                        <Redirect to={pathHome}/>}}/>
                     <Route path={pathShop} exact render={() =>
                     {return userData.username ? <Shop
                             itemsService = {itemsService}
@@ -86,10 +123,13 @@ const App =()=> {
                     <Route path={pathOrders} exact render={() =>
                     {return userData.username ? <Orders ordersService={ordersService}/> :
                         <Redirect to={pathLogin}/>}}/>
-                         //isAdmin
                     <Route path={pathProducts} exact render={() =>
                     {return userData.username ? <ProductsTable itemsService={itemsService}/> :
                         <Redirect to={pathLogin}/>}}/>
+
+               <Route path={pathUserProfile} exact render={() =>
+               {return userData.username ? <UserProfile /> :
+                   <Redirect to={pathLogin}/>}}/>
                     <Route path={pathLogin} exact render={() =>
                     {return !userData.username ? <Login authService={authService}/> :
                         <Redirect to={pathHome}/>}}/>
@@ -97,16 +137,12 @@ const App =()=> {
                     <Route path={pathLogout} exact render={() =>
                     {return userData.username ? <Logout authService={authService} /> :
                         <Redirect to={pathHome}/>}}/>
-
                   </Switch>
-                    <footer  className="page-footer align-content-end">
-           <div className="footer-copyright">
-            <div className="container">
-            © 2020 Copyright Alex Braslavskyi
-            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-           </div>
-        </footer>
+             <AppBar position='sticky' className={classes.appBar}>
+                 <Typography variant='h8' className={classes.footer}>
+                     © 2020 Copyright Alex Braslavskyi
+                 </Typography>
+             </AppBar>
        </BrowserRouter>
     );
   }

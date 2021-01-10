@@ -27,11 +27,7 @@ console.log(item);
         return  docRef.update({
             'items': firebase.firestore.FieldValue.arrayUnion({
                 id:item.id,
-                img:
-                    // <img src={
-                        item.img
-                    // } alt="" border="3" height="100" width="100" />
-                    ,
+                img:item.img,
                 title:item.title,
                 description:item.description==undefined?"Description not found":item.description,
                 price:item.price,
@@ -49,11 +45,7 @@ console.log(item);
       return  docRef.update({
             'items': firebase.firestore.FieldValue.arrayRemove({
                 id:item.id,
-                img:
-                    // <img src={
-                        item.img
-                    // } alt="" border="3" height="100" width="100" />
-                    ,
+                img:item.img,
                 title:item.title,
                 description:item.description,
                 price:item.price,

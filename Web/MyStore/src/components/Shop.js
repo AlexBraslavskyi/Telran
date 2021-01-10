@@ -8,8 +8,6 @@ const Shop = (props) => {
         props.addToCart(id);
     }
     const items = props.items;
-    // const items = useSelector(state=>state.items);
-   console.log(items)
         let itemList = items.map(item=>{
             return(
                 <div className="card" key={item.id}>

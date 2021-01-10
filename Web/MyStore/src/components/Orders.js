@@ -12,20 +12,20 @@ const Orders = (props) => {
     let addedItems = props.addedItems;
     let total = props.total;
     let delivery = props.delivery;
-    function addOrder(order) {
-        const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
-        if (index >= 0) {
-            return false;
-        }
-        props.ordersService.addOrder(order)
-            .then(() => {
-                    alert(`order with number ${order.orderNumber} added successfully`)
-            }
-            , error => {
-                alert(`order with number ${order.orderNumber} already exists`)
-            })
-        return true;
-    }
+    // function addOrder(order) {
+    //     const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
+    //     if (index >= 0) {
+    //         return false;
+    //     }
+    //     props.ordersService.addOrder(order)
+    //         .then(() => {
+    //                 alert(`order with number ${order.orderNumber} added successfully`)
+    //         }
+    //         , error => {
+    //             alert(`order with number ${order.orderNumber} already exists`)
+    //         })
+    //     return true;
+    // }
     function updateOrder(order) {
         props.ordersService.addOrder(order)
             .then(() => {
@@ -65,21 +65,21 @@ const Orders = (props) => {
             .then(() => {
             })
     }
-    if(orders.length) {
+    // if(userData.isAdmin) {
                 return <div><OrdersTable orders={orders}
                                     removeFn={removeOrder}
                                          removeItemFn = {removeItemFromOrder}
                                          addItemToOrderFn = {addItemToOrder}
                                          updateOrderFn = {updateOrder}
                                          updateItemFn={updateItem}
-                                    // isAdmin={userData.isAdmin}
+
                     />
                 </div>
-    }else{
-                return <OrderForm addOrderFn={addOrder}
-                                  addedItems={addedItems}
-                                  total = {total}
-                                  delivery = {delivery}/>
-        }
+    // }else{
+    //             return <OrderForm addOrderFn={addOrder}
+    //                               addedItems={addedItems}
+    //                               total = {total}
+    //                               delivery = {delivery}/>
+    //     }
     }
 export default Orders;

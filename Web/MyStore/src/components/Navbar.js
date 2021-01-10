@@ -1,19 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import firebase from "firebase";
+import * as $ from 'jquery';
+import M from "materialize-css";
 import {useDispatch, useSelector} from "react-redux";
 import useMedia from "../utils/mediaHook";
 import navMediaObject from "../config/navMediaConfig";
 import MobileNavMenu from "./mobileNavMenu";
 import {actionFlagMobMenu, addToCart} from "./actions/actions";
 import MobMenuService from "../services/MobMenuService";
-import {pathCart, pathShop, pathOrders, pathHome, pathLogout, pathLogin, pathProducts} from '../config/ShopConfig';
+import {
+    pathCart,
+    pathShop,
+    pathOrders,
+    pathHome,
+    pathLogout,
+    pathLogin,
+    pathProducts,
+    pathStatistics, pathSearch, pathContacts, pathUserProfile
+} from '../config/ShopConfig';
+import {Dropdown} from "react-materialize";
+import {Button, Divider, Icon} from "@material-ui/core";
+
  
 
 
 const Navbar = (props)=>{
-    console.log(props.userData);
     const buttons = useMedia(navMediaObject);
     const dispatch = useDispatch();
     const mobMenuService = new MobMenuService();
@@ -49,7 +61,7 @@ const Navbar = (props)=>{
         return true;
     }
 
-    const navItems =
+    const navItems =<div>
     <nav>
             <div className="nav-wrapper">
                 <img className = 'left' style = {{width:'7vw',height:'10vw',marginLeft:'5vw'}}src={require('../style/images/Daco_4048601.png')}/>
@@ -57,20 +69,45 @@ const Navbar = (props)=>{
                         Happy Balloons</Link>
                     <ul className="right">
                         <li><Link to={pathShop}>Shop</Link></li>
-                        <li><Link to={pathOrders}>Orders</Link></li>
-                        <li><Link>Statistics</Link></li>
-                        <li><Link>Search</Link></li>
-                        <li><Link to={pathProducts}>Products</Link></li>
-                        <li><Link>Contact</Link></li>
-                        <li><Link>My Cabinet</Link></li>
+                        {userData.isAdmin ? <li><Link to={pathOrders}>Orders</Link></li>:null}
+                        {userData.isAdmin ? <li><Link to={pathStatistics}>Statistics</Link></li>:null}
+                        {userData.isAdmin ?<li><Link to={pathProducts}>Products</Link></li>:null}
+                        <li><Link to={pathContacts}>Contacts</Link></li>
+                        {userData.username ?
+                           <li><Dropdown
+                                id="Dropdown_6"
+                                options={{
+                                    alignment: 'left',
+                                    autoTrigger: true,
+                                    closeOnClick: true,
+                                    coverTrigger: false,
+                                    hover: false,
+                                    inDuration: 150,
+                                    onCloseEnd: null,
+                                    onCloseStart: null,
+                                    onOpenEnd: null,
+                                    onOpenStart: null,
+                                    outDuration: 250,
+                                }}
+                                trigger={<Link>My Cabinet <i
+                                    className="material-icons right">arrow_drop_down</i></Link>}
+                            >
+                               <Link to={pathUserProfile}>Profile<i className="material-icons left">account_circle</i></Link>
+                               <a href="#!">My Orders<i className="material-icons left">shopping_basket</i></a>
+                               <Link to={pathContacts}>Contact Us<i className="material-icons left">alternate_email</i></Link>
+                               <Link to={pathHome}>Chat<i className="material-icons left">chat</i></Link>
+                               {/*<Divider  variant="middle"  />*/}
+                               <Link style={{borderTop: "solid"}} to={pathLogout}>Sing Out<i className="material-icons left">exit_to_app</i></Link>
+                           </Dropdown></li>
+                            :null}
                         <li><Link style={{height:'64px'}} to={pathCart}><span className = 'basketQuant'>{itemsCount?itemsCount:null}</span>
                         <i className="fa fa-shopping-bag fa-2x"/>
                             </Link></li>
                         {!userData.username ? <li><Link to={pathLogin}>Login</Link></li>
-                            : <li><Link to={pathLogout}>Sign out</Link></li>}
+                            : null}
                     </ul>
             </div>  
-            </nav>
+    </nav></div>
 
 
     return buttons ===1 ?<div className='navbar-fixed'>

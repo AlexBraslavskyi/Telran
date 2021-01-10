@@ -16,6 +16,5 @@ export function getRandomOrderNumb() {
 }
 
 export function getRandomColor() {
-    const color = ['black','red','green','blue','yellow','orange','purple','gold','lightgreen'];
-    return getRandomElement(color);
+    return '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
 }
