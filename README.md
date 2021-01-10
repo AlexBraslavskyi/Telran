@@ -1,1 +1,1 @@
-"# Telran" 
+#Telran
