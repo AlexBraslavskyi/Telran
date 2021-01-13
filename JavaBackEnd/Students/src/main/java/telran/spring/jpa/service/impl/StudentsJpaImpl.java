@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import telran.spring.jpa.dto.IntervalMarks;
 import telran.spring.jpa.dto.MarkDto;
@@ -51,10 +52,45 @@ public class StudentsJpaImpl implements Students {
 	}
 
 	@Override
+	@Transactional
 	public void deleteMarks(String name, String subject) {
-		// TODO Auto-generated method stub
+		marks.deleteMarks(name, subject);
 		
 	}
+	@Override
+	@Transactional
+	public void deleteStudent(String name) {
+//		Student student = students.findByName(name);
+//		if (student != null) {
+//			students.delete(student);
+//		}
+		students.deleteStudent(name);
+	}
+	@Override
+	@Transactional
+	public void deleteSubject(String subject) {
+		subjects.deleteSubject(subject);
+	}
+	@Override
+	@Transactional
+	public void createTempTable() {
+		marks.createTempTable();
+	}
+
+	@Override
+	@Transactional
+	public void delateAllDuplicates() {
+		marks.delateAllDuplicates();
+		
+	}
+
+	@Override
+	@Transactional
+	public void insert() {
+		marks.insert();
+		
+	}
+
 
 	@Override
 	public List<String> bestStudents() {
@@ -110,5 +146,8 @@ public class StudentsJpaImpl implements Students {
 	
 		return marks.findIntervalsMarks(interval);
 	}
+
+
+
 
 }

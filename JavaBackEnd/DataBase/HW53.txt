@@ -1,0 +1,23 @@
+
+
+CREATE TEMP TABLE mytable AS
+select min(id) as id, avg(mark) as mark, student_stid, subject_suid 
+from marks
+GROUP by subject_suid, student_stid
+having count(subject_suid) >1
+
+
+
+DELETE FROM marks WHERE marks.id IN 
+(SELECT id FROM  (SELECT * FROM
+  (SELECT *, count(*) 
+  OVER
+    (PARTITION BY
+      subject_suid,
+      student_stid
+    ) AS count
+   FROM marks) tableWithCount
+  WHERE tableWithCount.count > 1)as a)
+
+
+Insert into marks select * from mytable

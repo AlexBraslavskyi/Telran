@@ -3,8 +3,10 @@ package telran.spring.jpa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,6 +55,26 @@ public class StudentsController {
 		
 		return students.getIntervalsMarks(interval);
 		}
-
-
+	@DeleteMapping("/marks/{subject}")
+	void deleteMarks(@PathVariable("subject") String subject,
+			@RequestParam(name="name", required = true) String name) {
+		students.deleteMarks(name, subject);
+		
+	}
+	@DeleteMapping("/student")
+	void deleteStudent(@RequestParam(name="name", required = true) String name) {
+		students.deleteStudent(name);
+		
+	}
+	@DeleteMapping("/subject")
+	void deleteSubject(@RequestParam(name="subject", required = true) String subject) {
+		students.deleteSubject(subject);
+		
+	}
+	@PutMapping("/subjects/marks/averaging")
+	void deleteDublicateSubject() {
+		students.createTempTable();
+		students.delateAllDuplicates();
+		students.insert();
+	}
 }

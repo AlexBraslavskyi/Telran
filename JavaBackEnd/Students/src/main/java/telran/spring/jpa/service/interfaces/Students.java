@@ -13,6 +13,11 @@ public interface Students {
 	void addSubject(SubjectDto subjectDto);
 	void addMark(MarkDto markDto);
 	void deleteMarks(String name, String subject);
+	void deleteStudent(String name);
+	void deleteSubject(String subject);
+	void createTempTable();
+	void delateAllDuplicates();
+	void insert();
 	List<String> bestStudents();//List of student names having avg mark > then the total one
 	List<String> bestStudents(int nStudents); //list of nStudents best student names based on avg marks
 	List<String> bestStudentsSubject(String subject); //list of student names having avg mark on a given 
