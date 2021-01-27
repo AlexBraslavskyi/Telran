@@ -5,23 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.binder.test.OutputDestination;
 import org.springframework.cloud.stream.binder.test.TestChannelBinderConfiguration;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import telran.logs.bugs.RandomLogs;
-import telran.logs.bugs.dto.*;
+import telran.logs.bugs.dto.LogDto;
+import telran.logs.bugs.dto.LogType;
 
 @SpringBootTest
 @Import(TestChannelBinderConfiguration.class)
@@ -109,12 +109,14 @@ public class RandomLogsTest {
 	}
 	@Test
 	void sendRandomLogs() throws InterruptedException {
-		for (int i = 0; i < 10; i++) {
-			byte[] messageBytes = output.receive().getPayload();
-			String messageStr = new String(messageBytes);
-			System.out.println(messageStr);
-			Thread.sleep(1500);
+		Set<String> data = new HashSet<>();
+		int countOfMessages = 10;
+		for (int i = 0; i < countOfMessages; i++) {
+		    byte[] messageBytes = output.receive(1500).getPayload();
+		    String messageString = new String(messageBytes);
+		    data.add(messageString);
 		}
+		assertEquals(countOfMessages, data.size());
 	}
 
 }
