@@ -5,21 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.binder.test.OutputDestination;
 import org.springframework.cloud.stream.binder.test.TestChannelBinderConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import telran.logs.bugs.dto.LogDto;
-import telran.logs.bugs.dto.LogType;
+import telran.logs.bugs.RandomLogs;
+import telran.logs.bugs.dto.*;
 
 @SpringBootTest
 @Import(TestChannelBinderConfiguration.class)
@@ -27,7 +29,7 @@ public class RandomLogsTest {
 	private static final String AUTHENTICATION_ARTIFACT = "authentication";
 	private static final String AUTHORIZATION_ARTIFACT = "authorization";
 	private static final String CLASS_ARTIFACT = "class";
-	private static final long N_LOGS = 0;
+	private static final long N_LOGS = 100000;
 	@Autowired
 	RandomLogs randomLogs;
 	@Autowired
@@ -108,10 +110,10 @@ public class RandomLogsTest {
 	@Test
 	void sendRandomLogs() throws InterruptedException {
 		for (int i = 0; i < 10; i++) {
-			byte[] messageBytes = output.receive(1500).getPayload();
+			byte[] messageBytes = output.receive().getPayload();
 			String messageStr = new String(messageBytes);
-//			System.out.println(messageStr);
-//			Thread.sleep(1500);
+			System.out.println(messageStr);
+			Thread.sleep(1500);
 		}
 	}
 

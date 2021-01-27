@@ -1,15 +1,8 @@
 package telran.logs.bugs.dto;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class LogDto {
 	public LogDto(@NotNull Date dateTime, @NotNull LogType logType, @NotEmpty String artifact, int responseTime,
@@ -20,7 +13,6 @@ public class LogDto {
 		this.artifact = artifact;
 		this.responseTime = responseTime;
 		this.result = result;
-		validateDto();
 	}
 	@NotNull
 	public Date dateTime;
@@ -30,21 +22,6 @@ public class LogDto {
 	public String artifact;
 	public int responseTime;
 	public String result;
-	public String getMessage;
-	private void validateDto() {
-		  ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		  Validator validator = factory.getValidator();
-		  Set<ConstraintViolation<LogDto>> violations = validator.validate(this);
-		  if (!violations.isEmpty()) {
-//			  uncommit to throw exceptions
-//		      throw new ConstraintViolationException(violations);
-			  getMessage = new ConstraintViolationException(violations).getMessage();
-			  System.out.println(getMessage);
-		  }
-		    }
-	
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

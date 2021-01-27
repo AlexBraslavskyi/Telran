@@ -2,6 +2,8 @@ package telran.logs.bugs.mongo.doc;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.*;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class LogDocTest {
 LogsRepo logs;
 @Test
 void docStoreTest() {
-	LogDto logDto = new LogDto(null, LogType.NO_EXCEPTION, "",
+	LogDto logDto = new LogDto(new Date(), LogType.NO_EXCEPTION, "artifact",
 			20, "result");
 	logs.save(new LogDoc(logDto));
 	LogDoc actualDoc = logs.findAll().get(0) ;

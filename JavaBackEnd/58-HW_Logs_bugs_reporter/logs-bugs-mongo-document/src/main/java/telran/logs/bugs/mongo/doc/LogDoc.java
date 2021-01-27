@@ -1,13 +1,11 @@
 package telran.logs.bugs.mongo.doc;
 
 import java.util.Date;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import telran.logs.bugs.dto.LogDto;
-import telran.logs.bugs.dto.LogType;
+import telran.logs.bugs.dto.*;
 
 @Document(collection="logs")
 
@@ -31,7 +29,6 @@ public class LogDoc {
 		responseTime = logDto.responseTime;
 		result = logDto.result;
 	}
-	
 	public LogDto getLogDto () {
 		LogDto res = new LogDto(dateTime, logType, artifact, responseTime, result);
 		return res;
@@ -44,12 +41,6 @@ public class LogDoc {
 		this.responseTime = responseTime;
 		this.result = result;
 	}
-	@Override
-	public String toString() {
-		return "LogDoc [dateTime=" + dateTime + ", logType=" + logType + ", artifact=" + artifact + ", responseTime="
-				+ responseTime + ", result=" + result + "]";
-	}
-
 	public LogDoc() {
 	}
 	
