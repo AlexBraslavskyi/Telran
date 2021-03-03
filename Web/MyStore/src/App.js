@@ -13,6 +13,7 @@ import MobMenuService from "./services/MobMenuService";
 import {useDispatch, useSelector} from "react-redux";
 import 'fomantic-ui-css/semantic.css';
 import {
+    actionClients,
     actionComments,
     actionFlagMobMenu,
     actionItems,
@@ -26,7 +27,7 @@ import {
     pathLogout,
     pathHome,
     pathOrders,
-    pathSearch, pathProducts, pathStatistics, pathContacts, pathUserProfile
+    pathSearch, pathProducts, pathStatistics, pathContacts, pathUserProfile, pathUserOrders, pathNewUserForm
 } from './config/ShopConfig';
 import Orders from './components/Orders';
 import ItemsFirebaseService from "./services/ItemsFirebaseService";
@@ -40,17 +41,23 @@ import {BrowserRouter} from "react-router-dom";
 import UserProfile from "./components/UserProfile/UserProfile";
 import {AppBar, Typography} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import UsersFirebaseService from "./services/UsersFirebaseService";
+import UserOrders from "./components/UserOrders";
+import {NewUserForm} from "./components/UserProfile/NewUserForm";
+import {ProfileForm} from "./components/UserProfile/ProfileForm";
+import userEvent from "@testing-library/user-event";
 
 
 const App =()=> {
   const ordersService =
   new OrdersFirebaseService('orders');
   const itemsService = new ItemsFirebaseService('items');
+  const clientsService = new UsersFirebaseService('clients');
   const commentsService = new CommentsFirebaseService('comments');
- const authService =  new AuthFirebaseService();
- const mobMenuService = new MobMenuService();
- const dispatch = useDispatch();
- const userData = useSelector(state=>state.userData);
+  const authService =  new AuthFirebaseService();
+  const mobMenuService = new MobMenuService();
+  const dispatch = useDispatch();
+  const userData = useSelector(state=>state.userData);
  useEffect(()=>{
      dispatch(actionFlagMobMenu({flag:mobMenuService.getFlag()}))
      authService.getUserData().subscribe(userData=> {
@@ -58,6 +65,11 @@ const App =()=> {
          if(userData.username) {
              ordersService.getOrders().subscribe(orders => {
                      dispatch(actionOrders(orders));
+                 }
+                 , error => alert('Data transfer finished')
+             );
+             clientsService.getUsers().subscribe(client => {
+                     dispatch(actionClients(client));
                  }
                  , error => alert('Data transfer finished')
              );
@@ -102,7 +114,7 @@ const App =()=> {
          <BrowserRouter>
            <Navbar userData={userData}/>
            <Switch>
-                    <Route exact path={pathHome} render ={() => {return <Home commentsService={commentsService}/>}}/>
+                    <Route exact path={pathHome} render ={() => {return <Home commentsService={commentsService} clientsService={clientsService}/>}}/>
                     <Route path={pathCart} exact render={() =>
                     {return userData.username ? <Cart/> :
                         <Redirect to={pathLogin}/>}}/>
@@ -126,10 +138,16 @@ const App =()=> {
                     <Route path={pathProducts} exact render={() =>
                     {return userData.username ? <ProductsTable itemsService={itemsService}/> :
                         <Redirect to={pathLogin}/>}}/>
+               <Route path={pathNewUserForm} exact render={() =>
+               {return <NewUserForm clientsService={clientsService} />}}/>
 
                <Route path={pathUserProfile} exact render={() =>
-               {return userData.username ? <UserProfile /> :
+               {return !userData.isAdmin ? <UserProfile authService={authService} clientsService={clientsService} ordersService={ordersService}/> :
+                   <Redirect to={pathNewUserForm}/>}}/>
+               <Route path={pathUserOrders} exact render={() =>
+               {return userData.username ? <UserOrders clientsService={clientsService} ordersService={ordersService}/> :
                    <Redirect to={pathLogin}/>}}/>
+
                     <Route path={pathLogin} exact render={() =>
                     {return !userData.username ? <Login authService={authService}/> :
                         <Redirect to={pathHome}/>}}/>

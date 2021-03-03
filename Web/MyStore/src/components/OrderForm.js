@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {nameMinLength} from "../config/ShopConfig";
-import {getInputElement, getInputElementActive, getInputElementBlur} from "../utils/inputElements";
+import {getInputElement} from "../utils/inputElements";
 import { getRandomOrderNumb } from '../utils/random';
-import $ from "jquery";
-import { Button, Card, Row, Col } from 'react-materialize';
 import _ from "lodash";
 import {useSelector} from "react-redux";
 

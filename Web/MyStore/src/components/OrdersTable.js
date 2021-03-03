@@ -25,16 +25,22 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+// import * as firebase from "../../firebase.json";
+import  * as firebase from "firebase"
 
 export default function OrdersTable(props) {
     // const userData = useSelector(state=>state.userData);
-    const orders = props.orders;
+
+
     // let [rowData,setRowData] = useState({});
     // const columns = useColumnsMedia(columnsMediaObject);
     // const [order,setOrder] = useState({});
     // const showDetails=(order)=>
     //     setOrder({...order});
     // const backFn = () => setOrder({});
+
+
+    const orders = props.orders;
     const columnValues = Object.values(columnsMediaObject);
     const maxColumns = Math.max(...columnValues);
     const tableIcons = {
@@ -131,7 +137,7 @@ export default function OrdersTable(props) {
                        })));
 
     return  (
-        <MaterialTable style={{marginTop:'50px'}}
+        <MaterialTable style={{marginTop:'50px', marginBottom:'100px'}}
                        icons={tableIcons}
             title="- Orders - "
                        options={{
@@ -187,8 +193,8 @@ export default function OrdersTable(props) {
 
                             }}
                                 title = "- Orders Details -"
-                                             columns={[{ title: 'ID', field: 'id',width: 10 },
-                                                 { title: '', field: 'img', width: 120, padding:0,
+                                             columns={[{ title: 'ID', field: 'id',cellStyle:{width: 10}},
+                                                 { title: '', field: 'img', cellStyle:{width: 200},
                                                      render: (row) => (
                                                          <div
                                                              style={{
@@ -209,10 +215,10 @@ export default function OrdersTable(props) {
                                                              />
                                                          </div>
                                                      )},
-                                                             { title: 'Title', field: 'title', width: 300 },
-                                                             { title: 'Price', field: 'price', width: 10,  cellStyle:{padding:40}},
-                                                             { title: 'Quantity', field: 'quantity' , width: 10, type:'numeric',  cellStyle:{paddingRight:40}},
-                                                             { title: 'Subtotal', field: 'subtotal', width: 10 , cellStyle:{padding:40}},
+                                                             { title: 'Title', field: 'title', cellStyle:{width:600}},
+                                                             { title: 'Price', field: 'price', cellStyle:{width:40}},
+                                                             { title: 'Quantity', field: 'quantity',width: 40, type:'numeric',  cellStyle:{width: 40}},
+                                                             { title: 'Subtotal', field: 'subtotal', cellStyle:{width:40}},
                                                              { title: 'Description', field: 'description', hidden: true},
                                                          ]}
 

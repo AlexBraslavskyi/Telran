@@ -78,8 +78,8 @@ export default function ProductsTable(props) {
 
     const [columns, setColumns] = useState([
 
-        { title: 'ID', field: 'id', cellStyle:{width: 10,maxWidth: 10}, headerStyle:{width: 10,maxWidth: 10}},
-        { title: '', field: 'img', cellStyle:{width: 70,maxWidth: 70},headerStyle:{width: 70,maxWidth: 70},
+        { title: 'ID', field: 'id', cellStyle:{width: 50}, headerStyle:{width: 50}},
+        { title: '', field: 'img', cellStyle:{width: 200},headerStyle:{width: 200},
             render: (row) => (
                 <div
                     style={{
@@ -100,10 +100,10 @@ export default function ProductsTable(props) {
                     />
                 </div>
             )},
-        { title: 'Title', field: 'title',cellStyle:{width: 200 ,maxWidth: 200},headerStyle:{width: 200,maxWidth: 200}},
-        { title: 'Price', field: 'price', cellStyle:{width: 10,maxWidth: 10},headerStyle:{width: 10,maxWidth: 10}},
+        { title: 'Title', field: 'title',cellStyle:{width: 600},headerStyle:{width: 600}},
+        { title: 'Price', field: 'price', cellStyle:{width: 50},headerStyle:{width: 50}},
         { title: 'Description', field: 'description',
-            cellStyle:{width: 400,maxWidth: 400},headerStyle:{width: 400,maxWidth: 400}},
+            cellStyle:{width: 800},headerStyle:{width: 800}},
             ]);
 
     const [data, setData] = useState(products.map((item)=>({id: item.id, title:

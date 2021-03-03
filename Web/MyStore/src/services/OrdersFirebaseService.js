@@ -18,12 +18,12 @@ export default class OrdersFirebaseService {
         return this.db.doc(order.orderNumber).set(order);
     }
 
+
     deleteOrder(orderNumber) {
         return this.db.doc(orderNumber).delete();
     }
     addItemToOrder(orderNumber,item){
         var docRef = this.db.doc(orderNumber)
-console.log(item);
         return  docRef.update({
             'items': firebase.firestore.FieldValue.arrayUnion({
                 id:item.id,

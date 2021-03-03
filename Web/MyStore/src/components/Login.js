@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import {getInputElement} from "../utils/inputElements";
+import {Link} from "@material-ui/core";
+import {pathNewUserForm} from "../config/ShopConfig";
+import Contacts from "./Contacts";
 
 
 export default function Login(props) {
@@ -48,10 +51,8 @@ export default function Login(props) {
                         <div>
                     <div >
                     <button style = {{minWidth:'10vw', margin:'2vh'}} type="submit" name="action"className="btn waves-effect waves-light blue"
-                            > <i className="material-icons right">send</i>Sign
+                            > <i className="material-icons right">send</i>Sign in
                         </button>
-                    </div>
-                    <div>
                         <button  style = {{minWidth:'10vw', margin:'2vh'}} type = "reset" name = "action" className = "btn waves-effect waves-light red"
                             > <i className="material-icons right">delete</i>Reset
                         </button>
@@ -61,6 +62,11 @@ export default function Login(props) {
         </div>
     
             <div className="social-btn">
+
+                <div className='log'>
+                    <a className="waves-effect waves-light col s6 btn social reddit" href={pathNewUserForm}>
+                        <i className="fa fa-user-circle"></i>Sign up Now</a>
+                </div>
             <div className='log'>
                 <a className="waves-effect waves-light col s6 btn social google" onClick={googleAuth}>
                     <i className="fa fa-google"></i> Sign in with google</a>

@@ -14,6 +14,15 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
 .card{
     width: 300px;
 }
+.wrapper .card .card-title{
+    font-size: 16px;
+}
+.wrapper .card{
+    border-radius: 10px;
+}
+.wrapper{
+    margin-bottom: 20px;
+}
 .card .card-image .card-title{
     color: black;
     font-weight: 400;
@@ -23,7 +32,7 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
 .cart{
     margin-top:40px;
 }
-card-title{
+.card-title{
     position: inherit;
     color: black;
 }
@@ -46,7 +55,7 @@ card-title{
     align-self:center;
 }
 .body{
-    background-image: url('./images/colorful-balloon-png.png');
+    /*background-image: url('./images/colorful-balloon-png.png');*/
     background-repeat: round;
     background-size: auto;
     margin: 0;
@@ -129,6 +138,8 @@ card-title{
     height: 11vw;
     margin: 0 auto;
     padding: 0;
+    display:flex;
+    align-items:center;
 }
 .detailTotal{
     margin-left: 5px;
@@ -229,13 +240,98 @@ div.MuiInput-underline:after {
 }
 div.MuiDrawer-paper{
     position: inherit;
-    height: 90vh;
+    height: 100%;
 }
 div.MuiGrid-container{
     display: block;
     text-align: -webkit-center;
 }
+.MuiTableFooter-root{
+    margin-top: 20%;
+}
 .list-left{
     margin-left: 3vw;
     color: gray;
+}
+.card .card-image .itemImg{
+    height: 40vh;
+    display: block;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+}
+.card .card-content .card-title {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+ .card .card-content {
+     padding: 12px;
+ }
+
+.wrapper .inside {
+    z-index: 9;
+    background:  #ee6e73;
+    width: 45px;
+    height: 40px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 0px 50px 0px 200px;
+    transition: all 0.5s, border-radius 2s, top 1s;
+    overflow: hidden;
+}
+.wrapper .inside .icon {
+    color: #ffffff;
+    opacity: 1;
+    text-align: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.wrapper .inside:hover {
+    width: 100%;
+    right: 0;
+    top: 0;
+    border-radius: 0;
+    height: 82%;
+}
+.wrapper .inside:hover .icon {
+    opacity: 0;
+    right: 15px;
+    top: 15px;
+}
+.wrapper .inside:hover .contents {
+    opacity: 1;
+    transform: scale(1);
+    transform: translateY(0);
+}
+.wrapper .inside .contents {
+    padding: 5%;
+    opacity: 0;
+    transform: scale(0.5);
+    transform: translateY(-200%);
+    transition: opacity 0.2s, transform 0.8s;
+}
+.wrapper .inside .contents table {
+    text-align: left;
+    width: 100%;
+}
+.wrapper .inside .contents h1, .wrapper .inside .contents p, .wrapper .inside .contents table {
+    color: white;
+}
+.wrapper .inside .contents p {
+    font-size: 13px;
+}
+.wrapper .card{
+    margin-bottom: 5px;
+}
+ .wrapper .card .card-content {
+     padding-bottom: 5px;
+ }
+.form-profile{
+    display: flex;
+    justify-content: space-around;
 }

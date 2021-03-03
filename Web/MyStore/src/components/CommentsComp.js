@@ -8,6 +8,8 @@ import ReactPaginate from 'react-paginate';
 
 
 const CommentsComp = (props) => {
+
+
     const userData = useSelector(state => state.userData);
     let comments = useSelector(state => state.comments);
     let authorName, setAuthorName;
@@ -17,7 +19,8 @@ const CommentsComp = (props) => {
     let avatarUser = userData.username ? firebase.auth().currentUser.photoURL : null;
     let userName = userData.username ? firebase.auth().currentUser.displayName : null;
     let sortComments = comments.sort((a, b) => b.id - a.id);
-
+    const users = useSelector(state=>state.clients);
+    let currentUser = users.find(o => o.emailAddress == userData.username );
 
     const [pagination, setPagination] = useState({
         data: sortComments.map((comment) => (({
@@ -78,7 +81,7 @@ const CommentsComp = (props) => {
 
 
     return (
-        <div style={{marginLeft: '27.5vw', marginRight: '27.5vw', marginBottom: '5vw'}}>
+        <div style={{display:"flex", justifyContent:"center"}}>
             <div className="ui comments">
                 <h3 className="ui dividing header">Comments</h3>
                 <form className="ui reply form">
@@ -86,9 +89,11 @@ const CommentsComp = (props) => {
                         <div className="ui left icon input">
                             {userData.isAdmin ?
                                 <span><img className='img-avatar' src={require('../images/admin.jpg')}/></span> :
-                                !userData.isAdmin && userData.username ?
-                                    <span><img className='img-avatar' style={{marginRight: "1vw", borderRadius: "5%"}}
+                                !userData.isAdmin && userData.username ?firebase.auth().currentUser.photoURL?
+                                    <span><img className='img-avatar' style={{marginRight: "5vw", borderRadius: "5%"}}
                                                src={firebase.auth().currentUser.photoURL}/>{firebase.auth().currentUser.displayName}</span> :
+                                    <span><img className='img-avatar' style={{marginRight: "5vw", borderRadius: "5%"}}
+                                               src={require('../images/noAvatar.png')}/>{currentUser.name}</span>:
                                     <div className="ui left icon input" style={{paddingRight: '30vw'}}>
                                         <input id="authorName" type="text" placeholder="Enter your name..."
                                                style={{padding: 0, height: '5vh'}}/>
@@ -125,7 +130,7 @@ const CommentsComp = (props) => {
                             </div>
                         </div>
                     )))
-                    }<div style={{marginBottom:"1vw"}}>
+                    }<div style={{marginBottom:"5vw"}}>
                 <ReactPaginate
                     previousLabel={'previous'}
                     nextLabel={'next'}

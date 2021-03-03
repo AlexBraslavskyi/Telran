@@ -17,10 +17,10 @@ import {
     pathLogout,
     pathLogin,
     pathProducts,
-    pathStatistics, pathSearch, pathContacts, pathUserProfile
+    pathStatistics, pathSearch, pathContacts, pathUserProfile, pathUserOrders, pathNewUserForm
 } from '../config/ShopConfig';
 import {Dropdown} from "react-materialize";
-import {Button, Divider, Icon} from "@material-ui/core";
+import {Button, Divider, Icon, List} from "@material-ui/core";
 
  
 
@@ -89,11 +89,11 @@ const Navbar = (props)=>{
                                     onOpenStart: null,
                                     outDuration: 250,
                                 }}
-                                trigger={<Link>My Cabinet <i
+                                trigger={<Link to={""}>My Cabinet <i
                                     className="material-icons right">arrow_drop_down</i></Link>}
                             >
-                               <Link to={pathUserProfile}>Profile<i className="material-icons left">account_circle</i></Link>
-                               <a href="#!">My Orders<i className="material-icons left">shopping_basket</i></a>
+                               <Link to={!userData.isAdmin?pathUserProfile:pathNewUserForm}>Profile<i className="material-icons left">account_circle</i></Link>
+                               <Link to={!userData.isAdmin?pathUserOrders:pathOrders}>My Orders<i className="material-icons left">shopping_basket</i></Link>
                                <Link to={pathContacts}>Contact Us<i className="material-icons left">alternate_email</i></Link>
                                <Link to={pathHome}>Chat<i className="material-icons left">chat</i></Link>
                                {/*<Divider  variant="middle"  />*/}

@@ -26,7 +26,8 @@ export function getInputElement(type, name, label, handler,errorMessage,valuePro
                className = {errorMessage
                    ? "invalid"
                    :"validate"
-                       } defaultValue={valueProps.value}
+                       }
+               defaultValue={valueProps.value}
                onChange={handler}  name={name} type={type} />
                <label htmlFor={label}
                >{label}</label>
@@ -45,20 +46,20 @@ export function getInputElementActive(type, name, label, handler,errorMessage,va
         <div className="input-field col s12">
             <i className="material-icons prefix">{icon}</i>
             <input id={label} required="required" disabled={disabled}
-                   className = {(valueProps.controlError===-1
-                       ? " is-invalid"
-                       : valueProps.controlError===0
-                           ? ""
-                           : "validate")} defaultValue={valueProps.value}
+                   className = {errorMessage
+                       ? "invalid"
+                       :"validate"
+                   }
+                   defaultValue={valueProps}
                    onChange={handler}  name={name} type={type} />
             <label htmlFor={label} className="active"
             >{label}</label>
             <span className="helper-text" data-error={errorMessage} data-success="Perfect!"></span>
-
         </div>
     </div>
     $(document).ready(function() {
         M.updateTextFields()
+
     });
 }
 export function getInputElementBlur(type, name, label, handler,errorMessage,valueProps) {

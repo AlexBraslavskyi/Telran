@@ -8,13 +8,16 @@ import {
     SET_ORDERS,
     SET_USER_DATA,
     SET_FLAG_MOB_MENU,
-    SET_ITEMS, SET_COMMENTS
+    SET_ITEMS, SET_COMMENTS, SET_CLIENTS
 } from "./common";
 export const actionOrders = (orders)=>{
     return {type: SET_ORDERS, payload:orders}
 };
 export const actionItems = (items)=>{
     return {type: SET_ITEMS, payload:items}
+};
+export const actionClients = (clients)=>{
+    return {type: SET_CLIENTS, payload:clients}
 };
 export const actionComments = (comments)=>{
     return {type: SET_COMMENTS, payload:comments}

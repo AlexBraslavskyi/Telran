@@ -9,13 +9,14 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
     },
 }));
-function UserProfile() {
-    const classes = useStyles();
+function UserProfile(props) {
 
+    const classes = useStyles();
     return (
         <div className={classes.root}>
-            <SideMenu />
-            <MainContent />
+            <SideMenu userData={props.userData}/>
+            <MainContent clientsService = {props.clientsService} ordersService={props.ordersService}/>
+
         </div>
     );
 }

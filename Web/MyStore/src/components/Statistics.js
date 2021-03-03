@@ -59,7 +59,7 @@ export default function Statistics() {
             if (!alreadyExists) {
                 const filtered = flat.filter(item => item.title === currentObj.title);
                 const newObject = filtered.reduce((acc, curr) => {
-                    return {...acc, quantity: acc.quantity += curr.quantity}
+                    return {...acc, quantity: acc.quantity += parseInt(curr.quantity)}
                 }, {...currentObj, quantity: 0})
                 itemsStatTemp.push(newObject);
             }
@@ -76,7 +76,7 @@ export default function Statistics() {
         if (switchView != 0) {
 
             let data = switchView == 1 ? customersStat : itemsStat;
-            let total = Object.keys(data).reduce((sum, key) => sum + parseFloat(data[key] || 0), 0);
+            let total = Object.keys(data).reduce((sum, key) => sum + parseInt(data[key] || 0), 0);
             const sorted = Object.fromEntries(
                 Object.entries(data).sort(([, a], [, b]) => b - a)
             )

@@ -9,3 +9,4 @@ export const ADD_DELIVERY = 'ADD_DELIVERY';
 export const SUB_DELIVERY = 'SUB_DELIVERY';
 export const SET_ITEMS = 'SET_ITEMS';
 export const SET_COMMENTS = 'SET_COMMENTS';
+export const SET_CLIENTS = 'SET_CLIENTS';
