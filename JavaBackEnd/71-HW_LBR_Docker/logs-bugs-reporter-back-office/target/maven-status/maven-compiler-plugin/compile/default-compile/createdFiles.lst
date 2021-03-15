@@ -1,0 +1,7 @@
+telran/logs/bugs/jpa/repo/ArtifactRepository.class
+telran/logs/bugs/interfaces/BugsReporter.class
+telran/logs/bugs/controllers/BugsReporterController.class
+telran/logs/bugs/BugsReporterAppl.class
+telran/logs/bugs/jpa/repo/ProgrammerRepository.class
+telran/logs/bugs/impl/BugsReporterImpl.class
+telran/logs/bugs/jpa/repo/BugRepository.class

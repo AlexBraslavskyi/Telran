@@ -1,0 +1,7 @@
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/BugsReporterAppl.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/jpa/repo/ArtifactRepository.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/jpa/repo/ProgrammerRepository.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/impl/BugsReporterImpl.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/jpa/repo/BugRepository.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/controllers/BugsReporterController.java
+/Users/abraslik/git/logs-bugs-reporter/logs-bugs-reporter/logs-bugs-reporter-back-office/src/main/java/telran/logs/bugs/interfaces/BugsReporter.java
