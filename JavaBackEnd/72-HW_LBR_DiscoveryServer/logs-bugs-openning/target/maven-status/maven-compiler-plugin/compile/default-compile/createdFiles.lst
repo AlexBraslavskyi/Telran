@@ -1,0 +1,5 @@
+telran/logs/bugs/BugsOpenningAppl.class
+telran/logs/bugs/services/BugsOpeningService.class
+telran/logs/bugs/repo/ArtifactsRepo.class
+telran/logs/bugs/repo/BugsRepo.class
+telran/logs/bugs/services/BugsOpeningService$1.class

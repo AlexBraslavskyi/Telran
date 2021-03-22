@@ -1,0 +1,4 @@
+telran/logs/bugs/exceptions/DuplicatedException.class
+telran/logs/bugs/exceptions/ServerException.class
+telran/logs/bugs/controllers/GlobalExceptionsController.class
+telran/logs/bugs/exceptions/NotFoundException.class

@@ -1,0 +1,8 @@
+telran/logs/bugs/random/RandomLogsPopulator.class
+telran/logs/bugs/repo/LogStatistics.class
+telran/logs/bugs/impl/LogsInfoImpl.class
+telran/logs/bugs/repo/LogRepository.class
+telran/logs/bugs/repo/LogStatisticsImpl.class
+telran/logs/bugs/controllers/LogsInfoController.class
+telran/logs/bugs/LogsInfoAppl.class
+telran/logs/bugs/interfaces/LogsInfo.class
