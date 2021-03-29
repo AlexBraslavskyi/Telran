@@ -12,9 +12,11 @@ export default class UsersFirebaseService {
         return collectionData(this.db)
 
     }
-    updateUser(emailAddress,user){
-    return this.db.doc(emailAddress).update(user);
-}
+
+    updateUser(emailAddress, user) {
+        return this.db.doc(emailAddress).update(user);
+    }
+
     addUser(user) {
         firebase.auth().createUserWithEmailAndPassword(user.emailAddress, user.password);
         return this.db.doc(user.emailAddress).set(user);

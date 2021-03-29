@@ -1,6 +1,5 @@
 import appFirebase from "../config/firebase";
 import {collectionData} from "rxfire/firestore";
-import * as firebase from "firebase";
 
 export default class CommentsFirebaseService {
 
@@ -13,7 +12,7 @@ export default class CommentsFirebaseService {
 
     }
 
-    addComment(comment) {
+    addNewComment(comment) {
         return this.db.doc(comment.id).set(comment);
     }
 

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import static telran.security.accounting.api.ApiConstants.*;
 
+import java.util.List;
+
 import telran.security.accounting.dto.*;
 import telran.security.accounting.service.AccountingManagement;
 
@@ -21,6 +23,11 @@ AccountingManagement accountingService;
 AccountResponse getAccount(@RequestParam(name = USERNAME_PARAM) String username) {
 	return accountingService.getAccount(username);
 }
+@GetMapping(value = GET_ACTIVATED_ACCOUNTS)
+List<AccountResponse> getActivatedAccounts(){
+	return accountingService.getActivatedAccounts();
+}
+
 @PostMapping(value = ADD_ACCOUNT)
 AccountResponse addAccount(@RequestBody AccountRequest account) {
 	return accountingService.addAccount(account);

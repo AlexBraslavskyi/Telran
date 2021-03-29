@@ -1,6 +1,5 @@
 import appFirebase from "../config/firebase";
 import {collectionData} from "rxfire/firestore";
-import * as firebase from "firebase";
 
 export default class ItemsFirebaseService {
 

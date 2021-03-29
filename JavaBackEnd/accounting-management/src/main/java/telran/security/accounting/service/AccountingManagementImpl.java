@@ -1,5 +1,9 @@
 package telran.security.accounting.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -8,13 +12,13 @@ import telran.security.accounting.dto.AccountRequest;
 import telran.security.accounting.dto.AccountResponse;
 import telran.security.accounting.mongo.documents.AccountDocument;
 import telran.security.accounting.repo.AccountRepository;
+
 @Service
 public class AccountingManagementImpl implements AccountingManagement{
 @Autowired
 	AccountRepository accountRepository;
 @Autowired
-	PasswordEncoder passwordEncoder;
-
+PasswordEncoder passwordEncoder;
 	@Override
 	public AccountResponse addAccount(AccountRequest accountDto) {
 		if (accountRepository.existsById(accountDto.username)) {
@@ -30,7 +34,6 @@ public class AccountingManagementImpl implements AccountingManagement{
 		AccountResponse response = toResponse(account);
 		return response;
 	}
-
 
 	private String getStoredPassword(String password) {
 		
@@ -56,7 +59,9 @@ public class AccountingManagementImpl implements AccountingManagement{
 	@Override
 	public AccountResponse getAccount(String username) {
 		AccountDocument account = accountRepository.findById(username).orElse(null);
-		return account == null ? null : toResponse(account);
+		return account == null ||
+				account.getExpirationTimestamp() < 
+				System.currentTimeMillis() / 1000? null : toResponse(account);
 	}
 
 	@Override
@@ -65,7 +70,6 @@ public class AccountingManagementImpl implements AccountingManagement{
 		if (account == null) {
 			throw new RuntimeException(username + " doesn't exist");
 		}
-//		FIXME
 		if (samePasswords(password, account.getPassword())) {
 			throw new RuntimeException("the same password");
 		}
@@ -113,6 +117,21 @@ public class AccountingManagementImpl implements AccountingManagement{
 			throw new RuntimeException(username + " doesn't exist");
 		}
 		return toResponseHiddenPassword(account);
+	}
+
+	@Override
+	public List<AccountResponse> getActivatedAccounts() {
+		List<AccountDocument> activatedAccounts =
+		accountRepository
+		.findByExpirationTimestampGreaterThan(System.currentTimeMillis() / 1000);
+		return activatedAccounts.isEmpty() ? Collections.emptyList() : 
+			toListAccountResponse(activatedAccounts);
+	}
+
+	private List<AccountResponse> toListAccountResponse(List<AccountDocument>
+	accounts) {
+		
+		return accounts.stream().map(this::toResponse).collect(Collectors.toList());
 	}
 
 }

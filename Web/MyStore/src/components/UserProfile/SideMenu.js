@@ -1,6 +1,5 @@
 import React from "react";
-import {Avatar, Drawer, Grid, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
-import {AccountCircle, ExitToApp} from "@material-ui/icons";
+import {Avatar, Drawer, Grid, List} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import * as firebase from "firebase";
 import {Link} from "react-router-dom";
@@ -51,14 +50,18 @@ function SideMenu(props) {
                     src={firebase.auth().currentUser.photoURL}
                     className={classes.bigAvatar}
                 />
-                <span style={{marginBottom:"5vh"}}>{firebase.auth().currentUser.displayName}</span>
+                <span style={{marginBottom: "5vh"}}>{firebase.auth().currentUser.displayName}</span>
             </Grid>
-            <List style={{display:"grid"}}>
-                <Link className="list-left" to={!userData.isAdmin?pathUserProfile:pathNewUserForm}>Edit Profile<i className="material-icons left">account_circle</i></Link>
-                <Link className="list-left" to={!userData.isAdmin?pathUserOrders:pathOrders}>My Orders<i className="material-icons left">shopping_basket</i></Link>
-                <Link className="list-left" to={pathContacts}>Contact Us<i className="material-icons left">alternate_email</i></Link>
+            <List style={{display: "grid"}}>
+                <Link className="list-left" to={!userData.isAdmin ? pathUserProfile : pathNewUserForm}>Edit Profile<i
+                    className="material-icons left">account_circle</i></Link>
+                <Link className="list-left" to={!userData.isAdmin ? pathUserOrders : pathOrders}>My Orders<i
+                    className="material-icons left">shopping_basket</i></Link>
+                <Link className="list-left" to={pathContacts}>Contact Us<i
+                    className="material-icons left">alternate_email</i></Link>
                 <Link className="list-left" to={pathHome}>Chat<i className="material-icons left">chat</i></Link>
-                <Link className="list-left" to={pathLogout}>Sing Out<i className="material-icons left">exit_to_app</i></Link>
+                <Link className="list-left" to={pathLogout}>Sing Out<i
+                    className="material-icons left">exit_to_app</i></Link>
             </List>
         </Drawer>
     );

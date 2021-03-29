@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -20,24 +21,22 @@ public class SecurityConfiguration {
 	@Value("${app-password-user:****}")
 	String passwordUser;
 	@Value("${app-username-admin:admin}")
-	String userNameAdmin;
+	String usernameAdmin;
 	@Value("${app-password-admin:****}")
 	String passwordAdmin;
 	@Value("${app-security-enable:true}")
 	boolean securityEnable;
-	
 	@Bean
 	PasswordEncoder getPasswordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-	
 	@Bean
 	MapReactiveUserDetailsService getMapDetails() {
 		//noop means a plain text
 	
-		UserDetails user = new User("user", "{noop}"+ passwordUser,
+		UserDetails user = new User(usernameUser, "{noop}" + passwordUser,
 				AuthorityUtils.createAuthorityList("ROLE_USER")) ;
-		UserDetails admin = new User("admin", "{noop}"+passwordAdmin,
+		UserDetails admin = new User(usernameAdmin, "{noop}"+ passwordAdmin,
 				AuthorityUtils.createAuthorityList("ROLE_ADMIN")) ;
 		UserDetails users[] = {user, admin};
 		return new MapReactiveUserDetailsService(users);
@@ -46,7 +45,8 @@ public class SecurityConfiguration {
 @Bean
 SecurityWebFilterChain securityFiltersChain(ServerHttpSecurity httpSecurity) {
 	if (!securityEnable) {
-		return httpSecurity.csrf().disable().authorizeExchange().anyExchange().permitAll().and().build();
+		return httpSecurity.csrf().disable().authorizeExchange()
+				.anyExchange().permitAll().and().build();
 	}
 	SecurityWebFilterChain securityFiltersChain = httpSecurity.csrf()
 			.disable().httpBasic()

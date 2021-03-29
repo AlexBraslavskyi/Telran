@@ -7,6 +7,17 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     justify-content: space-around;
     flex-wrap: wrap
 }
+.contact-comp{
+    margin-top:50px;
+    margin-left:27.5vw;
+    margin-right:27.5vw;
+    height:100%
+}
+.buttons-form{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
 .material-icons{
     font-size: 2.4em;
     cursor: pointer;
@@ -42,7 +53,7 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
 .collection-item.avatar .title {
     font-size: 20px;
     font-weight: 500;
-    color: #ee6e73;
+    color: black;
     display: block;
     margin-bottom: 20px;
     
@@ -75,16 +86,34 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     width: 60%;
     margin-top:10px;
 }
+.checkout{
+    text-align: center;
+    margin-bottom: 20px;
+}
 .basketQuant{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     font-weight: 900;
     position: absolute;
-    color: #ee6e73;
-    text-align: center;
+    color: white;
     margin-left: 10px;
+    top:-15px;
+    margin-top: 22px;
 
+}
+#logo_img{
+    width:7vw;
+    height:10vw;
+    marginLeft:5vw;
+    z-index: 2;
+    position: absolute;
+}
+#logo_text{
+    margin-left: 7.5vw;
+    z-index: 1;
+    position: absolute;
+    font-size:2.5vw;
+    font-family:fantasy;
+    margin-top:30px
 }
 * {
     margin: 0;
@@ -100,11 +129,12 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
         margin-top: 1vh;
      }
      .social-btn{
-        display: block;
-        margin-left: 40%;
         margin-top: 1vh;
-        width: 20vw;
-
+         width: max-content;
+     }
+     .center-auth{
+         display: flex;
+         justify-content: center;
      }
 .sing-bar{
     display: flex;
@@ -114,16 +144,20 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     padding: 3px 12px;
 }
 .nav{
+
     display: grid;
     width: 100%;
     margin: 0 auto 20px;
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr;
-    /*grid-gap: 10px;*/
-
     grid-template-areas: "b s" "b a";
 
 }
+div nav{
+    background-color: black;
+    line-height: 10px !important;
+}
+
 .avatar{
     grid-area: a;
 }
@@ -147,9 +181,6 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     color: red;
 
 }
-
-
-
 
 /*contact form*/
 .container-out {
@@ -175,7 +206,7 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
 .contact-form p {
     margin: 0; /* removes all margins from the p tags */
     margin: 5px 0; /* add 5px margin at the top and bottom of the p tags */
-    color: #ee6e73; /* changes the text color of the p tag to white */
+    color: black; /* changes the text color of the p tag to white */
 }
 
 .contact-form input {
@@ -201,7 +232,7 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     border: none; /* removes the border on the button */
     padding: 7px; /*  adds px padding to all sides of the button */
     background: #e8f8ff; /* gives the button a background color */
-    color: #ee6e73; /* changes the text color of the button to white */
+    color: black; /* changes the text color of the button to white */
     border-radius: 4px; /* curves the edges of the button by 4px */
     cursor: pointer; /* changes the mouse pointer when you hover over the button */
     font-weight: bold; /* boldens the text of the button */
@@ -221,13 +252,14 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
     width: 15vw;
 }
 
-
 ul.select-dropdown,ul.dropdown-content{
-    width:15vw !important;
+    width:auto !important;
+    top:65px !important;
+    height: auto !important;
 
 }
 ul.dropdown-content li > a, .dropdown-content li > span {
-    color: #ee6e73;
+    color: black;
 }
 
 div.MuiInput-underline:before {
@@ -267,6 +299,10 @@ div.MuiGrid-container{
 .card .card-content .card-title {
     font-size: 15px;
     margin-bottom: 0;
+
+}
+.card-title{
+    color: white;
 }
  .card .card-content {
      padding: 12px;
@@ -274,7 +310,7 @@ div.MuiGrid-container{
 
 .wrapper .inside {
     z-index: 9;
-    background:  #ee6e73;
+    background:  grey;
     width: 45px;
     height: 40px;
     position: absolute;
@@ -309,6 +345,7 @@ div.MuiGrid-container{
     transform: translateY(0);
 }
 .wrapper .inside .contents {
+    color: white;
     padding: 5%;
     opacity: 0;
     transform: scale(0.5);
@@ -334,4 +371,165 @@ div.MuiGrid-container{
 .form-profile{
     display: flex;
     justify-content: space-around;
+}
+div .pagination li.active {
+    background-color: grey;
+}
+.gallery{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 50px;
+
+}
+
+/*//////*/
+.cards-list {
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div.card_home {
+    margin: 30px;
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card_home .card_image {
+    width: inherit;
+    height: inherit;
+    border-radius: 15px;
+}
+
+.card_home .card_image img {
+    width: inherit;
+    height: inherit;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.card_home .card_title {
+    text-align: center;
+    border-radius: 0px 0px 40px 40px;
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: 35px;
+    margin-top: -60px;
+    height: 40px;
+
+}
+
+.card_home:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25),
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+
+.title-white {
+    color: white;
+}
+
+.title-black {
+    color: black;
+}
+
+
+
+.react-multi-carousel-list{
+    margin: 10px;
+}
+.react-multi-carousel-track{
+    align-items: center;
+
+}
+/*.nav-button:focus{*/
+/*    text-decoration: none;*/
+/*    font: menu;*/
+/*    display: inline-block;*/
+/*    !*padding: 2px 8px;*!*/
+/*    border-style: solid;*/
+/*    border-width: 2px;*/
+/*    border-radius: 15px;*/
+/*}*/
+/*nav-buttonDrop:focus{*/
+/*    text-decoration: none;*/
+/*    display: inline-block;*/
+/*    !*padding: 2px 8px;*!*/
+/*    border-style: none;*/
+/*    border-radius: unset;*/
+/*}*/
+
+/*mobile menu style*/
+#mobMenu{
+    position: absolute;
+    background: #8a8a8a;
+    width: 150px;
+    z-index: 9999;
+}
+.mobile-button-group{
+    display: flex;
+    flex-direction: column;
+}
+.nav-button-mob{
+    height: 40px;
+    align-items: center;
+    display: flex;
+}
+#drop_icon{
+    display: flex;
+    margin-left: 5px;
+    align-items: center;
+}
+li #Dropdown_7{
+    position: absolute;
+    margin-left: 150px;
+    left:0 !important;
+    width: 150px !important;
+}
+.nav-buttonDrop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.mobile-table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    height: 100%;
+}
+#mobile-card{
+    display: flex;
+    position: absolute;
+    margin-left: 30px;
+}
+@media all and (max-width: 600px) {
+    .card-list {
+        /* On small screens, we are no longer using row direction but column */
+        flex-direction: column;
+    }
+    #icon_basket{
+        margin-top: 15px;
+    }
+    .contact-comp{
+        height: 100%;
+    }
+    #userOrders_body{
+        height: 100%;
+    }
+    .form-profile{
+        display: block;
+    }
 }

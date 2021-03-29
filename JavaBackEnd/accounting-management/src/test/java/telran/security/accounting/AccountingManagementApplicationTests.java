@@ -1,13 +1,9 @@
 package telran.security.accounting;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static telran.security.accounting.api.ApiConstants.ADD_ACCOUNT;
-import static telran.security.accounting.api.ApiConstants.ADD_ROLE;
-import static telran.security.accounting.api.ApiConstants.GET_ACCOUNT;
-import static telran.security.accounting.api.ApiConstants.REMOVE_ROLE;
-import static telran.security.accounting.api.ApiConstants.UPDATE_PASSWORD;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.*;
+import static telran.security.accounting.api.ApiConstants.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,36 +12,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import telran.security.accounting.dto.AccountPassword;
 import telran.security.accounting.dto.AccountRequest;
 import telran.security.accounting.dto.AccountResponse;
 import telran.security.accounting.dto.AccountRole;
+import telran.security.accounting.mongo.documents.AccountDocument;
+import telran.security.accounting.repo.AccountRepository;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-//@TestPropertySource()
+
 class AccountingManagementApplicationTests {
 private static final  String USER_MOSHE = "Moshe";
 private static final  String ASTERICS8 = "*".repeat(8);
 private static final  String PASSWORD_MOSHE = "12345.com";
-private static final  String EXPECTED_PASSWORD_MOSHE = "{noop}12345.com";
 private static final  String[] ROLES_MOSHE = {"USER","ADMIN"};
 private static final long EXPIRATION_MOSHE = 1;
+private static final String EXPIRED = "expired1";
 @Value("${app-security-enable:true}")
 	boolean securityEnable;
 @Autowired
 WebTestClient testClient;
+@Autowired
+PasswordEncoder passwordEncoder;
+@Autowired
+AccountRepository accountRepository;
 AccountRequest accountRequestMoshe = 
 new AccountRequest(USER_MOSHE, PASSWORD_MOSHE, ROLES_MOSHE, EXPIRATION_MOSHE);
 AccountResponse expectedMoshe = new AccountResponse
 (USER_MOSHE, "{noop}" + PASSWORD_MOSHE, ROLES_MOSHE,
 		System.currentTimeMillis() / 1000 + EXPIRATION_MOSHE * 60); 
-AccountResponse expectedResponseRoleRemove;	
+AccountResponse expectedResponseRoleRemove;
+private long currentTimestamp = System.currentTimeMillis() / 1000;
+private long futureTimestamp = currentTimestamp + 1000000;
+private long pastTimestamp = currentTimestamp - 1000000;
+AccountDocument activated1 = new AccountDocument
+("activated1", currentTimestamp , "password", new String[0],
+		futureTimestamp );
+AccountDocument activated2 = new AccountDocument
+("activated2", currentTimestamp , "password", new String[0],
+		futureTimestamp );
+AccountDocument expired1 = new AccountDocument
+(EXPIRED, currentTimestamp , "password", new String[0],
+		pastTimestamp );
+
 	
 	@Test
+	
 	@Order(1)
 	void addAccount() {
 		testClient.post().uri(ADD_ACCOUNT)
@@ -58,7 +75,7 @@ AccountResponse expectedResponseRoleRemove;
 	void getAccount() {
 		AccountResponse response = getMosheAccount();
 		assertEquals(expectedMoshe,response);
-		assertEquals(EXPECTED_PASSWORD_MOSHE, response.password);
+		assertTrue(passwordEncoder.matches(PASSWORD_MOSHE, response.password));
 		
 	}
 	private AccountResponse getMosheAccount() {
@@ -74,16 +91,16 @@ AccountResponse expectedResponseRoleRemove;
 		.exchange().expectStatus().isOk().returnResult(AccountResponse.class).getResponseBody().blockFirst();
 		AccountResponse responseUpdated = getMosheAccount();
 		assertEquals(ASTERICS8,response.password);
-		assertEquals("{noop}"+PASSWORD_MOSHE + "new",responseUpdated.password);
+		assertTrue(passwordEncoder.matches(PASSWORD_MOSHE + "new",responseUpdated.password));
 		
 		
 	}
 	private AccountPassword getAccountPassword(String password) {
-		AccountPassword accountPassword = new AccountPassword();
-		accountPassword.password = password;
-		accountPassword.username = USER_MOSHE;
+		AccountPassword accountPassword = new AccountPassword(USER_MOSHE, password);
+		
 		return accountPassword;
 	}
+	
 	@Test
 	@Order(3)
 	void updateSamePassword() {
@@ -122,10 +139,38 @@ AccountResponse expectedResponseRoleRemove;
 		
 		assertEquals(expectedMoshe, response);
 	}
+	@Test
+	@Order(7)
+	void removeAccount() {
+		testClient.delete().uri(REMOVE_ACCOUNT + "?username=" + USER_MOSHE)
+		.exchange().expectStatus().isOk();
+		assertNull(accountRepository.findById(USER_MOSHE).orElse(null));
+	}
+	@Test
+	@Order(8)
+	void getActivatedAccounts() {
+	accountRepository.saveAll(Arrays.asList(activated1,activated2,expired1));
+	 testClient.get()
+			.uri(GET_ACTIVATED_ACCOUNTS).exchange().expectStatus().isOk()
+			.expectBodyList(AccountResponse.class).isEqualTo(getExpectedAccounts());
+	}
+	@Test
+	@Order(9)
+	void getExpiredAccount() {
+		testClient.get().uri(GET_ACCOUNT + "?username=" + EXPIRED)
+		.exchange().expectStatus().isOk().expectBody(AccountResponse.class).isEqualTo(null);
+	}
+	private List<AccountResponse> getExpectedAccounts() {
+		
+		return Arrays.asList(new AccountResponse
+				(activated1.getUsername(), activated1.getPassword(),
+						activated1.getRoles(), activated1.getActivationTimestamp()),
+						new AccountResponse(activated2.getUsername(), activated2.getPassword(),
+						activated2.getRoles(), activated2.getActivationTimestamp()));
+	}
 	private AccountRole getAccountRole(String role) {
-		AccountRole res = new AccountRole();
-		res.username = USER_MOSHE;
-		res.role = role;
+		AccountRole res = new AccountRole(USER_MOSHE, role);
+		
 		return res;
 	}
 	

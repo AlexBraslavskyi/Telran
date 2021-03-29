@@ -11,41 +11,40 @@ export default class AuthFirebaseService {
 
     }
 
-    login(user,num){
+    login(user, num) {
 
-        return user&&num==0? this.emailAuth(user):num==1?this.googleAuth():
-            num==2?this.facebookAuth(): num==3?this.githubAuth():this.twitterAuth()
+        return user && num == 0 ? this.emailAuth(user) : num == 1 ? this.googleAuth() :
+            // num==2?
+            this.facebookAuth()
+        // : num==3?this.githubAuth():this.twitterAuth()
     }
-    emailAuth(user){
-        return this.auth.signInWithEmailAndPassword(user.email,user.password);
+
+    emailAuth(user) {
+        return this.auth.signInWithEmailAndPassword(user.email, user.password);
     }
-    googleAuth(){
+
+    googleAuth() {
         const authProvider = new firebase.auth.GoogleAuthProvider();
         return this.auth.signInWithPopup(authProvider);
     }
-    facebookAuth(){
+
+    facebookAuth() {
         const authProvider = new firebase.auth.FacebookAuthProvider();
         return this.auth.signInWithPopup(authProvider);
     }
-    githubAuth() {
-        const authProvider = new firebase.auth.GithubAuthProvider();
-        return this.auth.signInWithPopup(authProvider);
-    }
-    twitterAuth() {
-        const authProvider = new firebase.auth.TwitterAuthProvider();
-        return this.auth.signInWithPopup(authProvider);
-    }
-    logout(){
+
+    logout() {
         return this.auth.signOut()
     }
+
     getUserData() {
-        return authState(this.auth).pipe(mergeMap(user=>{
-            if(!user||!user.email){
+        return authState(this.auth).pipe(mergeMap(user => {
+            if (!user || !user.email) {
                 return of({});
             }
             return docData(appFirebase.firestore().collection('administrators').doc(user.email))
-                .pipe(map(admin =>{
-                    return {username: user.email,isAdmin: !!admin.email}
+                .pipe(map(admin => {
+                    return {username: user.email, isAdmin: !!admin.email}
                 }))
         }))
     }

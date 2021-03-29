@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 
-export  default function useSubscribeEffect(service, dataFn,pollingInterval) {
+export default function useSubscribeEffect(service, dataFn, pollingInterval) {
 
     const [data, setData] = useState([]);
     let subscription;
@@ -11,7 +11,10 @@ export  default function useSubscribeEffect(service, dataFn,pollingInterval) {
         subscription =
             dataFn.call(service)
                 .subscribe(dataFromServer => {
-                    setData(dataFromServer)}, (error) => {alert(JSON.stringify(error))}, () => {
+                    setData(dataFromServer)
+                }, (error) => {
+                    alert(JSON.stringify(error))
+                }, () => {
                     if (polling) {
                         intervalId = setInterval(poller, pollingInterval);
                     }
@@ -28,7 +31,7 @@ export  default function useSubscribeEffect(service, dataFn,pollingInterval) {
         () => {
             getData();
             return () => {
-                if(subscription && !subscription.closed) {
+                if (subscription && !subscription.closed) {
                     polling = false;
                     subscription.unsubscribe();
 
@@ -39,5 +42,5 @@ export  default function useSubscribeEffect(service, dataFn,pollingInterval) {
             }
         }, []
     )
-    return [data,setData]
+    return [data, setData]
 }

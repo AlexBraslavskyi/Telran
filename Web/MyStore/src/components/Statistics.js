@@ -1,11 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import _ from 'lodash';
-import $ from "jquery";
-import M from 'materialize-css/dist/js/materialize';
 import {useSelector} from "react-redux";
 import {getRandomColor} from "../utils/random";
-import {TITLES} from "../config/ShopConfig";
-import {getSelectElement} from "../utils/inputElements";
 
 export default function Statistics() {
 
@@ -101,8 +97,8 @@ export default function Statistics() {
         return <div>
             <div className="center">
                 <header className="card-header">
-                    {switchView == 1 ? <h4>Statistics of the Customers</h4> :
-                        switchView == 2 ? <h4>Statistics of the Items</h4> : null}
+                    {switchView == 1 ? <h4>Customers purchase statistics </h4> :
+                        switchView == 2 ? <h4>Statistics of items sold</h4> : null}
                 </header>
                 <div className="card-body">
                     <table className="table table-sm" style={{'textAlign': 'center'}}>
@@ -129,7 +125,7 @@ export default function Statistics() {
         <div className="row" style={{width: "60%"}}>
             <form className="col s12" onSubmit={submit}>
                 <div className="center">
-                    <h3 style={{color: "#ee6e73", marginTop: "5vh"}}> - Statistics -</h3>
+                    <h3 style={{marginTop: "5vh"}}> - Statistics -</h3>
                 </div>
                 <label>Statistic types</label>
                 <select className="browser-default" onChange={inputHandler}>
@@ -139,6 +135,7 @@ export default function Statistics() {
                 </select>
 
                 <button type="submit" name="action" className="btn waves-effect waves-light"
+                        style={{backgroundColor: "grey"}}
                 ><i className="material-icons right">send</i>Submit
                 </button>
             </form>

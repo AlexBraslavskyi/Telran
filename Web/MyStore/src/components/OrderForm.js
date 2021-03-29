@@ -1,72 +1,58 @@
 import React, {useEffect, useState} from 'react';
 import {nameMinLength} from "../config/ShopConfig";
 import {getInputElement} from "../utils/inputElements";
-import { getRandomOrderNumb } from '../utils/random';
-import _ from "lodash";
-import {useSelector} from "react-redux";
-
+import {getRandomOrderNumb} from '../utils/random';
+import CheckoutComp from "./CheckoutComp";
+import Cart from "./Cart";
 
 
 const letters = /^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/;
 
-export const OrderForm = (props) =>{
-
+export const OrderForm = (props) => {
+    let [backFl, setBackFl] = useState(0);
+    let [nextFl, setNextFl] = useState(0);
     let items = props.addedItems;
     let total = props.total;
     let delivery = props.delivery;
-    let order, setOrder, orderNumber, setOrderNumber, error, setError, emailAddress, setEmailAddress,
-        name, setName, address, setAddress, phone, setPhone, passport, setPassport,  formRef, setFormRef, comment, setComment;
-    [order,setOrder]=useState({
-                orderNumber: getRandomOrderNumb(),
-                orderData: new Date().toLocaleDateString(),
-                emailAddress: '',
-                name: '',
-                address: '',
-                passport: '',
-                phone: '',
-                comment: '',
-                items:items,
-                total: total,
-                delivery: delivery ? delivery: "0",
-                paymentMethod: 'VISA',
+    let order, setOrder, error, setError, emailAddress, setEmailAddress,
+        name, setName, address, setAddress, phone, setPhone, passport, setPassport, formRef, setFormRef, comment,
+        setComment;
+    [order, setOrder] = useState({
+        orderNumber: getRandomOrderNumb(),
+        orderDate: new Date().toLocaleDateString(),
+        emailAddress: '',
+        name: '',
+        address: '',
+        passport: '',
+        phone: '',
+        comment: '',
+        items: items,
+        total: total,
+        delivery: delivery ? delivery : "0",
+        paymentMethod: 'Empty',
     });
-    [error,setError]=useState({errorPassport:'',errorName:'',errorEmail:'',errorPhone:''});
-    [emailAddress,setEmailAddress]=useState({value:'',controlError: 0});
-    [name,setName]=useState({value:'',controlError: 0});
-    [address,setAddress]=useState({value:'',controlError: 0});
-    [phone,setPhone]=useState({value:'',controlError: 0});
-    [passport,setPassport]=useState({value:'',controlError: 0});
-    [comment, setComment] = useState({value:'',controlError: 0});
-    [formRef,setFormRef]=useState(null);
-    const orders = useSelector(state=>state.orders);
-    function addOrder(order) {
-        const index = _.findIndex(orders,o => o.orderNumber === order.orderNumber);
-        if (index >= 0) {
-            return false;
-        }
-        props.ordersService.addOrder(order)
-            .then(() => {
-                    alert(`order with number ${order.orderNumber} added successfully`)
-                }
-                , error => {
-                    alert(`order with number ${order.orderNumber} already exists`)
-                })
-        return true;
-    }
+    [error, setError] = useState({errorPassport: '', errorName: '', errorEmail: '', errorPhone: ''});
+    [emailAddress, setEmailAddress] = useState({value: '', controlError: 0});
+    [name, setName] = useState({value: '', controlError: 0});
+    [address, setAddress] = useState({value: '', controlError: 0});
+    [phone, setPhone] = useState({value: '', controlError: 0});
+    [passport, setPassport] = useState({value: '', controlError: 0});
+    [comment, setComment] = useState({value: '', controlError: 0});
+    [formRef, setFormRef] = useState(null);
+    console.log(order)
+
     function submit(event) {
         event.preventDefault();
-
-        if (!addOrder(order)) {
-            error.errorOrderNumber = `Order ${order.orderNumber} already exists`;
-            orderNumber={value:order.orderNumber}
-            error=error.errorOrderNumber;
-        }
+        setNextFl(1);
         formRef.reset();
         setFormRef(null);
         setError({...error});
+        document.getElementById("content-form").style.display = "none";
     }
 
-    useEffect(()=> {
+    useEffect(() => {
+        setBackFl(backFl);
+        setNextFl(nextFl);
         setOrder(order);
         setPhone(phone);
         setName(name);
@@ -74,135 +60,158 @@ export const OrderForm = (props) =>{
         setAddress(address);
         setComment(comment);
         setPassport(passport);
-    },[error])
+    }, [error])
 
 
-  function  handlerName(event) {
+    function handlerName(event) {
         name = event.target.value;
-        error={errorName:''}
-        if(name ==""){
-            name={value:name,controlError: 0}
+        error = {errorName: ''}
+        if (name == "") {
+            name = {value: name, controlError: 0}
             order.name = name.value;
-          
-        }else if (name.length < nameMinLength) {
-            error={errorName: 'Minimal name length should be '
-                + nameMinLength+' symbols'}
-            name={value:name,controlError: -1}
+        } else if (name.length < nameMinLength) {
+            error = {
+                errorName: 'Minimal name length should be '
+                    + nameMinLength + ' symbols'
+            }
+            name = {value: name, controlError: -1}
             order.name = name.value;
-   
-        }  else if(!name.match(letters)) {
-            error={errorName:'Name mast content only english letters'}
-            name={value:name,controlError: -1}
+        } else if (!name.match(letters)) {
+            error = {errorName: 'Name mast content only english letters'}
+            name = {value: name, controlError: -1}
             order.name = name.value;
-           
+        } else {
+            error = {errorName: ''}
+            name = {value: name, controlError: 1}
+            order.name = name.value;
         }
-        else {
-            error={errorName:''}
-            name={value:name,controlError: 1}
-            order.name = name.value;
-          
-        }
-      setError({...error})
-        }
-
-   function handlerNonValidated(event) {
-      order[event.target.name] = event.target.value;
-       setError({...error})
+        setError({...error})
     }
-  function  handlerEmail(event) {
+
+    function handlerNonValidated(event) {
+        order[event.target.name] = event.target.value;
+        setError({...error})
+    }
+
+    function handlerEmail(event) {
         emailAddress = event.target.value;
-        error={errorEmail:''}
+        error = {errorEmail: ''}
         const format = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
         if (emailAddress == "") {
-            emailAddress={value:emailAddress,controlError: 0}
+            emailAddress = {value: emailAddress, controlError: 0}
             order.emailAddress = emailAddress;
         } else if (!format.test(emailAddress)) {
-            error={errorEmail:'Wrong email format'}
-            emailAddress={value:emailAddress,controlError: -1}
+            error = {errorEmail: 'Wrong email format'}
+            emailAddress = {value: emailAddress, controlError: -1}
             order.emailAddress = emailAddress;
         } else {
-            error={errorEmail:''}
+            error = {errorEmail: ''}
             order.emailAddress = emailAddress;
-            emailAddress={value:emailAddress,controlError: 1}
+            emailAddress = {value: emailAddress, controlError: 1}
         }
-      setError({...error})
+        setError({...error})
     }
-    function  handlerPhone(event) {
-         phone = event.target.value;
-        error={errorPhone:''}
+
+    function handlerPhone(event) {
+        phone = event.target.value;
+        error = {errorPhone: ''}
         const format = /^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$/;
 
         if (phone == "") {
-            phone={value:phone,controlError: 0}
+            phone = {value: phone, controlError: 0}
             order.phone = phone;
         } else if (!format.test(phone)) {
-            error={errorPhone:'Wrong phone format'}
-            phone={value:phone,controlError: -1}
+            error = {errorPhone: 'Wrong phone format'}
+            phone = {value: phone, controlError: -1}
             order.phone = phone;
         } else {
-            error={errorPhone:''}
+            error = {errorPhone: ''}
             order.phone = phone;
-            phone={value:phone,controlError: 1}
+            phone = {value: phone, controlError: 1}
         }
 
-      setError({...error})
+        setError({...error})
     }
 
-   function validate() {
-        const res =  notErrors()
+    function backFn() {
+        setBackFl(1)
+        document.getElementById("content-form").style.display = "none";
+    }
+
+    const showCart = () => {
+        return <Cart/>
+    }
+    const showPayPal = () => {
+        return <CheckoutComp total={props.total} order={order} ordersService={props.ordersService}/>
+    }
+    if (backFl === 1) {
+        return showCart()
+    }
+    if (nextFl === 1) {
+        return showPayPal()
+    }
+
+    function validate() {
+        const res = notErrors()
             && allFields();
         return res;
     }
 
-       
+
     function notErrors() {
         return Object.values(error)
             .reduce((res, field) => {
                 return res && !field
-            } , true)
+            }, true)
     }
 
     function allFields() {
         return Object.values(order)
             .reduce((res, field) => {
                 return res && field
-            } , true)
+            }, true)
     }
 
-        return  <div className="content">
 
-            <div className="row" style={{width:"60%"}}>
+    return <div className="content" id="content-form">
+        <div className="row" style={{width: "60%"}}>
+            <form className="col s12" id="formValidate" ref={(ref) => formRef = ref} novalidate="novalidate"
+                  onSubmit={submit}>
+                <div className="center">
+                    <h3 style={{marginTop: "5vh"}}> - Personal information -</h3>
+                </div>
+                {getInputElement('text',
+                    'name', 'Name',
+                    handlerName, error.errorName, '', 'account_circle')}
+                {getInputElement('email',
+                    'emailAddress', 'Email',
+                    handlerEmail, error.errorEmail, '', 'email')}
+                {getInputElement('text',
+                    'phone', 'Phone number',
+                    handlerPhone, error.errorPhone, '', 'phone')}
 
-                <form className="col s12" id="formValidate" ref={(ref) => formRef = ref} novalidate="novalidate" onSubmit={submit}>
-                    <div className="center">
-                        <h3 style={{color:"#ee6e73", marginTop:"5vh"}}> - Order -</h3>
-                    </div>
-                    {getInputElement('text',
-                        'name', 'Name',
-                        handlerName,error.errorName,'','account_circle')}
-                    {getInputElement('email',
-                        'emailAddress', 'Email',
-                       handlerEmail,error.errorEmail,'','email')}
-                    {getInputElement('text',
-                        'phone', 'Phone number',
-                        handlerPhone,error.errorPhone,'','phone')}
-    
-                    {getInputElement('text',
-                        'address', 'Address',
-                        handlerNonValidated,"",'','home')}
-                    {getInputElement('text',
-                        'passport', 'Passport',
-                        handlerNonValidated,"",'','local_library',)}
-            
-                    {getInputElement('text',
-                        'comment', 'Comment',
-                        handlerNonValidated,"",'','comment')}
-                    <button type="submit" name="action" className="btn waves-effect waves-light"
+                {getInputElement('text',
+                    'address', 'Address',
+                    handlerNonValidated, "", '', 'home')}
+                {getInputElement('text',
+                    'passport', 'Passport',
+                    handlerNonValidated, "", '', 'local_library',)}
+                {getInputElement('text',
+                    'comment', 'Comment',
+                    handlerNonValidated, "", '', 'comment')}
+                <div className="buttons-form">
+                    <button type="submit" name="action" className="btn waves-effect waves-light grey"
                             disabled={!validate()}
-                            > <i className="material-icons right">send</i>Submit
-                        </button>
-                </form>
-            </div>
+                    > Next <i className="fa fa-arrow-circle-o-right"></i>
+                    </button>
+                    <button className="btn waves-effect waves-right red" onClick={backFn}
+                    >Back <i className="fa fa-arrow-circle-o-left"></i>
+                    </button>
+                </div>
+            </form>
+            {showCart}
+            {showPayPal}
         </div>
-    }
+    </div>
+}

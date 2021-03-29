@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+
 const useColumnsMedia = (columnsMediaObject) => {
 
     const mediaQueryList = Object.keys(columnsMediaObject).map(q =>
@@ -13,8 +14,8 @@ const useColumnsMedia = (columnsMediaObject) => {
         const handler = () => {
             setColumns(getColumns());
         }
-        // mediaQueryList.forEach(mq => mq.addEventListener('change', handler))
-    },[])
+        mediaQueryList.forEach(mq => mq.addEventListener('change', handler))
+    }, [])
     return columns;
 }
-export  default useColumnsMedia;
+export default useColumnsMedia;

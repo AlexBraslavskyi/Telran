@@ -6,10 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Reducers from './components/reducers/Reducers';
+import firebase from "./config/firebase";
 
 
 
-
+firebase.auth().languageCode = 'it';
 const store = createStore(
     Reducers
     // ,
