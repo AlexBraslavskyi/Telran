@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import {useSelector} from "react-redux";
 
 export const MyCarousel = (props) => {
-    const items = useSelector(state => state.items).sort((a, b) => b.id - a.id);
+    const items = useSelector(state => state.items).sort((a, b) => b.id - a.id).slice(0, 10);
     const responsive = {
         desktop: {
             breakpoint: {max: 3000, min: 1024},

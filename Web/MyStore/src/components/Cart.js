@@ -48,7 +48,7 @@ const Cart = (props) => {
                         <div className="item-desc">
                             <span className="title">{item.title}</span>
                             <p>{item.desc}</p>
-                            <p><b>Price: {item.price}₪</b></p>
+                            <p><b>Price: {item.price}$</b></p>
                             <p>
                                 <b>Quantity: {item.quantity}</b>
                             </p>
@@ -100,17 +100,15 @@ const Cart = (props) => {
                             <label>
                                 <input id="deliveryCheckbox" type="checkbox"
                                        checked={props.delivery == 0 ? false : true} onChange={handleChecked}/>
-                                <span>Delivery : {DELIVERY} ₪</span>
+                                <span>Delivery : {DELIVERY} $</span>
                             </label>
                         </li>
-                        <li className="collection-item"><b>Total: {props.total} ₪</b></li>
+                        <li className="collection-item"><b>Total: {props.total} $</b></li>
                     </div>
                     <div className="checkout">
-                        <button className="waves-effect waves-light btn" style={{backgroundColor: "grey"}}
+                        <button className="btn waves-effect waves-light grey"
                                 onClick={hideCart}>
-                        <span style={{color: 'white'}}><i
-                            className="material-icons right">send</i>Next</span>
-                        </button>
+                        <i className="fa fa-arrow-circle-o-left"></i>NEXT</button>
                     </div>
                 </div>
                 {showForm}

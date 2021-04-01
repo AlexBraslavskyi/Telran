@@ -26,7 +26,6 @@ import {
     pathLogout,
     pathHome,
     pathOrders,
-    pathSearch,
     pathProducts,
     pathStatistics,
     pathContacts,
@@ -139,10 +138,11 @@ const App = () => {
                         <Redirect to={pathHome}/>
                 }}/>
                 <Route path={pathShop} exact render={() => {
-                    return userData.username ? <Shop
+                    // return userData.username ?
+                       return <Shop
                             itemsService={itemsService}
-                        /> :
-                        <Redirect to={pathLogin}/>
+                        />
+                        // : <Redirect to={pathLogin}/>
                 }}/>
                 <Route path={pathOrders} exact render={() => {
                     return userData.username ? <Orders ordersService={ordersService}/> :

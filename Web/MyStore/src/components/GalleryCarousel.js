@@ -20,6 +20,7 @@ import CommentsComp from "./CommentsComp";
 
 export const GalleryCarousel = (props) => {
     const items = [item1, item2, item3, item5, item6, item8, item10, item11, item12, item13, item9, item14, item4, item15];
+    window.scrollTo(0, 0)
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.

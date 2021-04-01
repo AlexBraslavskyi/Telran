@@ -118,7 +118,7 @@ const CommentsComp = (props) => {
                                     <span><img className='img-avatar' style={{marginRight: "5vw", borderRadius: "5%"}}
                                                src={firebase.auth().currentUser.photoURL}/>{firebase.auth().currentUser.displayName}</span> :
                                     <span><img className='img-avatar' style={{marginRight: "5vw", borderRadius: "5%"}}
-                                               src={require('../images/noAvatar.png')}/>{currentUser.name}</span> :
+                                               src={require('../images/noAvatar.png')}/>{userName}</span> :
                                     <div className="ui left icon input" style={{paddingRight: '30vw'}}>
                                         <input id="authorName" type="text" placeholder="Please enter your name..."
                                                style={{padding: 0, height: '5vh'}}/>

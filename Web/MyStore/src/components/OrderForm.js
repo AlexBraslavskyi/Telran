@@ -4,6 +4,8 @@ import {getInputElement} from "../utils/inputElements";
 import {getRandomOrderNumb} from '../utils/random';
 import CheckoutComp from "./CheckoutComp";
 import Cart from "./Cart";
+import * as firebase from "firebase";
+import {useSelector} from "react-redux";
 
 
 const letters = /^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/;
@@ -13,14 +15,14 @@ export const OrderForm = (props) => {
     let [nextFl, setNextFl] = useState(0);
     let items = props.addedItems;
     let total = props.total;
-    let delivery = props.delivery;
+        let delivery = props.delivery;
     let order, setOrder, error, setError, emailAddress, setEmailAddress,
         name, setName, address, setAddress, phone, setPhone, passport, setPassport, formRef, setFormRef, comment,
         setComment;
     [order, setOrder] = useState({
         orderNumber: getRandomOrderNumb(),
         orderDate: new Date().toLocaleDateString(),
-        emailAddress: '',
+        emailAddress: firebase.auth().currentUser.email,
         name: '',
         address: '',
         passport: '',
@@ -32,14 +34,13 @@ export const OrderForm = (props) => {
         paymentMethod: 'Empty',
     });
     [error, setError] = useState({errorPassport: '', errorName: '', errorEmail: '', errorPhone: ''});
-    [emailAddress, setEmailAddress] = useState({value: '', controlError: 0});
     [name, setName] = useState({value: '', controlError: 0});
     [address, setAddress] = useState({value: '', controlError: 0});
     [phone, setPhone] = useState({value: '', controlError: 0});
     [passport, setPassport] = useState({value: '', controlError: 0});
     [comment, setComment] = useState({value: '', controlError: 0});
     [formRef, setFormRef] = useState(null);
-    console.log(order)
+
 
     function submit(event) {
         event.preventDefault();
@@ -56,7 +57,6 @@ export const OrderForm = (props) => {
         setOrder(order);
         setPhone(phone);
         setName(name);
-        setEmailAddress(emailAddress);
         setAddress(address);
         setComment(comment);
         setPassport(passport);
@@ -93,25 +93,6 @@ export const OrderForm = (props) => {
         setError({...error})
     }
 
-    function handlerEmail(event) {
-        emailAddress = event.target.value;
-        error = {errorEmail: ''}
-        const format = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
-        if (emailAddress == "") {
-            emailAddress = {value: emailAddress, controlError: 0}
-            order.emailAddress = emailAddress;
-        } else if (!format.test(emailAddress)) {
-            error = {errorEmail: 'Wrong email format'}
-            emailAddress = {value: emailAddress, controlError: -1}
-            order.emailAddress = emailAddress;
-        } else {
-            error = {errorEmail: ''}
-            order.emailAddress = emailAddress;
-            emailAddress = {value: emailAddress, controlError: 1}
-        }
-        setError({...error})
-    }
 
     function handlerPhone(event) {
         phone = event.target.value;
@@ -143,7 +124,12 @@ export const OrderForm = (props) => {
         return <Cart/>
     }
     const showPayPal = () => {
-        return <CheckoutComp total={props.total} order={order} ordersService={props.ordersService}/>
+        return <CheckoutComp
+            addedItems={props.addedItems}
+            ordersService={props.ordersService}
+            total={props.total}
+            delivery={props.delivery}
+            order={order}/>
     }
     if (backFl === 1) {
         return showCart()
@@ -176,7 +162,7 @@ export const OrderForm = (props) => {
 
     return <div className="content" id="content-form">
         <div className="row" style={{width: "60%"}}>
-            <form className="col s12" id="formValidate" ref={(ref) => formRef = ref} novalidate="novalidate"
+            <form className="col s12" id="formValidate" ref={(ref) => formRef = ref} noValidate="noValidate"
                   onSubmit={submit}>
                 <div className="center">
                     <h3 style={{marginTop: "5vh"}}> - Personal information -</h3>
@@ -184,9 +170,6 @@ export const OrderForm = (props) => {
                 {getInputElement('text',
                     'name', 'Name',
                     handlerName, error.errorName, '', 'account_circle')}
-                {getInputElement('email',
-                    'emailAddress', 'Email',
-                    handlerEmail, error.errorEmail, '', 'email')}
                 {getInputElement('text',
                     'phone', 'Phone number',
                     handlerPhone, error.errorPhone, '', 'phone')}
@@ -203,10 +186,10 @@ export const OrderForm = (props) => {
                 <div className="buttons-form">
                     <button type="submit" name="action" className="btn waves-effect waves-light grey"
                             disabled={!validate()}
-                    > Next <i className="fa fa-arrow-circle-o-right"></i>
+                    > <i className="fa fa-arrow-circle-o-left">Next </i>
                     </button>
                     <button className="btn waves-effect waves-right red" onClick={backFn}
-                    >Back <i className="fa fa-arrow-circle-o-left"></i>
+                    >Back <i className="fa fa-arrow-circle-o-right"></i>
                     </button>
                 </div>
             </form>

@@ -21,6 +21,9 @@ export default class UsersFirebaseService {
         firebase.auth().createUserWithEmailAndPassword(user.emailAddress, user.password);
         return this.db.doc(user.emailAddress).set(user);
     }
+    addSocialUser(user) {
+        return this.db.doc(user.emailAddress).set(user);
+    }
 
     deleteUser(passport) {
         return this.db.doc(passport).delete();

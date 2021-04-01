@@ -43,7 +43,7 @@ export const NewUserForm = (props) => {
     [showPass, setShowPass] = useState("password");
     [isDisable, setIsDisable] = useState(true);
 
-    function addUser(user) {
+   function addUser(user) {
         const index = _.findIndex(users, u => u.emailAddress == user.emailAddress);
         if (index >= 0) {
             return false;

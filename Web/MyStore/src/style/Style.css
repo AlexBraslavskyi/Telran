@@ -65,8 +65,9 @@ body, #root { position:absolute; top:0; bottom:0; right:0; left:0; }
 .item-desc{
     align-self:center;
 }
+
 .body{
-    /*background-image: url('./images/colorful-balloon-png.png');*/
+    /*background-image: url('./images/Balloons-Background-PNG-715x715.png');*/
     background-repeat: round;
     background-size: auto;
     margin: 0;

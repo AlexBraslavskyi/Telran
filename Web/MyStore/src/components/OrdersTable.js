@@ -22,8 +22,8 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 
 export default function OrdersTable(props) {
     const orders = props.orders;
-    // const columnValues = Object.values(columnsMediaObject);
-    // const maxColumns = Math.max(...columnValues);
+    const columnValues = Object.values(columnsMediaObject);
+    const maxColumns = Math.max(...columnValues);
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref}/>),
         Check: forwardRef((props, ref) => <Check {...props} ref={ref}/>),

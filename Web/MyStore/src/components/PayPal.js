@@ -1,6 +1,8 @@
 import React from "react";
 import _ from "lodash";
 import {useSelector} from "react-redux";
+import * as firebase from "firebase";
+import UsersFirebaseService from "../services/UsersFirebaseService";
 
 export default function PayPal(props) {
     const [paid, setPaid] = React.useState(false);
@@ -9,13 +11,34 @@ export default function PayPal(props) {
     const orders = useSelector(state => state.orders);
     const order = props.order;
     const index = _.findIndex(orders, o => o.orderNumber === order.orderNumber);
-
+    const clientsService = new UsersFirebaseService('clients');
     function sendOrder() {
         order.paymentMethod = "VISA";
         addOrder(order);
+        document.getElementById("hide").style.display = "none";
+        document.querySelectorAll('.hide-elem').forEach(function(el) {
+            el.style.display = 'none';
+        });
     }
 
     function addOrder(order) {
+        if(!orders.find(o => o.emailAddress == firebase.auth().currentUser.displayName)){
+            let user =  {
+                emailAddress: order.emailAddress,
+                name:order.name,
+                address: order.address,
+                passport: order.passport,
+                phone: order.phone,
+                password: "Test12345",
+                confirmPassword: "Test12345"}
+            clientsService.addSocialUser(user)
+                .then(() => {
+                        // alert(`User with email ${user.emailAddress} added successfully`)
+                    }
+                    , error => {
+                        alert(`User with email ${user.emailAddress} already exists`)
+                    })
+        }
         props.ordersService.addOrder(order)
             .then(() => {
                     // alert(`order with number ${order.orderNumber} added successfully`)
@@ -60,8 +83,8 @@ export default function PayPal(props) {
 
     // If the payment has been made
     if (paid) {
-        return <div><h5>Payment successful!</h5>
-            <h5>Order with number {order.orderNumber} added successfully!</h5>
+        return <div><h3>Payment successful!</h3>
+            <h4>Order with number {order.orderNumber} added successfully!</h4>
         </div>
 
     }

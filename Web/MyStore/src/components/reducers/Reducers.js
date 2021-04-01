@@ -28,16 +28,14 @@ const initState = {
 const Reducers =
     (state = initState, action) => {
         let existedQuantity = state.quantity;
-        let addedItem =
-            // state.addedItems.find(item=> action.id === item.id);
-            state.items.find(item => item.id === action.id);
+        let addedItem = state.items.find(item => item.id === action.id);
         let existed_item = state.addedItems.find(item => action.id === item.id);
         let new_items = state.addedItems.filter(item => action.id !== item.id);
         //INSIDE SHOP COMPONENT
         if (action.type === ADD_TO_CART) {
             //check if the action id exists in the addedItems
             if (existed_item) {
-                if (window.confirm('You already added item with id=' + existed_item.id + '. Do you want to add quantity')) {
+                if (window.confirm('You already added this item. Do you want to add quantity')) {
                     addedItem.quantity += 1;
                     return {
                         ...state,
@@ -167,7 +165,6 @@ const Reducers =
         } else {
             return state
         }
-
     }
 
 export default Reducers;
